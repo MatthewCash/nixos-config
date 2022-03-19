@@ -1,0 +1,34 @@
+table inet filter {
+    chain input {
+        type filter hook input priority filter; policy drop;
+
+        ct state invalid drop comment "early drop of invalid connections"
+        ct state { established, related } accept comment "allow tracked connections"
+
+        iifname "lo" accept comment "allow from loopback"
+
+        ip protocol icmp accept comment "allow icmp"
+
+        meta l4proto ipv6-icmp accept comment "allow icmp v6"
+
+        tcp dport 22 accept comment "allow sshd"
+
+        meta pkttype host limit rate 5/second counter reject with icmpx admin-prohibited
+
+        counter
+    }
+
+    chain forward {
+        type filter hook forward priority filter; policy drop;
+    }
+}
+
+table ip nat {
+    chain output {
+        type nat hook output priority 100; policy accept;
+        counter jump zero
+    }
+
+    chain zero {
+    }
+}
