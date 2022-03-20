@@ -24,7 +24,8 @@ in
         enable = true;
         package = firefox-devedition-bin;
         profiles = {
-            "main.devedition-default" = {
+            "main" = {
+                name = "dev-edition-default";
                 isDefault = true;
                 settings = {
                     "general.autoScroll" = true;
@@ -99,6 +100,18 @@ in
 
                     # Open Popups in new tabs
                     "browser.link.open_newwindow.restriction" = 0;
+
+                    # UI Customization
+                    "browser.toolbars.bookmarks.visibility" = "never";
+                    "browser.uiCustomization.state" = "{\"placements\":{\"widget-overflow-fixed-list\":[\"developer-button\",\"ublock0_raymondhill_net-browser-action\",\"_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action\",\"addon_darkreader_org-browser-action\",\"print-button\",\"sponsorblocker_ajay_app-browser-action\",\"_b86e4813-687a-43e6-ab65-0bde4ab75758_-browser-action\"],\"nav-bar\":[\"back-button\",\"forward-button\",\"stop-reload-button\",\"urlbar-container\",\"downloads-button\",\"new-window-button\",\"fxa-toolbar-menu-button\"],\"toolbar-menubar\":[\"menubar-items\"],\"TabsToolbar\":[\"tabbrowser-tabs\",\"new-tab-button\",\"alltabs-button\"],\"PersonalToolbar\":[\"import-button\",\"personal-bookmarks\"]},\"seen\":[\"save-to-pocket-button\",\"developer-button\",\"ublock0_raymondhill_net-browser-action\",\"addon_darkreader_org-browser-action\",\"_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action\",\"_9a41dee2-b924-4161-a971-7fb35c053a4a_-browser-action\",\"chrome-gnome-shell_gnome_org-browser-action\",\"sponsorblocker_ajay_app-browser-action\",\"profiler-button\",\"_b86e4813-687a-43e6-ab65-0bde4ab75758_-browser-action\",\"_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action\"],\"dirtyAreaCache\":[\"nav-bar\",\"PersonalToolbar\",\"toolbar-menubar\",\"TabsToolbar\",\"widget-overflow-fixed-list\"],\"currentVersion\":17,\"newElementCount\":5}";
+                    "browser.uidensity" = 2;
+                    "browser.urlbar.placeholderName" = "Google";
+                    "browser.urlbar.placeholderName.private" = "Google";
+                    "browser.urlbar.quicksuggest.migrationVersion" = 2;
+
+                    # Theme
+                    "devtools.theme" = "dark";
+                    "extensions.activeThemeID" = "default-theme@mozilla.org";
                 };
             };
         };
