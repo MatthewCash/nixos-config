@@ -112,6 +112,11 @@ in
                     # Theme
                     "devtools.theme" = "dark";
                     "extensions.activeThemeID" = "default-theme@mozilla.org";
+
+                    # New Tab Page
+                    "browser.newtabpage.pinned" = "[]";
+                    "browser.newtabpage.activity-stream.feeds.topsites" = false;
+                    "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
                 };
             };
         };
