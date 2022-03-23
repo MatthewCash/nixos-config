@@ -15,6 +15,7 @@
         profile."b1dcc9dd-5262-4d8d-a863-c897e6d979ba" = {
             visibleName = "Main";
             cursorShape = "ibeam";
+            showScrollbar = false;
             default = true;
             colors = {
                 backgroundColor = "black";
