@@ -56,11 +56,12 @@
             let g:airline_powerline_fonts = 1
             let g:airline#extensions#tabline#enabled = 1
 
-            " Git Gutter"
+            " Git Gutter
             set updatetime=250
             let g:gitgutter_max_signs = 500
             " No mapping
             let g:gitgutter_map_keys = 0
+
             " Colors
             let g:gitgutter_override_sign_column_highlight = 0
             highlight clear SignColumn
@@ -72,6 +73,9 @@
             set noshowmode  " to get rid of thing like --INSERT--
             set noshowcmd  " to get rid of display of last command
             set shortmess+=F  " to get rid of the file name displayed in the command line bar
+
+            " Current line number color
+            highlight CursorLineNr term=bold cterm=NONE ctermfg=lightmagenta ctermbg=NONE gui=NONE guifg=lightmagenta guibg=NONE
 
 
             highlight clear SignColumn
