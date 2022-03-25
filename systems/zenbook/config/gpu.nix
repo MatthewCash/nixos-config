@@ -9,4 +9,6 @@
             vaapiIntel
         ];
     };
+
+    boot.blacklistedKernelModules = [ "nouveau" ];
 }

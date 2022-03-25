@@ -11,6 +11,6 @@
         enable = true;
         enableExtraSocket = true;
         enableSshSupport = true;
-        pinentryFlavor = "curses";
+#        pinentryFlavor = "curses";
     };
 }
