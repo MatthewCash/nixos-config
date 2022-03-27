@@ -15,6 +15,7 @@
             dbaeumer.vscode-eslint
             github.vscode-pull-request-github
             eamodio.gitlens
+            octref.vetur
         ];
     };
 }
