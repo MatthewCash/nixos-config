@@ -1,7 +1,7 @@
 { ... }:
 
 let
-    storageBindMountOptions = [ "bind" "nofail" ];
+    storageBindMountOptions = [ "bind" "nofail" "x-gvfs-hide" ];
 in
 
 {
