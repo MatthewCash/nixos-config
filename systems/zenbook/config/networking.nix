@@ -3,7 +3,7 @@
 {
     networking.networkmanager = {
         enable = true;
-        insertNameservers = [ "192.168.1.201" "1.1.1.1" ];
+        appendNameservers = [ "1.1.1.1" ];
     };
 
     networking.hosts = {
