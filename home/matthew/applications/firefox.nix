@@ -5,12 +5,18 @@ let
         icon = "firefox-developer-edition";
         desktopName = "Firefox Developer Edition";
         nameSuffix = ""; 
-        forceWayland = true;
         extraPolicies = {
             DisableAppUpdate = true;
             DontCheckDefaultBrowser = true;
             DisablePocket = true;
         };
+    });
+
+    firefox-gnome-theme = pkgs.fetchFromGitHub ({
+        owner = "rafaelmardojai";
+        repo = "firefox-gnome-theme";
+        rev = "cd84202cc5b2c05511ca89078d0025b82d2d57d5";
+        sha256 = "bcQEN0B5SnBX5PupYgLudWUVQ3MDwUtwumI+TpCHUG4=";
     });
 in
 
@@ -27,6 +33,9 @@ in
             "main" = {
                 name = "dev-edition-default";
                 isDefault = true;
+                userChrome = ''
+                    @import "${firefox-gnome-theme}/userChrome.css";
+                '';
                 settings = {
                     "general.autoScroll" = true;
                     "gfx.webrender.all" = true;
@@ -117,6 +126,12 @@ in
                     "browser.newtabpage.pinned" = "[]";
                     "browser.newtabpage.activity-stream.feeds.topsites" = false;
                     "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
+
+                    # GNOME Theme
+                    "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+                    "browser.uidensity" = 0;
+                    "svg.context-properties.content.enabled" = true;
+                    "ui.useOverlayScrollbars" = 1;
                 };
             };
         };
