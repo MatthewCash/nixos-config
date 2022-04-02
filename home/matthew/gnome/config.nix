@@ -13,6 +13,7 @@
             monospace-font-name = "CaskaydiaCove Nerd Font 12";
             show-battery-percentage = true;
             enable-hot-corners = true;
+            color-scheme = "prefer-dark";
         };        
 
         "org/gnome/desktop/sound" = {
@@ -55,9 +56,9 @@
                 "firefox.desktop" 
                 "steam.desktop" 
                 "org.gnome.Boxes.desktop" 
-                "org.gnome.Terminal.desktop" 
+                "org.gnome.Console.desktop"
                 "org.gnome.Evolution.desktop" 
-                "gnome-control-center.desktop" 
+                "org.gnome.Settings.desktop"
                 "org.gnome.Nautilus.desktop" 
             ];
             enabled-extensions = [ 
