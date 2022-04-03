@@ -13,6 +13,7 @@
     ../../../../home/${homeName}/gnome/extensions/just-perfection.nix
     ../../../../home/${homeName}/gnome/extensions/tray-icons-reloaded.nix
     ../../../../home/${homeName}/desktop/defaultApps.nix
+    ../../../../home/${homeName}/desktop/userDirs.nix
 
     ../../../../home/${homeName}/applications/chromium.nix
     ../../../../home/${homeName}/applications/dev.nix
