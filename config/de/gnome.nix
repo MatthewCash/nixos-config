@@ -21,7 +21,7 @@
 
     programs.dconf.enable = true;
     
-    services.dbus.packages = with pkgs; [ dconf ];
+    services.dbus.packages = with pkgs; [ dconf gcr ];
     
-	services.udev.packages = with pkgs; [ gnome3.gnome-settings-daemon ];
+    services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 }
