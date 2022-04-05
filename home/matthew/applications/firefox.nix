@@ -178,6 +178,9 @@ in
                     "browser.uidensity" = 0;
                     "svg.context-properties.content.enabled" = true;
                     "ui.useOverlayScrollbars" = 1;
+
+                    # Backspace goes back
+                    "browser.backspace_action" = 0;
                 };
             };
         };
