@@ -10,6 +10,7 @@ let
             DontCheckDefaultBrowser = true;
             DisablePocket = true;
         };
+        forceWayland = true;
     });
 
     firefox-gnome-theme = pkgs.fetchFromGitHub ({
