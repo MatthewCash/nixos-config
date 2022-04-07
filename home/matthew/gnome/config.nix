@@ -68,6 +68,7 @@
             ];
             disabled-extensions = [];
             welcome-dialog-last-shown-version = "41.4";
+            disable-extension-version-validation = true;
         };
 
         "org/gnome/desktop/screensaver" = {
