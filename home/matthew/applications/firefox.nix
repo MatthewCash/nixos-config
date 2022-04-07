@@ -11,6 +11,7 @@ let
             DisablePocket = true;
         };
         forceWayland = true;
+        wmClass = "firefox-aurora";
     });
 
     firefox-gnome-theme = pkgs.fetchFromGitHub ({
