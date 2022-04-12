@@ -35,4 +35,5 @@
     ../../../../home/${homeName}/applications/discord.nix
     ../../../../home/${homeName}/applications/setzer.nix
     ../../../../home/${homeName}/applications/bitwarden.nix
+    ../../../../home/${homeName}/applications/nix.nix
 ]

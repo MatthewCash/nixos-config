@@ -12,4 +12,5 @@
     ../../../../home/${homeName}/applications/wsu2fa.nix
     ../../../../home/${homeName}/applications/zsh.nix
     ../../../../home/${homeName}/applications/vscode-server.nix
+    ../../../../home/${homeName}/applications/nix.nix
 ]
