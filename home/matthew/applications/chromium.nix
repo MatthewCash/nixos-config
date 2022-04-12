@@ -1,4 +1,4 @@
-{ persistenceHomePath, name, ... }:
+{ pkgs, persistenceHomePath, name, ... }:
 
 {
     home.persistence."${persistenceHomePath}/${name}".directories = [
@@ -6,5 +6,18 @@
         ".cache/chromium"
     ];
 
-    programs.chromium.enable = true;
+    programs.chromium = {
+        enable = true;
+        package = pkgs.ungoogled-chromium;
+        commandLineArgs = [
+            "--enable-features=UseOzonePlatform"
+            "--ozone-platform=wayland"
+            "--ignore-gpu-blocklist"
+        ];
+        extensions = [
+            {
+                id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; # ublock origin
+            }
+        ];
+    };
 }
