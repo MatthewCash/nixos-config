@@ -20,7 +20,7 @@
     ../../../../home/${homeName}/applications/evolution.nix
     ../../../../home/${homeName}/applications/firefox.nix
     ../../../../home/${homeName}/applications/fzf.nix
-    ../../../../home/${homeName}/applications/general.nix
+    ../../../../home/${homeName}/applications/node.nix
     ../../../../home/${homeName}/applications/git.nix
     ../../../../home/${homeName}/applications/gnome.nix
     ../../../../home/${homeName}/applications/gpg.nix

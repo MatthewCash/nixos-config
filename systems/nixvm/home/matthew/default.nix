@@ -3,7 +3,7 @@
 [
     ../../../../home/${homeName}/applications/dev.nix
     ../../../../home/${homeName}/applications/fzf.nix
-    ../../../../home/${homeName}/applications/general.nix
+    ../../../../home/${homeName}/applications/node.nix
     ../../../../home/${homeName}/applications/git.nix
     ../../../../home/${homeName}/applications/gpg.nix
     ../../../../home/${homeName}/applications/htop.nix

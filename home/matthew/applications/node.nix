@@ -7,8 +7,8 @@
         ".cache/typescript"
     ];
 
-    home.packages = with pkgs; [
-        nodePackages.npm
-        comma
+    home.packages = with pkgs; with nodePackages; [
+        npm
+        typescript
     ];
 }
