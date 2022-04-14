@@ -38,6 +38,7 @@ in
                 userChrome = ''
                     @import "${firefox-gnome-theme}/userChrome.css";
                 '';
+                extraConfig = builtins.readFile "${firefox-gnome-theme}/configuration/user.js";
                 settings = {
                     "general.autoScroll" = true;
                     "gfx.webrender.all" = true;
@@ -173,12 +174,6 @@ in
                     "browser.newtabpage.pinned" = "[]";
                     "browser.newtabpage.activity-stream.feeds.topsites" = false;
                     "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
-
-                    # GNOME Theme
-                    "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-                    "browser.uidensity" = 0;
-                    "svg.context-properties.content.enabled" = true;
-                    "ui.useOverlayScrollbars" = 1;
 
                     # Backspace goes back
                     "browser.backspace_action" = 0;
