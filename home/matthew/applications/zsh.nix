@@ -29,6 +29,8 @@
         };
 
         initExtra = ''
+            unsetopt HIST_SAVE_BY_COPY
+
             bindkey '^H' backward-kill-word
             bindkey '5~' kill-word
 
