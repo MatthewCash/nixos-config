@@ -17,8 +17,8 @@ let
     firefox-gnome-theme = pkgs.fetchFromGitHub ({
         owner = "rafaelmardojai";
         repo = "firefox-gnome-theme";
-        rev = "cd84202cc5b2c05511ca89078d0025b82d2d57d5";
-        sha256 = "bcQEN0B5SnBX5PupYgLudWUVQ3MDwUtwumI+TpCHUG4=";
+        rev = "435b8cc597af8bb005a15dbba6f3950357ca5339";
+        sha256 = "sha256-OTk4D3ilqthPph/QkRCLpAR88lV6gL/Vsi1oxutWslo=";
     });
 in
 
