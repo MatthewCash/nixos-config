@@ -1,7 +1,18 @@
 { pkgs, ... }:
 
+let
+    dash-to-dock = pkgs.gnomeExtensions.dash-to-dock.overrideAttrs (oldAttrs: {
+        src = pkgs.fetchFromGitHub {
+            owner = "micheleg";
+            repo = "dash-to-dock";
+            rev = "9c59e7e586be71588f177644127e6179c8b86ebe";
+            sha256 = "sha256-ej2ZI3h7l/vmeIwFnwcMFL3VNbeGZtwkB91b+Wg9YuU=";
+        };
+    });
+in
+
 {   
-    home.packages = with pkgs.gnomeExtensions; [ dash-to-dock ];
+    home.packages = [ dash-to-dock ];
 
     dconf.settings."org/gnome/shell".enabled-extensions = [ "dash-to-dock@micxgx.gmail.com" ];
 
