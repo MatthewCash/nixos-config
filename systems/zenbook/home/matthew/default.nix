@@ -2,7 +2,6 @@
 
 [
     ../../../../home/${homeName}/gnome/tweaks.nix
-    ../../../../home/${homeName}/gnome/terminal.nix
     ../../../../home/${homeName}/gnome/console.nix
     ../../../../home/${homeName}/gnome/gtk.nix
     ../../../../home/${homeName}/gnome/config.nix
