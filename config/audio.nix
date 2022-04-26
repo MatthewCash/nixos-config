@@ -1,4 +1,14 @@
-{ ... }:
+{ pkgs, ... }:
+
+let
+    bluez = pkgs.bluez.overrideAttrs (oldAttrs: rec {
+        version = "5.63";
+        src = pkgs.fetchurl {
+            url = "mirror://kernel/linux/bluetooth/${oldAttrs.pname}-${version}.tar.xz";
+            sha256 = "sha256-k0nhHoFguz1yCDXScSUNinQk02kPUonm22/gfMZsbXY=";
+        };
+    });
+in
 
 {
     security.rtkit.enable = true;
@@ -17,6 +27,5 @@
     hardware.pulseaudio.enable = false;
 
     hardware.bluetooth.enable = true;
-
-    services.blueman.enable = true;
+    hardware.bluetooth.package = bluez;
 }
