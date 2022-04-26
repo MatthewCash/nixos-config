@@ -35,4 +35,5 @@
     ../../../../home/${homeName}/applications/setzer.nix
     ../../../../home/${homeName}/applications/bitwarden.nix
     ../../../../home/${homeName}/applications/nix.nix
+    ../../../../home/${homeName}/applications/virt.nix
 ]
