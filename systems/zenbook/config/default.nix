@@ -22,7 +22,7 @@
     ./firewall/nftables.nix
     ../../../config/networking/vpn/wireguard.nix
     ../../../config/hardware/tpm.nix
-    ../../../config/hardware/nvidia.nix
+#    ./nvidia.nix
     ../../../config/hardware/keyboard.nix
     ../../../config/hardware/gpu.nix
     ./gpu.nix
@@ -30,6 +30,8 @@
     ../../../config/cpu/intel.nix
     ../../../config/fs/mounts.nix
     ./mounts.nix
+    ./lid.nix
+    ./virt.nix
 
     ../../../config/applications/steam.nix
     ../../../config/applications/python.nix
