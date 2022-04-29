@@ -52,7 +52,6 @@
         sushi
         rygel
         zenity
-        gpaste
         cheese
         caribou
         seahorse
