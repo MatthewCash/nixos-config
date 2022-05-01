@@ -1,4 +1,9 @@
-{ persistenceHomePath, name, ... }:
+{ persistenceHomePath, name, lib, ... }:
+ 
+let 
+    gvariant = lib.hm.gvariant;
+    inherit (gvariant) mkUint32;
+in
 
 {   
     home.persistence."${persistenceHomePath}/${name}".files = [
@@ -77,6 +82,10 @@
 
         "org/gnome/desktop/background" = {
             picture-uri = "file:///home/matthew/.local/share/backgrounds/current_wallpaper.png";
+        };
+
+        "org/gnome/desktop/session" = {
+            idle-delay = mkUint32 600;
         };
     };
 }
