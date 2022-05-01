@@ -2,7 +2,7 @@
   
 let 
     gvariant = lib.hm.gvariant;
-    mkTuple = gvariant.mkTuple;
+    inherit (gvariant) mkTuple;
 in
 
 {   
