@@ -24,7 +24,9 @@ in
 
         inputs.impermanence.nixosModule
         
-        inputs.home-manager.nixosModule {
+        inputs.home-manager.nixosModule
+
+        {
             home-manager = {
                 useGlobalPkgs = true;
                 users = import ../home/buildHomeConfigs.nix { 
