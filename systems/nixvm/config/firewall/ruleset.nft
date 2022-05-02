@@ -13,8 +13,6 @@ table inet filter {
 
         tcp dport 22 accept comment "allow sshd"
 
-        meta pkttype host limit rate 5/second counter reject with icmpx admin-prohibited
-
         counter
     }
 
