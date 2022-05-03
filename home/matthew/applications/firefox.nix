@@ -203,6 +203,9 @@ in
 
                     # Backspace goes back
                     "browser.backspace_action" = 0;
+
+                    # Hide single tab
+                    "gnomeTheme.hideSingleTab" = true;
                 };
             };
         };
