@@ -9,6 +9,32 @@ let
             DisableAppUpdate = true;
             DontCheckDefaultBrowser = true;
             DisablePocket = true;
+            ExtensionSettings = {
+                "uBlock0@raymondhill.net" = {
+                    installation_mode = "normal_installed";
+                    install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+                };
+                "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+                    installation_mode = "normal_installed";
+                    install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
+                };
+                "jid1-KKzOGWgsW3Ao4Q@jetpack" = {
+                    installation_mode = "normal_installed";
+                    install_url = "https://addons.mozilla.org/firefox/downloads/latest/i-dont-care-about-cookies/latest.xpi";
+                };
+                "addon@darkreader.org" = {
+                    installation_mode = "normal_installed";
+                    install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
+                };
+                "sponsorBlocker@ajay.app" = {
+                    installation_mode = "normal_installed";
+                    install_url = "https://addons.mozilla.org/firefox/downloads/latest/sponsorblock/latest.xpi";
+                };
+                "{762f9885-5a13-4abd-9c77-433dcd38b8fd}" = {
+                    installation_mode = "normal_installed";
+                    install_url = "https://addons.mozilla.org/firefox/downloads/latest/return-youtube-dislikes/latest.xpi";
+                };
+            };
         };
         forceWayland = true;
         wmClass = "firefox-aurora";
@@ -119,12 +145,13 @@ in
                         "placements" = {
                             "widget-overflow-fixed-list" = [
                                 "developer-button"
+                                "print-button"
                                 "ublock0_raymondhill_net-browser-action"
                                 "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
                                 "addon_darkreader_org-browser-action"
-                                "print-button"
                                 "sponsorblocker_ajay_app-browser-action"
                                 "_b86e4813-687a-43e6-ab65-0bde4ab75758_-browser-action"
+                                "jid1-KKzOGWgsW3Ao4Q_jetpack-browser-action"
                             ];
                             "nav-bar" = [
                                 "back-button"
@@ -132,7 +159,6 @@ in
                                 "stop-reload-button"
                                 "urlbar-container"
                                 "downloads-button"
-                                "new-window-button"
                                 "fxa-toolbar-menu-button"
                             ];
                             "toolbar-menubar" = [ "menubar-items" ];
