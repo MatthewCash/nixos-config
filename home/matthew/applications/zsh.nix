@@ -13,8 +13,30 @@
         oh-my-zsh = {
             enable = true;
             plugins = [ "git" "bundler" "dotenv" "rake" "npm" ];
-            theme = "agnoster";
         };
+
+        plugins = [
+            {
+                name = "zsh-nix-shell";
+                file = "nix-shell.plugin.zsh";
+                src = pkgs.fetchFromGitHub {
+                    owner = "chisui";
+                    repo = "zsh-nix-shell";
+                    rev = "v0.5.0";
+                    sha256 = "0za4aiwwrlawnia4f29msk822rj9bgcygw6a8a6iikiwzjjz0g91";
+                };
+            }
+            {
+                name = "agnoster";
+                file = "agnoster.zsh-theme";
+                src = pkgs.fetchFromGitHub {
+                    owner = "MatthewCash";
+                    repo = "agnoster-zsh-theme";
+                    rev = "6003192cb698ad63ca8f3dc61f029033d5b5d0a8";
+                    sha256 = "sha256-0VmgFYofjh3YUSKu8tBG7bjCOyF096zbBpfF5EjN7iA=";
+                };
+            }
+        ];
 
         enableCompletion = true;
         enableSyntaxHighlighting = true;
