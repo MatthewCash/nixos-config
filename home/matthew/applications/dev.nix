@@ -5,5 +5,6 @@
         gcc
         gdb
         gnumake
+        binutils
     ];
 }
