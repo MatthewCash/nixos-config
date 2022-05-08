@@ -36,4 +36,5 @@
     ../../../../home/${homeName}/applications/bitwarden.nix
     ../../../../home/${homeName}/applications/nix.nix
     ../../../../home/${homeName}/applications/virt.nix
+    ../../../../home/${homeName}/applications/direnv.nix
 ]
