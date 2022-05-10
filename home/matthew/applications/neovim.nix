@@ -29,6 +29,34 @@
         };
 
         extraConfig = ''
+            " Colemak-DH remapping
+            noremap  a a
+            noremap  z z
+            noremap  d c 
+            noremap  s d
+            noremap  f f
+            noremap  t f
+            noremap  g g
+            noremap  m h
+            noremap  u i
+            noremap  n j
+            noremap  e k
+            noremap  i l
+            noremap  h m
+            noremap  k n
+            noremap  y o
+            noremap  ; p
+            noremap  q q
+            noremap  p r
+            noremap  r s
+            noremap  b t
+            noremap  l u
+            noremap  v v
+            noremap  w w
+            noremap  c x
+            noremap  j y
+            noremap  x z
+
             let g:nix_recommended_style=0
 
             inoremap <C-H> <C-W>	
