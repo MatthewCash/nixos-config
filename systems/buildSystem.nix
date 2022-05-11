@@ -13,7 +13,7 @@ let
 in
 
 (lib.nixosSystem {
-    system = systemConfig.system;
+    inherit (systemConfig) system;
 
     specialArgs = { 
         inherit inputs hostname kernelPackages ssd vpnAddress;
