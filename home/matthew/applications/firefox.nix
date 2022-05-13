@@ -152,6 +152,7 @@ in
                                 "sponsorblocker_ajay_app-browser-action"
                                 "_b86e4813-687a-43e6-ab65-0bde4ab75758_-browser-action"
                                 "jid1-KKzOGWgsW3Ao4Q_jetpack-browser-action"
+                                "_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action"
                             ];
                             "nav-bar" = [
                                 "back-button"
@@ -175,6 +176,7 @@ in
                             "chrome-gnome-shell_gnome_org-browser-action"
                             "sponsorblocker_ajay_app-browser-action"
                             "profiler-button"
+                            "jid1-kkzogwgsw3ao4q_jetpack-browser-action"
                             "_b86e4813-687a-43e6-ab65-0bde4ab75758_-browser-action"
                             "_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action"
                         ];
