@@ -2,7 +2,6 @@
 
 {
     home.persistence."${persistenceHomePath}/${name}".directories = [
-        ".steam"
         ".local/share/Steam"
         ".local/share/vulkan"
         ".config/unity3d"
