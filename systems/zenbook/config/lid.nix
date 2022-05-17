@@ -1,5 +1,8 @@
 { ... }:
 
 {
-    services.logind.lidSwitch = "lock";
+    services.logind = {
+        lidSwitch = "lock";
+        lidSwitchExternalPower = "lock";
+    };
 }
