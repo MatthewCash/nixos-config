@@ -11,6 +11,7 @@
         layout = 1;
         show-to-do-bar = false;
         show-to-do-bar-sub = false;
+        mark-seen-timeout = 0;
     };
 
     dconf.settings."org/gnome/evolution/mail/browser-window" = {
