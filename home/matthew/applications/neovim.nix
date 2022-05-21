@@ -9,21 +9,32 @@
     programs.neovim = {
         enable = true;
         
-        coc.enable = true;
-
-        coc.settings = {
-            suggest = {
-                noselect = false;
-                enablePreview = true;
-                removeDuplicateItems = true;
+        coc = {
+            enable = true;
+            package = pkgs.vimUtils.buildVimPluginFrom2Nix {
+                pname = "coc.nvim";
+                version = "2022-05-21";
+                src = pkgs.fetchFromGitHub {
+                    owner = "neoclide";
+                    repo = "coc.nvim";
+                    rev = "791c9f673b882768486450e73d8bda10e391401d";
+                    sha256 = "sha256-MobgwhFQ1Ld7pFknsurSFAsN5v+vGbEFojTAYD/kI9c=";
+                };
             };
+            settings = {
+                suggest = {
+                    noselect = false;
+                    enablePreview = true;
+                    removeDuplicateItems = true;
+                };
 
-            languageserver = {
-                ccls = {
-                    command = "ccls";
-                    filetypes = [ "c" "cpp" "cc" "ino" ];
-                    rootPatterns = [ ".ccls" "compile_commands.json" ".vim/" ".git/" ".hg/" ];
-                    initializationOptions.cache.directory = "/tmp/ccls";
+                languageserver = {
+                    ccls = {
+                        command = "ccls";
+                        filetypes = [ "c" "cpp" "cc" "ino" ];
+                        rootPatterns = [ ".ccls" "compile_commands.json" ".vim/" ".git/" ".hg/" ];
+                        initializationOptions.cache.directory = "/tmp/ccls";
+                    };
                 };
             };
         };
@@ -130,7 +141,6 @@
             vim-gitgutter
             vim-airline
             vim-airline-themes
-            coc-nvim
             coc-snippets
             coc-highlight
             vim-polyglot
