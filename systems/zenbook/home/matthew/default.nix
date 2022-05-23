@@ -37,4 +37,5 @@
     ../../../../home/${homeName}/applications/nix.nix
     ../../../../home/${homeName}/applications/virt.nix
     ../../../../home/${homeName}/applications/direnv.nix
+    ../../../../home/${homeName}/applications/helvum.nix
 ]
