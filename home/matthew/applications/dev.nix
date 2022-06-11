@@ -11,6 +11,9 @@
         cargo
         rustc
         rustfmt
+
+        # Java
+        maven
     ];
 
     home.sessionVariables = {
