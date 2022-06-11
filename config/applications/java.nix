@@ -3,6 +3,6 @@
 {
     programs.java = {
         enable = true;
-        package = pkgs.adoptopenjdk-jre-hotspot-bin-16;
+        package = pkgs.jdk17_headless;
     };
 }
