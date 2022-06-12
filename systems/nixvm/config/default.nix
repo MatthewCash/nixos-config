@@ -17,6 +17,7 @@
     ../../../config/hardware/hyperv.nix
     ../../../config/fs/mounts.nix
     ./mounts.nix
+    ../../../config/ld.nix
     
     ../../../config/applications/steam.nix
     ../../../config/applications/python.nix
