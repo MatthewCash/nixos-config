@@ -32,6 +32,7 @@
     ./mounts.nix
     ./lid.nix
     ./virt.nix
+    ../../../config/ld.nix
 
     ../../../config/applications/steam.nix
     ../../../config/applications/python.nix
