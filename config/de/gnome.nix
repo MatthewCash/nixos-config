@@ -23,6 +23,7 @@
     systemd.tmpfiles.rules = [ "d /run/gdm 0711 gdm gdm -" ];
 
     # GDM UX Settings
+    home-manager.users.gdm.home.stateVersion = "22.05";
     home-manager.users.gdm.dconf.settings = {
         "org/gnome/settings-daemon/plugins/power".sleep-inactive-ac-type = "nothing";
         "org/gnome/desktop/input-sources".xkb-options = [ "caps:escape" ];
