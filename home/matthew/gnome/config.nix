@@ -82,6 +82,7 @@ in
 
         "org/gnome/desktop/background" = {
             picture-uri = "file:///home/matthew/.local/share/backgrounds/current_wallpaper.png";
+            picture-uri-dark = "file:///home/matthew/.local/share/backgrounds/current_wallpaper.png";
         };
 
         "org/gnome/desktop/session" = {
