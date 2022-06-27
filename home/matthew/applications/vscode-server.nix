@@ -16,6 +16,7 @@
             github.vscode-pull-request-github
             eamodio.gitlens
             octref.vetur
+            redhat.java
         ];
     };
 }
