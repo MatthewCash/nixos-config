@@ -1,4 +1,4 @@
-{ pkgs, persistenceHomePath, name, ... }:
+{ pkgs, persistenceHomePath, name, inputs, ... }:
 
 let
     firefox-devedition-bin = pkgs.firefox-devedition-bin.override (old: {
@@ -39,13 +39,6 @@ let
         forceWayland = true;
         wmClass = "firefox-aurora";
     });
-
-    firefox-gnome-theme = pkgs.fetchFromGitHub ({
-        owner = "rafaelmardojai";
-        repo = "firefox-gnome-theme";
-        rev = "868e1d51d13d19e4152164f6c39317a043902be8";
-        sha256 = "sha256-LEnmYrSzaJUqPkm57a7HBtCAnVPQY15u03/ABrOGKp0=";
-    });
 in
 
 {
@@ -62,9 +55,9 @@ in
                 name = "dev-edition-default";
                 isDefault = true;
                 userChrome = ''
-                    @import "${firefox-gnome-theme}/userChrome.css";
+                    @import "${inputs.firefox-gnome-theme}/userChrome.css";
                 '';
-                extraConfig = builtins.readFile "${firefox-gnome-theme}/configuration/user.js";
+                extraConfig = builtins.readFile "${inputs.firefox-gnome-theme}/configuration/user.js";
                 settings = {
                     "general.autoScroll" = true;
                     "gfx.webrender.all" = true;
