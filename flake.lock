@@ -79,11 +79,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1649111508,
-        "narHash": "sha256-zMXuOohxn3U/HjJXy5oQINiNNzvyqiUwgQu4Rsw9VIY=",
+        "lastModified": 1657846023,
+        "narHash": "sha256-W7XkZ96U/fRzZDU6YGGBQGgxo6A6RJzOrfSRweCZfjw=",
         "owner": "MatthewCash",
         "repo": "nixos-vscode-server",
-        "rev": "bc9a62ac42a38e22b552cd88841640725e1b7a2b",
+        "rev": "58a5bbc00235d212a3c99bb62113504abf13da50",
         "type": "github"
       },
       "original": {

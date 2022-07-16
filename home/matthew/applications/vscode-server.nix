@@ -7,7 +7,6 @@
 
     services.vscode-server = {
         enable = true;
-        useFhsNodeEnvironment = true;
         extensions = with pkgs.vscode-extensions; [ 
             ms-vscode.cpptools 
             jnoortheen.nix-ide 
@@ -18,5 +17,8 @@
             octref.vetur
             redhat.java
         ];
+        settings = {
+            "java.jdt.ls.java.home" = "${pkgs.jdk17_headless}/lib/openjdk";
+        };
     };
 }
