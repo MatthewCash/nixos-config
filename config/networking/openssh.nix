@@ -10,7 +10,7 @@
         extraConfig = ''
             PrintLastLog no
             TCPKeepAlive yes
-            ClientAliveInterval 36000
+            ClientAliveInterval 30
         '';
     };
 
