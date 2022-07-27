@@ -7,6 +7,8 @@
         ".zsh_history"
     ];
 
+    home.sessionVariables.COLORTERM = "truecolor";
+
     programs.zsh = {
         enable = true;
 
