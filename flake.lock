@@ -20,6 +20,22 @@
         "type": "github"
       }
     },
+    "agnoster-zsh-theme": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1651961431,
+        "narHash": "sha256-0VmgFYofjh3YUSKu8tBG7bjCOyF096zbBpfF5EjN7iA=",
+        "owner": "MatthewCash",
+        "repo": "agnoster-zsh-theme",
+        "rev": "6003192cb698ad63ca8f3dc61f029033d5b5d0a8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MatthewCash",
+        "repo": "agnoster-zsh-theme",
+        "type": "github"
+      }
+    },
     "firefox-gnome-theme": {
       "flake": false,
       "locked": {
@@ -110,6 +126,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "agnoster-zsh-theme": "agnoster-zsh-theme",
         "firefox-gnome-theme": "firefox-gnome-theme",
         "home-manager": "home-manager",
         "impermanence": "impermanence",

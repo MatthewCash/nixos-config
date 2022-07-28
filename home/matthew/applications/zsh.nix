@@ -1,4 +1,4 @@
-{ pkgs, persistenceHomePath, name, ... }:
+{ pkgs, persistenceHomePath, name, inputs, ... }:
 
 {
     home.packages = with pkgs; [ wl-clipboard ];
@@ -31,12 +31,7 @@
             {
                 name = "agnoster";
                 file = "agnoster.zsh-theme";
-                src = pkgs.fetchFromGitHub {
-                    owner = "MatthewCash";
-                    repo = "agnoster-zsh-theme";
-                    rev = "6003192cb698ad63ca8f3dc61f029033d5b5d0a8";
-                    sha256 = "sha256-0VmgFYofjh3YUSKu8tBG7bjCOyF096zbBpfF5EjN7iA=";
-                };
+                src = inputs.agnoster-zsh-theme;
             }
         ];
 
