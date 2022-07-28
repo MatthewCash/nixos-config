@@ -59,8 +59,7 @@
             bindkey '5~' kill-word
 
             x() { command xdg-open "$@" 2>/dev/null }
-            wf()
-            {
+            wf() {
                 if [[ ! -f "$1" ]]; then
                     >&2 echo "File $1 not found!"
                     return 1
@@ -75,7 +74,6 @@
                     ${pkgs.inotify-tools}/bin/inotifywait $1 > /dev/null 2>&1
                     ''${@:2}
                 done
-
             }
         '';
     };
