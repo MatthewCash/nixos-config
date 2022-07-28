@@ -13,6 +13,53 @@
             };
 
             theme = "main";
+
+            keys.normal = {
+                "q" = "no_op"; # Q
+                "w" = "no_op"; # W
+                "f" = "no_op"; # E
+                "p" = "replace"; # R
+                "b" = ":x"; # T
+                "B" = ":q!";
+                "j" = "yank"; # Y
+                "l" = "undo"; # U
+                "L" = "redo";
+                "u" = "move_line_up"; # I
+                "U" = "half_page_up";
+                "y" = "open_below"; # O
+                "Y" = "open_above";
+                ";" = "no_op"; # P
+                "[" = "no_op"; # [
+                "]" = "no_op"; # ]
+                "\\\\" = "no_op"; # \
+                "a" = "append_mode"; # A
+                "A" = "append_to_line";
+                "r" = "unindent"; # S
+                "s" = "indent"; # D
+                "t" = "insert_mode"; # F
+                "T" = "prepend_to_line";
+                "g" = "paste_after"; # G
+                "m" = "delete_selection"; # H
+                "M" = [ "extend_to_line_bounds" "delete_selection" ];
+                "n" = "move_char_left"; # J
+                "N" = "move_prev_word_start";
+                "e" = "move_line_down"; # K
+                "E" = "half_page_down";
+                "i" = "move_char_right"; # L
+                "I" = "move_next_word_end";
+                "o" = "no_op"; # ;
+                "'" = "no_op"; # '
+                "x" = "search"; # Z
+                "c" = "no_op"; # X
+                "d" = "no_op"; # C
+                "v" = "select_mode"; # V
+                "z" = "no_op"; # B
+                "k" = "no_op"; # N
+                "h" = "no_op"; # M
+                "," = "no_op"; # ,
+                "." = "no_op"; # .
+                "/" = "no_op"; # /
+            };
         };
 
         # Colors from VSCode Dark+
