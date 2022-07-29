@@ -14,6 +14,7 @@ let
                 home.stateVersion = "22.05";
             };
         }) homeNames;
+        
     homeConfigs = builtins.listToAttrs homeList;
 in
 
