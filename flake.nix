@@ -33,6 +33,11 @@
             url = github:MatthewCash/agnoster-zsh-theme;
             flake = false;
         };
+        
+        zsh-nix-shell = {
+            url = github:chisui/zsh-nix-shell;
+            flake = false;   
+        };
     };
 
     outputs = inputs @ { self, nixpkgs, ... }:

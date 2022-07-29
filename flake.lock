@@ -131,7 +131,8 @@
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "nixos-vscode-server": "nixos-vscode-server",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "zsh-nix-shell": "zsh-nix-shell"
       }
     },
     "utils": {
@@ -146,6 +147,22 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "zsh-nix-shell": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1648749800,
+        "narHash": "sha256-BjgMhILEL/qdgfno4LR64LSB8n9pC9R+gG7IQWwgyfQ=",
+        "owner": "chisui",
+        "repo": "zsh-nix-shell",
+        "rev": "af6f8a266ea1875b9a3e86e14796cadbe1cfbf08",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chisui",
+        "repo": "zsh-nix-shell",
         "type": "github"
       }
     }
