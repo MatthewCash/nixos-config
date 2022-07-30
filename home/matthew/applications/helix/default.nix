@@ -16,24 +16,10 @@
 
             keys = import ./keybinds.nix;
         };
+        
+        languages = import ./languages.nix { inherit pkgs; };
 
         # Colors from VSCode Dark+
         themes.main = import ./theme.nix;
     };
-
-    home.packages = with pkgs; with nodePackages; [
-        clang-tools
-        rnix-lsp
-        lldb
-        typescript-language-server
-        vscode-css-languageserver-bin
-        vscode-html-languageserver-bin
-        vscode-json-languageserver
-        rust-analyzer
-        vls
-        omnisharp-roslyn
-        jdt-language-server
-        gopls
-        taplo-lsp
-    ];
 }
