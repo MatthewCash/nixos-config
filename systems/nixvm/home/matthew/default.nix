@@ -14,5 +14,5 @@
     ../../../../home/${homeName}/applications/vscode-server.nix
     ../../../../home/${homeName}/applications/nix.nix
     ../../../../home/${homeName}/applications/direnv.nix
-    ../../../../home/${homeName}/applications/helix.nix
+    ../../../../home/${homeName}/applications/helix
 ]
