@@ -28,6 +28,7 @@
     {
         name = "java";
         language-server.command = "${pkgs.jdt-language-server}/bin/jdt-language-server";
+        language-server.args = [ "-configuration" "~/.config/jdtls" "-data" "./.jdtls_data" ];
     }
     {
         name = "javascript";
