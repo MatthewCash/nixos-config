@@ -153,15 +153,16 @@
     "zsh-nix-shell": {
       "flake": false,
       "locked": {
-        "lastModified": 1648749800,
-        "narHash": "sha256-BjgMhILEL/qdgfno4LR64LSB8n9pC9R+gG7IQWwgyfQ=",
-        "owner": "chisui",
+        "lastModified": 1659401003,
+        "narHash": "sha256-NmxSkX+T4FrhtqJuqhZ4Vi1foucaF1TBzMGyMfK/ytE=",
+        "owner": "MatthewCash",
         "repo": "zsh-nix-shell",
-        "rev": "af6f8a266ea1875b9a3e86e14796cadbe1cfbf08",
+        "rev": "77b43020a9c10afeedf40e1b0f194690de0056ea",
         "type": "github"
       },
       "original": {
-        "owner": "chisui",
+        "owner": "MatthewCash",
+        "ref": "feat/nix-cmd-support",
         "repo": "zsh-nix-shell",
         "type": "github"
       }

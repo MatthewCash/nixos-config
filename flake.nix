@@ -35,7 +35,7 @@
         };
         
         zsh-nix-shell = {
-            url = github:chisui/zsh-nix-shell;
+            url = github:MatthewCash/zsh-nix-shell/feat/nix-cmd-support;
             flake = false;   
         };
     };
