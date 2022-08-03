@@ -19,6 +19,7 @@
         ];
         settings = {
             "java.jdt.ls.java.home" = "${pkgs.jdk17_headless}/lib/openjdk";
+            "java.import.gradle.home" = "${pkgs.gradle}/lib/gradle";
         };
     };
 }
