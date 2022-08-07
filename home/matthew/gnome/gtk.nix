@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, system, ... }:
 
 let
     adw-gtk3-theme = pkgs.callPackage ./adw-gtk3-theme.nix { };
@@ -9,7 +9,7 @@ in
         enable = true;
 
         theme = { 
-            package = adw-gtk3-theme;
+            package = inputs.adw-gtk3.defaultPackage.${system};
             name = "adw-gtk3-dark";
         };
 

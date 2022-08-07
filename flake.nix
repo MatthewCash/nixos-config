@@ -35,8 +35,13 @@
         };
         
         zsh-nix-shell = {
-            url = github:MatthewCash/zsh-nix-shell/feat/nix-cmd-support;
+            url = github:MatthewCash/adw-gtk3;
             flake = false;   
+        };
+        
+        adw-gtk3 = {
+            url = path:/home/matthew/code/adw-gtk3;
+            inputs.nixpkgs.follows = "nixpkgs";
         };
     };
 
