@@ -36,6 +36,7 @@ in
                 extraSpecialArgs = {
                     persistenceHomePath = "/nix/persist/home";
                     inherit inputs;
+                    inherit (systemConfig) system;
                 };
             };
         }
