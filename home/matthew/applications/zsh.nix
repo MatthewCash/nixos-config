@@ -40,6 +40,7 @@
             watch = "watch -n 1";
             c = "wl-copy";
             p = "wl-paste";
+            e = "$EDITOR";
         };
 
         initExtra = ''
