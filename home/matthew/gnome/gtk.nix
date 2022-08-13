@@ -2,29 +2,9 @@
 
 let
     customCss = ''
-        @define-color accent_color #ff0000;
-        
-        @define-color accent_bg_color #00ff00;
-        
-        @define-color window_bg_color #282a36;
-        
-        @define-color window_fg_color #f8f8f2;
-        
-        @define-color headerbar_bg_color #282a36;
-        
-        @define-color headerbar_fg_color #f8f8f2;
-        
-        @define-color popover_bg_color #282a36;
-        
-        @define-color popover_fg_color #f8f8f2;
-        
-        @define-color view_bg_color #282a36;
-        
-        @define-color view_fg_color #f8f8f2;
-        
-        @define-color card_bg_color rgba(255, 255, 255, 0.08);
-        
-        @define-color card_fg_color #f8f8f2;
+        @define-color accent_bg_color #e77be0;
+        @define-color accent_fg_color @accent_bg_color;
+        @define-color accent_color @accent_bg_color;
     '';
 in
 
@@ -47,7 +27,7 @@ in
         };
 
         gtk4.extraConfig = {
-            gtk-application-prefer-dark-theme = 1;
+#            gtk-application-prefer-dark-theme = 1;
         };
     };
         
