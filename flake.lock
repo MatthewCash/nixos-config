@@ -8,14 +8,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1659909495,
-        "narHash": "sha256-8hO0h7LZMvjCBUJORj3UrEkTQtMb5x2AKnXHRmQoFxk=",
-        "path": "/home/matthew/code/adw-gtk3",
-        "type": "path"
+        "lastModified": 1660414169,
+        "narHash": "sha256-lFzM3SH/5FKu/NsZ08mbYffE2fUGpUPq9KbjVQpPCUY=",
+        "owner": "MatthewCash",
+        "repo": "adw-gtk3",
+        "rev": "2d650f96b059ea67533cbd990ce2ad7ac4e3efce",
+        "type": "github"
       },
       "original": {
-        "path": "/home/matthew/code/adw-gtk3",
-        "type": "path"
+        "owner": "MatthewCash",
+        "repo": "adw-gtk3",
+        "type": "github"
       }
     },
     "agenix": {
@@ -93,11 +96,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1659484873,
-        "narHash": "sha256-6VoPiGyDdjBHOJ3IpS24lY1lrDiOHeuEefOFI0qz3WE=",
+        "lastModified": 1660330190,
+        "narHash": "sha256-RgQUtZGmdb9fRkdBcI8x1KYuykbQCBaeY6ejFls7hFM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "d8d9ff0b2df77defa10375c6665b51f0251c34d6",
+        "rev": "8675cfa549e1240c9d2abb1c878bc427eefcf926",
         "type": "github"
       },
       "original": {
@@ -143,11 +146,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1659522808,
-        "narHash": "sha256-HBcM19nGhI3IWwPNVlYb0MZ8VW6iKp4JbAVkeIHVykc=",
+        "lastModified": 1660305968,
+        "narHash": "sha256-r0X1pZCSEA6mzt5OuTA7nHuLmvnbkwgpFAh1iLIx4GU=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "168d1c578909dc143ba52dbed661c36e76b12b36",
+        "rev": "c4a0efdd5a728e20791b8d8d2f26f90ac228ee8d",
         "type": "github"
       },
       "original": {
@@ -187,16 +190,16 @@
     "zsh-nix-shell": {
       "flake": false,
       "locked": {
-        "lastModified": 1659909488,
-        "narHash": "sha256-EN5EY69wj2RypyCFJE0x6LKQaydhlD+mdMna7WlMhzg=",
+        "lastModified": 1648749800,
+        "narHash": "sha256-BjgMhILEL/qdgfno4LR64LSB8n9pC9R+gG7IQWwgyfQ=",
         "owner": "MatthewCash",
-        "repo": "adw-gtk3",
-        "rev": "b9e754f578b6f00d1ec6cd46720e48c7ec346998",
+        "repo": "zsh-nix-shell",
+        "rev": "af6f8a266ea1875b9a3e86e14796cadbe1cfbf08",
         "type": "github"
       },
       "original": {
         "owner": "MatthewCash",
-        "repo": "adw-gtk3",
+        "repo": "zsh-nix-shell",
         "type": "github"
       }
     }
