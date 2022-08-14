@@ -35,12 +35,12 @@
         };
         
         zsh-nix-shell = {
-            url = github:MatthewCash/adw-gtk3;
+            url = github:MatthewCash/zsh-nix-shell;
             flake = false;   
         };
         
         adw-gtk3 = {
-            url = path:/home/matthew/code/adw-gtk3;
+            url = github:MatthewCash/adw-gtk3;
             inputs.nixpkgs.follows = "nixpkgs";
         };
     };
