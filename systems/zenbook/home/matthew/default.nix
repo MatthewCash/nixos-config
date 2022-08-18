@@ -1,6 +1,7 @@
 { homeName }:
 
 [
+    ../../../.../home/${homeName}/env.nix
     ../../../../home/${homeName}/gnome/tweaks.nix
     ../../../../home/${homeName}/gnome/console.nix
     ../../../../home/${homeName}/gnome/gtk.nix
