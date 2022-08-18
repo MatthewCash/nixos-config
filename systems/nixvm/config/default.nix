@@ -18,6 +18,7 @@
     ../../../config/fs/mounts.nix
     ./mounts.nix
     ../../../config/ld.nix
+    ../../../config/env.nix
     
     ../../../config/applications/steam.nix
     ../../../config/applications/python.nix
