@@ -1,6 +1,8 @@
 { homeName }:
 
 [
+    ../../../../home/${homeName}/env.nix
+
     ../../../../home/${homeName}/applications/dev.nix
     ../../../../home/${homeName}/applications/fzf.nix
     ../../../../home/${homeName}/applications/node.nix
