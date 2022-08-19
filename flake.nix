@@ -48,17 +48,22 @@
     outputs = inputs @ { self, nixpkgs, ... }:
 
     let
+        # NixOS Configurations
         systemNames = builtins.attrNames (nixpkgs.lib.attrsets.filterAttrs (n: v: v == "directory") (builtins.readDir ./systems));
-        systemList = builtins.map (name: 
-        { 
-            name = name;
+        systemConfigList = builtins.map (name: { 
+            inherit name;
             value = (import ./systems/${name} {
                 inherit (nixpkgs) lib;
                 inherit inputs;
             });
         }) systemNames;
-        systems = builtins.listToAttrs systemList;
-    in
+        systemConfigs = builtins.listToAttrs systemConfigList;
+        systems = builtins.mapAttrs (name: systemConfig: 
+            (import ./systems/buildSystem.nix {
+                inherit (nixpkgs) lib;
+                inherit systemConfig inputs;
+            })
+        ) systemConfigs;
 
     {
         nixosConfigurations = systems;
