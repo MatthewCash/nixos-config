@@ -38,9 +38,14 @@
             url = github:MatthewCash/zsh-nix-shell;
             flake = false;   
         };
-        
+
         adw-gtk3 = {
             url = github:MatthewCash/adw-gtk3;
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+
+        nixos-generators = {
+            url = github:nix-community/nixos-generators;
             inputs.nixpkgs.follows = "nixpkgs";
         };
     };
@@ -65,7 +70,19 @@
             })
         ) systemConfigs;
 
+        # NixOS Generators
+        generatorFormats = [ "qcow" "iso" "hyperv" ];
+        generatorList = builtins.map (name: {
+            inherit name;
+            value = builtins.mapAttrs (configName: systemConfig: inputs.nixos-generators.nixosGenerate {
+                inherit (systemConfig) system;
+                format = name;
+            }) systemConfigs;
+        }) generatorFormats;
+        generators = builtins.listToAttrs generatorList;
+    in
     {
         nixosConfigurations = systems;
+        packages.x86_64-linux = generators;
     };
 }
