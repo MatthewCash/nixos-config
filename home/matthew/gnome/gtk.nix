@@ -3,7 +3,6 @@
 let
     customCss = ''
         @define-color accent_bg_color #e77be0;
-        @define-color accent_fg_color @accent_bg_color;
         @define-color accent_color @accent_bg_color;
     '';
 in
