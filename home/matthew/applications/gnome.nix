@@ -57,6 +57,7 @@
         seahorse
         nautilus
         evince
+        authenticator
         gnome-boxes
         gnome-books
         gnome-clocks
