@@ -12,6 +12,16 @@
                 insert = "bar";
             };
 
+            editor.whitespace.render = {
+                space = "all";
+                tab = "all";
+            };
+            editor.whitespace.characters = {
+                space = "·";
+                nbsp = "⍽";
+                tab = "→";
+            };
+
             theme = "main";
 
             keys = import ./keybinds.nix;
