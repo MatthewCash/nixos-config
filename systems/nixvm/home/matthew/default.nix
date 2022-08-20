@@ -1,20 +1,21 @@
 { homeName }:
 
-[
-    ../../../../home/${homeName}/env.nix
+builtins.map (path: ../../../../home/${homeName}/${path}) [
+    "env.nix"
 
-    ../../../../home/${homeName}/applications/dev.nix
-    ../../../../home/${homeName}/applications/fzf.nix
-    ../../../../home/${homeName}/applications/node.nix
-    ../../../../home/${homeName}/applications/git.nix
-    ../../../../home/${homeName}/applications/gpg.nix
-    ../../../../home/${homeName}/applications/htop.nix
-    ../../../../home/${homeName}/applications/neovim.nix
-    ../../../../home/${homeName}/applications/openssh.nix
-    ../../../../home/${homeName}/applications/wsu2fa.nix
-    ../../../../home/${homeName}/applications/zsh.nix
-    ../../../../home/${homeName}/applications/vscode-server.nix
-    ../../../../home/${homeName}/applications/nix.nix
-    ../../../../home/${homeName}/applications/direnv.nix
-    ../../../../home/${homeName}/applications/helix
+    "applications/dev.nix"
+    "applications/fzf.nix"
+    "applications/node.nix"
+    "applications/git.nix"
+    "applications/gpg.nix"
+    "applications/htop.nix"
+    "applications/neovim.nix"
+    "applications/openssh.nix"
+    "applications/wsu2fa.nix"
+    "applications/zsh.nix"
+    "applications/vscode-server.nix"
+    "applications/nix.nix"
+    "applications/direnv.nix"
+    "applications/helix"
+    "applications/gradle.nix"
 ]
