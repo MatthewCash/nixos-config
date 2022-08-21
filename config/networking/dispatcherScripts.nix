@@ -11,7 +11,7 @@
     networking.networkmanager.dispatcherScripts = [
         {
             source = pkgs.writeText "upHook" ''
-                home_net_id="NETZ"
+                home_net_id="NETZ_5"
                 current_net_id="$CONNECTION_ID"
 
                 if [[ "$current_net_id" = "$home_net_id" ]]; then
@@ -19,7 +19,7 @@
                     ${pkgs.nftables}/bin/nft flush chain ip nat zero
 
                     # Add DNAT rules pointing to LAN
-                    ${pkgs.nftables}/bin/nft add rule ip nat zero ip daddr 172.30.0.2 counter dnat to 192.168.1.201
+                    ${pkgs.nftables}/bin/nft add rule ip nat zero ip daddr 172.30.0.2 counter dnat to 192.168.1.200
                     ${pkgs.nftables}/bin/nft add rule ip nat zero ip daddr 172.30.0.5 counter dnat to 192.168.1.203
 
                     # Remove VPN routing rules
