@@ -1,33 +1,33 @@
 { homeName }:
 
-[
-    ../../../../home/${homeName}/persist.nix
+builtins.map (path: ../../../../home/${homeName}/${path}) [
+    "persist.nix"
  
-    ../../../../home/${homeName}/gnome/tweaks.nix
-    ../../../../home/${homeName}/gnome/terminal.nix
-    ../../../../home/${homeName}/gnome/gtk.nix
-    ../../../../home/${homeName}/gnome/config.nix
-    ../../../../home/${homeName}/gnome/input/keyboard.nix
-    ../../../../home/${homeName}/gnome/extensions/dash-to-dock.nix
-    ../../../../home/${homeName}/gnome/extensions/gesture-improvements.nix
-    ../../../../home/${homeName}/gnome/extensions/just-perfection.nix
-    ../../../../home/${homeName}/gnome/extensions/tray-icons-reloaded.nix
-    ../../../../home/${homeName}/desktop/defaultApps.nix
+    "gnome/tweaks.nix"
+    "gnome/terminal.nix"
+    "gnome/gtk.nix"
+    "gnome/config.nix"
+    "gnome/input/keyboard.nix"
+    "gnome/extensions/dash-to-dock.nix"
+    "gnome/extensions/gesture-improvements.nix"
+    "gnome/extensions/just-perfection.nix"
+    "gnome/extensions/tray-icons-reloaded.nix"
+    "desktop/defaultApps.nix"
 
-    ../../../../home/${homeName}/applications/chromium.nix
-    ../../../../home/${homeName}/applications/dev.nix
-    ../../../../home/${homeName}/applications/evolution.nix
-    ../../../../home/${homeName}/applications/firefox.nix
-    ../../../../home/${homeName}/applications/fzf.nix
-    ../../../../home/${homeName}/applications/node.nix
-    ../../../../home/${homeName}/applications/git.nix
-    ../../../../home/${homeName}/applications/gnome.nix
-    ../../../../home/${homeName}/applications/gpg.nix
-    ../../../../home/${homeName}/applications/htop.nix
-    ../../../../home/${homeName}/applications/neovim.nix
-    ../../../../home/${homeName}/applications/openssh.nix
-    ../../../../home/${homeName}/applications/vscode.nix
-    ../../../../home/${homeName}/applications/wsu2fa.nix
-    ../../../../home/${homeName}/applications/zsh.nix
-    ../../../../home/${homeName}/applications/nix.nix
+    "applications/chromium.nix"
+    "applications/dev.nix"
+    "applications/evolution.nix"
+    "applications/firefox.nix"
+    "applications/fzf.nix"
+    "applications/node.nix"
+    "applications/git.nix"
+    "applications/gnome.nix"
+    "applications/gpg.nix"
+    "applications/htop.nix"
+    "applications/neovim.nix"
+    "applications/openssh.nix"
+    "applications/vscode.nix"
+    "applications/wsu2fa.nix"
+    "applications/zsh.nix"
+    "applications/nix.nix"
 ]
