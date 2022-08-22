@@ -17,6 +17,7 @@
             ".local/share/backgrounds"
             ".local/share/nautilus"
             ".local/share/gnome-podcasts"
+            ".local/share/authenticator"
 
             ".config/fragments"
             ".config/totem"
