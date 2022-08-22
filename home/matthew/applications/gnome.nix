@@ -36,7 +36,6 @@
             ".cache/thumbnails"
             ".cache/org.gnome.Books"
             ".cache/org.gnome.SoundRecorder"
-            ".cache/"
         ];
         files = [
             # gnome-keyring-daemon misbehaves in bindfs, symlinks are fine
