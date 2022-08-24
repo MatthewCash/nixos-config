@@ -11,7 +11,6 @@ builtins.map (path: ../../../../home/${homeName}/${path}) [
     "applications/htop.nix"
     "applications/neovim.nix"
     "applications/openssh.nix"
-    "applications/wsu2fa.nix"
     "applications/zsh.nix"
     "applications/vscode-server.nix"
     "applications/nix.nix"
