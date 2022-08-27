@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+nix flake update
+./apply.sh
