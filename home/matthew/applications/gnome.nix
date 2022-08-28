@@ -59,7 +59,7 @@
         evince
         authenticator
         gnome-boxes
-        gnome-books
+#        gnome-books
         gnome-clocks
         gnome-autoar
         gnome-weather
