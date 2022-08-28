@@ -17,6 +17,7 @@ in
 
     specialArgs = { 
         inherit inputs hostname kernelPackages ssd vpnAddress;
+        inherit (systemConfig) system;
     };
 
     modules = [
