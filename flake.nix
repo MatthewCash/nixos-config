@@ -33,7 +33,7 @@
             url = github:MatthewCash/agnoster-zsh-theme;
             flake = false;
         };
-        
+
         zsh-nix-shell = {
             url = github:MatthewCash/zsh-nix-shell;
             flake = false;   
@@ -48,6 +48,11 @@
             url = github:nix-community/nixos-generators;
             inputs.nixpkgs.follows = "nixpkgs";
         };
+
+        aurebesh-fonts = {
+            url = github:MatthewCash/aurebesh-fonts;
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
     };
 
     outputs = inputs @ { self, nixpkgs, ... }:
@@ -57,7 +62,7 @@
         systemNames = builtins.attrNames (nixpkgs.lib.attrsets.filterAttrs (n: v: v == "directory") (builtins.readDir ./systems));
         systemConfigList = builtins.map (name: { 
             inherit name;
-            value = (import ./systems/${name} {
+                value = (import ./systems/${name} {
                 inherit (nixpkgs) lib;
                 inherit inputs;
             });
