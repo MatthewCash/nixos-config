@@ -19,7 +19,7 @@
                     ${pkgs.nftables}/bin/nft flush chain ip nat zero
 
                     # Add DNAT rules pointing to LAN
-                    ${pkgs.nftables}/bin/nft add rule ip nat zero ip daddr 172.30.0.2 counter dnat to 192.168.1.200
+                    ${pkgs.nftables}/bin/nft add rule ip nat zero ip daddr 172.30.0.2 counter dnat to 192.168.1.211
                     ${pkgs.nftables}/bin/nft add rule ip nat zero ip daddr 172.30.0.5 counter dnat to 192.168.1.203
 
                     # Remove VPN routing rules
