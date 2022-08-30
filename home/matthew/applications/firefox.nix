@@ -34,6 +34,10 @@ let
                     installation_mode = "normal_installed";
                     install_url = "https://addons.mozilla.org/firefox/downloads/latest/return-youtube-dislikes/latest.xpi";
                 };
+                "{bca78169-de5a-4ac1-8fbd-8e768795427e}" = {
+                    installation_mode = "normal_installed";
+                    install_url = "https://addons.mozilla.org/firefox/downloads/latest/styl-us/latest.xpi";
+                };
             };
         };
         forceWayland = true;
@@ -144,8 +148,9 @@ in
                                 "addon_darkreader_org-browser-action"
                                 "sponsorblocker_ajay_app-browser-action"
                                 "_b86e4813-687a-43e6-ab65-0bde4ab75758_-browser-action"
-                                "jid1-KKzOGWgsW3Ao4Q_jetpack-browser-action"
+                                "jid1-kkzogwgsw3ao4q_jetpack-browser-action"
                                 "_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action"
+                                "_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action"
                             ];
                             "nav-bar" = [
                                 "back-button"
@@ -159,20 +164,6 @@ in
                             "TabsToolbar" = [ "tabbrowser-tabs" "new-tab-button" "alltabs-button" ];
                             "PersonalToolbar" = [ "import-button" "personal-bookmarks" ];
                         };
-                        "seen" = [
-                            "save-to-pocket-button"
-                            "developer-button"
-                            "ublock0_raymondhill_net-browser-action"
-                            "addon_darkreader_org-browser-action"
-                            "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
-                            "_9a41dee2-b924-4161-a971-7fb35c053a4a_-browser-action"
-                            "chrome-gnome-shell_gnome_org-browser-action"
-                            "sponsorblocker_ajay_app-browser-action"
-                            "profiler-button"
-                            "jid1-kkzogwgsw3ao4q_jetpack-browser-action"
-                            "_b86e4813-687a-43e6-ab65-0bde4ab75758_-browser-action"
-                            "_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action"
-                        ];
                         "dirtyAreaCache" = [
                             "nav-bar"
                             "PersonalToolbar"
