@@ -192,6 +192,10 @@ in
 
                     # Hide single tab
                     "gnomeTheme.hideSingleTab" = true;
+
+                    # No Refresh Banner
+                    "browser.slowStartup.notificationDisabled" = true;
+                    "browser.disableResetPrompt" = true;
                 };
             };
         };
