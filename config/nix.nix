@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
     nixpkgs.config.allowUnfree = true;
@@ -17,5 +17,7 @@
         extraOptions = ''
             experimental-features = nix-command flakes
         '';
+        
+        nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     };
 }
