@@ -88,5 +88,9 @@ in
         "org/gnome/desktop/session" = {
             idle-delay = mkUint32 600;
         };
+
+        "com/belmoussaoui/Authenticator" = {
+            keyrings-migrated = true;
+        };
     };
 }
