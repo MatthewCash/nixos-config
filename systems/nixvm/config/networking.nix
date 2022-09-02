@@ -12,7 +12,7 @@ in
             "${gatewayAddress}" = [ "host" "windows" "inferno" ];
         };
 
-        nameservers = [ "192.168.1.200" "1.1.1.1" ]; 
+        nameservers = [ "192.168.1.211" "1.1.1.1" ];
 
         interfaces = {
             eth0.ipv4.addresses = [{
