@@ -13,6 +13,7 @@ in
         };
 
         nameservers = [ "192.168.1.211" "1.1.1.1" ];
+        resolvconf.extraOptions = [ "use-vc" ];
 
         interfaces = {
             eth0.ipv4.addresses = [{
