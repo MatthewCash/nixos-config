@@ -54,4 +54,10 @@
         x = 0;
         y = 0;
     };
+
+
+    # Prefer plain text messages
+    dconf.settings."org/gnome/evolution/plugin/prefer-plain" = {
+        mode = "prefer_source";
+    };
 }
