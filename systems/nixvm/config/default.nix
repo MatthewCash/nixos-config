@@ -10,7 +10,6 @@
     ../../../config/networking/general.nix
     ./networking.nix
     ../../../config/networking/openssh.nix
-    ../../../config/networking/firewall/fail2ban.nix
     ../../../config/networking/firewall/nftables.nix
     ./firewall/nftables.nix
     ../../../config/hardware/keyboard.nix
