@@ -20,4 +20,6 @@
         
         nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     };
+
+    environment.variables.nixpkgs = builtins.toString inputs.nixpkgs;
 }
