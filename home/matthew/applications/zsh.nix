@@ -44,6 +44,8 @@
         };
 
         initExtra = ''
+            . /run/current-system/etc/profile
+
             unsetopt HIST_SAVE_BY_COPY
 
             bindkey '^H' backward-kill-word
