@@ -25,6 +25,7 @@
 #    ./nvidia.nix
     ../../../config/hardware/keyboard.nix
     ../../../config/hardware/gpu.nix
+    ../../../config/hardware/battery.nix
     ./gpu.nix
     ../../../config/de/gnome.nix
     ../../../config/cpu/intel.nix
