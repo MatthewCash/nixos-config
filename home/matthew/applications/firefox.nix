@@ -38,6 +38,10 @@ let
                     installation_mode = "normal_installed";
                     install_url = "https://addons.mozilla.org/firefox/downloads/latest/styl-us/latest.xpi";
                 };
+                "{b86e4813-687a-43e6-ab65-0bde4ab75758}" = {
+                    installation_mode = "normal_installed";
+                    install_url = "https://addons.mozilla.org/firefox/downloads/latest/localcdn-fork-of-decentraleyes/latest.xpi";
+                };
             };
         };
         forceWayland = true;
@@ -151,6 +155,7 @@ in
                                 "jid1-kkzogwgsw3ao4q_jetpack-browser-action"
                                 "_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action"
                                 "_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action"
+                                "_b86e4813-687a-43e6-ab65-0bde4ab75758_-browser-action"
                             ];
                             "nav-bar" = [
                                 "back-button"
