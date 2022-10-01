@@ -4,8 +4,6 @@
     nixpkgs.config.allowUnfree = true;
 
     nix = {
-        package = pkgs.nixFlakes;
-
         settings.auto-optimise-store = true;
 
         gc = {
