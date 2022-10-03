@@ -1,26 +1,5 @@
 {
   "nodes": {
-    "adw-gtk3": {
-      "inputs": {
-        "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1661729541,
-        "narHash": "sha256-gCFFeHEwFKhdR/0f+bJ4rZQiEC3nOeDIy32r2I7gnxo=",
-        "owner": "MatthewCash",
-        "repo": "adw-gtk3",
-        "rev": "190cc63b92fbcd33fb057fcdb27bbcfead25f570",
-        "type": "github"
-      },
-      "original": {
-        "owner": "MatthewCash",
-        "repo": "adw-gtk3",
-        "type": "github"
-      }
-    },
     "agenix": {
       "inputs": {
         "nixpkgs": [
@@ -72,7 +51,7 @@
     "aurebesh-fonts": {
       "inputs": {
         "aurabesh": "aurabesh",
-        "flake-utils": "flake-utils_2",
+        "flake-utils": "flake-utils",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -108,21 +87,6 @@
       }
     },
     "flake-utils": {
-      "locked": {
-        "lastModified": 1659877975,
-        "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "c0e246b9b83f637f4681389ecabcb2681b4f3af0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_2": {
       "locked": {
         "lastModified": 1659877975,
         "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
@@ -246,7 +210,6 @@
     },
     "root": {
       "inputs": {
-        "adw-gtk3": "adw-gtk3",
         "agenix": "agenix",
         "agnoster-zsh-theme": "agnoster-zsh-theme",
         "aurebesh-fonts": "aurebesh-fonts",

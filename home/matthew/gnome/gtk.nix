@@ -12,7 +12,7 @@ in
         enable = true;
 
         theme = { 
-            package = inputs.adw-gtk3.defaultPackage.${system};
+            package = pkgs.adw-gtk3;
             name = "adw-gtk3-dark";
         };
 
