@@ -1,7 +1,8 @@
 { ... }:
 
 {
-    security.pam = {
-        services.sudo.nodelay = true;
+    security.pam.services = {
+        sudo.nodelay = true;
+        login.nodelay = true;
     };
 }
