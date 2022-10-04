@@ -64,6 +64,16 @@ in
                 isDefault = true;
                 userChrome = ''
                     @import "${inputs.firefox-gnome-theme}/userChrome.css";
+
+                    #firefox-view-button {
+                        display: none;
+                    }
+
+                    #tabbrowser-tabs {
+                        margin-inline-start: 0 !important;
+                        border-inline-start: 0 !important;
+                        padding: 0 !important;
+                    }
                 '';
                 extraConfig = builtins.readFile "${inputs.firefox-gnome-theme}/configuration/user.js";
                 settings = {
