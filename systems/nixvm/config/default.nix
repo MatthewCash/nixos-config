@@ -18,8 +18,7 @@
     ./mounts.nix
     ../../../config/ld.nix
     ../../../config/env.nix
-    
-    ../../../config/applications/steam.nix
+
     ../../../config/applications/python.nix
     ../../../config/applications/nodejs.nix
     ../../../config/applications/java.nix
