@@ -59,12 +59,11 @@
         evince
         authenticator
         gnome-boxes
-#        gnome-books
+#        gnome-books # Broken, upstream is archived :/
         gnome-clocks
         gnome-autoar
         gnome-weather
         gnome-maps
-        gnome-nettool
         gnome-contacts
         gnome-calendar
         gnome-screenshot
