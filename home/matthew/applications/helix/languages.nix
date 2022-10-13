@@ -1,5 +1,12 @@
 { pkgs, ... }:
 
+let
+    fourTabLanguages = [
+        "c" "c-sharp" "cpp" "css" "go" "html" "java" "javascript" "json" "jsx" "nix" "rust" "tsx" "typescript" "vue"
+    ];
+in
+
+map (name: { inherit name; indent = { tab-width = 4; unit = "    "; }; }) fourTabLanguages ++
 [
     {
         name = "c";
