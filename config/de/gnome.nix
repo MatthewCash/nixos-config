@@ -8,6 +8,8 @@
         desktopManager.gnome.enable = true;
 
         libinput.enable = true;
+
+        excludePackages = with pkgs; [ xterm ];
     };
 
     services.gnome = {
