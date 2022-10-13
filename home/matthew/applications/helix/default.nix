@@ -22,6 +22,11 @@
                 tab = "→";
             };
 
+            editor.indent-guides = {
+                render = true;
+                character = "╎";
+            };
+
             theme = "main";
 
             keys = import ./keybinds.nix;
