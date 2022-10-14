@@ -5,7 +5,7 @@ let
     inherit (gvariant) mkUint32;
 in
 
-{   
+{
     home.persistence."${persistenceHomePath}/${name}".files = [
         ".config/monitors.xml"
     ];
@@ -19,7 +19,7 @@ in
             show-battery-percentage = true;
             enable-hot-corners = true;
             color-scheme = "prefer-dark";
-        };        
+        };
 
         "org/gnome/desktop/sound" = {
             allow-volume-above-100-percent = true;
