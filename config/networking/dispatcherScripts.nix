@@ -35,7 +35,18 @@
                     ${pkgs.iproute2}/bin/ip route add 172.30.0.5 via 10.0.0.9 table wg_vpn
                 fi
             '';
-            type = "pre-up";
+        }
+        {
+            type = "basic";
+            source = pkgs.writeText "upHook" ''
+                school_net_uuid="eb7d4c15-44f1-4649-83a7-fce78ed236c5"
+                current_net_uuid="$CONNECTION_UUID"
+
+                if [[ "$NM_DISPATCHER_ACTION" = "up" && "$current_net_uuid" = "$school_net_uuid" ]]; then
+                    # Complete captive portal
+                    ${pkgs.curl}/bin/curl -m 10 -d "originurl=http://%3a%2f%2f172%2e16%2e8%2e131%2f" http://172.16.8.131/forms/guest_toued || true
+                fi
+            '';
         }
     ];
 }
