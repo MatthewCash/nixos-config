@@ -1,6 +1,6 @@
 { pkgs, ... }:
 
-{   
+{
     home.packages = with pkgs.gnomeExtensions; [ dash-to-dock ];
 
     dconf.settings."org/gnome/shell".enabled-extensions = [ "dash-to-dock@micxgx.gmail.com" ];
