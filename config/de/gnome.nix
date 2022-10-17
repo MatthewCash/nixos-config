@@ -18,7 +18,7 @@
 
         gnome-keyring.enable = true;
 
-        chrome-gnome-shell.enable = true;
+        gnome-browser-connector.enable = true;
     };
 
     environment.gnome.excludePackages = with pkgs; [ gnome-tour ];
