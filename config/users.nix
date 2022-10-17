@@ -5,7 +5,7 @@
 
     users.extraUsers.matthew = {
         description = "Matthew";
-    	hashedPassword = "$6$EjrPLKMWVyP8NeF6$7IH.rKSAL41g/QAsBCjPhdmTPMK2shb1Do6gRHqquJTE6sPKeoR/pJFlXxCDQoXD0fRqZjIpA/8DMJG69wJSo.";
+        passwordFile = "/nix/persist/pwd/matthew";
         createHome = true;
         isNormalUser = true;
         home = "/home/matthew";
