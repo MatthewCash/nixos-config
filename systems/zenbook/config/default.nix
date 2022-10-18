@@ -35,6 +35,7 @@
     ./virt.nix
     ../../../config/ld.nix
     ../../../config/env.nix
+    ../../../config/docs.nix
 
     ../../../config/applications/steam.nix
     ../../../config/applications/python.nix
