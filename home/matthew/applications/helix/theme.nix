@@ -1,4 +1,4 @@
-let 
+let
     white = "#ffffff";
     orange = "#ce9178";
     gold = "#d7ba7d";

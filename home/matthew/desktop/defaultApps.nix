@@ -9,10 +9,10 @@
             "x-scheme-handler/https" = [ "firefox.desktop" ];
             "application/pdf" = [ "org.gnome.Evince.desktop" ];
             "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
-            
+
             # Mail
             "x-scheme-handler/mailto" = [ "org.gnome.Evolution.desktop" ];
-            
+
             # Images
             "image/jpeg" = [ "org.gnome.eog.desktop" ];
             "image/bmp" = [ "org.gnome.eog.desktop" ];
@@ -37,6 +37,6 @@
             "image/svg+xml-compressed" = [ "org.gnome.eog.desktop" ];
             "image/vnd.wap.wbmp" = [ "org.gnome.eog.desktop" ];
             "image/x-icns" = [ "org.gnome.eog.desktop" ];
-        };	
+        };
     };
 }

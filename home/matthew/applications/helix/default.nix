@@ -31,7 +31,7 @@
 
             keys = import ./keybinds.nix;
         };
-        
+
         languages = import ./languages.nix { inherit pkgs; };
 
         # Colors from VSCode Dark+

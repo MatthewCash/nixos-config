@@ -20,8 +20,8 @@
     };
 
     age.identityPaths = [
-        "/nix/persist/etc/ssh/ssh_host_ed25519_key" 
-        "/nix/persist/home/matthew/.ssh/id_matthew" 
+        "/nix/persist/etc/ssh/ssh_host_ed25519_key"
+        "/nix/persist/home/matthew/.ssh/id_matthew"
     ];
 
     fileSystems = {

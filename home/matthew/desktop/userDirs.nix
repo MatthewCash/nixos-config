@@ -2,8 +2,8 @@
 
 {
     xdg.userDirs = {
-        enable = true;			
-        
+        enable = true;
+
         documents = "/mnt/storage/Documents";
         download = "/mnt/storage/Downloads";
         music = "/mnt/storage/Music";

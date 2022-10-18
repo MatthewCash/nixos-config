@@ -15,7 +15,7 @@ in
 (lib.nixosSystem {
     inherit (systemConfig) system;
 
-    specialArgs = { 
+    specialArgs = {
         inherit inputs hostname kernelPackages ssd vpnAddress;
         inherit (systemConfig) system;
     };
@@ -24,13 +24,13 @@ in
         inputs.agenix.nixosModule
 
         inputs.impermanence.nixosModule
-        
+
         inputs.home-manager.nixosModule
 
         {
             home-manager = {
                 useGlobalPkgs = true;
-                users = import ../home/buildHomeConfigs.nix { 
+                users = import ../home/buildHomeConfigs.nix {
                     inherit lib inputs;
                     homeConfigPath = systemConfig.homeConfig;
                 };
@@ -43,8 +43,6 @@ in
         }
 
         { system.stateVersion = "22.05"; }
-        
+
     ] ++ import systemConfig.nixosConfig;
 })
-
-

@@ -35,7 +35,7 @@
 
         zsh-nix-shell = {
             url = github:MatthewCash/zsh-nix-shell;
-            flake = false;   
+            flake = false;
         };
 
         nixos-generators = {
@@ -54,7 +54,7 @@
     let
         # NixOS Configurations
         systemNames = builtins.attrNames (nixpkgs.lib.attrsets.filterAttrs (n: v: v == "directory") (builtins.readDir ./systems));
-        systemConfigList = builtins.map (name: { 
+        systemConfigList = builtins.map (name: {
             inherit name;
                 value = (import ./systems/${name} {
                 inherit (nixpkgs) lib;
@@ -62,7 +62,7 @@
             });
         }) systemNames;
         systemConfigs = builtins.listToAttrs systemConfigList;
-        systems = builtins.mapAttrs (name: systemConfig: 
+        systems = builtins.mapAttrs (name: systemConfig:
             (import ./systems/buildSystem.nix {
                 inherit (nixpkgs) lib;
                 inherit systemConfig inputs;

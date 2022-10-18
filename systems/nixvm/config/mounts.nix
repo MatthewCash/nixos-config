@@ -6,7 +6,7 @@ let
 in
 
 {
-    age.secrets.nixvm-smb-creds.file = ../../../secrets/nixvm-smb-creds.age;    
+    age.secrets.nixvm-smb-creds.file = ../../../secrets/nixvm-smb-creds.age;
 
     services.samba.enable = true;
 

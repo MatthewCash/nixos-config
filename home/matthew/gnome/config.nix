@@ -1,6 +1,6 @@
 { persistenceHomePath, name, lib, ... }:
- 
-let 
+
+let
     gvariant = lib.hm.gvariant;
     inherit (gvariant) mkUint32;
 in
@@ -53,20 +53,20 @@ in
         };
 
         "org/gnome/shell" = {
-            favorite-apps = [ 
-                "discord.desktop" 
-                "chromium-browser.desktop" 
-                "termius-app.desktop" 
-                "code.desktop" 
-                "firefox.desktop" 
-                "steam.desktop" 
-                "org.gnome.Boxes.desktop" 
+            favorite-apps = [
+                "discord.desktop"
+                "chromium-browser.desktop"
+                "termius-app.desktop"
+                "code.desktop"
+                "firefox.desktop"
+                "steam.desktop"
+                "org.gnome.Boxes.desktop"
                 "org.gnome.Console.desktop"
-                "org.gnome.Evolution.desktop" 
+                "org.gnome.Evolution.desktop"
                 "org.gnome.Settings.desktop"
-                "org.gnome.Nautilus.desktop" 
+                "org.gnome.Nautilus.desktop"
             ];
-            enabled-extensions = [ 
+            enabled-extensions = [
                 "screenshot-window-sizer@gnome-shell-extensions.gcampax.github.co"
                 "places-menu@gnome-shell-extensions.gcampax.github.com"
                 "user-theme@gnome-shell-extensions.gcampax.github.com"

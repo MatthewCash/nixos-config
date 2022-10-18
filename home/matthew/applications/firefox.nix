@@ -4,7 +4,7 @@ let
     firefox-devedition-bin = pkgs.firefox-devedition-bin.override (old: {
         icon = "firefox-developer-edition";
         desktopName = "Firefox Developer Edition";
-        nameSuffix = ""; 
+        nameSuffix = "";
         extraPolicies = {
             DisableAppUpdate = true;
             DontCheckDefaultBrowser = true;

@@ -1,5 +1,5 @@
 { pkgs, ... }:
 
 {
-    home.packages = with pkgs; [ gnome-console ]; 
+    home.packages = with pkgs; [ gnome-console ];
 }

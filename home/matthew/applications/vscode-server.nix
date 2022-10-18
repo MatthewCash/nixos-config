@@ -7,9 +7,9 @@
 
     services.vscode-server = {
         enable = true;
-        extensions = with pkgs.vscode-extensions; [ 
-            ms-vscode.cpptools 
-            jnoortheen.nix-ide 
+        extensions = with pkgs.vscode-extensions; [
+            ms-vscode.cpptools
+            jnoortheen.nix-ide
             github.copilot
             dbaeumer.vscode-eslint
             github.vscode-pull-request-github

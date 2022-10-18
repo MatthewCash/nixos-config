@@ -14,10 +14,10 @@
             source = pkgs.writeText "upHook" ''
                 home_net_id_hash="997ae2dff5a617f2bafa6ae7ffe50b8594265de06894a5b5f24590d3dea58761"
                 current_net_id_hash=$(echo "$CONNECTION_ID" | ${pkgs.coreutils}/bin/sha256sum | sed 's/ .*$//')
-                
+
                 # Remove previous DNAT rules
                 ${pkgs.nftables}/bin/nft flush chain ip nat zero
-                
+
                 # Remove VPN routing rules
                 ${pkgs.iproute2}/bin/ip route flush table wg_vpn
 

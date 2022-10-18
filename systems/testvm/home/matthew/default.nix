@@ -2,8 +2,8 @@
 
 builtins.map (path: ../../../../home/${homeName}/${path}) [
     "persist.nix"
- 
-    "gnome/tweaks.nix"
+
+     "gnome/tweaks.nix"
     "gnome/terminal.nix"
     "gnome/gtk.nix"
     "gnome/config.nix"

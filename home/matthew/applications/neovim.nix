@@ -3,7 +3,7 @@
 {
     programs.neovim = {
         enable = true;
-        
+
         coc = {
             enable = true;
             settings = {
@@ -28,7 +28,7 @@
             " Colemak-DH remapping
             noremap  a a
             noremap  z z
-            noremap  d c 
+            noremap  d c
             noremap  s d
             noremap  f f
             noremap  t f
@@ -55,7 +55,7 @@
 
             let g:nix_recommended_style=0
 
-            inoremap <C-H> <C-W>	
+            inoremap <C-H> <C-W>
             tnoremap <Esc> <C-\><C-n>
             set mouse=a
             set number
@@ -71,7 +71,7 @@
             set encoding=utf8
             set history=5000
             set clipboard=unnamedplus
-          
+
             augroup RestoreCursorShapeOnExit
             autocmd!
             autocmd VimLeave * set guicursor=a:ver25
@@ -100,7 +100,6 @@
 
             " Current line number color
             highlight CursorLineNr term=bold cterm=NONE ctermfg=lightmagenta ctermbg=NONE gui=NONE guifg=lightmagenta guibg=NONE
-
 
             highlight clear SignColumn
 
@@ -131,7 +130,7 @@
             vim-polyglot
             copilot-vim
             indentLine
-            yats-vim          
+            yats-vim
             vim-markdown
             neoformat
         ];
