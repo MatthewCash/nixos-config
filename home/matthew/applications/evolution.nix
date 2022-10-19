@@ -43,7 +43,7 @@
         sidebar-visible-sub = true;
         statusbar-visible = false;
         statusbar-visible-sub = true;
-        toolbar-visible = true;
+        toolbar-visible = false;
         toolbar-visible-sub = true;
     };
 
