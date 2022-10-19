@@ -13,6 +13,7 @@ builtins.map (path: ../../../../home/${homeName}/${path}) [
     "gnome/extensions/just-perfection.nix"
     "gnome/extensions/tray-icons-reloaded.nix"
     "gnome/extensions/rounded-windows.nix"
+    "gnome/extensions/bluetooth-quick-connect.nix"
     "desktop/defaultApps.nix"
     "desktop/userDirs.nix"
 
