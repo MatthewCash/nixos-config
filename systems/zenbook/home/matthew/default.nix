@@ -32,7 +32,7 @@ builtins.map (path: ../../../../home/${homeName}/${path}) [
     "applications/vscode.nix"
     "applications/zsh.nix"
     "applications/steam.nix"
-    "applications/polymc.nix"
+    "applications/prismlauncher.nix"
     "applications/discord.nix"
     "applications/setzer.nix"
     "applications/bitwarden.nix"
