@@ -14,6 +14,7 @@ builtins.map (path: ../../../../home/${homeName}/${path}) [
     "gnome/extensions/tray-icons-reloaded.nix"
     "gnome/extensions/rounded-windows.nix"
     "gnome/extensions/bluetooth-quick-connect.nix"
+    "gnome/extensions/tailscale-status.nix"
     "desktop/defaultApps.nix"
     "desktop/userDirs.nix"
 
