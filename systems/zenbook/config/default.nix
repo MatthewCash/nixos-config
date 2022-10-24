@@ -36,6 +36,7 @@
     ../../../config/ld.nix
     ../../../config/env.nix
     ../../../config/docs.nix
+    ../../../config/tailscale.nix
 
     ../../../config/applications/steam.nix
     ../../../config/applications/python.nix
