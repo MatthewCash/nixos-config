@@ -1,6 +1,8 @@
-{ lib, config, ... }:
+{ lib, pkgs, ... }:
 
 {
-#    environment.variables = builtins.removeAttrs config.environment.variables [ "EDITOR" ];
-    environment.variables.EDITOR = lib.mkForce "$EDITOR";
+    environment = {
+        variables.EDITOR = lib.mkForce "$EDITOR";
+        shells = with pkgs; [ zsh ];
+    };
 }
