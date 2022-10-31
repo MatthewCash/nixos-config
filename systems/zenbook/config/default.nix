@@ -15,7 +15,7 @@
     ../../../config/acpi.nix
     ../../../config/networking/general.nix
     ./networking.nix
-    ../../../config/networking/dispatcherScripts.nix
+    ../../../config/networking/dispatcherScripts/captivePortal.nix
     ../../../config/networking/openssh.nix
     ../../../config/networking/firewall/fail2ban.nix
     ../../../config/networking/firewall/nftables.nix
