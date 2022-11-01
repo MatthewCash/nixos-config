@@ -9,6 +9,7 @@ let
             DisableAppUpdate = true;
             DontCheckDefaultBrowser = true;
             DisablePocket = true;
+            DisableTelemetry = true;
             ExtensionSettings = {
                 "uBlock0@raymondhill.net" = {
                     installation_mode = "normal_installed";
