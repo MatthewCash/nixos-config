@@ -10,4 +10,5 @@ in
 {
     "secrets/nixvm-smb-creds.age".publicKeys = [ matthew_pubkey nixvm_pubkey ];
     "secrets/wireguard/10.0.0.9/privkey.age".publicKeys = [ matthew_pubkey zenbook_pubkey ];
+    "secrets/tailscale/zeta.age".publicKeys = [ matthew_pubkey zenbook_pubkey ];
 }
