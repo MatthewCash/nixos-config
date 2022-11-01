@@ -94,7 +94,6 @@ in
                     "privacy.sanitize.pending" = "[{\"id\":\"newtab-container\" =\"itemsToClear\":[] =\"options\":{}}]";
                     "reader.color_scheme" = "dark";
                     "reader.content_width" = 5;
-                    "security.sandbox.content.level" = 0;
                     "services.sync.declinedEngines" = "";
                     "services.sync.engine.addresses.available" = true;
                     "signon.autologin.proxy" = true;
