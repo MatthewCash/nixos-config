@@ -166,7 +166,7 @@ in
                                 "fxa-toolbar-menu-button"
                             ];
                             "toolbar-menubar" = [ "menubar-items" ];
-                            "TabsToolbar" = [ "tabbrowser-tabs" "new-tab-button" "alltabs-button" ];
+                            "TabsToolbar" = [ "tabbrowser-tabs" "alltabs-button" ];
                             "PersonalToolbar" = [ "import-button" "personal-bookmarks" ];
                         };
                         "dirtyAreaCache" = [
