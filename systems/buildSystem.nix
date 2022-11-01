@@ -10,13 +10,15 @@ let
     useHomeManager = systemConfig.useHomeManager ? true;
 
     vpnAddress = systemConfig.vpnAddress;
+
+    tailscaleId = systemConfig.tailscaleId;
 in
 
 (lib.nixosSystem {
     inherit (systemConfig) system;
 
     specialArgs = {
-        inherit inputs hostname kernelPackages ssd vpnAddress;
+        inherit inputs hostname kernelPackages ssd vpnAddress tailscaleId;
         inherit (systemConfig) system;
     };
 
