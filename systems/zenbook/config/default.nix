@@ -20,9 +20,7 @@
     ../../../config/networking/firewall/fail2ban.nix
     ../../../config/networking/firewall/nftables.nix
     ./firewall/nftables.nix
-    ../../../config/networking/vpn/wireguard.nix
     ../../../config/hardware/tpm.nix
-#    ./nvidia.nix
     ../../../config/hardware/keyboard.nix
     ../../../config/hardware/gpu.nix
     ../../../config/hardware/battery.nix
