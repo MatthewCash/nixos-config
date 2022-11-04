@@ -1,9 +1,9 @@
-{ lib, inputs }:
+{ lib, nixpkgs }:
 
 rec {
     hostname = "zenbook";
     system = "x86_64-linux";
-    kernelPackages = inputs.nixpkgs.legacyPackages.${system}.linuxPackages_6_0;
+    kernelPackages = nixpkgs.legacyPackages.${system}.linuxPackages_6_0;
     ssd = true;
     vpnAddress = "10.0.0.9";
     tailscaleId = "zeta";

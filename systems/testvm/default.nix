@@ -1,9 +1,9 @@
-{ lib, inputs }:
+{ lib, nixpkgs }:
 
 rec {
     hostname = "testvm";
     system = "x86_64-linux";
-    kernelPackages = inputs.nixpkgs.legacyPackages.${system}.linuxPackages_latest;
+    kernelPackages = nixpkgs.legacyPackages.${system}.linuxPackages_latest;
     ssd = false;
 
     nixosConfig = builtins.toString ./config;

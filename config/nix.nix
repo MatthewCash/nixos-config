@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, nixpkgs, ... }:
 
 {
     nixpkgs.config.allowUnfree = true;
@@ -16,8 +16,8 @@
             experimental-features = nix-command flakes
         '';
 
-        nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+        nixPath = [ "nixpkgs=${nixpkgs}" ];
     };
 
-    environment.variables.nixpkgs = builtins.toString inputs.nixpkgs;
+    environment.variables.nixpkgs = builtins.toString nixpkgs;
 }

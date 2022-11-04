@@ -1,25 +1,15 @@
-{ lib, inputs, systemConfig, ... }:
+{ lib, inputs, nixpkgs, systemConfig, ... }:
 
 let
-    hostname = systemConfig.hostname;
-
-    kernelPackages = systemConfig.kernelPackages;
-
-    ssd = systemConfig.ssd ? false;
-
     useHomeManager = systemConfig.useHomeManager ? true;
-
-    vpnAddress = systemConfig.vpnAddress;
-
-    tailscaleId = systemConfig.tailscaleId;
 in
 
 (lib.nixosSystem {
     inherit (systemConfig) system;
 
     specialArgs = {
-        inherit inputs hostname kernelPackages ssd vpnAddress tailscaleId;
-        inherit (systemConfig) system;
+        inherit (systemConfig) system hostname kernelPackages ssd vpnAddress tailscaleId;
+        inherit inputs nixpkgs;
     };
 
     modules = [

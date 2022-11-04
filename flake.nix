@@ -2,25 +2,24 @@
     description = "NixOS and Home Manager Configuration";
 
     inputs = {
-        nixpkgs.url = "nixpkgs/nixos-unstable";
+        nixpkgsStable.url = "nixpkgs/nixos-22.05";
+        nixpkgsUnstable.url = "nixpkgs/nixos-unstable";
 
         home-manager = {
             url = github:nix-community/home-manager;
-            inputs.nixpkgs.follows = "nixpkgs";
+            inputs.nixpkgs.follows = "nixpkgsUnstable";
         };
 
-        impermanence = {
-            url = github:nix-community/impermanence;
-        };
+        impermanence.url = github:nix-community/impermanence;
 
         agenix = {
             url = github:ryantm/agenix;
-            inputs.nixpkgs.follows = "nixpkgs";
+            inputs.nixpkgs.follows = "nixpkgsStable";
         };
 
         nixos-vscode-server = {
             url = github:MatthewCash/nixos-vscode-server;
-            inputs.nixpkgs.follows = "nixpkgs";
+            inputs.nixpkgs.follows = "nixpkgsUnstable";
         };
 
         firefox-gnome-theme = {
@@ -40,32 +39,33 @@
 
         nixos-generators = {
             url = github:nix-community/nixos-generators;
-            inputs.nixpkgs.follows = "nixpkgs";
+            inputs.nixpkgs.follows = "nixpkgsUnstable";
         };
 
         aurebesh-fonts = {
             url = github:MatthewCash/aurebesh-fonts;
-            inputs.nixpkgs.follows = "nixpkgs";
+            inputs.nixpkgs.follows = "nixpkgsStable";
         };
     };
 
-    outputs = inputs @ { self, nixpkgs, ... }:
+    outputs = inputs @ { self, nixpkgsStable, nixpkgsUnstable, ... }:
 
     let
         # NixOS Configurations
-        systemNames = builtins.attrNames (nixpkgs.lib.attrsets.filterAttrs (n: v: v == "directory") (builtins.readDir ./systems));
+        systemNames = builtins.attrNames (nixpkgsStable.lib.attrsets.filterAttrs (n: v: v == "directory") (builtins.readDir ./systems));
         systemConfigList = builtins.map (name: {
             inherit name;
                 value = (import ./systems/${name} {
-                inherit (nixpkgs) lib;
-                inherit inputs;
+                inherit (nixpkgsUnstable) lib;
+                nixpkgs = nixpkgsUnstable;
             });
         }) systemNames;
         systemConfigs = builtins.listToAttrs systemConfigList;
         systems = builtins.mapAttrs (name: systemConfig:
             (import ./systems/buildSystem.nix {
-                inherit (nixpkgs) lib;
+                inherit (nixpkgsUnstable) lib;
                 inherit systemConfig inputs;
+                nixpkgs = nixpkgsUnstable;
             })
         ) systemConfigs;
 
