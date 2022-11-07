@@ -1,9 +1,9 @@
-{ lib, nixpkgs }:
+{ lib, nixpkgsStable, nixpkgsUnstable }:
 
 rec {
     hostname = "testvm";
     system = "x86_64-linux";
-    kernelPackages = nixpkgs.legacyPackages.${system}.linuxPackages_latest;
+    kernelPackages = nixpkgsUnstable.legacyPackages.${system}.linuxPackages_latest;
     ssd = false;
 
     nixosConfig = builtins.toString ./config;

@@ -1,4 +1,4 @@
-{ lib, inputs, nixpkgs, systemConfig, ... }:
+{ lib, inputs, nixpkgsStable, nixpkgsUnstable, systemConfig, ... }:
 
 let
     useHomeManager = systemConfig.useHomeManager ? true;
@@ -9,7 +9,8 @@ in
 
     specialArgs = {
         inherit (systemConfig) system hostname kernelPackages ssd vpnAddress tailscaleId;
-        inherit inputs nixpkgs;
+        inherit inputs nixpkgsStable nixpkgsUnstable;
+        nixpkgs = nixpkgsUnstable;
     };
 
     modules = [

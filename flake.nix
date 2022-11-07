@@ -57,15 +57,14 @@
             inherit name;
                 value = (import ./systems/${name} {
                 inherit (nixpkgsUnstable) lib;
-                nixpkgs = nixpkgsUnstable;
+                inherit nixpkgsStable nixpkgsUnstable;
             });
         }) systemNames;
         systemConfigs = builtins.listToAttrs systemConfigList;
         systems = builtins.mapAttrs (name: systemConfig:
             (import ./systems/buildSystem.nix {
                 inherit (nixpkgsUnstable) lib;
-                inherit systemConfig inputs;
-                nixpkgs = nixpkgsUnstable;
+                inherit systemConfig inputs nixpkgsStable nixpkgsUnstable;
             })
         ) systemConfigs;
 
