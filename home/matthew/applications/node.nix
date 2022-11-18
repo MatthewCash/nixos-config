@@ -1,4 +1,4 @@
-{ pkgs, persistenceHomePath, name, ... }:
+{ pkgsUnstable, persistenceHomePath, name, ... }:
 
 {
     home.persistence."${persistenceHomePath}/${name}".directories = [
@@ -7,7 +7,7 @@
         ".cache/typescript"
     ];
 
-    home.packages = with pkgs; with nodePackages; [
+    home.packages = with pkgsUnstable; with nodePackages; [
         npm
         typescript
     ];

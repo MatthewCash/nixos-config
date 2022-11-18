@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgsUnstable, ... }:
 
 {
     hardware.opengl = {
-        extraPackages = with pkgs; [ intel-media-driver ];
+        extraPackages = with pkgsUnstable; [ intel-media-driver ];
     };
 }

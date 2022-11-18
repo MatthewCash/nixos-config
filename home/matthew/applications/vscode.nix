@@ -1,8 +1,8 @@
-{ pkgs, persistenceHomePath, name, ... }:
+{ pkgsStable, pkgsUnstable, persistenceHomePath, name, ... }:
 
 let
-    vscode = pkgs.vscode.overrideAttrs(oldAttrs: {
-         desktopItem = pkgs.makeDesktopItem {
+    vscode = pkgsUnstable.vscode.overrideAttrs(oldAttrs: {
+         desktopItem = pkgsStable.makeDesktopItem {
             name = "code";
             icon = "vscode";
             desktopName = "Visual Studio Code";
@@ -15,7 +15,7 @@ let
         };
     });
 
-    vscode-fhs = pkgs.buildFHSUserEnvBubblewrap {
+    vscode-fhs = pkgsStable.buildFHSUserEnvBubblewrap {
         name = "code";
 
         targetPkgs = pkgs: (with pkgs; [
@@ -54,7 +54,7 @@ in
     programs.vscode = {
         enable = true;
         package = vscode;
-        extensions = with pkgs.vscode-extensions; [
+        extensions = with pkgsUnstable.vscode-extensions; [
             ms-vscode.cpptools
             jnoortheen.nix-ide
             github.copilot

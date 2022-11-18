@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ pkgsUnstable, ... }:
 
 {
     programs.java = {
         enable = true;
-        package = pkgs.jdk17_headless;
+        package = pkgsUnstable.jdk17_headless;
     };
 }

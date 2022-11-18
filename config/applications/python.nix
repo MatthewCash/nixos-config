@@ -1,5 +1,5 @@
-{ pkgs, ... }:
+{ pkgsUnstable, ... }:
 
 {
-    environment.systemPackages = with pkgs; [ python3Full ];
+    environment.systemPackages = with pkgsUnstable; [ python3Full ];
 }

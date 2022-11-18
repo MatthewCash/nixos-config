@@ -1,5 +1,5 @@
-{ pkgs, ... }:
+{ pkgsUnstable, ... }:
 
 {
-    home.packages = with pkgs; [ nix-prefetch ];
+    home.packages = with pkgsUnstable; [ nix-prefetch ];
 }

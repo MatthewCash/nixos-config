@@ -1,5 +1,5 @@
-{ pkgs, ... }:
+{ pkgsUnstable, ... }:
 
 {
-    home.packages = with pkgs; [ texlive.combined.scheme-basic setzer ];
+    home.packages = with pkgsUnstable; [ texlive.combined.scheme-basic setzer ];
 }

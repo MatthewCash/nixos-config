@@ -1,13 +1,13 @@
-{ pkgs, ... }:
+{ pkgsUnstable, ... }:
 
 {
-    environment.systemPackages = with pkgs; [
+    environment.systemPackages = with pkgsUnstable; [
         evolutionWithPlugins
         evolution-ews
     ];
 
     programs.evolution = {
         enable = true;
-	    plugins = [ pkgs.evolution-ews ];
+	    plugins = with pkgsUnstable; [ evolution-ews ];
     };
 }

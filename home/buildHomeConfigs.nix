@@ -1,7 +1,7 @@
-{ lib, inputs, homeConfigPath, ... }:
+{ stableLib, inputs, homeConfigPath }:
 
 let
-    homeNames = builtins.attrNames (lib.attrsets.filterAttrs (n: v: v == "directory") (builtins.readDir homeConfigPath));
+    homeNames = builtins.attrNames (stableLib.attrsets.filterAttrs (n: v: v == "directory") (builtins.readDir homeConfigPath));
     homeList = builtins.map (homeName:
         {
             name = homeName;

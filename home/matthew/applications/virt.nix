@@ -1,5 +1,5 @@
-{ pkgs, ... }:
+{ pkgsUnstable, ... }:
 
 {
-    home.packages = with pkgs; [ virt-manager ];
+    home.packages = with pkgsUnstable; [ virt-manager ];
 }

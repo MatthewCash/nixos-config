@@ -1,4 +1,4 @@
-{ pkgs, persistenceHomePath, name, ... }:
+{ pkgsUnstable, persistenceHomePath, name, ... }:
 
 {
     home.persistence."${persistenceHomePath}/${name}".directories = [
@@ -8,7 +8,7 @@
 
     programs.chromium = {
         enable = true;
-        package = pkgs.ungoogled-chromium;
+        package = pkgsUnstable.ungoogled-chromium;
         commandLineArgs = [
             "--enable-features=UseOzonePlatform"
             "--ozone-platform=wayland"

@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgsUnstable, ... }:
 
 {
-    home.packages = with pkgs.gnome; [ gnome-terminal ];
+    home.packages = with pkgsUnstable.gnome; [ gnome-terminal ];
 
     dconf.settings = {
         "org/gnome/terminal/legacy" = {

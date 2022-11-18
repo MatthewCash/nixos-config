@@ -49,21 +49,18 @@
     };
 
     outputs = inputs @ { self, nixpkgsStable, nixpkgsUnstable, ... }:
-
     let
         # NixOS Configurations
         systemNames = builtins.attrNames (nixpkgsStable.lib.attrsets.filterAttrs (n: v: v == "directory") (builtins.readDir ./systems));
         systemConfigList = builtins.map (name: {
             inherit name;
-                value = (import ./systems/${name} {
-                inherit (nixpkgsUnstable) lib;
+            value = (import ./systems/${name} {
                 inherit nixpkgsStable nixpkgsUnstable;
             });
         }) systemNames;
         systemConfigs = builtins.listToAttrs systemConfigList;
         systems = builtins.mapAttrs (name: systemConfig:
             (import ./systems/buildSystem.nix {
-                inherit (nixpkgsUnstable) lib;
                 inherit systemConfig inputs nixpkgsStable nixpkgsUnstable;
             })
         ) systemConfigs;

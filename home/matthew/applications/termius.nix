@@ -1,9 +1,9 @@
-{ pkgs, persistenceHomePath, name, ... }:
+{ pkgsUnstable, persistenceHomePath, name, ... }:
 
 {
     home.persistence."${persistenceHomePath}/${name}".directories = [
         ".config/Termius"
     ];
 
-    home.packages = with pkgs; [ termius ];
+    home.packages = with pkgsUnstable; [ termius ];
 }

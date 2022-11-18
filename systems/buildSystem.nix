@@ -1,17 +1,28 @@
-{ lib, inputs, nixpkgsStable, nixpkgsUnstable, systemConfig, ... }:
+{ inputs, nixpkgsStable, nixpkgsUnstable, systemConfig }:
 
 let
     useHomeManager = systemConfig.useHomeManager ? true;
+    kernelPackages = systemConfig.kernelPackages or nixpkgsStable.legacyPackages.${systemConfig.system}.linuxPackages;
+
+    nixpkgsArgs = {
+        localSystem = systemConfig.system;
+        config.allowUnfree = true;
+    };
+
+    extraArgs = rec {
+        inherit (systemConfig) system hostname ssd vpnAddress tailscaleId;
+        inherit inputs nixpkgsStable nixpkgsUnstable kernelPackages;
+        pkgsStable = import nixpkgsStable nixpkgsArgs;
+        pkgsUnstable = import nixpkgsUnstable nixpkgsArgs;
+        stableLib = pkgsStable.lib;
+        unstableLib = pkgsUnstable.lib;
+    };
 in
 
-(lib.nixosSystem {
+(systemConfig.systemNixpkgs.lib.nixosSystem {
     inherit (systemConfig) system;
 
-    specialArgs = {
-        inherit (systemConfig) system hostname kernelPackages ssd vpnAddress tailscaleId;
-        inherit inputs nixpkgsStable nixpkgsUnstable;
-        nixpkgs = nixpkgsUnstable;
-    };
+    specialArgs = extraArgs;
 
     modules = [
         inputs.agenix.nixosModule
@@ -24,14 +35,13 @@ in
             home-manager = {
                 useGlobalPkgs = true;
                 users = import ../home/buildHomeConfigs.nix {
-                    inherit lib inputs;
+                    inherit (extraArgs) stableLib;
+                    inherit inputs;
                     homeConfigPath = systemConfig.homeConfig;
                 };
                 extraSpecialArgs = {
                     persistenceHomePath = "/nix/persist/home";
-                    inherit inputs;
-                    inherit (systemConfig) system;
-                };
+                } // extraArgs;
             };
         }
 

@@ -1,4 +1,4 @@
-{ pkgs, persistenceHomePath, name, ... }:
+{ pkgsUnstable, persistenceHomePath, name, ... }:
 
 {
     home.persistence."${persistenceHomePath}/${name}".directories = [
@@ -6,5 +6,5 @@
         ".gradle/wrapper"
     ];
 
-    home.packages = with pkgs; [ gradle ];
+    home.packages = with pkgsUnstable; [ gradle ];
 }

@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgsUnstable, ... }:
 
 {
-    home.packages = with pkgs.gnomeExtensions; [ bluetooth-quick-connect ];
+    home.packages = with pkgsUnstable.gnomeExtensions; [ bluetooth-quick-connect ];
 
     dconf.settings."org/gnome/shell".enabled-extensions = [ "bluetooth-quick-connect@bjarosze.gmail.com" ];
 

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgsUnstable, ... }:
 
 {
     programs.neovim = {
@@ -111,12 +111,12 @@
         withNodeJs = true;
         withPython3 = true;
 
-        extraPackages = with pkgs; [
+        extraPackages = with pkgsUnstable; [
             ccls
             clang-tools
         ];
 
-        plugins = with pkgs.vimPlugins; [
+        plugins = with pkgsUnstable.vimPlugins; [
             ale
             gruvbox-nvim
             nerdtree

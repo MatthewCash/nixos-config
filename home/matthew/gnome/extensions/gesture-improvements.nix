@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgsUnstable, ... }:
 
 {
-    home.packages = with pkgs.gnomeExtensions; [ gesture-improvements ];
+    home.packages = with pkgsUnstable.gnomeExtensions; [ gesture-improvements ];
 
     dconf.settings."org/gnome/shell".enabled-extensions = [ "gestureImprovements@gestures" ];
 

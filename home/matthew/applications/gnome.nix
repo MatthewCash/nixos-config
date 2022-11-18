@@ -1,4 +1,4 @@
-{ pkgs, persistenceHomePath, name, ... }:
+{ pkgsUnstable, persistenceHomePath, name, ... }:
 
 {
     # TODO: move persistence option to move relevant config files
@@ -44,7 +44,7 @@
         ];
     };
 
-    home.packages = with pkgs; with gnome; [
+    home.packages = with pkgsUnstable; with gnome; [
         eog
         fragments
         totem

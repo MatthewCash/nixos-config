@@ -1,7 +1,7 @@
-{ pkgs, persistenceHomePath, name, inputs, ... }:
+{ pkgsUnstable, persistenceHomePath, name, inputs, ... }:
 
 let
-    firefox-devedition-bin = pkgs.firefox-devedition-bin.override (old: {
+    firefox-devedition-bin = pkgsUnstable.firefox-devedition-bin.override (old: {
         icon = "firefox-developer-edition";
         desktopName = "Firefox Developer Edition";
         nameSuffix = "";
@@ -44,10 +44,27 @@ let
                     install_url = "https://addons.mozilla.org/firefox/downloads/latest/localcdn-fork-of-decentraleyes/latest.xpi";
                 };
             };
+            Handlers = {
+                mimeTypes = {
+                    "application/pdf" = {
+                        action = 3;
+                        extensions = [ "pdf" ];
+                    };
+                };
+            };
         };
-        forceWayland = true;
+#        forceWayland = true;
         wmClass = "firefox-aurora";
     });
+
+    handlers = builtins.toJSON {
+        mimeTypes =  {
+            "application/pdf" = {
+                action = 3;
+                extension = [ "pdf" ];
+            };
+        };
+    };
 in
 
 {

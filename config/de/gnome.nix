@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgsUnstable, ... }:
 
 {
     services.xserver = {
@@ -9,7 +9,7 @@
 
         libinput.enable = true;
 
-        excludePackages = with pkgs; [ xterm ];
+        excludePackages = with pkgsUnstable; [ xterm ];
     };
 
     services.gnome = {
@@ -21,7 +21,7 @@
         gnome-browser-connector.enable = true;
     };
 
-    environment.gnome.excludePackages = with pkgs; [ gnome-tour ];
+    environment.gnome.excludePackages = with pkgsUnstable; [ gnome-tour ];
 
     # Setup /run/gdm directory
     systemd.tmpfiles.rules = [ "d /run/gdm 0711 gdm gdm -" ];
@@ -43,7 +43,7 @@
 
     programs.dconf.enable = true;
 
-    services.dbus.packages = with pkgs; [ dconf gcr ];
+    services.dbus.packages = with pkgsUnstable; [ dconf gcr ];
 
-    services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+    services.udev.packages = with pkgsUnstable; [ gnome.gnome-settings-daemon ];
 }

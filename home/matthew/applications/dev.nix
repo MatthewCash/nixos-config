@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgsUnstable, ... }:
 
 {
-    home.packages = with pkgs; [
+    home.packages = with pkgsUnstable; [
         gcc
         gdb
         gnumake
@@ -17,6 +17,6 @@
     ];
 
     home.sessionVariables = {
-        RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
+        RUST_SRC_PATH = "${pkgsUnstable.rust.packages.stable.rustPlatform.rustLibSrc}";
     };
 }

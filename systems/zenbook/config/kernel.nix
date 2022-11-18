@@ -1,4 +1,4 @@
-{ lib, kernelPackages, ... }:
+{ stableLib, kernelPackages, ... }:
 
 {
     boot.extraModulePackages = with kernelPackages; [ turbostat asus-wmi-sensors ];
@@ -9,5 +9,5 @@
         options asus_wmi fnlock_default=0
     '';
 
-    hardware.enableRedistributableFirmware = lib.mkDefault true;
+    hardware.enableRedistributableFirmware = stableLib.mkDefault true;
 }

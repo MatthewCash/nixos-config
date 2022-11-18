@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgsUnstable, ... }:
 
 {
-    home.packages = with pkgs.gnomeExtensions; [ just-perfection ];
+    home.packages = with pkgsUnstable.gnomeExtensions; [ just-perfection ];
 
     dconf.settings."org/gnome/shell".enabled-extensions = [ "just-perfection-desktop@just-perfection" ];
 

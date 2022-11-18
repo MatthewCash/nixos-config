@@ -1,7 +1,7 @@
-{ pkgs, persistenceHomePath, name, inputs, ... }:
+{ pkgsStable, persistenceHomePath, name, inputs, ... }:
 
 {
-    home.packages = with pkgs; [ wl-clipboard ];
+    home.packages = with pkgsStable; [ wl-clipboard ];
 
     home.persistence."${persistenceHomePath}/${name}".files = [
         ".zsh_history"
@@ -64,7 +64,7 @@
                 fi
 
                 while :; do
-                    ${pkgs.inotify-tools}/bin/inotifywait $1 > /dev/null 2>&1
+                    ${pkgsStable.inotify-tools}/bin/inotifywait $1 > /dev/null 2>&1
                     ''${@:2}
                 done
             }

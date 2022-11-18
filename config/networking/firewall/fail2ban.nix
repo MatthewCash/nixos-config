@@ -1,9 +1,9 @@
-{ pkgs, ... }:
+{ pkgsStable, ... }:
 
 {
     services.fail2ban = {
         enable = true;
-        packageFirewall = pkgs.nftables;
+        packageFirewall = pkgsStable.nftables;
         banaction = "nftables-multiport";
         banaction-allports = "nftables-allport";
         maxretry = 5;

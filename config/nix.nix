@@ -1,8 +1,6 @@
-{ pkgs, nixpkgs, ... }:
+{ nixpkgsStable, nixpkgsUnstable, system, ... }:
 
 {
-    nixpkgs.config.allowUnfree = true;
-
     nix = {
         settings.auto-optimise-store = true;
 
@@ -16,8 +14,12 @@
             experimental-features = nix-command flakes
         '';
 
-        nixPath = [ "nixpkgs=${nixpkgs}" ];
+        nixPath = [ "nixpkgs=${nixpkgsUnstable}" ];
     };
 
-    environment.variables.nixpkgs = builtins.toString nixpkgs;
+    environment.variables = {
+        nixpkgsStable = builtins.toString nixpkgsStable;
+        nixpkgsUnstable = builtins.toString nixpkgsUnstable;
+        nixpkgs = builtins.toString nixpkgsUnstable;
+    };
 }

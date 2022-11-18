@@ -1,7 +1,7 @@
 { persistenceHomePath, name, lib, ... }:
 
 let
-    gvariant = lib.hm.gvariant;
+    inherit (lib.hm) gvariant;
     inherit (gvariant) mkUint32;
 in
 

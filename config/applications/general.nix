@@ -1,8 +1,7 @@
-{ pkgs, ... }:
+{ pkgsStable, ... }:
 
 {
-    environment.systemPackages = with pkgs; [
-        vim
+    environment.systemPackages = with pkgsStable; [
         wget
         killall
         pciutils

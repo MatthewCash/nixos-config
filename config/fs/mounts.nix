@@ -29,7 +29,7 @@
             device = "tmpfs-root";
             fsType = "tmpfs";
             mountPoint = "/";
-            options = [ "defaults" "size=2G" "mode=755" ];
+            options = [ "defaults" "size=4G" "mode=755" ];
         };
 
         nix = {

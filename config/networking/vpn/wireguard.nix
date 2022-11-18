@@ -1,4 +1,4 @@
-{ pkgs, vpnAddress, config, ... }:
+{ vpnAddress, config, ... }:
 
 {
     age.secrets."wireguard-privatekey-${vpnAddress}".file = ../../../secrets/wireguard/${vpnAddress}/privkey.age;

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgsUnstable, ... }:
 
 {
     programs.helix = {
@@ -32,7 +32,7 @@
             keys = import ./keybinds.nix;
         };
 
-        languages = import ./languages.nix { inherit pkgs; };
+        languages = import ./languages.nix { inherit pkgsUnstable; };
 
         # Colors from VSCode Dark+
         themes.main = import ./theme.nix;

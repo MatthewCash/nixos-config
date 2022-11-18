@@ -1,4 +1,4 @@
-{ pkgs, persistenceHomePath, name, ... }:
+{ pkgsUnstable, persistenceHomePath, name, ... }:
 
 {
     home.persistence."${persistenceHomePath}/${name}".directories = [
@@ -11,5 +11,5 @@
         ".local/share/Colossal Order"
     ];
 
-    home.packages = with pkgs; [ steam ];
+    home.packages = with pkgsUnstable; [ steam ];
 }

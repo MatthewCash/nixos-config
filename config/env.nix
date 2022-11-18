@@ -1,8 +1,8 @@
-{ lib, pkgs, ... }:
+{ stableLib, pkgsUnstable, ... }:
 
 {
     environment = {
-        variables.EDITOR = lib.mkForce "$EDITOR";
-        shells = with pkgs; [ zsh ];
+        variables.EDITOR = stableLib.mkForce "$EDITOR";
+        shells = with pkgsUnstable; [ zsh ];
     };
 }

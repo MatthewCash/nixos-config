@@ -1,5 +1,5 @@
-{ pkgs, ... }:
+{ pkgsUnstable, ... }:
 
 {
-    home.packages = with pkgs; [ helvum ];
+    home.packages = with pkgsUnstable; [ helvum ];
 }

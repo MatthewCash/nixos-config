@@ -1,5 +1,5 @@
-{ pkgs, ... }:
+{ pkgsUnstable, ... }:
 
 {
-    home.packages = with pkgs; [ gnome-console ];
+    home.packages = with pkgsUnstable; [ gnome-console ];
 }

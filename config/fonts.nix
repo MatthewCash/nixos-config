@@ -1,7 +1,7 @@
-{ pkgs, inputs, system, ... }:
+{ pkgsStable, inputs, system, ... }:
 
 {
-    fonts.fonts = with pkgs; [
+    fonts.fonts = with pkgsStable; [
         (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
         ipafont
         inputs.aurebesh-fonts.defaultPackage.${system}

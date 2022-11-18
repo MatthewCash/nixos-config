@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgsUnstable, inputs, ... }:
 
 {
     imports = [
@@ -7,7 +7,7 @@
 
     services.vscode-server = {
         enable = true;
-        extensions = with pkgs.vscode-extensions; [
+        extensions = with pkgsUnstable.vscode-extensions; [
             ms-vscode.cpptools
             jnoortheen.nix-ide
             github.copilot
@@ -18,8 +18,8 @@
             redhat.java
         ];
         settings = {
-            "java.jdt.ls.java.home" = "${pkgs.jdk17_headless}/lib/openjdk";
-            "java.import.gradle.home" = "${pkgs.gradle}/lib/gradle";
+            "java.jdt.ls.java.home" = "${pkgsUnstable.jdk17_headless}/lib/openjdk";
+            "java.import.gradle.home" = "${pkgsUnstable.gradle}/lib/gradle";
         };
     };
 }

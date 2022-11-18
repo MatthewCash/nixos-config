@@ -1,4 +1,4 @@
-{ pkgs, persistenceHomePath, name, ... }:
+{ pkgsStable, pkgsUnstable, persistenceHomePath, name, ... }:
 
 let
     discordConfig = {
@@ -14,7 +14,7 @@ let
         SKIP_HOST_UPDATE = true;
     };
 
-    discordConfigFile = pkgs.writeText "settings.json" (builtins.toJSON discordConfig);
+    discordConfigFile = pkgsStable.writeText "settings.json" (builtins.toJSON discordConfig);
 in
 
 {
@@ -24,5 +24,5 @@ in
 
     home.file.".config/discord/settings.json".source = discordConfigFile;
 
-    home.packages = with pkgs; [ discord ];
+    home.packages = with pkgsUnstable; [ discord ];
 }

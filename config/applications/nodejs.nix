@@ -1,5 +1,5 @@
-{ pkgs, ... }:
+{ pkgsUnstable, ... }:
 
 {
-    environment.systemPackages = with pkgs; [ nodejs-16_x ];
+    environment.systemPackages = with pkgsUnstable; [ nodejs-16_x ];
 }

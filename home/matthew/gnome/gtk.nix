@@ -1,4 +1,4 @@
-{ pkgs, inputs, system, ... }:
+{ pkgsUnstable, inputs, system, ... }:
 
 let
     customCss = ''
@@ -12,12 +12,12 @@ in
         enable = true;
 
         theme = {
-            package = pkgs.adw-gtk3;
+            package = pkgsUnstable.adw-gtk3;
             name = "adw-gtk3-dark";
         };
 
         iconTheme = {
-            package = pkgs.kora-icon-theme;
+            package = pkgsUnstable.kora-icon-theme;
             name = "kora";
         };
 
