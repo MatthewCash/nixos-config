@@ -162,6 +162,7 @@ in
                     "browser.uiCustomization.state" = builtins.toJSON ({
                         "placements" = {
                             "widget-overflow-fixed-list" = [
+                                "downloads-button"
                                 "developer-button"
                                 "print-button"
                                 "ublock0_raymondhill_net-browser-action"
@@ -179,7 +180,6 @@ in
                                 "forward-button"
                                 "stop-reload-button"
                                 "urlbar-container"
-                                "downloads-button"
                                 "fxa-toolbar-menu-button"
                             ];
                             "toolbar-menubar" = [ "menubar-items" ];
