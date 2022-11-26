@@ -13,9 +13,8 @@
         };
 
         extraConfig = {
-            init = {
-                defaultBranch = "main";
-            };
+            init.defaultBranch = "main";
+            core.whitespace = "trailing-space,space-before-tab";
         };
 	};
 }
