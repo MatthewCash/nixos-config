@@ -17,4 +17,5 @@ builtins.map (path: ../../../../home/${homeName}/${path}) [
     "applications/direnv.nix"
     "applications/helix"
     "applications/gradle.nix"
+    "applications/editor-config.nix"
 ]
