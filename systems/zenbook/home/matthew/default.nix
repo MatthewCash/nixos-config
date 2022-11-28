@@ -40,4 +40,5 @@ builtins.map (path: ../../../../home/${homeName}/${path}) [
     "applications/direnv.nix"
     "applications/helvum.nix"
     "applications/helix"
+    "applications/editor-config.nix"
 ]
