@@ -5,7 +5,6 @@
 
     environment.persistence."/nix/persist" = {
         directories = [
-            "/etc/nixos"
             "/var/lib/systemd/coredump"
             "/var/log"
         ];
