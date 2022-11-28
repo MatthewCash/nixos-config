@@ -1,5 +1,4 @@
 [
-    ../../../config/virt.nix
     ../../../config/users.nix
     ../../../config/time.nix
     ../../../config/console.nix
@@ -30,7 +29,6 @@
     ../../../config/fs/mounts.nix
     ./mounts.nix
     ./lid.nix
-    ./virt.nix
     ../../../config/ld.nix
     ../../../config/env.nix
     ../../../config/docs.nix
