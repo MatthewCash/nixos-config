@@ -6,9 +6,9 @@
         createMountPoints = true;
     };
 
-    # Disable home-manager on boot
-    # TODO: enable for gdm!
-    systemd.services = stableLib.attrsets.mapAttrs' (name: value: stableLib.attrsets.nameValuePair "home-manager-${name}" { wantedBy = stableLib.mkForce []; }) config.home-manager.users;
+    # Disable home-manager on boot for users without a pamMount path
+    systemd.services = stableLib.attrsets.mapAttrs' (name: value: stableLib.attrsets.nameValuePair "home-manager-${name}" { wantedBy = stableLib.mkForce []; })
+        (stableLib.attrsets.filterAttrs (name: value: config.users.extraUsers.${name}.pamMount ? path) config.home-manager.users);
 
     environment.etc."pam.d/login".text = let
         systemctl = "${pkgsStable.systemd}/bin/systemctl";
