@@ -33,6 +33,8 @@
     ../../../config/env.nix
     ../../../config/docs.nix
     ../../../config/tailscale.nix
+    ../../../config/lvm.nix
+    ../../../config/pam-mount.nix
 
     ../../../config/applications/steam.nix
     ../../../config/applications/python.nix
