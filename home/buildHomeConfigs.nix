@@ -11,7 +11,7 @@ let
                 ] ++ import "${homeConfigPath}/${homeName}" { inherit homeName; };
 
                 home.persistence."/nix/persist/home/${homeName}".allowOther = true;
-                home.stateVersion = "22.05";
+                home.stateVersion = "22.11";
             };
         }) homeNames;
 
