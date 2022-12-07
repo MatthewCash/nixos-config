@@ -36,7 +36,6 @@ builtins.map (path: ../../../../home/${homeName}/${path}) [
     "applications/discord.nix"
     "applications/setzer.nix"
     "applications/bitwarden.nix"
-    "applications/nix.nix"
     "applications/direnv.nix"
     "applications/helvum.nix"
     "applications/helix"

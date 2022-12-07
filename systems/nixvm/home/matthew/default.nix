@@ -13,7 +13,6 @@ builtins.map (path: ../../../../home/${homeName}/${path}) [
     "applications/openssh.nix"
     "applications/zsh.nix"
     "applications/vscode-server.nix"
-    "applications/nix.nix"
     "applications/direnv.nix"
     "applications/helix"
     "applications/gradle.nix"
