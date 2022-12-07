@@ -1,21 +1,22 @@
 { pkgsStable, pkgsUnstable, persistenceHomePath, name, ... }:
 
 let
-    vscode = pkgsUnstable.vscode.overrideAttrs(oldAttrs: {
+    vscodium = pkgsUnstable.vscodium.overrideAttrs(oldAttrs: {
          desktopItem = pkgsStable.makeDesktopItem {
-            name = "code";
+            name = "codium";
             icon = "vscode";
-            desktopName = "Visual Studio Code";
+            startupWMClass = "VSCodium";
+            desktopName = "Visual Studio Codium";
             comment = "Code Editing. Redefined.";
             genericName = "Text Editor";
-            exec = "code";
+            exec = "codium";
             startupNotify = true;
             categories = [ "Utility" "TextEditor" "Development" "IDE" ];
             mimeTypes = [ "text/plain" "inode/directory" ];
         };
     });
 
-    vscode-fhs = pkgsStable.buildFHSUserEnvBubblewrap {
+    vscodium-fhs = pkgsStable.buildFHSUserEnvBubblewrap {
         name = "code";
 
         targetPkgs = pkgs: (with pkgs; [
@@ -30,10 +31,10 @@ let
          ]);
 
         extraInstallCommands = ''
-           ln -s "${vscode}/share" "$out/"
+           ln -s "${vscodium}/share" "$out/"
         '';
 
-        runScript = "${vscode}/bin/code";
+        runScript = "${vscodium}/bin/code";
 
         dieWithParent = false;
 
@@ -48,16 +49,14 @@ in
 
 {
     home.persistence."${persistenceHomePath}/${name}".directories = [
-        ".config/Code"
+        ".config/VSCodium"
     ];
 
     programs.vscode = {
         enable = true;
-        package = vscode;
+        package = vscodium;
         extensions = with pkgsUnstable.vscode-extensions; [
-            ms-vscode.cpptools
             jnoortheen.nix-ide
-            github.copilot
             dbaeumer.vscode-eslint
             github.vscode-pull-request-github
             eamodio.gitlens

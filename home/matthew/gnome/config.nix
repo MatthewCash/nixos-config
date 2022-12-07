@@ -57,7 +57,7 @@ in
                 "discord.desktop"
                 "chromium-browser.desktop"
                 "termius-app.desktop"
-                "code.desktop"
+                "codium.desktop"
                 "firefox.desktop"
                 "steam.desktop"
                 "org.gnome.Boxes.desktop"
