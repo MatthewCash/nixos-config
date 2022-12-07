@@ -1,13 +1,26 @@
-{ ... }:
+{ persistenceHomePath, name, ... }:
+
+let
+    persistHome = "${persistenceHomePath}/${name}";
+in
 
 {
     xdg.userDirs = {
         enable = true;
 
-        documents = "/mnt/storage/Documents";
-        download = "/mnt/storage/Downloads";
-        music = "/mnt/storage/Music";
-        pictures = "/mnt/storage/Pictures";
-        videos = "/mnt/storage/Videos";
+        documents = "${persistHome}/documents";
+        download = "${persistHome}/downloads";
+        music = "${persistHome}/music";
+        pictures = "${persistHome}/pictures";
+        videos = "${persistHome}/videos";
     };
+
+    home.persistence.${persistHome}.directories = [
+        "code"
+        "documents"
+        "downloads"
+        "music"
+        "pictures"
+        "videos"
+    ];
 }
