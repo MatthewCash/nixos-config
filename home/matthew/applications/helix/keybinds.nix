@@ -18,11 +18,11 @@
         "]" = "no_op"; # ]
         "\\\\" = "no_op"; # \
         "a" = "append_mode"; # A
-        "A" = "append_to_line";
+        "A" = [ "goto_line_end" "append_mode" ];
         "r" = "unindent"; # S
         "s" = "indent"; # D
         "t" = "insert_mode"; # F
-        "T" = "prepend_to_line";
+        "T" = "insert_at_line_start";
         "g" = "paste_after"; # G
         "m" = "delete_selection"; # H
         "M" = [ "extend_to_line_bounds" "delete_selection" ];
