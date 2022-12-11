@@ -53,7 +53,6 @@ let
                 };
             };
         };
-#        forceWayland = true;
         wmClass = "firefox-aurora";
     });
 
