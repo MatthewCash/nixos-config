@@ -83,6 +83,9 @@ in
                 userChrome = ''
                     @import "${inputs.firefox-gnome-theme}/userChrome.css";
                 '';
+                userContent = ''
+                    @import "${inputs.firefox-mods}/userContent.css";
+                '';
                 extraConfig = builtins.readFile "${inputs.firefox-gnome-theme}/configuration/user.js";
                 settings = {
                     "general.autoScroll" = true;

@@ -86,6 +86,22 @@
         "type": "github"
       }
     },
+    "firefox-mods": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1670702056,
+        "narHash": "sha256-OSOQYz1p8t759lDRKB432f4S6VKp1jEejCa+9rP/224=",
+        "owner": "MatthewCash",
+        "repo": "firefox-mods",
+        "rev": "278edc90d8b8754c7a7b3fa65f20d1d3cd52e357",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MatthewCash",
+        "repo": "firefox-mods",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1659877975,
@@ -229,6 +245,7 @@
         "agnoster-zsh-theme": "agnoster-zsh-theme",
         "aurebesh-fonts": "aurebesh-fonts",
         "firefox-gnome-theme": "firefox-gnome-theme",
+        "firefox-mods": "firefox-mods",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "nixos-generators": "nixos-generators",

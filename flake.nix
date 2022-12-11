@@ -46,6 +46,11 @@
             url = github:MatthewCash/aurebesh-fonts;
             inputs.nixpkgs.follows = "nixpkgsStable";
         };
+
+        firefox-mods = {
+            url = github:MatthewCash/firefox-mods;
+            flake = false;
+        };
     };
 
     outputs = inputs @ { self, nixpkgsStable, nixpkgsUnstable, ... }:
