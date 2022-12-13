@@ -1,4 +1,4 @@
-{ pkgsStable, pkgsUnstable, stableLib, config, ... }:
+{ pkgsStable, pkgsUnstable, stableLib, config, pamMountUsers, ... }:
 
 {
     security.pam.mount = {
@@ -8,7 +8,7 @@
 
     # Disable home-manager on boot for users without a pamMount path
     systemd.services = stableLib.attrsets.mapAttrs' (name: value: stableLib.attrsets.nameValuePair "home-manager-${name}" { wantedBy = stableLib.mkForce []; })
-        (stableLib.attrsets.filterAttrs (name: value: config.users.extraUsers.${name}.pamMount ? path) config.home-manager.users);
+        (stableLib.attrsets.filterAttrs (name: value: builtins.elem name pamMountUsers) config.home-manager.users);
 
     environment.etc."pam.d/login".text = let
         systemctl = "${pkgsStable.systemd}/bin/systemctl";
@@ -22,7 +22,7 @@
         '';
 
         # Verify that mount does not already exist
-        pamCheckLine = "session [success=2 default=ignore] ${pkgsStable.linux-pam}/lib/security/pam_exec.so ${checkScript} quiet";
+        pamCheckLine = "session [success=2 default=ignore] ${pkgsStable.linux-pam}/lib/security/pam_exec.so quiet ${checkScript}";
         pamMountLine = "session optional ${pkgsUnstable.pam_mount}/lib/security/pam_mount.so disable_interactive";
         # Run home-manager activation for user
         pamExecLine = "session optional ${pkgsStable.linux-pam}/lib/security/pam_exec.so ${hmScript}";
