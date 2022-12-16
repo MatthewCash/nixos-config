@@ -9,7 +9,6 @@ let
             desktopName = "Visual Studio Codium";
             comment = "Code Editing. Redefined.";
             genericName = "Text Editor";
-            exec = "codium";
             startupNotify = true;
             categories = [ "Utility" "TextEditor" "Development" "IDE" ];
             mimeTypes = [ "text/plain" "inode/directory" ];
@@ -17,7 +16,7 @@ let
     });
 
     vscodium-fhs = pkgsStable.buildFHSUserEnvBubblewrap {
-        name = "code";
+        name = "codium";
 
         targetPkgs = pkgs: (with pkgs; [
             glibc
@@ -34,13 +33,13 @@ let
            ln -s "${vscodium}/share" "$out/"
         '';
 
-        runScript = "${vscodium}/bin/code";
+        runScript = "${vscodium}/bin/codium";
 
         dieWithParent = false;
 
         meta = {
             description = ''
-                Wrapped variant of vs-code which launches in a FHS compatible envrionment.
+                Wrapped variant of VSCodium which launches in a FHS compatible envrionment.
                 Should allow for easy usage of extensions without nix-specific modifications.
             '';
         };
