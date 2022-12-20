@@ -51,6 +51,11 @@
             url = github:MatthewCash/firefox-mods;
             flake = false;
         };
+
+        tpm-fido = {
+            url = github:MatthewCash/tpm-fido;
+            inputs.nixpkgs.follows = "nixpkgsStable";
+        };
     };
 
     outputs = inputs @ { self, nixpkgsStable, nixpkgsUnstable, ... }:

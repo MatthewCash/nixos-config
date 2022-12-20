@@ -12,7 +12,7 @@ let
         isNormalUser = true;
         home = "/home/${name}";
         shell = pkgsUnstable.zsh;
-        extraGroups = [ "wheel" ];
+        extraGroups = [ "wheel" "tss" "uhid" ];
         openssh.authorizedKeys.keys = [
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK1cahhYmVTV0ewIug2zzGdeXruxWeJToxHDXbEBLoCB ${name}"
         ];
