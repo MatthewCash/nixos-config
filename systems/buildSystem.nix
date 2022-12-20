@@ -6,11 +6,7 @@ let
 
     nixpkgsArgs = {
         localSystem = systemConfig.system;
-        config.allowUnfreePredicate = pkg: builtins.elem (nixpkgsStable.lib.getName pkg) [
-            "discord"
-            "steam"
-            "steam-original"
-        ];
+        config.allowUnfreePredicate = pkg: builtins.elem (nixpkgsStable.lib.getName pkg) (systemConfig.unfreePkgs or [ ]);
     };
 
     extraArgs = rec {
