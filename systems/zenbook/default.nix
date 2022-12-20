@@ -8,6 +8,7 @@ rec {
     ssd = true;
     vpnAddress = "10.0.0.9";
     tailscaleId = "zeta";
+    pamMountUsers = [ "matthew" ];
 
     nixosConfig = builtins.toString ./config;
     homeConfig = builtins.toString ./home;
