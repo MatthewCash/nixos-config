@@ -3,6 +3,9 @@
 let
     useHomeManager = systemConfig.useHomeManager ? true;
     kernelPackages = systemConfig.kernelPackages or nixpkgsStable.legacyPackages.${systemConfig.system}.linuxPackages;
+    pamMountUsers = systemConfig.pamMountUsers or [ ];
+    persistPath = systemConfig.persistPath or "/mnt/persist";
+    homeMountPath = systemConfig.persistPath or "/mnt/home";
 
     nixpkgsArgs = {
         localSystem = systemConfig.system;
@@ -11,7 +14,7 @@ let
 
     extraArgs = rec {
         inherit (systemConfig) system hostname ssd vpnAddress tailscaleId;
-        inherit inputs nixpkgsStable nixpkgsUnstable kernelPackages;
+        inherit inputs nixpkgsStable nixpkgsUnstable kernelPackages pamMountUsers persistPath homeMountPath;
         pkgsStable = import nixpkgsStable nixpkgsArgs;
         pkgsUnstable = import nixpkgsUnstable nixpkgsArgs;
         stableLib = pkgsStable.lib;
@@ -40,7 +43,7 @@ in
                     homeConfigPath = systemConfig.homeConfig;
                 };
                 extraSpecialArgs = {
-                    persistenceHomePath = "/nix/persist/home";
+                    persistenceHomePath = "/mnt/home";
                 } // extraArgs;
             };
         }
