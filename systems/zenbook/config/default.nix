@@ -35,6 +35,7 @@
     ../../../config/tailscale.nix
     ../../../config/lvm.nix
     ../../../config/pam-mount.nix
+    ../../../config/uhid.nix
 
     ../../../config/applications/steam.nix
     ../../../config/applications/python.nix

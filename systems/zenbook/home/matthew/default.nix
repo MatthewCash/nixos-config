@@ -2,6 +2,7 @@
 
 builtins.map (path: ../../../../home/${homeName}/${path}) [
     "env.nix"
+    "services/tpm-fido.nix"
     "gnome/tweaks.nix"
     "gnome/console.nix"
     "gnome/gtk.nix"
