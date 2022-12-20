@@ -1,4 +1,4 @@
-{ pkgsStable, pkgsUnstable, stableLib, config, pamMountUsers, ... }:
+{ pkgsStable, pkgsUnstable, stableLib, config, pamMountUsers, homeMountPath, ... }:
 
 {
     security.pam.mount = {
@@ -7,13 +7,13 @@
     };
 
     # Disable home-manager on boot for users without a pamMount path
-    systemd.services = stableLib.attrsets.mapAttrs' (name: value: stableLib.attrsets.nameValuePair "home-manager-${name}" { wantedBy = stableLib.mkForce []; })
+    systemd.services = stableLib.attrsets.mapAttrs' (name: value: stableLib.attrsets.nameValuePair "home-manager-${name}" { wantedBy = stableLib.mkForce [ ]; })
         (stableLib.attrsets.filterAttrs (name: value: builtins.elem name pamMountUsers) config.home-manager.users);
 
     environment.etc."pam.d/login".text = let
         systemctl = "${pkgsStable.systemd}/bin/systemctl";
         checkScript = pkgsStable.writeShellScript "check_for_mount.sh" ''
-            mountpoint -q "/mnt/storage/$PAM_USER"
+            mountpoint -q "${homeMountPath}/$PAM_USER"
         '';
         hmScript = pkgsStable.writeShellScript "run_hm.sh" ''
             if [[ -n $(${systemctl} list-unit-files | grep "^home-manager-$PAM_USER") ]]; then

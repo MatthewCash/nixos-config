@@ -1,9 +1,9 @@
-{ ssd, ... }:
+{ ssd, persistPath, ... }:
 
 {
     programs.fuse.userAllowOther = true;
 
-    environment.persistence."/nix/persist" = {
+    environment.persistence.${persistPath} = {
         directories = [
             "/var/lib/systemd/coredump"
             "/var/log"
@@ -19,7 +19,7 @@
     };
 
     age.identityPaths = [
-        "/nix/persist/etc/ssh/ssh_host_ed25519_key"
+        "${persistPath}/etc/ssh/ssh_host_ed25519_key"
     ];
 
     fileSystems = {
@@ -34,6 +34,13 @@
             label = "nix";
             fsType = "btrfs";
             mountPoint = "/nix";
+            options = [ "rw" "noatime" ];
+        };
+
+        persist = {
+            label = "persist";
+            fsType = "btrfs";
+            mountPoint = "/mnt/persist";
             options = [ "rw" "noatime" ];
 
             # Needed to decrypt agenix secrets

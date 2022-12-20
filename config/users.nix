@@ -1,4 +1,4 @@
-{ pkgsUnstable, stableLib, pamMountUsers, ... }:
+{ pkgsUnstable, stableLib, pamMountUsers, persistPath, homeMountPath, ... }:
 
 let
     createDisplayName = name: stableLib.strings.toUpper (builtins.substring 0 1 name) +
@@ -7,7 +7,7 @@ let
     buildUserConfig = name: {
         inherit name;
         description = createDisplayName name;
-        passwordFile = "/nix/persist/pwd/${name}";
+        passwordFile = "${persistPath}/pwd/${name}";
         createHome = true;
         isNormalUser = true;
         home = "/home/${name}";
@@ -19,7 +19,7 @@ let
     } // stableLib.attrsets.optionalAttrs (builtins.elem name pamMountUsers)  {
         pamMount = {
             path = "/dev/main/crypt-home-${name}";
-            mountpoint = "/mnt/storage/${name}";
+            mountpoint = "${homeMountPath}/${name}";
             fstype = "crypt";
         };
     };

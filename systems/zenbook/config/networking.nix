@@ -1,4 +1,4 @@
-{ pkgsStable, ... }:
+{ pkgsStable, persistPath, ... }:
 
 {
     networking.networkmanager = {
@@ -6,7 +6,7 @@
         appendNameservers = [ "1.1.1.1" ];
     };
 
-    environment.persistence."/nix/persist".directories = [
+    environment.persistence.${persistPath}.directories = [
         "/etc/NetworkManager/system-connections"
     ];
 
