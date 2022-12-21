@@ -12,6 +12,8 @@
         excludePackages = with pkgsUnstable; [ xterm ];
     };
 
+    users.extraUsers.gdm.extraGroups = [ "video" ];
+
     services.gnome = {
         # Do not install default GNOME apps
         core-utilities.enable = false;
