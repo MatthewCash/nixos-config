@@ -71,7 +71,7 @@ in
                 "places-menu@gnome-shell-extensions.gcampax.github.com"
                 "user-theme@gnome-shell-extensions.gcampax.github.com"
             ];
-            disabled-extensions = [];
+            disabled-extensions = [ ];
             welcome-dialog-last-shown-version = "41.4";
             disable-extension-version-validation = true;
         };
