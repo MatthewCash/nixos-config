@@ -8,7 +8,6 @@ let
         inherit name;
         description = createDisplayName name;
         passwordFile = "${persistPath}/pwd/${name}";
-        createHome = true;
         isNormalUser = true;
         home = "/home/${name}";
         shell = pkgsUnstable.zsh;
