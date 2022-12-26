@@ -21,6 +21,7 @@
     ../../../config/de/gnome.nix
     ../../../config/fs/mounts.nix
     ./mounts.nix
+    ../../../config/systemd/config.nix
 
     ../../../config/applications/steam.nix
     ../../../config/applications/python.nix
