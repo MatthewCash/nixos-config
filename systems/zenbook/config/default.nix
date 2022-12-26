@@ -36,6 +36,7 @@
     ../../../config/lvm.nix
     ../../../config/pam-mount.nix
     ../../../config/uhid.nix
+    ../../../config/systemd/config.nix
 
     ../../../config/applications/steam.nix
     ../../../config/applications/python.nix
