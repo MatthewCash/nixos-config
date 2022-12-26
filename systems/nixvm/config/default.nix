@@ -20,6 +20,7 @@
     ../../../config/env.nix
     ../../../config/docs.nix
     ../../../config/lvm.nix
+    ../../../config/systemd/config.nix
 
     ../../../config/applications/python.nix
     ../../../config/applications/nodejs.nix
