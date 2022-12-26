@@ -11,6 +11,14 @@ in
     services.samba.enable = true;
 
     fileSystems = {
+        home-matthew = {
+            device = "/dev/disk/by-label/home-matthew";
+            fsType = "btrfs";
+            mountPoint = "/mnt/home/matthew";
+            options = [ "rw" "noatime" ];
+#            neededForBoot = true;
+        };
+
         windows = {
             device = "//host/Windows";
             fsType = "cifs";
