@@ -1,10 +1,10 @@
 { homeName }:
 
 builtins.map (path: ../../../../home/${homeName}/${path}) [
-    "persist.nix"
+    "env.nix"
 
-     "gnome/tweaks.nix"
-    "gnome/terminal.nix"
+    "gnome/tweaks.nix"
+    "gnome/console.nix"
     "gnome/gtk.nix"
     "gnome/config.nix"
     "gnome/input/keyboard.nix"
@@ -12,11 +12,10 @@ builtins.map (path: ../../../../home/${homeName}/${path}) [
     "gnome/extensions/gesture-improvements.nix"
     "gnome/extensions/just-perfection.nix"
     "gnome/extensions/tray-icons-reloaded.nix"
+    "gnome/extensions/rounded-windows.nix"
     "desktop/defaultApps.nix"
+    "desktop/userDirs.nix"
 
-    "applications/chromium.nix"
-    "applications/dev.nix"
-    "applications/evolution.nix"
     "applications/firefox.nix"
     "applications/fzf.nix"
     "applications/node.nix"
@@ -26,8 +25,8 @@ builtins.map (path: ../../../../home/${homeName}/${path}) [
     "applications/htop.nix"
     "applications/neovim.nix"
     "applications/openssh.nix"
-    "applications/vscode.nix"
-    "applications/wsu2fa.nix"
     "applications/zsh.nix"
-    "applications/nix.nix"
+    "applications/direnv.nix"
+    "applications/helix"
+    "applications/editor-config.nix"
 ]
