@@ -1,5 +1,4 @@
 [
-    ../../../config/virt.nix
     ../../../config/users.nix
     ../../../config/time.nix
     ../../../config/console.nix
@@ -9,24 +8,19 @@
     ../../../config/kernel.nix
     ../../../config/fonts.nix
     ../../../config/boot.nix
-    ../../../config/audio.nix
     ../../../config/networking/general.nix
-    ../../../config/networking/dispatcherScripts.nix
     ../../../config/networking/openssh.nix
-    ../../../config/networking/firewall/fail2ban.nix
-    ../../../config/networking/firewall/nftables.nix
-    ./firewall/nftables.nix
     ../../../config/hardware/keyboard.nix
     ../../../config/hardware/hyperv.nix
     ../../../config/de/gnome.nix
+    ./gnome.nix
     ../../../config/fs/mounts.nix
     ./mounts.nix
+    ../../../config/env.nix
+    ../../../config/docs.nix
+    ../../../config/pam-mount.nix
+    ../../../config/lvm.nix
     ../../../config/systemd/config.nix
 
-    ../../../config/applications/steam.nix
-    ../../../config/applications/python.nix
-    ../../../config/applications/nodejs.nix
-    ../../../config/applications/java.nix
-    ../../../config/applications/evolution.nix
     ../../../config/applications/general.nix
 ]
