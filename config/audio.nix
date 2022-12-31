@@ -15,6 +15,4 @@
     };
 
     hardware.pulseaudio.enable = false;
-
-    hardware.bluetooth.enable = true;
 }
