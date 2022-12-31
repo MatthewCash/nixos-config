@@ -37,6 +37,7 @@
     ../../../config/pam-mount.nix
     ../../../config/uhid.nix
     ../../../config/systemd/config.nix
+    ../../../config/bluetooth.nix
 
     ../../../config/applications/steam.nix
     ../../../config/applications/python.nix
