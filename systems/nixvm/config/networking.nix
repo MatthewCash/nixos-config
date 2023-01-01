@@ -2,7 +2,7 @@
 
 let
     systemAddress = "192.168.40.2";
-    netmask = 24;
+    prefixLength = 24;
     gatewayAddress = "192.168.40.1";
 in
 
@@ -15,12 +15,10 @@ in
         nameservers = [ "192.168.1.221" "1.1.1.1" ];
         resolvconf.extraOptions = [ "use-vc" ];
 
-        interfaces = {
-            eth0.ipv4.addresses = [{
-                address = systemAddress;
-                prefixLength = netmask;
-            }];
-        };
+        interfaces.eth0.ipv4.addresses = [{
+            inherit prefixLength;
+            address = systemAddress;
+        }];
 
         defaultGateway = gatewayAddress;
     };
