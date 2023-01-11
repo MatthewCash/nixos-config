@@ -20,7 +20,6 @@
             ".local/share/authenticator"
 
             ".config/fragments"
-            ".config/totem"
             ".config/gnome-control-center"
             ".config/gnome-boxes"
             ".config/gnome-session"
@@ -47,7 +46,6 @@
     home.packages = with pkgsUnstable; with gnome; [
         eog
         fragments
-        totem
         gvfs
         sushi
         rygel
