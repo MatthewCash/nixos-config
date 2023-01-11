@@ -233,6 +233,10 @@ in
 
                     # Hide Firefox View
                     "browser.tabs.firefox-view" = false;
+
+                    # Fonts
+                    "font.default.x-western" = "sans-serif";
+                    "font.name.serif.x-western" = "sans-serif";
                 };
             };
         };
