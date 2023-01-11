@@ -81,6 +81,13 @@ in
                 isDefault = true;
                 userChrome = ''
                     @import "${inputs.firefox-gnome-theme}/userChrome.css";
+
+                    /* remove margin from Firefox View */
+                    tabs#tabbrowser-tabs {
+                        border-inline-start: unset !important;
+                        padding-inline-start: unset !important;
+                        margin-inline-start: unset !important;
+                    }
                 '';
                 userContent = ''
                     @import "${inputs.firefox-mods}/userContent.css";
