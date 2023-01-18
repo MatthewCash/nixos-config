@@ -15,7 +15,7 @@ in
         videos = "${persistHome}/videos";
     };
 
-    home.persistence.${persistHome}.directories = [
+    home.persistence.${persistHome}.files = [
         "code"
         "documents"
         "downloads"
