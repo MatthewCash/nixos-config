@@ -2,7 +2,7 @@
 
 let
     fourTabLanguages = [
-        "c" "c-sharp" "cpp" "css" "go" "html" "java" "javascript" "json" "jsx" "nix" "rust" "tsx" "typescript" "vue"
+        "c" "c-sharp" "cpp" "css" "go" "html" "java" "javascript" "json" "jsx" "markdown" "nix" "rust" "tsx" "typescript" "vue"
     ];
 in
 
