@@ -54,6 +54,8 @@ in
     programs.vscode = {
         enable = true;
         package = vscodium;
+        enableUpdateCheck = false;
+        enableExtensionUpdateCheck = false;
         extensions = with pkgsUnstable.vscode-extensions; [
             jnoortheen.nix-ide
             dbaeumer.vscode-eslint
