@@ -4,6 +4,7 @@
     inputs = {
         nixpkgsStable.url = "nixpkgs/nixos-22.11";
         nixpkgsUnstable.url = "nixpkgs/nixos-unstable";
+        flake-utils.url = github:numtide/flake-utils;
 
         home-manager = {
             url = github:nix-community/home-manager;
@@ -58,7 +59,7 @@
         };
     };
 
-    outputs = inputs @ { self, nixpkgsStable, nixpkgsUnstable, ... }:
+    outputs = inputs @ { self, nixpkgsStable, nixpkgsUnstable, flake-utils, ... }:
     let
         # NixOS Configurations
         systemNames = builtins.attrNames (nixpkgsStable.lib.attrsets.filterAttrs (n: v: v == "directory") (builtins.readDir ./systems));
@@ -85,9 +86,22 @@
             }) systemConfigs;
         }) generatorFormats;
         generators = builtins.listToAttrs generatorList;
+
     in
     {
         nixosConfigurations = systems;
-        packages.x86_64-linux = generators;
+        packages = nixpkgsStable.lib.listToAttrs (nixpkgsStable.lib.forEach flake-utils.lib.defaultSystems (system:
+            let pkgsStable = nixpkgsStable.legacyPackages.${system}; in
+            {
+                name = system;
+                value.apply = pkgsStable.writeShellScriptBin "apply" ''
+                    exec ${pkgsStable.nixos-rebuild}/bin/nixos-rebuild switch --flake path:. --use-remote-sudo $@
+                '';
+                value.full-upgrade = pkgsStable.writeShellScriptBin "full-upgrade" ''
+                    ${pkgsStable.nix}/bin/nix flake update path:.
+                    exec ${self.packages.${system}.apply}/bin/apply
+                '';
+            }
+        ));
     };
 }
