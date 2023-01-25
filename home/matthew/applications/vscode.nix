@@ -1,7 +1,7 @@
 { pkgsStable, pkgsUnstable, persistenceHomePath, name, ... }:
 
 let
-    vscodium = pkgsUnstable.vscodium.overrideAttrs(oldAttrs: {
+    vscodium = (pkgsUnstable.vscodium.overrideAttrs (oldAttrs: {
          desktopItem = pkgsStable.makeDesktopItem {
             name = "codium";
             icon = "vscode";
@@ -13,7 +13,9 @@ let
             categories = [ "Utility" "TextEditor" "Development" "IDE" ];
             mimeTypes = [ "text/plain" "inode/directory" ];
         };
-    });
+    })).override {
+        commandLineArgs = "--touch-events";
+    };
 
     vscodium-fhs = pkgsStable.buildFHSUserEnvBubblewrap {
         name = "codium";
