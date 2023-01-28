@@ -4,6 +4,7 @@ let
     vscodium = (pkgsUnstable.vscodium.overrideAttrs (oldAttrs: {
          desktopItem = pkgsStable.makeDesktopItem {
             name = "codium";
+            exec = "codium %F";
             icon = "vscode";
             startupWMClass = "VSCodium";
             desktopName = "Visual Studio Codium";
