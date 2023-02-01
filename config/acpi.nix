@@ -4,7 +4,7 @@ let
     batteryTarget = 80;
 
     isLidClosed = "[[ \"$(cat /proc/acpi/button/lid/LID/state)\" == \"state:      closed\" ]]";
-    isPowerConnected = "[[ \"$(cat /sys/class/power_supply/AC?/online)\" -eq 0 ]]";
+    isPowerConnected = "[[ \"$(cat /sys/class/power_supply/AC?/online)\" -eq 1 ]]";
     isPowerDisconnected = "[[ \"$(cat /sys/class/power_supply/AC?/online)\" -eq 0 ]]";
     sleep = "${pkgsStable.coreutils}/bin/sleep";
 in
