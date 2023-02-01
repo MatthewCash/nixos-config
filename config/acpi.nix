@@ -1,7 +1,8 @@
-{ pkgsStable, ... }:
+{ pkgsStable, stableLib, ... }:
 
 let
     batteryTarget = 80;
+    batteryTargetStr = builtins.toString (stableLib.min (batteryTarget + 1) 100);
 
     isLidClosed = "[[ \"$(cat /proc/acpi/button/lid/LID/state)\" == \"state:      closed\" ]]";
     isPowerConnected = "[[ \"$(cat /sys/class/power_supply/AC?/online)\" -eq 1 ]]";
@@ -27,9 +28,9 @@ in
                 && ${isLidClosed} && ${sleep} 5 && ${isPowerDisconnected} \
                 && ${isLidClosed} && ${pkgsStable.systemd}/bin/systemctl suspend
 
-            # Set battery limit to 80% when plugged in
+            # Set battery limit when plugged in
             ${isPowerConnected} \
-                && echo ${builtins.toString (batteryTarget + 1)} > /sys/class/power_supply/BAT?/charge_control_end_threshold
+                && echo ${batteryTargetStr} > /sys/class/power_supply/BAT?/charge_control_end_threshold \
         '';
     };
 }
