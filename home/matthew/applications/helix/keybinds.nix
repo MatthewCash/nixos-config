@@ -16,7 +16,7 @@
         ";" = "no_op"; # P
         "[" = "no_op"; # [
         "]" = "no_op"; # ]
-        "\\\\" = "no_op"; # \
+        "\\" = "no_op"; # \
         "a" = "append_mode"; # A
         "A" = [ "goto_line_end" "append_mode" ];
         "r" = "unindent"; # S
