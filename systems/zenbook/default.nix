@@ -9,7 +9,7 @@ rec {
     vpnAddress = "10.0.0.9";
     tailscaleId = "zeta";
     pamMountUsers = [ "matthew" ];
-    unfreePkgs = [ "steam" "steam-original" "discord" ];
+    unfreePkgs = [ "steam" "steam-original" ];
 
     nixosConfig = builtins.toString ./config;
     homeConfig = builtins.toString ./home;
