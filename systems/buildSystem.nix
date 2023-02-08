@@ -6,6 +6,7 @@ let
     pamMountUsers = systemConfig.pamMountUsers or [ ];
     persistPath = systemConfig.persistPath or "/mnt/persist";
     homeMountPath = systemConfig.persistPath or "/mnt/home";
+    batteryChargeLimit = systemConfig.batteryChargeLimit or 100;
 
     nixpkgsArgs = {
         localSystem = systemConfig.system;
@@ -14,7 +15,7 @@ let
 
     extraArgs = rec {
         inherit (systemConfig) system hostname ssd vpnAddress tailscaleId;
-        inherit inputs nixpkgsStable nixpkgsUnstable kernelPackages pamMountUsers persistPath homeMountPath;
+        inherit inputs nixpkgsStable nixpkgsUnstable kernelPackages pamMountUsers persistPath homeMountPath batteryChargeLimit;
         pkgsStable = import nixpkgsStable nixpkgsArgs;
         pkgsUnstable = import nixpkgsUnstable nixpkgsArgs;
         stableLib = pkgsStable.lib;

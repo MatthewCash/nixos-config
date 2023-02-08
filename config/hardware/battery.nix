@@ -1,8 +1,7 @@
-{ stableLib, pkgsStable, ... }:
+{ stableLib, pkgsStable, batteryChargeLimit, ... }:
 
 let
-    target = 80;
-    batteryTargetStr = builtins.toString (stableLib.min (target + 1) 100);
+    batteryTargetStr = builtins.toString (stableLib.min (batteryChargeLimit + 1) 100);
 in
 {
     # Limit Battery Charge

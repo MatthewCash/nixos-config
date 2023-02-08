@@ -1,8 +1,7 @@
-{ pkgsStable, stableLib, ... }:
+{ pkgsStable, stableLib, batteryChargeLimit, ... }:
 
 let
-    batteryTarget = 80;
-    batteryTargetStr = builtins.toString (stableLib.min (batteryTarget + 1) 100);
+    batteryTargetStr = builtins.toString (stableLib.min (batteryChargeLimit + 1) 100);
 
     isLidClosed = "[[ \"$(cat /proc/acpi/button/lid/LID/state)\" == \"state:      closed\" ]]";
     isPowerConnected = "[[ \"$(cat /sys/class/power_supply/AC?/online)\" -eq 1 ]]";
