@@ -10,6 +10,7 @@ rec {
     tailscaleId = "zeta";
     pamMountUsers = [ "matthew" ];
     unfreePkgs = [ "steam" "steam-original" ];
+    batteryChargeLimit = 100;
 
     nixosConfig = builtins.toString ./config;
     homeConfig = builtins.toString ./home;
