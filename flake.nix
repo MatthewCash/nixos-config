@@ -57,6 +57,11 @@
             url = github:MatthewCash/tpm-fido;
             inputs.nixpkgs.follows = "nixpkgsStable";
         };
+
+        gnome-accent-colors = {
+            url = github:demiskp/custom-accent-colors;
+            flake = false;
+        };
     };
 
     outputs = inputs @ { self, nixpkgsStable, nixpkgsUnstable, flake-utils, ... }:

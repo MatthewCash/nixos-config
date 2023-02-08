@@ -170,6 +170,22 @@
         "type": "github"
       }
     },
+    "gnome-accent-colors": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1675855838,
+        "narHash": "sha256-xX9uPIrErUxE+NvY38iuI6av5h5+zjJ9cyGB/56yVBE=",
+        "owner": "demiskp",
+        "repo": "custom-accent-colors",
+        "rev": "aa995d0e85bc976dcb520e7c0f5bff6345175974",
+        "type": "github"
+      },
+      "original": {
+        "owner": "demiskp",
+        "repo": "custom-accent-colors",
+        "type": "github"
+      }
+    },
     "gomod2nix": {
       "inputs": {
         "nixpkgs": "nixpkgs",
@@ -335,6 +351,7 @@
         "firefox-gnome-theme": "firefox-gnome-theme",
         "firefox-mods": "firefox-mods",
         "flake-utils": "flake-utils_2",
+        "gnome-accent-colors": "gnome-accent-colors",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "nixos-generators": "nixos-generators",
