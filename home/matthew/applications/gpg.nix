@@ -1,10 +1,13 @@
-{ persistenceHomePath, name, ... }:
+{ persistenceHomePath, name, config, ... }:
 
 {
-    programs.gpg.enable = true;
+    programs.gpg = {
+        enable = true;
+        homedir = "${config.xdg.configHome}/gnupg";
+    };
 
     home.persistence."${persistenceHomePath}/${name}".directories = [
-        ".gnupg"
+        ".config/gnupg"
     ];
 
     services.gpg-agent = {
