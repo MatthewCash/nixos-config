@@ -1,16 +1,19 @@
-{ pkgsStable, persistenceHomePath, name, inputs, ... }:
+{ pkgsStable, persistenceHomePath, name, inputs, config, ... }:
 
 {
     home.packages = with pkgsStable; [ wl-clipboard ];
 
     home.persistence."${persistenceHomePath}/${name}".files = [
-        ".zsh_history"
+        ".cache/zsh/history"
     ];
 
     home.sessionVariables.COLORTERM = "truecolor";
 
     programs.zsh = {
         enable = true;
+
+        dotDir = ".config/zsh";
+        history.path = "${config.xdg.cacheHome}/zsh/history";
 
         oh-my-zsh = {
             enable = true;
