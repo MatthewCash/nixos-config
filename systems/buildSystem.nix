@@ -8,6 +8,11 @@ let
     homeMountPath = systemConfig.persistPath or "/mnt/home";
     batteryChargeLimit = systemConfig.batteryChargeLimit or 100;
 
+    stableLib = nixpkgsStable.lib;
+    toHex = i: import ../util/padStart.nix stableLib { padStr = "0"; len = 2; str = import ../util/decToHex.nix stableLib i;};
+    accentColor = systemConfig.accentColor //
+        { hex = "#${toHex accentColor.r}${toHex accentColor.g}${toHex accentColor.b}"; };
+
     nixpkgsArgs = {
         localSystem = systemConfig.system;
         config.allowUnfreePredicate = pkg: builtins.elem (nixpkgsStable.lib.getName pkg) (systemConfig.unfreePkgs or [ ]);
@@ -15,7 +20,7 @@ let
 
     extraArgs = rec {
         inherit (systemConfig) system hostname ssd vpnAddress tailscaleId;
-        inherit inputs nixpkgsStable nixpkgsUnstable kernelPackages pamMountUsers persistPath homeMountPath batteryChargeLimit;
+        inherit inputs nixpkgsStable nixpkgsUnstable kernelPackages pamMountUsers persistPath homeMountPath batteryChargeLimit accentColor;
         pkgsStable = import nixpkgsStable nixpkgsArgs;
         pkgsUnstable = import nixpkgsUnstable nixpkgsArgs;
         stableLib = pkgsStable.lib;
