@@ -12,6 +12,8 @@
     programs.zsh = {
         enable = true;
 
+        enableVteIntegration = true;
+
         dotDir = ".config/zsh";
         history.path = "${config.xdg.cacheHome}/zsh/history";
 
