@@ -1,3 +1,5 @@
+{ accentColor, ... }:
+
 let
     white = "#ffffff";
     orange = "#ce9178";
@@ -103,8 +105,8 @@ in {
     "ui.linenr.selected" = { fg = light_gray2; };
 
     "ui.cursorline.primary" = { bg = dark_gray3; };
-    "ui.statusline" = { fg = white; bg = blue; };
-    "ui.statusline.inactive" = { fg = white; bg = blue; };
+    "ui.statusline" = { fg = white; bg = accentColor.hex; };
+    "ui.statusline.inactive" = { fg = white; bg = accentColor.hex; };
 
     "ui.text" = { fg = text; };
     "ui.text.focus" = { fg = white; };
