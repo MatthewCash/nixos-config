@@ -1,4 +1,4 @@
-{ pkgsUnstable, persistenceHomePath, name, inputs, ... }:
+{ pkgsUnstable, persistenceHomePath, name, inputs, accentColor, ... }:
 
 let
     firefox-devedition-bin = pkgsUnstable.firefox-devedition-bin.override (old: {
@@ -79,7 +79,7 @@ in
             "main" = {
                 name = "dev-edition-default";
                 isDefault = true;
-                userChrome = ''
+                userChrome = /* css */ ''
                     @import "${inputs.firefox-gnome-theme}/userChrome.css";
 
                     /* remove margin from Firefox View */
@@ -89,8 +89,14 @@ in
                         margin-inline-start: unset !important;
                     }
                 '';
-                userContent = ''
+                userContent = /* css */ ''
                     @import "${inputs.firefox-mods}/userContent.css";
+
+                    :root {
+                        --system-hue: ${builtins.toString accentColor.h};
+                        --system-saturation: ${builtins.toString accentColor.s}%;
+                        --system-lightness: ${builtins.toString accentColor.l}%;
+                    }
                 '';
                 extraConfig = builtins.readFile "${inputs.firefox-gnome-theme}/configuration/user.js";
                 settings = {
