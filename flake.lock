@@ -277,26 +277,6 @@
         "type": "github"
       }
     },
-    "nixos-vscode-server": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgsUnstable"
-        ]
-      },
-      "locked": {
-        "lastModified": 1657846023,
-        "narHash": "sha256-W7XkZ96U/fRzZDU6YGGBQGgxo6A6RJzOrfSRweCZfjw=",
-        "owner": "MatthewCash",
-        "repo": "nixos-vscode-server",
-        "rev": "58a5bbc00235d212a3c99bb62113504abf13da50",
-        "type": "github"
-      },
-      "original": {
-        "owner": "MatthewCash",
-        "repo": "nixos-vscode-server",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1658285632,
@@ -355,7 +335,6 @@
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "nixos-generators": "nixos-generators",
-        "nixos-vscode-server": "nixos-vscode-server",
         "nixpkgsStable": "nixpkgsStable",
         "nixpkgsUnstable": "nixpkgsUnstable",
         "tpm-fido": "tpm-fido",

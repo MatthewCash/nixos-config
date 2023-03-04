@@ -18,11 +18,6 @@
             inputs.nixpkgs.follows = "nixpkgsStable";
         };
 
-        nixos-vscode-server = {
-            url = github:MatthewCash/nixos-vscode-server;
-            inputs.nixpkgs.follows = "nixpkgsUnstable";
-        };
-
         firefox-gnome-theme = {
             url = github:rafaelmardojai/firefox-gnome-theme;
             flake = false;
