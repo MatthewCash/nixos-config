@@ -1,10 +1,10 @@
-{ pkgsStable, persistenceHomePath, name, inputs, config, ... }:
+{ pkgsStable, pkgsUnstable, persistenceHomePath, name, inputs, ... }:
 
 {
     home.packages = with pkgsStable; [ wl-clipboard ];
 
     home.persistence."${persistenceHomePath}/${name}".files = [
-        ".cache/zsh/history"
+        ".zsh_history"
     ];
 
     home.sessionVariables.COLORTERM = "truecolor";
@@ -14,13 +14,7 @@
 
         enableVteIntegration = true;
 
-        dotDir = ".config/zsh";
-        history.path = "${config.xdg.cacheHome}/zsh/history";
-
-        oh-my-zsh = {
-            enable = true;
-            plugins = [ "git" "bundler" "dotenv" "rake" "npm" ];
-        };
+        oh-my-zsh.enable = true;
 
         plugins = [
             {
@@ -29,9 +23,9 @@
                 src = inputs.zsh-nix-shell;
             }
             {
-                name = "agnoster";
-                file = "agnoster.zsh-theme";
-                src = inputs.agnoster-zsh-theme;
+                name = "powerlevel10k";
+                file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+                src = pkgsUnstable.zsh-powerlevel10k;
             }
         ];
 
@@ -46,15 +40,29 @@
             c = "wl-copy";
             p = "wl-paste";
             e = "$EDITOR";
+            cd = "pushd > /dev/null";
         };
 
         initExtra = ''
-            . /run/current-system/etc/profile
+            ${builtins.readFile ./p10k.zsh}
+            ${builtins.readFile ./git_formatter.sh}
+            source /run/current-system/etc/profile
 
             unsetopt HIST_SAVE_BY_COPY
 
-            bindkey '^H' backward-kill-word
-            bindkey '5~' kill-word
+            bindkey "^[[3~" delete-char
+
+            bindkey "^H" backward-kill-word
+            bindkey "^[[3;5~" kill-word
+
+            bindkey "^[[1;5C" forward-word
+            bindkey "^[[1;5D" backward-word
+
+            # Home / End
+            bindkey "^[[H" beginning-of-line
+            bindkey "^[[F" end-of-line
+
+            typeset -g WORDCHARS="''${WORDCHARS/\//}"
 
             x() { command xdg-open "$@" 2>/dev/null }
             wf() {
