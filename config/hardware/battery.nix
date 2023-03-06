@@ -9,5 +9,9 @@ in
         ACTION=="add", KERNEL=="asus-nb-wmi", RUN+="${pkgsStable.bash}/bin/bash -c 'echo ${batteryTargetStr} > /sys/class/power_supply/BAT?/charge_control_end_threshold'"
     '';
 
-    powerManagement.cpuFreqGovernor = stableLib.mkDefault "powersave";
+    powerManagement.powertop.enable = true;
+    services.thermald.enable = true;
+    services.power-profiles-daemon.enable = true;
+
+    boot.kernelParams = [ "ahci.mobile_lpm_policy=3" ];
 }
