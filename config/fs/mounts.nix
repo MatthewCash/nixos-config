@@ -3,6 +3,8 @@
 {
     programs.fuse.userAllowOther = true;
 
+    boot.initrd.systemd.enable = true;
+
     environment.persistence.${persistPath} = {
         directories = [
             "/var/lib/systemd/coredump"
