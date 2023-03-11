@@ -10,8 +10,12 @@ let
 
     stableLib = nixpkgsStable.lib;
     toHex = i: import ../util/padStart.nix stableLib { padStr = "0"; len = 2; str = import ../util/decToHex.nix stableLib i;};
-    accentColor = systemConfig.accentColor //
-        { hex = "#${toHex accentColor.r}${toHex accentColor.g}${toHex accentColor.b}"; };
+    toRgb = hsl: import ../util/hsl2rgb.nix stableLib hsl;
+
+    accentColor = systemConfig.accentColor // {
+        hex = "#${toHex accentColor.r}${toHex accentColor.g}${toHex accentColor.b}";
+        inherit (import ../util/hsl2rgb.nix stableLib accentColor) r g b;
+    };
 
     nixpkgsArgs = {
         localSystem = systemConfig.system;
