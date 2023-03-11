@@ -1,6 +1,10 @@
-{ persistenceHomePath, name, ... }:
+{ pkgsUnstable, persistenceHomePath, name, ... }:
 
 {
+    home.packages = with pkgsUnstable; [
+#        (evolutionWithPlugins.override { plugins = [ evolution evolution-ews ]; })
+    ];
+
     home.persistence."${persistenceHomePath}/${name}".directories = [
         ".local/share/evolution"
         ".config/evolution"

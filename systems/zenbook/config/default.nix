@@ -38,11 +38,11 @@
     ../../../config/uhid.nix
     ../../../config/systemd/config.nix
     ../../../config/bluetooth.nix
+    ../../../config/services/evolution.nix
 
     ../../../config/applications/steam.nix
     ../../../config/applications/python.nix
     ../../../config/applications/nodejs.nix
     ../../../config/applications/java.nix
-    ../../../config/applications/evolution.nix
     ../../../config/applications/general.nix
 ]
