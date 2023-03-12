@@ -3,9 +3,13 @@
 builtins.map (path: ../../../../home/${homeName}/${path}) [
     "env.nix"
 
-    "applications/dev.nix"
+    "dev/c.nix"
+    "dev/rust.nix"
+    "dev/node.nix"
+    "dev/java"
+    "dev/omnisharp.nix"
+
     "applications/fzf.nix"
-    "applications/node.nix"
     "applications/git.nix"
     "applications/gpg.nix"
     "applications/htop.nix"
@@ -17,5 +21,4 @@ builtins.map (path: ../../../../home/${homeName}/${path}) [
     "applications/helix"
     "applications/gradle.nix"
     "applications/editor-config.nix"
-    "applications/omnisharp.nix"
 ]

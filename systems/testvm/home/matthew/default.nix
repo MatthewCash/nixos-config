@@ -16,9 +16,11 @@ builtins.map (path: ../../../../home/${homeName}/${path}) [
     "desktop/defaultApps.nix"
     "desktop/userDirs.nix"
 
+    "dev/c.nix"
+    "dev/node.nix"
+
     "applications/firefox"
     "applications/fzf.nix"
-    "applications/node.nix"
     "applications/git.nix"
     "applications/gnome.nix"
     "applications/gpg.nix"

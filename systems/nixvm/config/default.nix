@@ -22,8 +22,5 @@
     ../../../config/lvm.nix
     ../../../config/systemd/config.nix
 
-    ../../../config/applications/python.nix
-    ../../../config/applications/nodejs.nix
-    ../../../config/applications/java.nix
     ../../../config/applications/general.nix
 ]
