@@ -1,4 +1,4 @@
-{ pkgsStable, pkgsUnstable, stableLib, inputs, ... }:
+{ pkgsStable, pkgsUnstable, stableLib, inputs, config, ... }:
 
 let
     extensions = with pkgsUnstable.vscode-extensions; [
@@ -14,7 +14,7 @@ let
         "java.jdt.ls.java.home" = "${pkgsUnstable.jdk17_headless}/lib/openjdk";
         "java.import.gradle.home" = "${pkgsUnstable.gradle}/lib/gradle";
         "java.configuration.updateBuildConfiguration" = "automatic";
-        "java.format.settings.url" = "/home/matthew/code/java-formatter.xml";
+        "java.format.settings.url" = "${config.xdg.configHome}/java/java-formatter.xml";
         "omnisharp.dotnetPath" = "${pkgsUnstable.dotnet-sdk}/bin";
         "omnisharp.sdkPath" = "${pkgsUnstable.dotnet-sdk}/sdk/";
     };
