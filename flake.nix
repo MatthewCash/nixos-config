@@ -57,6 +57,11 @@
             url = github:demiskp/custom-accent-colors;
             flake = false;
         };
+
+        lanzaboote = {
+            url = github:nix-community/lanzaboote;
+            inputs.nixpkgs.follows = "nixpkgsUnstable";
+        };
     };
 
     outputs = inputs @ { self, nixpkgsStable, nixpkgsUnstable, flake-utils, ... }:

@@ -44,6 +44,8 @@ in
 
         inputs.home-manager.nixosModule
 
+        inputs.lanzaboote.nixosModules.lanzaboote
+
         {
             home-manager = {
                 useGlobalPkgs = true;
