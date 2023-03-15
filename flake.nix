@@ -62,6 +62,11 @@
             url = github:nix-community/lanzaboote;
             inputs.nixpkgs.follows = "nixpkgsUnstable";
         };
+
+        mozilla-theme = {
+            url = path:/mnt/home/matthew/code/mozilla-theme;
+            inputs.nixpkgs.follows = "nixpkgsStable";
+        };
     };
 
     outputs = inputs @ { self, nixpkgsStable, nixpkgsUnstable, flake-utils, ... }:

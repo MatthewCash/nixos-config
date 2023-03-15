@@ -268,6 +268,21 @@
     },
     "flake-utils_4": {
       "locked": {
+        "lastModified": 1676283394,
+        "narHash": "sha256-XX2f9c3iySLCw54rJ/CZs+ZK6IQy7GXNY4nSOyu2QG4=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3db36a8b464d0c4532ba1c7dda728f4576d6d073",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_5": {
+      "locked": {
         "lastModified": 1667395993,
         "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
         "owner": "numtide",
@@ -399,6 +414,24 @@
         "owner": "nix-community",
         "repo": "lanzaboote",
         "type": "github"
+      }
+    },
+    "mozilla-theme": {
+      "inputs": {
+        "flake-utils": "flake-utils_4",
+        "nixpkgs": [
+          "nixpkgsStable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1678687702,
+        "narHash": "sha256-gApK1DYz8yGKI5vg4ycUhxxgwPL7ktx05JwlMvX6XUE=",
+        "path": "/mnt/home/matthew/code/mozilla-theme",
+        "type": "path"
+      },
+      "original": {
+        "path": "/mnt/home/matthew/code/mozilla-theme",
+        "type": "path"
       }
     },
     "nixlib": {
@@ -573,6 +606,7 @@
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "lanzaboote": "lanzaboote",
+        "mozilla-theme": "mozilla-theme",
         "nixos-generators": "nixos-generators",
         "nixpkgsStable": "nixpkgsStable",
         "nixpkgsUnstable": "nixpkgsUnstable",
@@ -607,7 +641,7 @@
     },
     "tpm-fido": {
       "inputs": {
-        "flake-utils": "flake-utils_4",
+        "flake-utils": "flake-utils_5",
         "gomod2nix": "gomod2nix",
         "nixpkgs": [
           "nixpkgsStable"

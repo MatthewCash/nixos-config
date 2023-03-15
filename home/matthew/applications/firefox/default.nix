@@ -1,11 +1,11 @@
-{ pkgsUnstable, persistenceHomePath, name, inputs, accentColor, ... }:
+args @ { pkgsUnstable, persistenceHomePath, name, inputs, accentColor, system, ... }:
 
 let
     firefox-devedition-bin = pkgsUnstable.firefox-devedition-bin.override (old: {
         icon = "firefox-developer-edition";
         desktopName = "Firefox Developer Edition";
         nameSuffix = "";
-        extraPolicies = import ./policy.nix;
+        extraPolicies = import ./policy.nix args;
         wmClass = "firefox-aurora";
     });
 
@@ -40,6 +40,11 @@ in
                         border-inline-start: unset !important;
                         padding-inline-start: unset !important;
                         margin-inline-start: unset !important;
+                    }
+
+                    /* remove active tab outline */
+                    .tab-background {
+                        outline: none !important;
                     }
                 '';
                 userContent = /* css */ ''
