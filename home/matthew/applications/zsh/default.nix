@@ -1,4 +1,4 @@
-{ pkgsStable, pkgsUnstable, persistenceHomePath, name, inputs, ... }:
+{ pkgsStable, pkgsUnstable, persistenceHomePath, name, inputs, accentColor, ... }:
 
 {
     home.packages = with pkgsStable; [ wl-clipboard ];
@@ -44,8 +44,9 @@
         };
 
         initExtra = /* zsh */ ''
-            ${builtins.readFile ./p10k.zsh}
             ${builtins.readFile ./git_formatter.sh}
+            ${import ./p10k.nix { inherit accentColor; }  }
+
             source /run/current-system/etc/profile
 
             unsetopt HIST_SAVE_BY_COPY
