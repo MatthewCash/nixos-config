@@ -69,4 +69,8 @@ map (name: { inherit name; indent = { tab-width = 4; unit = "    "; }; }) fourTa
         name = "vue";
         language-server.command = "${pkgsUnstable.nodePackages.vls}/bin/vls";
     }
+    {
+        name = "nix";
+        language-server.command = "${pkgsUnstable.nil}/bin/nil";
+    }
 ]
