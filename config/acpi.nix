@@ -12,7 +12,7 @@ in
     services.acpid = {
         enable = true;
 
-        lidEventCommands = ''
+        lidEventCommands = /* bash */ ''
             # If lid is closed...
             if ${isLidClosed}; then
                 # Suspend if discharging and if lid is still closed after 15 seconds
@@ -21,7 +21,7 @@ in
             fi
         '';
 
-        acEventCommands = ''
+        acEventCommands = /* bash */ ''
             # If the lid is closed and charger is unplugged, suspend after 15 seconds
             ${sleep} 1 && ${isPowerDisconnected} \
                 && ${isLidClosed} && ${sleep} 5 && ${isPowerDisconnected} \

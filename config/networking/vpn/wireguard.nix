@@ -16,7 +16,7 @@
             ];
             table = "off";
             privateKeyFile = config.age.secrets."wireguard-privatekey-${vpnAddress}".path;
-            postUp = ''
+            postUp = /* bash */ ''
                 ${pkgs.iproute2}/bin/ip route add 10.0.0.0/24 via ${vpnAddress}
                 ${pkgs.iproute2}/bin/ip rule add to 172.30.0.0/24 table wg_vpn
             '';

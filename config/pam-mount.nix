@@ -12,10 +12,10 @@
 
     environment.etc."pam.d/login".text = let
         systemctl = "${pkgsStable.systemd}/bin/systemctl";
-        checkScript = pkgsStable.writeShellScript "check_for_mount.sh" ''
+        checkScript = pkgsStable.writeShellScript "check_for_mount.sh" /* bash */ ''
             mountpoint -q "${homeMountPath}/$PAM_USER"
         '';
-        hmScript = pkgsStable.writeShellScript "run_hm.sh" ''
+        hmScript = pkgsStable.writeShellScript "run_hm.sh" /* bash */ ''
             if [[ -n $(${systemctl} list-unit-files | grep "^home-manager-$PAM_USER") ]]; then
                 ${systemctl} restart home-manager-$PAM_USER
             fi

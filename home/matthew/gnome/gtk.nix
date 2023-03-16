@@ -3,7 +3,7 @@
 let
     accentColorHex = accentColor.hex;
 
-    customCss = ''
+    customCss = /* css */ ''
         @define-color accent_bg_color ${accentColorHex};
         @define-color accent_color ${accentColorHex};
     '';

@@ -10,7 +10,7 @@ let
         "<setting id=\"org.eclipse.jdt.core.formatter.${id}\" value=\"${valueToString value}\" />";
 
     settingsLines = builtins.mapAttrs convertLineToXml settings;
-    settingsText = ''
+    settingsText = /* xml */ ''
     <?xml version="1.0" encoding="UTF-8" standalone="no"?>
     <profiles version="13">
         <profile kind="CodeFormatterProfile" name="Eclipse" version="13">

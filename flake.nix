@@ -104,10 +104,10 @@
             let pkgsStable = nixpkgsStable.legacyPackages.${system}; in
             {
                 name = system;
-                value.apply = pkgsStable.writeShellScriptBin "apply" ''
+                value.apply = pkgsStable.writeShellScriptBin "apply" /* bash */ ''
                     exec ${pkgsStable.nixos-rebuild}/bin/nixos-rebuild switch --flake path:. --use-remote-sudo $@
                 '';
-                value.full-upgrade = pkgsStable.writeShellScriptBin "full-upgrade" ''
+                value.full-upgrade = pkgsStable.writeShellScriptBin "full-upgrade" /* bash */ ''
                     ${pkgsStable.nix}/bin/nix flake update path:.
                     exec ${self.packages.${system}.apply}/bin/apply
                 '';

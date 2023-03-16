@@ -43,7 +43,7 @@
             cd = "pushd > /dev/null";
         };
 
-        initExtra = ''
+        initExtra = /* zsh */ ''
             ${builtins.readFile ./p10k.zsh}
             ${builtins.readFile ./git_formatter.sh}
             source /run/current-system/etc/profile

@@ -11,7 +11,7 @@
     networking.networkmanager.dispatcherScripts = [
         {
             type = "pre-up";
-            source = pkgsStable.writeText "upHook" ''
+            source = pkgsStable.writeText "upHook" /* bash */ ''
                 home_net_id_hash="997ae2dff5a617f2bafa6ae7ffe50b8594265de06894a5b5f24590d3dea58761"
                 current_net_id_hash=$(echo "$CONNECTION_ID" | ${pkgsStable.coreutils}/bin/sha256sum | sed 's/ .*$//')
 
