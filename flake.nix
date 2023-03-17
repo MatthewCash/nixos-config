@@ -64,7 +64,7 @@
         };
 
         mozilla-theme = {
-            url = path:/mnt/home/matthew/code/mozilla-theme;
+            url = github:MatthewCash/mozilla-theme;
             inputs.nixpkgs.follows = "nixpkgsStable";
         };
     };

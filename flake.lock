@@ -424,14 +424,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1678687702,
-        "narHash": "sha256-gApK1DYz8yGKI5vg4ycUhxxgwPL7ktx05JwlMvX6XUE=",
-        "path": "/mnt/home/matthew/code/mozilla-theme",
-        "type": "path"
+        "lastModified": 1678335548,
+        "narHash": "sha256-qtnXc2AMdfR/wK7MCriWFTr0xr8pjf00xTTu0cyKiG0=",
+        "owner": "MatthewCash",
+        "repo": "mozilla-theme",
+        "rev": "da9e7895ae08d367df130884d0500b5adfcac52b",
+        "type": "github"
       },
       "original": {
-        "path": "/mnt/home/matthew/code/mozilla-theme",
-        "type": "path"
+        "owner": "MatthewCash",
+        "repo": "mozilla-theme",
+        "type": "github"
       }
     },
     "nixlib": {
