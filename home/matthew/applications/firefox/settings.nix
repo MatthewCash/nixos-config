@@ -142,4 +142,7 @@
     # Fonts
     "font.default.x-western" = "sans-serif";
     "font.name.serif.x-western" = "sans-serif";
+
+    # Allow unverified addons
+    "xpinstall.signatures.required" = false;
 }
