@@ -43,7 +43,6 @@
             c = "wl-copy";
             p = "wl-paste";
             e = "$EDITOR";
-            cd = "pushd > /dev/null";
         };
 
         initExtra = /* zsh */ ''
@@ -68,6 +67,7 @@
 
             typeset -g WORDCHARS="''${WORDCHARS/\//}"
 
+            cd() { pushd "''${1:-$HOME}" > /dev/null }
             x() { command xdg-open "$@" 2>/dev/null }
             wf() {
                 if [[ ! -f "$1" ]]; then
