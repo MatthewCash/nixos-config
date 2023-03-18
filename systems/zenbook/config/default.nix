@@ -10,6 +10,7 @@
     ./kernel.nix
     ../../../config/fonts.nix
     ../../../config/boot.nix
+    ../../../config/secureboot.nix
     ../../../config/audio.nix
     ../../../config/acpi.nix
     ../../../config/networking/general.nix
