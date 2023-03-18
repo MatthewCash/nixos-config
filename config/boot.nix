@@ -11,4 +11,6 @@
             configurationLimit = 20;
         };
     };
+
+    boot.initrd.systemd.enable = true;
 }

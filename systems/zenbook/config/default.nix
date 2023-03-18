@@ -27,13 +27,13 @@
     ../../../config/de/gnome.nix
     ../../../config/cpu/intel.nix
     ../../../config/fs/mounts.nix
+    ../../../config/fs/lvm.nix
     ./mounts.nix
     ./lid.nix
     ../../../config/ld.nix
     ../../../config/env.nix
     ../../../config/docs.nix
     ../../../config/tailscale.nix
-    ../../../config/lvm.nix
     ../../../config/pam-mount.nix
     ../../../config/uhid.nix
     ../../../config/systemd/config.nix

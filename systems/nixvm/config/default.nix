@@ -15,11 +15,11 @@
     ../../../config/hardware/keyboard.nix
     ../../../config/hardware/hyperv.nix
     ../../../config/fs/mounts.nix
+    ../../../config/fs/lvm.nix
     ./mounts.nix
     ../../../config/ld.nix
     ../../../config/env.nix
     ../../../config/docs.nix
-    ../../../config/lvm.nix
     ../../../config/systemd/config.nix
 
     ../../../config/applications/general.nix

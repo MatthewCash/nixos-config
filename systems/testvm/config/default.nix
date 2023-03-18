@@ -15,11 +15,11 @@
     ../../../config/de/gnome.nix
     ./gnome.nix
     ../../../config/fs/mounts.nix
+    ../../../config/fs/lvm.nix
     ./mounts.nix
     ../../../config/env.nix
     ../../../config/docs.nix
     ../../../config/pam-mount.nix
-    ../../../config/lvm.nix
     ../../../config/systemd/config.nix
 
     ../../../config/applications/general.nix

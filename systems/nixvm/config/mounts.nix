@@ -16,7 +16,6 @@ in
             fsType = "btrfs";
             mountPoint = "/mnt/home/matthew";
             options = [ "rw" "noatime" ];
-#            neededForBoot = true;
         };
 
         windows = {
