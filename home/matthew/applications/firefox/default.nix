@@ -8,15 +8,6 @@ let
         extraPolicies = import ./policy.nix args;
         wmClass = "firefox-aurora";
     });
-
-    handlers = builtins.toJSON {
-        mimeTypes =  {
-            "application/pdf" = {
-                action = 3;
-                extension = [ "pdf" ];
-            };
-        };
-    };
 in
 
 {
@@ -35,12 +26,6 @@ in
                 userChrome = /* css */ ''
                     @import "${inputs.firefox-gnome-theme}/userChrome.css";
 
-                    /* remove margin from Firefox View */
-                    tabs#tabbrowser-tabs {
-                        border-inline-start: unset !important;
-                        padding-inline-start: unset !important;
-                        margin-inline-start: unset !important;
-                    }
 
                     /* remove active tab outline */
                     .tab-background {
