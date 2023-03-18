@@ -1,16 +1,19 @@
-{ pkgsStable, pkgsUnstable, persistenceHomePath, name, inputs, accentColor, ... }:
+{ pkgsStable, pkgsUnstable, persistenceHomePath, name, inputs, accentColor, config, ... }:
 
 {
     home.packages = with pkgsStable; [ wl-clipboard ];
 
     home.persistence."${persistenceHomePath}/${name}".files = [
-        ".zsh_history"
+        ".cache/zsh/history"
     ];
 
     home.sessionVariables.COLORTERM = "truecolor";
 
     programs.zsh = {
         enable = true;
+
+        dotDir = ".config/zsh";
+        history.path = "${config.xdg.cacheHome}/zsh/history";
 
         enableVteIntegration = true;
 
