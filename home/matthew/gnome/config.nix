@@ -14,7 +14,7 @@ in
         "org/gnome/desktop/interface" = {
             clock-show-seconds = true;
             clock-show-weekday = true;
-            font-antialiasing = "rgba";
+            font-antialiasing = "grayscale";
             monospace-font-name = "CaskaydiaCove Nerd Font 12";
             show-battery-percentage = true;
             enable-hot-corners = true;
