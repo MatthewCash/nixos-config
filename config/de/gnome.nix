@@ -1,4 +1,4 @@
-{ pkgsUnstable, ... }:
+{ pkgsUnstable, stableLib, ... }:
 
 {
     services.xserver = {
@@ -42,6 +42,8 @@
             speed = 0.6;
         };
     };
+
+    environment.variables.QT_STYLE_OVERRIDE = stableLib.mkForce "$QT_STYLE_OVERRIDE";
 
     programs.dconf.enable = true;
 

@@ -67,6 +67,11 @@
             url = github:MatthewCash/mozilla-theme;
             inputs.nixpkgs.follows = "nixpkgsStable";
         };
+
+        kvlibadwaita = {
+            url = github:GabePoel/KvLibadwaita;
+            flake = false;
+        };
     };
 
     outputs = inputs @ { self, nixpkgsStable, nixpkgsUnstable, flake-utils, ... }:

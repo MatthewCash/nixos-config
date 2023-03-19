@@ -8,6 +8,7 @@ builtins.map (path: ../../../../home/${homeName}/${path}) [
     "gnome/totem.nix"
     "gnome/gtk.nix"
     "gnome/config.nix"
+    "gnome/kvantum.nix"
     "gnome/input/touchpad.nix"
     "gnome/input/keyboard.nix"
     "gnome/extensions/dash-to-dock.nix"

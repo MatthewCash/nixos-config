@@ -389,6 +389,22 @@
         "type": "github"
       }
     },
+    "kvlibadwaita": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1659723804,
+        "narHash": "sha256-65Gz3WNAwuoWWbBZJL0Ifl+PVLOHjpl6GNhR1oVmGZ0=",
+        "owner": "GabePoel",
+        "repo": "KvLibadwaita",
+        "rev": "61f2e0b04937b6d31f0f4641c9c9f1cc3600a723",
+        "type": "github"
+      },
+      "original": {
+        "owner": "GabePoel",
+        "repo": "KvLibadwaita",
+        "type": "github"
+      }
+    },
     "lanzaboote": {
       "inputs": {
         "crane": "crane",
@@ -608,6 +624,7 @@
         "gnome-accent-colors": "gnome-accent-colors",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
+        "kvlibadwaita": "kvlibadwaita",
         "lanzaboote": "lanzaboote",
         "mozilla-theme": "mozilla-theme",
         "nixos-generators": "nixos-generators",
