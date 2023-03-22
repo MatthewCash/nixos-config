@@ -116,6 +116,14 @@
                     ${pkgsStable.nix}/bin/nix flake update path:.
                     exec ${self.packages.${system}.apply}/bin/apply
                 '';
+                value.test = pkgsStable.writeShellScriptBin "test" /* bash */ ''
+                    ${builtins.concatStringsSep "\n"
+                        (builtins.map
+                            (name: "${pkgsStable.nixos-rebuild}/bin/nixos-rebuild dry-build --flake path:.#${name}")
+                            systemNames
+                        )
+                    }
+                '';
             }
         ));
     };
