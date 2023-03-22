@@ -38,7 +38,7 @@ in
     specialArgs = extraArgs;
 
     modules = [
-        inputs.agenix.nixosModules.default
+        inputs.ragenix.nixosModules.default
 
         inputs.impermanence.nixosModule
 

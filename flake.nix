@@ -13,8 +13,8 @@
 
         impermanence.url = github:nix-community/impermanence;
 
-        agenix = {
-            url = github:ryantm/agenix;
+        ragenix = {
+            url = github:yaxitech/ragenix;
             inputs.nixpkgs.follows = "nixpkgsStable";
         };
 
