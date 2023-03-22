@@ -15,7 +15,7 @@ let
                 };
                 window= {
                     transparent = true;
-                    hideOnClose = true;
+                    hideOnClose = false;
                 };
             };
             privacy = {
