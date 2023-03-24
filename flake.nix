@@ -4,72 +4,72 @@
     inputs = {
         nixpkgsStable.url = "nixpkgs/nixos-22.11";
         nixpkgsUnstable.url = "nixpkgs/nixos-unstable";
-        flake-utils.url = github:numtide/flake-utils;
+        flake-utils.url = "github:numtide/flake-utils";
 
         home-manager = {
-            url = github:nix-community/home-manager;
+            url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgsUnstable";
         };
 
-        impermanence.url = github:nix-community/impermanence;
+        impermanence.url = "github:nix-community/impermanence";
 
         ragenix = {
-            url = github:yaxitech/ragenix;
+            url = "github:yaxitech/ragenix";
             inputs.nixpkgs.follows = "nixpkgsStable";
         };
 
         firefox-gnome-theme = {
-            url = github:rafaelmardojai/firefox-gnome-theme;
+            url = "github:rafaelmardojai/firefox-gnome-theme";
             flake = false;
         };
 
         agnoster-zsh-theme = {
-            url = github:MatthewCash/agnoster-zsh-theme;
+            url = "github:MatthewCash/agnoster-zsh-theme";
             flake = false;
         };
 
         zsh-nix-shell = {
-            url = github:MatthewCash/zsh-nix-shell;
+            url = "github:MatthewCash/zsh-nix-shell";
             flake = false;
         };
 
         nixos-generators = {
-            url = github:nix-community/nixos-generators;
+            url = "github:nix-community/nixos-generators";
             inputs.nixpkgs.follows = "nixpkgsUnstable";
         };
 
         aurebesh-fonts = {
-            url = github:MatthewCash/aurebesh-fonts;
+            url = "github:MatthewCash/aurebesh-fonts";
             inputs.nixpkgs.follows = "nixpkgsStable";
         };
 
         firefox-mods = {
-            url = github:MatthewCash/firefox-mods;
+            url = "github:MatthewCash/firefox-mods";
             flake = false;
         };
 
         tpm-fido = {
-            url = github:MatthewCash/tpm-fido;
+            url = "github:MatthewCash/tpm-fido";
             inputs.nixpkgs.follows = "nixpkgsStable";
         };
 
         gnome-accent-colors = {
-            url = github:demiskp/custom-accent-colors;
+            url = "github:demiskp/custom-accent-colors";
             flake = false;
         };
 
         lanzaboote = {
-            url = github:nix-community/lanzaboote;
+            url = "github:nix-community/lanzaboote";
             inputs.nixpkgs.follows = "nixpkgsUnstable";
         };
 
         mozilla-theme = {
-            url = github:MatthewCash/mozilla-theme;
+            url = "github:MatthewCash/mozilla-theme";
             inputs.nixpkgs.follows = "nixpkgsStable";
         };
 
         kvlibadwaita = {
-            url = github:GabePoel/KvLibadwaita;
+            url = "github:GabePoel/KvLibadwaita";
             flake = false;
         };
     };
