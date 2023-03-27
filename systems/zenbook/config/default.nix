@@ -1,46 +1,47 @@
-[
-    ../../../config/users.nix
-    ../../../config/time.nix
-    ../../../config/console.nix
-    ../../../config/sudo.nix
-    ../../../config/printing.nix
-    ../../../config/pam.nix
-    ../../../config/nix.nix
-    ../../../config/kernel.nix
+builtins.map (path: ../../../config/${path}) [
+    "users.nix"
+    "time.nix"
+    "console.nix"
+    "sudo.nix"
+    "printing.nix"
+    "pam.nix"
+    "nix.nix"
+    "kernel.nix"
+    "fonts.nix"
+    "boot.nix"
+    "secureboot.nix"
+    "audio.nix"
+    "acpi.nix"
+    "networking/general.nix"
+    "networking/dispatcherScripts/captivePortal.nix"
+    "networking/openssh.nix"
+    "networking/firewall/fail2ban.nix"
+    "networking/firewall/nftables.nix"
+    "hardware/tpm.nix"
+    "hardware/keyboard.nix"
+    "hardware/gpu.nix"
+    "hardware/battery.nix"
+    "de/gnome.nix"
+    "cpu/intel.nix"
+    "fs/mounts.nix"
+    "fs/lvm.nix"
+    "ld.nix"
+    "env.nix"
+    "docs.nix"
+    "tailscale.nix"
+    "pam-mount.nix"
+    "uhid.nix"
+    "systemd/config.nix"
+    "bluetooth.nix"
+    "services/evolution.nix"
+
+    "applications/steam.nix"
+    "applications/general.nix"
+] ++ [
     ./kernel.nix
-    ../../../config/fonts.nix
-    ../../../config/boot.nix
-    ../../../config/secureboot.nix
-    ../../../config/audio.nix
-    ../../../config/acpi.nix
-    ../../../config/networking/general.nix
     ./networking.nix
-    ../../../config/networking/dispatcherScripts/captivePortal.nix
-    ../../../config/networking/openssh.nix
-    ../../../config/networking/firewall/fail2ban.nix
-    ../../../config/networking/firewall/nftables.nix
     ./firewall/nftables.nix
-    ../../../config/hardware/tpm.nix
-    ../../../config/hardware/keyboard.nix
-    ../../../config/hardware/gpu.nix
-    ../../../config/hardware/battery.nix
     ./gpu.nix
-    ../../../config/de/gnome.nix
-    ../../../config/cpu/intel.nix
-    ../../../config/fs/mounts.nix
-    ../../../config/fs/lvm.nix
     ./mounts.nix
     ./lid.nix
-    ../../../config/ld.nix
-    ../../../config/env.nix
-    ../../../config/docs.nix
-    ../../../config/tailscale.nix
-    ../../../config/pam-mount.nix
-    ../../../config/uhid.nix
-    ../../../config/systemd/config.nix
-    ../../../config/bluetooth.nix
-    ../../../config/services/evolution.nix
-
-    ../../../config/applications/steam.nix
-    ../../../config/applications/general.nix
 ]

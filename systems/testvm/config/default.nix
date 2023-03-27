@@ -1,26 +1,27 @@
-[
-    ../../../config/users.nix
-    ../../../config/time.nix
-    ../../../config/console.nix
-    ../../../config/sudo.nix
-    ../../../config/pam.nix
-    ../../../config/nix.nix
-    ../../../config/kernel.nix
-    ../../../config/fonts.nix
-    ../../../config/boot.nix
-    ../../../config/networking/general.nix
-    ../../../config/networking/openssh.nix
-    ../../../config/hardware/keyboard.nix
-    ../../../config/hardware/hyperv.nix
-    ../../../config/de/gnome.nix
-    ./gnome.nix
-    ../../../config/fs/mounts.nix
-    ../../../config/fs/lvm.nix
-    ./mounts.nix
-    ../../../config/env.nix
-    ../../../config/docs.nix
-    ../../../config/pam-mount.nix
-    ../../../config/systemd/config.nix
+builtins.map (path: ../../../config/${path}) [
+    "users.nix"
+    "time.nix"
+    "console.nix"
+    "sudo.nix"
+    "pam.nix"
+    "nix.nix"
+    "kernel.nix"
+    "fonts.nix"
+    "boot.nix"
+    "networking/general.nix"
+    "networking/openssh.nix"
+    "hardware/keyboard.nix"
+    "hardware/hyperv.nix"
+    "de/gnome.nix"
+    "fs/mounts.nix"
+    "fs/lvm.nix"
+    "env.nix"
+    "docs.nix"
+    "pam-mount.nix"
+    "systemd/config.nix"
 
-    ../../../config/applications/general.nix
+    "applications/general.nix"
+] ++ [
+    ./gnome.nix
+    ./mounts.nix
 ]
