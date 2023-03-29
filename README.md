@@ -15,6 +15,15 @@ The main goal is to be fully declarative and reproducible while not compromising
 
 - Sandboxing applications using something like [bubblewrap](https://github.com/containers/bubblewrap)
 - Generate images (ISO, qcow2, ...) using [nixos-generators](https://github.com/nix-community/nixos-generators)
+- Setup disks during installation using [disko](https://github.com/nix-community/disko)
+
+## Installation
+
+There is no easy way to install this configuration yet, you are expected to be very famililar with NixOS, flakes, and disk partitioning
+
+In the [future](#todo), installer images will be generated and disks can be setup declaratively
+
+A basic [install script](install.sh) exists to somewhat automate installation but must be modified for each system
 
 ## Updating and Applying Changes
 
