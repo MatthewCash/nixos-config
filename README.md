@@ -16,6 +16,16 @@ The main goal is to be fully declarative and reproducible while not compromising
 - Sandboxing applications using something like [bubblewrap](https://github.com/containers/bubblewrap)
 - Generate images (ISO, qcow2, ...) using [nixos-generators](https://github.com/nix-community/nixos-generators)
 
+## Updating and Applying Changes
+
+The [flake](flake.nix) contains small scripts to make applying changes and updating the system easier
+
+After modifying the configuration run `nix run .#apply` to apply the changes
+
+To update the flake's inputs and apply the changes run `nix run .#full-upgrade`
+
+Use `nix run .#test` to verify that all systems evaluate successfully before committing
+
 ## Directory Structure
 
 ### System Configurations `config/`
