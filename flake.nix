@@ -2,8 +2,9 @@
     description = "NixOS and Home Manager Configuration";
 
     inputs = {
-        nixpkgsStable.url = "nixpkgs/nixos-22.11";
-        nixpkgsUnstable.url = "nixpkgs/nixos-unstable";
+        nixpkgsStable.url = "github:nixos/nixpkgs/nixos-22.11";
+        nixpkgsUnstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
         flake-utils.url = "github:numtide/flake-utils";
 
         home-manager = {
