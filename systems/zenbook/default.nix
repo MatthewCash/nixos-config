@@ -4,7 +4,7 @@ rec {
     hostname = "zenbook";
     system = "x86_64-linux";
     systemNixpkgs = nixpkgsUnstable;
-    kernelPackages = nixpkgsUnstable.legacyPackages.${system}.linuxPackages_6_1;
+    kernelPackages = nixpkgsUnstable.legacyPackages.${system}.linuxPackages_6_2;
     ssd = true;
     vpnAddress = "10.0.0.9";
     tailscaleId = "zeta";
