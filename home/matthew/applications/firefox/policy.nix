@@ -1,4 +1,8 @@
-{ inputs, system, ... }:
+{ inputs, system, accentColor, ... }:
+
+let
+    mozilla-theme = inputs.mozilla-theme.defaultPackage.${system}.override { inherit accentColor; };
+in
 
 {
     DisableAppUpdate = true;
@@ -40,7 +44,7 @@
         };
         "main-theme@matthew-cash.com" = {
             installation_mode = "normal_installed";
-            install_url = "file://${inputs.mozilla-theme.defaultPackage.${system}}/addon/theme.xpi";
+            install_url = "file://${mozilla-theme}/addon/theme.xpi";
             allowed_types = [ "theme" ];
         };
     };
