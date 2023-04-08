@@ -1,5 +1,9 @@
 { pkgsStable, pkgsUnstable, stableLib, config, pamMountUsers, homeMountPath, ... }:
 
+let
+    pamServices = [ "login" "sshd" ];
+in
+
 {
     security.pam.mount = {
         enable = true;
@@ -10,7 +14,7 @@
     systemd.services = stableLib.attrsets.mapAttrs' (name: value: stableLib.attrsets.nameValuePair "home-manager-${name}" { wantedBy = stableLib.mkForce [ ]; })
         (stableLib.attrsets.filterAttrs (name: value: builtins.elem name pamMountUsers) config.home-manager.users);
 
-    environment.etc."pam.d/login".text = let
+    environment.etc = builtins.listToAttrs (builtins.map (service: let
         systemctl = "${pkgsStable.systemd}/bin/systemctl";
         checkScript = pkgsStable.writeShellScript "check_for_mount.sh" /* bash */ ''
             mountpoint -q "${homeMountPath}/$PAM_USER"
@@ -31,5 +35,5 @@
             [ pamMountLine ]
             [ "${pamCheckLine}\n${pamMountLine}\n${pamExecLine}" ]
             config.security.pam.services.login.text;
-    in stableLib.mkForce pamLoginText;
+    in { name = "pam.d/${service}"; value.text = stableLib.mkForce pamLoginText; }) pamServices);
 }
