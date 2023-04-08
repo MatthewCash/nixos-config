@@ -15,4 +15,6 @@ in
     '';
 
     hardware.enableRedistributableFirmware = stableLib.mkDefault true;
+
+    boot.blacklistedKernelModules = [ "nouveau" ];
 }
