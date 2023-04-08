@@ -73,6 +73,11 @@
             url = "github:GabePoel/KvLibadwaita";
             flake = false;
         };
+
+        asus-wmi-screenpad = {
+            url = "path:/home/matthew/code/asus-wmi-screenpad-module";
+            inputs.nixpkgs.follows = "nixpkgsUnstable";
+        };
     };
 
     outputs = inputs @ { self, nixpkgsStable, nixpkgsUnstable, flake-utils, ... }:
