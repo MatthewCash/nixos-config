@@ -68,7 +68,12 @@
             typeset -g WORDCHARS="''${WORDCHARS/\//}"
 
             cd() { pushd "''${1:-$HOME}" > /dev/null }
-            x() { command xdg-open "$@" 2>/dev/null }
+            x() {
+                command xdg-open "$@" 2>/dev/null
+                if [[ $? -eq 4 ]]; then
+                    >&2 echo "File $1 not found!"
+                fi
+            }
             wf() {
                 if [[ ! -f "$1" ]]; then
                     >&2 echo "File $1 not found!"
