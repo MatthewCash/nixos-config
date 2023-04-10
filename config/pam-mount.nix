@@ -2,6 +2,8 @@
 
 let
     pamServices = [ "login" "sshd" ];
+
+    mountpoint = "${pkgsStable.util-linux}/bin/mountpoint";
 in
 
 {
@@ -17,7 +19,7 @@ in
     environment.etc = builtins.listToAttrs (builtins.map (service: let
         systemctl = "${pkgsStable.systemd}/bin/systemctl";
         checkScript = pkgsStable.writeShellScript "check_for_mount.sh" /* bash */ ''
-            mountpoint -q "${homeMountPath}/$PAM_USER"
+            ${mountpoint} -q "${homeMountPath}/$PAM_USER"
         '';
         hmScript = pkgsStable.writeShellScript "run_hm.sh" /* bash */ ''
             if [[ -n $(${systemctl} list-unit-files | grep "^home-manager-$PAM_USER") ]]; then
@@ -35,5 +37,26 @@ in
             [ pamMountLine ]
             [ "${pamCheckLine}\n${pamMountLine}\n${pamExecLine}" ]
             config.security.pam.services.login.text;
-    in { name = "pam.d/${service}"; value.text = stableLib.mkForce pamLoginText; }) pamServices);
+    in { name = "pam.d/${service}"; value.text = stableLib.mkForce pamLoginText; }) pamServices)
+
+        # Force ssh password auth if mount does not exist
+        // { "ssh/get_authorized_keys" = {
+            mode = "0555";
+            text = /* bash */ ''
+                #!${pkgsStable.bash}/bin/bash
+
+                ${mountpoint} -q "${homeMountPath}/$1" ||
+                echo ${builtins.toString pamMountUsers} | ${pkgsStable.coreutils}/bin/grep -w -q $1 &&
+                ${pkgsStable.coreutils}/bin/cat /etc/ssh/authorized_keys.d/$1
+            '';
+        };
+    };
+
+    services.openssh = {
+        authorizedKeysFiles = stableLib.mkForce [ "none" ];
+        authorizedKeysCommandUser = "root";
+        authorizedKeysCommand = "/etc/ssh/get_authorized_keys %u";
+        settings.PasswordAuthentication = true;
+        settings.KbdInteractiveAuthentication = false;
+    };
 }
