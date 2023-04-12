@@ -46,14 +46,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1680923478,
-        "narHash": "sha256-Lnwvi7+bgFUsHcn3AcKFy8SVnbRzVwnZqbFlDENOhbI=",
-        "path": "/home/matthew/code/asus-wmi-screenpad-module",
-        "type": "path"
+        "lastModified": 1681268894,
+        "narHash": "sha256-0WPsx6JQPuHaJ7hTgNA/ez0yB1spCYKkGwwyFz37dOg=",
+        "owner": "MatthewCash",
+        "repo": "asus-wmi-screenpad-module",
+        "rev": "741150fb1273cfc2991cfa6553fb9012b285cb88",
+        "type": "github"
       },
       "original": {
-        "path": "/home/matthew/code/asus-wmi-screenpad-module",
-        "type": "path"
+        "owner": "MatthewCash",
+        "repo": "asus-wmi-screenpad-module",
+        "type": "github"
       }
     },
     "aurabesh": {

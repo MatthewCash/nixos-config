@@ -75,7 +75,7 @@
         };
 
         asus-wmi-screenpad = {
-            url = "path:/home/matthew/code/asus-wmi-screenpad-module";
+            url = "github:MatthewCash/asus-wmi-screenpad-module";
             inputs.nixpkgs.follows = "nixpkgsUnstable";
         };
     };
