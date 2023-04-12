@@ -1,11 +1,16 @@
 { pkgsUnstable, persistenceHomePath, name, config, ... }:
 
 {
-    home.persistence."${persistenceHomePath}/${name}".directories = [
-        ".local/share/.npm"
-        ".cache/.npm-global"
-        ".cache/typescript"
-    ];
+    home.persistence."${persistenceHomePath}/${name}" = {
+        directories = [
+            ".local/share/.npm"
+            ".cache/.npm-global"
+            ".cache/typescript"
+        ];
+        files = [
+            ".cache/node/repl_history"
+        ];
+    };
 
     home.sessionVariables = {
         NODE_REPL_HISTORY = "${config.xdg.cacheHome}/node/repl_history";
