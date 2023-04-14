@@ -33,6 +33,7 @@ builtins.map (path: ../../../config/${path}) [
     "uhid.nix"
     "systemd/config.nix"
     "bluetooth.nix"
+    "fwupd.nix"
     "services/evolution.nix"
 
     "applications/steam.nix"
