@@ -61,7 +61,7 @@
 
         lanzaboote = {
             url = "github:nix-community/lanzaboote";
-            inputs.nixpkgs.follows = "nixpkgsUnstable";
+            inputs.nixpkgs.follows = "nixpkgsStable";
         };
 
         mozilla-theme = {
