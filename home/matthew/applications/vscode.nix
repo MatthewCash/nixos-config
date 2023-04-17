@@ -1,4 +1,4 @@
-{ pkgsStable, pkgsUnstable, persistenceHomePath, name, ... }:
+{ pkgsStable, pkgsUnstable, persistenceHomePath, name, inputs, system, ... }:
 
 let
     vscodium = (pkgsUnstable.vscodium.overrideAttrs (oldAttrs: {
@@ -66,6 +66,7 @@ in
             eamodio.gitlens
             esbenp.prettier-vscode
             octref.vetur
+            inputs.codium-theme.defaultPackage.${system}
         ];
     };
 }

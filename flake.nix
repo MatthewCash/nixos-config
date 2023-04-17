@@ -78,6 +78,11 @@
             url = "github:MatthewCash/asus-wmi-screenpad-module";
             inputs.nixpkgs.follows = "nixpkgsUnstable";
         };
+
+        codium-theme = {
+            url = "github:MatthewCash/codium-theme";
+            inputs.nixpkgs.follows = "nixpkgsUnstable";
+        };
     };
 
     outputs = inputs @ { self, nixpkgsStable, nixpkgsUnstable, flake-utils, ... }:
