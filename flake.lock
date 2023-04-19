@@ -416,11 +416,11 @@
     "gnome-accent-colors": {
       "flake": false,
       "locked": {
-        "lastModified": 1679755616,
-        "narHash": "sha256-2wGw82E4H9gccy3bDzDgB3gyDMVCS7Gvhx1pM2y2qe4=",
+        "lastModified": 1681732844,
+        "narHash": "sha256-LlVf0Qfs6RnQGbtB4qMeJ2UoxO+utWkNuvoQskxSQE8=",
         "owner": "demiskp",
         "repo": "custom-accent-colors",
-        "rev": "b0e74da6dc54620958efce0f36f1c6b295812bd2",
+        "rev": "45ec92b384fa9372af1296be632bf0683d13f841",
         "type": "github"
       },
       "original": {
