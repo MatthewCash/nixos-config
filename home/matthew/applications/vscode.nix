@@ -68,5 +68,20 @@ in
             octref.vetur
             inputs.codium-theme.defaultPackage.${system}
         ];
+        userSettings = {
+            "workbench.colorTheme" = "Main Theme";
+            "window.titleBarStyle" = "custom";
+            "editor.smoothScrolling" = true;
+            "editor.cursorSmoothCaretAnimation" = true;
+            "workbench.list.smoothScrolling" = true;
+            "terminal.integrated.smoothScrolling" = true;
+            "editor.renderWhitespace" = "all";
+            "files.trimTrailingWhitespace" = true;
+            "files.insertFinalNewline" = true;
+            "files.trimFinalNewlines" = true;
+            "editor.wordWrap" = "on";
+            "window.commandCenter" = true;
+            "editor.fontFamily" = "'CaskaydiaCove Nerd Font Regular', monospace";
+        };
     };
 }
