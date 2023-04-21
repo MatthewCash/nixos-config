@@ -7,6 +7,7 @@
             editor.line-number = "relative";
             editor.idle-timeout = 0;
             editor.completion-trigger-len = 1;
+            editor.soft-wrap.enable = true;
 
             editor.cursor-shape = {
                 insert = "bar";
