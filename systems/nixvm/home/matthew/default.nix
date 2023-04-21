@@ -8,6 +8,7 @@ builtins.map (path: ../../../../home/${homeName}/${path}) [
     "dev/node.nix"
     "dev/java"
     "dev/omnisharp.nix"
+    "dev/prettier.nix"
 
     "applications/fzf.nix"
     "applications/git.nix"
