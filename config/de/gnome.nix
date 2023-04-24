@@ -21,6 +21,8 @@
         gnome-keyring.enable = true;
 
         gnome-browser-connector.enable = true;
+
+        gnome-settings-daemon.enable = true;
     };
 
     environment.gnome.excludePackages = with pkgsUnstable; [ gnome-tour ];
