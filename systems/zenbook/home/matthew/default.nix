@@ -46,4 +46,6 @@ builtins.map (path: ../../../../home/${homeName}/${path}) [
     "applications/helix"
     "applications/editor-config.nix"
     "applications/libreoffice.nix"
+] ++ [
+    ./firefox.nix
 ]
