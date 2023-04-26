@@ -31,4 +31,6 @@ builtins.map (path: ../../../../home/${homeName}/${path}) [
     "applications/direnv.nix"
     "applications/helix"
     "applications/editor-config.nix"
+] ++ [
+    ./gnome.nix
 ]
