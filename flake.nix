@@ -135,6 +135,7 @@
                         )
                     }
                 '';
+                value.generators = generators;
             }
         ));
     };
