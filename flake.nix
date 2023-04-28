@@ -113,30 +113,34 @@
         }) generatorFormats;
         generators = builtins.listToAttrs generatorList;
 
+        packages = { system, pkgsStable }: rec {
+            inherit generators;
+            apply = pkgsStable.writeShellScriptBin "apply" /* bash */ ''
+                exec ${pkgsStable.nixos-rebuild}/bin/nixos-rebuild switch --flake path:. --use-remote-sudo $@
+            '';
+            full-upgrade = pkgsStable.writeShellScriptBin "full-upgrade" /* bash */ ''
+                ${pkgsStable.nix}/bin/nix flake update path:.
+                exec ${apply}/bin/apply
+            '';
+            test = pkgsStable.writeShellScriptBin "test" /* bash */ ''
+                ${builtins.concatStringsSep "\n"
+                    (builtins.map
+                        (name: "${pkgsStable.nixos-rebuild}/bin/nixos-rebuild dry-build --flake path:.#${name}")
+                        systemNames
+                    )
+                }
+            '';
+        };
     in
     {
         nixosConfigurations = systems;
-        packages = nixpkgsStable.lib.listToAttrs (nixpkgsStable.lib.forEach flake-utils.lib.defaultSystems (system:
-            let pkgsStable = nixpkgsStable.legacyPackages.${system}; in
-            {
-                name = system;
-                value.apply = pkgsStable.writeShellScriptBin "apply" /* bash */ ''
-                    exec ${pkgsStable.nixos-rebuild}/bin/nixos-rebuild switch --flake path:. --use-remote-sudo $@
-                '';
-                value.full-upgrade = pkgsStable.writeShellScriptBin "full-upgrade" /* bash */ ''
-                    ${pkgsStable.nix}/bin/nix flake update path:.
-                    exec ${self.packages.${system}.apply}/bin/apply
-                '';
-                value.test = pkgsStable.writeShellScriptBin "test" /* bash */ ''
-                    ${builtins.concatStringsSep "\n"
-                        (builtins.map
-                            (name: "${pkgsStable.nixos-rebuild}/bin/nixos-rebuild dry-build --flake path:.#${name}")
-                            systemNames
-                        )
-                    }
-                '';
-                value.generators = generators;
-            }
-        ));
+        packages = nixpkgsStable.lib.listToAttrs (
+            nixpkgsStable.lib.forEach flake-utils.lib.defaultSystems (system:
+                let
+                    pkgsStable = nixpkgsStable.legacyPackages.${system};
+                in
+                { name = system; value = packages { inherit system pkgsStable; }; }
+            )
+        );
     };
 }
