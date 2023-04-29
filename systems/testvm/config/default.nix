@@ -19,7 +19,7 @@ builtins.map (path: ../../../config/${path}) [
     "docs.nix"
     "pam-mount.nix"
     "systemd/config.nix"
-
+    "secureboot.nix"
     "applications/general.nix"
 ] ++ [
     ./gnome.nix
