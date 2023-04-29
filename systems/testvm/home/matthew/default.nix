@@ -20,6 +20,7 @@ builtins.map (path: ../../../../home/${homeName}/${path}) [
     "dev/node.nix"
 
     "applications/firefox"
+    "applications/thunderbird"
     "applications/fzf.nix"
     "applications/git.nix"
     "applications/gnome.nix"
