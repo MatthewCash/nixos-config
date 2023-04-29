@@ -22,6 +22,7 @@ builtins.map (path: ../../../config/${path}) [
     "secureboot.nix"
     "applications/general.nix"
 ] ++ [
+    ./networking.nix
     ./gnome.nix
     ./mounts.nix
 ]
