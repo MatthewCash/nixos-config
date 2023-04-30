@@ -85,12 +85,14 @@
         };
     };
 
-    outputs = inputs @ { self, nixpkgsStable, nixpkgsUnstable, flake-utils, ... }:
+    outputs = inputs @ { nixpkgsStable, nixpkgsUnstable, flake-utils, ... }:
     let
         stateVersion = "22.11";
 
         # NixOS Configurations
-        systemNames = builtins.attrNames (nixpkgsStable.lib.attrsets.filterAttrs (n: v: v == "directory") (builtins.readDir ./systems));
+        systemNames = builtins.attrNames
+            (nixpkgsStable.lib.attrsets.filterAttrs (n: v: v == "directory")
+            (builtins.readDir ./systems));
         systemConfigList = builtins.map (name: {
             inherit name;
             value = (import ./systems/${name} {
@@ -103,15 +105,19 @@
                 inherit systemConfig inputs nixpkgsStable nixpkgsUnstable stateVersion;
             }
         ) systemConfigs;
+        builtSystems = builtins.mapAttrs (name: system:
+            system.specialArgs.systemNixpkgs.lib.nixosSystem system
+        ) systems;
 
         # NixOS Generators
+        # FIXME: generation fails, not enough disk space on tmpfs
         generatorFormats = [ "qcow" "iso" "hyperv" ];
-        generatorList = builtins.map (name: {
-            inherit name;
-            value = builtins.mapAttrs (configName: systemConfig: inputs.nixos-generators.nixosGenerate {
-                inherit (systemConfig) system;
-                format = name;
-            }) systemConfigs;
+        generatorList = builtins.map (formatName: {
+            name = formatName;
+            value = builtins.mapAttrs (systemName: system: inputs.nixos-generators.nixosGenerate ({
+                format = formatName;
+                pkgs = system.specialArgs.systemNixpkgs.legacyPackages.${system.system};
+            } // system)) systems;
         }) generatorFormats;
         generators = builtins.listToAttrs generatorList;
 
@@ -138,7 +144,7 @@
         };
     in
     {
-        nixosConfigurations = systems;
+        nixosConfigurations = builtSystems;
         packages = nixpkgsStable.lib.listToAttrs (
             nixpkgsStable.lib.forEach flake-utils.lib.defaultSystems (system:
                 let

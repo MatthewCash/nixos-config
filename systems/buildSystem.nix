@@ -22,7 +22,7 @@ let
     };
 
     extraArgs = rec {
-        inherit (systemConfig) system hostname ssd vpnAddress tailscaleId;
+        inherit (systemConfig) system systemNixpkgs hostname ssd vpnAddress tailscaleId;
         inherit inputs nixpkgsStable nixpkgsUnstable kernelPackages pamMountUsers persistPath homeMountPath batteryChargeLimit accentColor stateVersion;
         pkgsStable = import nixpkgsStable nixpkgsArgs;
         pkgsUnstable = import nixpkgsUnstable nixpkgsArgs;
@@ -31,7 +31,7 @@ let
     };
 in
 
-(systemConfig.systemNixpkgs.lib.nixosSystem {
+{
     inherit (systemConfig) system;
 
     specialArgs = extraArgs;
@@ -62,4 +62,4 @@ in
         { system.stateVersion = stateVersion; }
 
     ] ++ import systemConfig.nixosConfig;
-})
+}
