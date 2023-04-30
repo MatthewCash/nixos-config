@@ -1,4 +1,4 @@
-{ inputs, nixpkgsStable, nixpkgsUnstable, systemConfig }:
+{ inputs, nixpkgsStable, nixpkgsUnstable, systemConfig, stateVersion }:
 
 let
     useHomeManager = systemConfig.useHomeManager ? true;
@@ -23,7 +23,7 @@ let
 
     extraArgs = rec {
         inherit (systemConfig) system hostname ssd vpnAddress tailscaleId;
-        inherit inputs nixpkgsStable nixpkgsUnstable kernelPackages pamMountUsers persistPath homeMountPath batteryChargeLimit accentColor;
+        inherit inputs nixpkgsStable nixpkgsUnstable kernelPackages pamMountUsers persistPath homeMountPath batteryChargeLimit accentColor stateVersion;
         pkgsStable = import nixpkgsStable nixpkgsArgs;
         pkgsUnstable = import nixpkgsUnstable nixpkgsArgs;
         stableLib = pkgsStable.lib;
@@ -50,7 +50,7 @@ in
                 useGlobalPkgs = true;
                 users = import ../home/buildHomeConfigs.nix {
                     inherit (extraArgs) stableLib;
-                    inherit inputs;
+                    inherit inputs stateVersion;
                     homeConfigPath = systemConfig.homeConfig;
                 };
                 extraSpecialArgs = {
@@ -59,7 +59,7 @@ in
             };
         }
 
-        { system.stateVersion = "22.11"; }
+        { system.stateVersion = stateVersion; }
 
     ] ++ import systemConfig.nixosConfig;
 })

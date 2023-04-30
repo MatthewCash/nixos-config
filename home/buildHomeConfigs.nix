@@ -1,4 +1,4 @@
-{ stableLib, inputs, homeConfigPath }:
+{ stableLib, inputs, homeConfigPath, stateVersion }:
 
 let
     homeNames = builtins.attrNames (stableLib.attrsets.filterAttrs (n: v: v == "directory") (builtins.readDir homeConfigPath));
@@ -12,7 +12,7 @@ let
 
             home.persistence."/mnt/home/${homeName}".allowOther = true;
             systemd.user.startServices = "sd-switch";
-            home.stateVersion = "22.11";
+            home.stateVersion = stateVersion;
         };
     }) homeNames;
 

@@ -87,6 +87,8 @@
 
     outputs = inputs @ { self, nixpkgsStable, nixpkgsUnstable, flake-utils, ... }:
     let
+        stateVersion = "22.11";
+
         # NixOS Configurations
         systemNames = builtins.attrNames (nixpkgsStable.lib.attrsets.filterAttrs (n: v: v == "directory") (builtins.readDir ./systems));
         systemConfigList = builtins.map (name: {
@@ -97,9 +99,9 @@
         }) systemNames;
         systemConfigs = builtins.listToAttrs systemConfigList;
         systems = builtins.mapAttrs (name: systemConfig:
-            (import ./systems/buildSystem.nix {
-                inherit systemConfig inputs nixpkgsStable nixpkgsUnstable;
-            })
+            import ./systems/buildSystem.nix {
+                inherit systemConfig inputs nixpkgsStable nixpkgsUnstable stateVersion;
+            }
         ) systemConfigs;
 
         # NixOS Generators
