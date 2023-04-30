@@ -127,7 +127,10 @@
             test = pkgsStable.writeShellScriptBin "test" /* bash */ ''
                 ${builtins.concatStringsSep "\n"
                     (builtins.map
-                        (name: "${pkgsStable.nixos-rebuild}/bin/nixos-rebuild dry-build --flake path:.#${name}")
+                        (name: ''
+                            echo "Evaluating ${name}"
+                            ${pkgsStable.nixos-rebuild}/bin/nixos-rebuild dry-build --flake path:.#${name}
+                        '')
                         systemNames
                     )
                 }
