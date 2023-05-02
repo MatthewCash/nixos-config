@@ -18,9 +18,9 @@ in
             installation_mode = "normal_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
         };
-        "jid1-KKzOGWgsW3Ao4Q@jetpack" = {
+        "idcac-pub@guus.ninja" = {
             installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/i-dont-care-about-cookies/latest.xpi";
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/istilldontcareaboutcookies/latest.xpi";
         };
         "addon@darkreader.org" = {
             installation_mode = "normal_installed";
