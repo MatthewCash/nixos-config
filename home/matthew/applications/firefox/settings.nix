@@ -146,4 +146,7 @@
 
     # Allow unverified addons
     "xpinstall.signatures.required" = false;
+
+    # Enable userChrome + userContent styling
+    "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 }
