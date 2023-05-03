@@ -149,4 +149,9 @@
 
     # Enable userChrome + userContent styling
     "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+
+    # Allow chrome debugging
+    "devtools.chrome.enabled" = true;
+    "devtools.debugger.remote-enabled" = true;
+    "devtools.debugger.prompt-connection" = false;
 }
