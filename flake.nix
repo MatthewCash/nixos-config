@@ -121,7 +121,7 @@
         }) generatorFormats;
         generators = builtins.listToAttrs generatorList;
 
-        packages = { system, pkgsStable }: rec {
+        packages = { pkgsStable }: rec {
             inherit generators;
             apply = pkgsStable.writeShellScriptBin "apply" /* bash */ ''
                 exec ${pkgsStable.nixos-rebuild}/bin/nixos-rebuild switch --flake path:. --use-remote-sudo $@
@@ -150,7 +150,7 @@
                 let
                     pkgsStable = nixpkgsStable.legacyPackages.${system};
                 in
-                { name = system; value = packages { inherit system pkgsStable; }; }
+                { name = system; value = packages { inherit pkgsStable; }; }
             )
         );
     };
