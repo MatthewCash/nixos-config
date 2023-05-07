@@ -105,9 +105,19 @@
                 inherit systemConfig inputs nixpkgsStable nixpkgsUnstable stateVersion;
             }
         ) systemConfigs;
-        builtSystems = builtins.mapAttrs (name: system:
+        nixosConfigurations = builtins.mapAttrs (name: system:
             system.specialArgs.systemNixpkgs.lib.nixosSystem system
         ) systems;
+
+        # Standalone Home Manager Configurations
+        homeConfigurations = builtins.mapAttrs (systemName: systemConfig:
+            (import ./systems/buildHomeConfigs.nix {
+                inherit (systemConfig) systemNixpkgs system homeConfig;
+                inherit inputs stateVersion;
+                stableLib = nixpkgsStable.lib;
+                extraArgs = systems.${systemName}.specialArgs;
+            }).standalone
+        ) systemConfigs;
 
         # NixOS Generators
         # FIXME: generation fails, not enough disk space on tmpfs
@@ -144,7 +154,7 @@
         };
     in
     {
-        nixosConfigurations = builtSystems;
+        inherit nixosConfigurations homeConfigurations;
         packages = nixpkgsStable.lib.listToAttrs (
             nixpkgsStable.lib.forEach flake-utils.lib.defaultSystems (system:
                 let
