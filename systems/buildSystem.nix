@@ -45,16 +45,10 @@ in
         inputs.lanzaboote.nixosModules.lanzaboote
 
         {
-            home-manager = {
-                useGlobalPkgs = true;
-                users = import ./buildHomeConfigs.nix {
-                    inherit inputs stateVersion;
-                    homeConfig = systemConfig.homeConfig;
-                };
-                extraSpecialArgs = {
-                    persistenceHomePath = "/mnt/home";
-                } // extraArgs;
-            };
+            home-manager = (import ./buildHomeConfigs.nix {
+                inherit (systemConfig) systemNixpkgs system homeConfig;
+                inherit stableLib inputs stateVersion extraArgs;
+            }).nixos;
         }
 
         { system.stateVersion = stateVersion; }
