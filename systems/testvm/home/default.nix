@@ -1,6 +1,4 @@
-{ homeName }:
-
-builtins.map (path: ../../../../home/${homeName}/${path}) [
+builtins.map (path: ../../../home/${path}) [
     "env.nix"
 
     "gnome/tweaks.nix"

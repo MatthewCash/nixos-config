@@ -12,5 +12,5 @@ rec {
     };
 
     nixosConfig = builtins.toString ./config;
-    homeConfig = builtins.toString ./home;
+    homeConfig.matthew = builtins.toString ./home;
 }

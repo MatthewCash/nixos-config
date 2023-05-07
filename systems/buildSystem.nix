@@ -1,7 +1,6 @@
 { inputs, nixpkgsStable, nixpkgsUnstable, systemConfig, stateVersion }:
 
 let
-    useHomeManager = systemConfig.useHomeManager ? true;
     kernelPackages = systemConfig.kernelPackages or nixpkgsStable.legacyPackages.${systemConfig.system}.linuxPackages;
     pamMountUsers = systemConfig.pamMountUsers or [ ];
     persistPath = systemConfig.persistPath or "/mnt/persist";
@@ -48,10 +47,9 @@ in
         {
             home-manager = {
                 useGlobalPkgs = true;
-                users = import ../home/buildHomeConfigs.nix {
-                    inherit (extraArgs) stableLib;
+                users = import ./buildHomeConfigs.nix {
                     inherit inputs stateVersion;
-                    homeConfigPath = systemConfig.homeConfig;
+                    homeConfig = systemConfig.homeConfig;
                 };
                 extraSpecialArgs = {
                     persistenceHomePath = "/mnt/home";
