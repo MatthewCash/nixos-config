@@ -1,4 +1,4 @@
-{ pkgsUnstable, stableLib, useImpermanenceh, persistenceHomePath, name, ... }:
+{ pkgsUnstable, stableLib, useImpermanence, persistenceHomePath, name, ... }:
 
 {
     home.packages = with pkgsUnstable; [
