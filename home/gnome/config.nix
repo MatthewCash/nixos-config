@@ -1,4 +1,4 @@
-{ persistenceHomePath, name, lib, ... }:
+{ stableLib, useImpermanence, persistenceHomePath, name, lib, ... }:
 
 let
     inherit (lib.hm) gvariant;
@@ -6,7 +6,7 @@ let
 in
 
 {
-    home.persistence."${persistenceHomePath}/${name}".files = [
+    home.persistence."${persistenceHomePath}/${name}".files = stableLib.mkIf useImpermanence [
         ".config/monitors.xml"
     ];
 

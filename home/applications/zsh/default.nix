@@ -1,9 +1,9 @@
-{ pkgsStable, pkgsUnstable, persistenceHomePath, name, inputs, accentColor, config, ... }:
+{ pkgsStable, pkgsUnstable, stableLib, useImpermanence, persistenceHomePath, name, inputs, accentColor, config, ... }:
 
 {
     home.packages = with pkgsStable; [ wl-clipboard ];
 
-    home.persistence."${persistenceHomePath}/${name}".files = [
+    home.persistence."${persistenceHomePath}/${name}".files = stableLib.mkIf useImpermanence [
         ".cache/zsh/history"
     ];
 

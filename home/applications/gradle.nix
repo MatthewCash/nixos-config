@@ -1,7 +1,7 @@
-{ pkgsUnstable, persistenceHomePath, name, ... }:
+{ pkgsUnstable, stableLib, useImpermanence, persistenceHomePath, name, ... }:
 
 {
-    home.persistence."${persistenceHomePath}/${name}".directories = [
+    home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence [
         ".gradle/cache"
         ".gradle/wrapper"
     ];

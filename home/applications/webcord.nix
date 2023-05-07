@@ -1,4 +1,4 @@
-{ pkgsStable, pkgsUnstable, persistenceHomePath, name, ... }:
+{ pkgsStable, pkgsUnstable, stableLib, useImpermanence, persistenceHomePath, name, ... }:
 
 let
     config = {
@@ -88,7 +88,7 @@ let
 in
 
 {
-    home.persistence."${persistenceHomePath}/${name}".directories = [
+    home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence [
         ".config/WebCord"
     ];
 

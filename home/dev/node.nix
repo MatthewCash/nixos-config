@@ -1,7 +1,7 @@
-{ pkgsUnstable, persistenceHomePath, name, config, ... }:
+{ pkgsUnstable, stableLib, useImpermanence, persistenceHomePath, name, config, ... }:
 
 {
-    home.persistence."${persistenceHomePath}/${name}" = {
+    home.persistence."${persistenceHomePath}/${name}" = stableLib.mkIf useImpermanence {
         directories = [
             ".local/share/.npm"
             ".cache/.npm-global"

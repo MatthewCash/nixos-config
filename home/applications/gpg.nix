@@ -1,4 +1,4 @@
-{ persistenceHomePath, name, config, ... }:
+{ stableLib, useImpermanence, persistenceHomePath, name, config, ... }:
 
 {
     programs.gpg = {
@@ -6,7 +6,7 @@
         homedir = "${config.xdg.configHome}/gnupg";
     };
 
-    home.persistence."${persistenceHomePath}/${name}".directories = [
+    home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence [
         ".config/gnupg"
     ];
 

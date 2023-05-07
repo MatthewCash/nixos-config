@@ -1,4 +1,4 @@
-{ pkgsStable, pkgsUnstable, persistenceHomePath, name, inputs, system, ... }:
+{ pkgsStable, pkgsUnstable, stableLib, useImpermanence, persistenceHomePath, name, inputs, system, ... }:
 
 let
     vscodium = (pkgsUnstable.vscodium.overrideAttrs (oldAttrs: {
@@ -50,7 +50,7 @@ let
 in
 
 {
-    home.persistence."${persistenceHomePath}/${name}".directories = [
+    home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence [
         ".config/VSCodium"
     ];
 

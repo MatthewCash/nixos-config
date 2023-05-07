@@ -1,4 +1,4 @@
-args @ { stableLib, pkgsUnstable, persistenceHomePath, name, ... }:
+args @ { stableLib, pkgsUnstable, useImpermanence, persistenceHomePath, name, ... }:
 
 let
     firefox-devedition-bin = pkgsUnstable.firefox-devedition-bin.override (old: {
@@ -20,7 +20,7 @@ let
 in
 
 {
-    home.persistence."${persistenceHomePath}/${name}".directories = [
+    home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence [
         ".mozilla"
         ".cache/mozilla"
     ];
