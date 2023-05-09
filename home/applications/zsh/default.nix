@@ -49,7 +49,7 @@
             ${builtins.readFile ./git_formatter.sh}
             ${import ./p10k.nix { inherit accentColor; }  }
 
-            source /run/current-system/etc/profile
+            file="/run/current-system/etc/profile" && test -f $file && source $file
 
             unsetopt HIST_SAVE_BY_COPY
 
