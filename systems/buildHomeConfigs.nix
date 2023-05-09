@@ -32,12 +32,12 @@ let
             useImpermanence = false;
             name = builtins.getEnv "USER";
         };
-        modules = defaultImports ++ import homeConfigPath ++ [ ({ ... }: stableLib.recursiveUpdate {
+        modules = defaultImports ++ import homeConfigPath ++ [ (stableLib.recursiveUpdate {
             home = {
                 username =
                     stableLib.warnIf
                     stableLib.inPureEvalMode
-                    "This expression needs to evaluate $USER,$HOME which is not allowed in pure evaluation mode. Use --impure to fix!"
+                    "This expression needs to evaluate $USER,$HOME which is not allowed in pure evaluation mode. Run with --impure to fix!"
                     builtins.getEnv "USER";
                 homeDirectory = builtins.getEnv "HOME";
             };
