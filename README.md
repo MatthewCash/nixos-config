@@ -10,6 +10,7 @@ The main goal is to be fully declarative and reproducible while not compromising
 - Full Disk encryption with key enrolled in TPM2
 - Encrypted home directory unlocked automatically on login with pam-mount
 - [impermanence](https://github.com/nix-community/impermanence) (/ on a tmpfs) with explicitly persisted paths
+- Standalone [home-manager](https://github.com/nix-community/home-manager) activation script generation
 
 ## TODO
 
@@ -34,6 +35,14 @@ After modifying the configuration run `nix run .#apply` to apply the changes
 To update the flake's inputs and apply the changes run `nix run .#full-upgrade`
 
 Use `nix run .#test` to verify that all systems evaluate successfully before committing
+
+## Standalone Home Manager Configurations
+
+Home Manager configurations can be applied without applying the entire system configuration
+
+Impermanence is disabled when using a standalone configuration
+
+To apply the configuration run `nix run .#homeConfigurations.<system>.<name>` replacing `<system>` with the appropriate system in `systems/` and `<name>` with a username listed in that system's home config
 
 ## Directory Structure
 
@@ -66,7 +75,7 @@ The declarations also have fields used to specify config imports (for the system
 
 Files are usually imported from `config/` and `home/`, but systems often specify their own individual configs that should not be shared in `systems/systemname/config/`
 
-The file `systems/buildSystem.nix` is responsible for taking these system declarations and building a complete NixOS system from them, it also calls `home/buildHomeConfigs.nix` to build the home configuration
+The file `systems/buildSystem.nix` is responsible for taking these system declarations and building a complete NixOS system from them, it also calls `systems/buildHomeConfigs.nix` to build the home configuration
 
 ### Secrets `secrets.nix` and `secrets/`
 
