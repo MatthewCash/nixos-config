@@ -82,6 +82,9 @@ in
             "editor.wordWrap" = "on";
             "window.commandCenter" = true;
             "editor.fontFamily" = "'CaskaydiaCove Nerd Font Regular', monospace";
+
+            "nix.enableLanguageServer" = true;
+            "nix.serverPath" = "${pkgsUnstable.nil}/bin/nil";
         };
     };
 }
