@@ -1,4 +1,4 @@
-{ pkgsStable, pkgsUnstable, stableLib, inputs, config, ... }:
+{ pkgsStable, pkgsUnstable, stableLib, config, ... }:
 
 let
     extensions = with pkgsUnstable.vscode-extensions; [
@@ -17,6 +17,8 @@ let
         "java.format.settings.url" = "${config.xdg.configHome}/java/java-formatter.xml";
         "omnisharp.dotnetPath" = "${pkgsUnstable.dotnet-sdk}/bin";
         "omnisharp.sdkPath" = "${pkgsUnstable.dotnet-sdk}/sdk/";
+        "nix.enableLanguageServer" = true;
+        "nix.serverPath" = "${pkgsUnstable.nil}/bin/nil";
     };
 
     extensionPath = ".vscodium-server/extensions";
