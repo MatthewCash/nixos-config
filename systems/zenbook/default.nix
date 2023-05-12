@@ -8,13 +8,17 @@ rec {
     ssd = true;
     vpnAddress = "10.0.0.9";
     tailscaleId = "zeta";
-    pamMountUsers = [ "matthew" ];
     unfreePkgs = [ "steam" "steam-original" ];
     batteryChargeLimit = 100;
     accentColor = {
         h = 300;
         s = 60;
         l = 70;
+    };
+
+    users.matthew = {
+        authorizedKeys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK1cahhYmVTV0ewIug2zzGdeXruxWeJToxHDXbEBLoCB" ];
+        usePamMount = true;
     };
 
     nixosConfig = builtins.toString ./config;

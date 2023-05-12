@@ -2,7 +2,6 @@
 
 let
     kernelPackages = systemConfig.kernelPackages or nixpkgsStable.legacyPackages.${systemConfig.system}.linuxPackages;
-    pamMountUsers = systemConfig.pamMountUsers or [ ];
     persistPath = systemConfig.persistPath or "/mnt/persist";
     homeMountPath = systemConfig.persistPath or "/mnt/home";
     batteryChargeLimit = systemConfig.batteryChargeLimit or 100;
@@ -21,8 +20,8 @@ let
     };
 
     extraArgs = rec {
-        inherit (systemConfig) system systemNixpkgs hostname ssd vpnAddress tailscaleId;
-        inherit inputs nixpkgsStable nixpkgsUnstable kernelPackages pamMountUsers persistPath homeMountPath batteryChargeLimit accentColor stateVersion;
+        inherit (systemConfig) system systemNixpkgs hostname ssd vpnAddress tailscaleId users;
+        inherit inputs nixpkgsStable nixpkgsUnstable kernelPackages persistPath homeMountPath batteryChargeLimit accentColor stateVersion;
         pkgsStable = import nixpkgsStable nixpkgsArgs;
         pkgsUnstable = import nixpkgsUnstable nixpkgsArgs;
         stableLib = pkgsStable.lib;

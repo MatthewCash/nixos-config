@@ -1,22 +1,19 @@
-{ pkgsUnstable, stableLib, pamMountUsers, persistPath, homeMountPath, ... }:
+{ pkgsUnstable, stableLib, persistPath, homeMountPath, users, ... }:
 
 let
     createDisplayName = name: stableLib.strings.toUpper (builtins.substring 0 1 name) +
         builtins.substring 1 (builtins.stringLength name) name;
 
-    buildUserConfig = name: {
+    buildUserConfig = name: config: {
         inherit name;
-        description = createDisplayName name;
+        description = config.displayName or createDisplayName name;
         passwordFile = "${persistPath}/pwd/${name}";
         isNormalUser = true;
         home = "/home/${name}";
-        shell = pkgsUnstable.zsh;
-        extraGroups = [ "wheel" "tss" "uhid" ];
-        openssh.authorizedKeys.keys = [
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK1cahhYmVTV0ewIug2zzGdeXruxWeJToxHDXbEBLoCB ${name}"
-        ];
-    } // stableLib.attrsets.optionalAttrs (builtins.elem name pamMountUsers)  {
-        pamMount = {
+        shell = config.shell or pkgsUnstable.zsh;
+        extraGroups = [ "wheel" "tss" "uhid" ] ++ config.groups or [];
+        openssh.authorizedKeys.keys = config.authorizedKeys or [];
+        pamMount = stableLib.mkIf config.usePamMount {
             path = "/dev/main/crypt-home-${name}";
             mountpoint = "${homeMountPath}/${name}";
             fstype = "crypt";
@@ -26,5 +23,5 @@ in
 
 {
     users.mutableUsers = false;
-    users.extraUsers.matthew = buildUserConfig "matthew";
+    users.extraUsers =  builtins.mapAttrs buildUserConfig users;
 }

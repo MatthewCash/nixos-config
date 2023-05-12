@@ -1,9 +1,13 @@
-{ pkgsStable, pkgsUnstable, stableLib, config, pamMountUsers, homeMountPath, ... }:
+{ pkgsStable, pkgsUnstable, stableLib, config, users, homeMountPath, ... }:
 
 let
     pamServices = [ "login" "sshd" ];
 
     mountpoint = "${pkgsStable.util-linux}/bin/mountpoint";
+
+    pamMountUsers = builtins.attrNames (
+        stableLib.attrsets.filterAttrs (name: config: config ? usePamMount) users
+    );
 in
 
 {
@@ -14,7 +18,7 @@ in
 
     # Disable home-manager on boot for users without a pamMount path
     systemd.services = stableLib.attrsets.mapAttrs' (name: value: stableLib.attrsets.nameValuePair "home-manager-${name}" { wantedBy = stableLib.mkForce [ ]; })
-        (stableLib.attrsets.filterAttrs (name: value: builtins.elem name pamMountUsers) config.home-manager.users);
+        (stableLib.attrsets.filterAttrs (name: value: users ? name && users.${name} ? usePamMount) config.home-manager.users);
 
     environment.etc = builtins.listToAttrs (builtins.map (service: let
         systemctl = "${pkgsStable.systemd}/bin/systemctl";
