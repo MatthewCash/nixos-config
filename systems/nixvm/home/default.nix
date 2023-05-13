@@ -15,7 +15,7 @@ builtins.map (path: ../../../home/${path}) [
     "applications/neovim.nix"
     "applications/openssh.nix"
     "applications/zsh"
-    "applications/vscode-server.nix"
+    "applications/vscode/server.nix"
     "applications/direnv.nix"
     "applications/helix"
     "applications/gradle.nix"

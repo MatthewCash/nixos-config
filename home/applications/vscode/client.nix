@@ -1,4 +1,4 @@
-{ pkgsStable, pkgsUnstable, stableLib, useImpermanence, persistenceHomePath, name, inputs, system, ... }:
+args @ { pkgsStable, pkgsUnstable, stableLib, useImpermanence, persistenceHomePath, name, inputs, system, ... }:
 
 let
     vscodium = (pkgsUnstable.vscodium.overrideAttrs (oldAttrs: {
@@ -47,6 +47,8 @@ let
             '';
         };
     };
+
+    common = import ./common.nix args;
 in
 
 {
@@ -60,15 +62,9 @@ in
         enableUpdateCheck = false;
         enableExtensionUpdateCheck = false;
         extensions = with pkgsUnstable.vscode-extensions; [
-            jnoortheen.nix-ide
-            dbaeumer.vscode-eslint
-            github.vscode-pull-request-github
-            eamodio.gitlens
-            esbenp.prettier-vscode
-            octref.vetur
             inputs.codium-theme.defaultPackage.${system}
-        ];
-        userSettings = {
+        ] ++ common.extensions;
+        userSettings = common.settings // {
             "workbench.colorTheme" = "Main Theme";
             "window.titleBarStyle" = "custom";
             "editor.smoothScrolling" = true;
@@ -82,9 +78,6 @@ in
             "editor.wordWrap" = "on";
             "window.commandCenter" = true;
             "editor.fontFamily" = "'CaskaydiaCove Nerd Font Regular', monospace";
-
-            "nix.enableLanguageServer" = true;
-            "nix.serverPath" = "${pkgsUnstable.nil}/bin/nil";
         };
     };
 }
