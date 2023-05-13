@@ -16,7 +16,7 @@
             all = {
                 host = "*";
                 identitiesOnly = true;
-                identityFile = [ "~/.ssh/id_matthew" ];
+                identityFile = [ "~/.ssh/id_${name}" ];
                 extraOptions = {
                     GSSAPIAuthentication = "no";
                 };
