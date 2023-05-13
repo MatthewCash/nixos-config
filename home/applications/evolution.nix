@@ -1,10 +1,6 @@
-{ pkgsUnstable, stableLib, useImpermanence, persistenceHomePath, name, ... }:
+{ stableLib, useImpermanence, persistenceHomePath, name, ... }:
 
 {
-    home.packages = with pkgsUnstable; [
-#        (evolutionWithPlugins.override { plugins = [ evolution evolution-ews ]; })
-    ];
-
     home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence [
         ".local/share/evolution"
         ".config/evolution"
