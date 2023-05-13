@@ -13,7 +13,7 @@ let
         shell = config.shell or pkgsUnstable.zsh;
         extraGroups = [ "wheel" "tss" "uhid" ] ++ config.groups or [];
         openssh.authorizedKeys.keys = config.authorizedKeys or [];
-        pamMount = stableLib.mkIf config.usePamMount {
+        pamMount = stableLib.mkIf (config ? usePamMount && config.usePamMount) {
             path = "/dev/main/crypt-home-${name}";
             mountpoint = "${homeMountPath}/${name}";
             fstype = "crypt";
@@ -23,5 +23,5 @@ in
 
 {
     users.mutableUsers = false;
-    users.extraUsers =  builtins.mapAttrs buildUserConfig users;
+    users.extraUsers = builtins.mapAttrs buildUserConfig users;
 }
