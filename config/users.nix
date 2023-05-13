@@ -11,7 +11,7 @@ let
         isNormalUser = true;
         home = "/home/${name}";
         shell = config.shell or pkgsUnstable.zsh;
-        extraGroups = [ "wheel" "tss" "uhid" ] ++ config.groups or [];
+        extraGroups = [ "wheel" ] ++ config.groups or [];
         openssh.authorizedKeys.keys = config.authorizedKeys or [];
         pamMount = stableLib.mkIf (config ? usePamMount && config.usePamMount) {
             path = "/dev/main/crypt-home-${name}";
