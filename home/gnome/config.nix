@@ -10,6 +10,8 @@ in
         ".config/monitors.xml"
     ];
 
+    home.sessionVariables.STATIC_WALLPAPER_PATH = "$HOME/.local/share/backgrounds/current_wallpaper.png";
+
     dconf.settings = {
         "org/gnome/desktop/interface" = {
             clock-show-seconds = true;
