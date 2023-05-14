@@ -1,4 +1,4 @@
-{ pkgsUnstable, accentColor, ... }:
+args @ { accentColor, ... }:
 
 {
     programs.helix = {
@@ -33,9 +33,9 @@
             keys = import ./keybinds.nix;
         };
 
-        languages = import ./languages.nix { inherit pkgsUnstable; };
+        languages = import ./languages.nix args;
 
         # Colors from VSCode Dark+
-        themes.main = import ./theme.nix { inherit accentColor; };
+        themes.main = import ./theme.nix args;
     };
 }

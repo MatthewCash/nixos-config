@@ -1,4 +1,4 @@
-{ pkgsUnstable, ... }:
+{ pkgsUnstable, stableLib, config, ... }:
 
 let
     fourTabLanguages = [
@@ -32,11 +32,11 @@ map (name: { inherit name; indent = { tab-width = 4; unit = "    "; }; }) fourTa
         name = "html";
         language-server.command = "${pkgsUnstable.nodePackages.vscode-html-languageserver-bin}/bin/html-languageserver";
     }
-    {
+    ] ++ stableLib.optional config.programs.java.enable { # Make Java optional because total size > 1GB
         name = "java";
         language-server.command = "${pkgsUnstable.jdt-language-server}/bin/jdt-language-server";
         language-server.args = [ "-configuration" ".jdtls/config" "-data" ".jdtls/data" ];
-    }
+    } ++ [
     {
         name = "javascript";
         language-server.command = "${pkgsUnstable.nodePackages.typescript-language-server}/bin/typescript-language-server";
