@@ -9,7 +9,7 @@ let
         stableLib.attrsets.filterAttrs (name: config: config ? usePamMount && config.usePamMount) users
     );
 
-    usePamMount = name: pamMountUsers ? name;
+    usePamMount = name: builtins.elem name pamMountUsers;
 in
 
 {
