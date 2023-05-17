@@ -15,6 +15,7 @@ map (name: { inherit name; indent = { tab-width = 4; unit = "    "; }; }) fourTa
     {
         name = "c-sharp";
         language-server.command = "${pkgsUnstable.omnisharp-roslyn}/bin/OmniSharp";
+        language-server.args = [ "--languageserver" ];
     }
     {
         name = "cpp";
