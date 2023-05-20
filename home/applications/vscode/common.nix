@@ -17,7 +17,8 @@
         "java.configuration.updateBuildConfiguration" = "automatic";
         "java.format.settings.url" = "${config.xdg.configHome}/java/java-formatter.xml";
         "omnisharp.dotnetPath" = "${pkgsUnstable.dotnet-sdk}/bin";
-        "omnisharp.sdkPath" = "${pkgsUnstable.dotnet-sdk}/sdk/";
+        "omnisharp.dotNetCliPaths" = [ "${pkgsUnstable.dotnet-sdk}/bin" ];
+        "omnisharp.enableEditorConfigSupport" = false;
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "${pkgsUnstable.nil}/bin/nil";
     };
