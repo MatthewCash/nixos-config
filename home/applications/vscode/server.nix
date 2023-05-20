@@ -1,17 +1,9 @@
-args @ { pkgsStable, pkgsUnstable, stableLib, ... }:
+args @ { pkgsStable, stableLib, ... }:
 
 let
     common = import ./common.nix args;
 
-    extensions = with pkgsUnstable.vscode-extensions; [
-        jnoortheen.nix-ide
-        dbaeumer.vscode-eslint
-        github.vscode-pull-request-github
-        eamodio.gitlens
-        octref.vetur
-        redhat.java
-        ms-dotnettools.csharp
-    ] ++ common.extensions;
+    extensions = common.extensions;
     settings = common.settings;
 
     extensionPath = ".vscodium-server/extensions";

@@ -8,6 +8,8 @@
         eamodio.gitlens
         esbenp.prettier-vscode
         octref.vetur
+        redhat.java
+        ms-dotnettools.csharp
     ];
     settings = {
         "java.jdt.ls.java.home" = "${pkgsUnstable.jdk17_headless}/lib/openjdk";
