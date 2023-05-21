@@ -35,6 +35,7 @@ builtins.map (path: ../../../config/${path}) [
     "bluetooth.nix"
     "fwupd.nix"
     "services/evolution.nix"
+    "dbus.nix"
     "kmscon.nix"
 
     "applications/steam.nix"
