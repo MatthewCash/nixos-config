@@ -22,6 +22,8 @@ The main goal is to be fully declarative and reproducible while not compromising
 
 There is no easy way to install this configuration yet, you are expected to be very famililar with NixOS, flakes, and disk partitioning
 
+Your nix installation should have `nix-command` and `flakes` features set to enabled, [nix-installer](https://github.com/DeterminateSystems/nix-installer) will do this automatically
+
 In the [future](#todo), installer images will be generated and disks can be setup declaratively
 
 A basic [install script](install.sh) exists to somewhat automate installation but must be modified for each system
