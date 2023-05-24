@@ -38,7 +38,6 @@ builtins.map (path: ../../../config/${path}) [
     "dbus.nix"
     "kmscon.nix"
 
-    "applications/steam.nix"
     "applications/general.nix"
 ] ++ [
     ./kernel.nix
