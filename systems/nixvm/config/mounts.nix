@@ -39,6 +39,13 @@ in
             options = windowsMountOptions;
         };
 
+        records = {
+            device = "//host/Records";
+            fsType = "cifs";
+            mountPoint = "/mnt/records";
+            options = windowsMountOptions;
+        };
+
         # Windows Bind Mounts
 
         windows-code = {
