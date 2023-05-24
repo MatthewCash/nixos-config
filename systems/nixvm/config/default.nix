@@ -20,6 +20,7 @@ builtins.map (path: ../../../config/${path}) [
     "docs.nix"
     "systemd/config.nix"
     "kmscon.nix"
+    "dbus.nix"
 
     "applications/general.nix"
 ] ++ [
