@@ -16,6 +16,7 @@ builtins.map (path: ../../../config/${path}) [
     "env.nix"
     "docs.nix"
     "systemd/config.nix"
+    "dbus.nix"
 
     "applications/general.nix"
 ]
