@@ -20,6 +20,8 @@ builtins.map (path: ../../../config/${path}) [
     "pam-mount.nix"
     "systemd/config.nix"
     "secureboot.nix"
+    "dbus.nix"
+
     "applications/general.nix"
 ] ++ [
     ./networking.nix
