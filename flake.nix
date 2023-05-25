@@ -141,6 +141,7 @@
                 exec ${apply}/bin/apply
             '';
             test = pkgsStable.writeShellScriptBin "test" /* bash */ ''
+                set -e
                 ${builtins.concatStringsSep "\n"
                     (builtins.map
                         (name: ''
@@ -150,6 +151,7 @@
                         systemNames
                     )
                 }
+                echo "All systems evaluated successfully!"
             '';
         };
     in
