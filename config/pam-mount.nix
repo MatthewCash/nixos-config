@@ -16,6 +16,7 @@ in
     security.pam.mount = {
         enable = true;
         createMountPoints = true;
+        cryptMountOptions = [ "allow_discard" ];
     };
 
     # Disable home-manager on boot for users without a pamMount path
