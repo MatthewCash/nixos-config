@@ -33,7 +33,7 @@ args @ { accentColor, ... }:
             keys = import ./keybinds.nix;
         };
 
-        languages = import ./languages.nix args;
+        languages.language = import ./languages.nix args;
 
         # Colors from VSCode Dark+
         themes.main = import ./theme.nix args;
