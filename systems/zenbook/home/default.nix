@@ -48,4 +48,5 @@ builtins.map (path: ../../../home/${path}) [
     "applications/bat.nix"
 ] ++ [
     ./firefox.nix
+    ./monitors.nix
 ]
