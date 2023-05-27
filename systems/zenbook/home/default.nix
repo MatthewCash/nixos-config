@@ -14,6 +14,7 @@ builtins.map (path: ../../../home/${path}) [
     "gnome/extensions/just-perfection.nix"
     "gnome/extensions/tray-icons-reloaded.nix"
     "gnome/extensions/rounded-windows.nix"
+    "gnome/extensions/desktop-cube.nix"
     "desktop/defaultApps.nix"
     "desktop/userDirs.nix"
 
