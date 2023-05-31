@@ -1,4 +1,4 @@
-{ stableLib, useImpermanence, persistenceHomePath, name, lib, config, ... }:
+{ lib, config, ... }:
 
 let
     inherit (lib.hm) gvariant;
@@ -8,10 +8,6 @@ let
 in
 
 {
-    home.persistence."${persistenceHomePath}/${name}".files = stableLib.mkIf useImpermanence [
-        ".config/monitors.xml"
-    ];
-
     home.sessionVariables.STATIC_WALLPAPER_PATH = wallpaperPath;
 
     dconf.settings = {
