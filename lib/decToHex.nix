@@ -12,4 +12,7 @@ let
             ((elemAt intToHex (mod q 16)) + a))
         else a;
 in
-    v: toHex' v ""
+
+{
+    decToHex = v: toHex' v "";
+}

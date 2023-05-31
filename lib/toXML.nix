@@ -34,4 +34,6 @@ let
             toString exp;
 in
 
-toXML
+{
+    inherit toXML;
+}

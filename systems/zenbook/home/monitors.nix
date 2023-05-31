@@ -1,4 +1,4 @@
-{ stableLib, ... }:
+{ customLib, ... }:
 
 let
     configuration = [
@@ -52,7 +52,7 @@ let
             ];
         }
     ];
-    monitorsXml = import ../../../util/toXML.nix stableLib {
+    monitorsXml = customLib.toXML {
         monitors = {
             _version = 2;
             inherit configuration;

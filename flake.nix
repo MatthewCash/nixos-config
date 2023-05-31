@@ -89,6 +89,13 @@
     let
         stateVersion = "22.11";
 
+        # Lib
+        customLibs = builtins.map (name: import ./lib/${name} nixpkgsStable.lib) (builtins.attrNames
+            (nixpkgsStable.lib.attrsets.filterAttrs (n: v: v == "regular")
+            (builtins.readDir ./lib)));
+
+        customLib = builtins.foldl' (acc: cur: acc // cur) {} customLibs;
+
         # NixOS Configurations
         systemNames = builtins.attrNames
             (nixpkgsStable.lib.attrsets.filterAttrs (n: v: v == "directory")
@@ -102,7 +109,7 @@
         systemConfigs = builtins.listToAttrs systemConfigList;
         systems = builtins.mapAttrs (name: systemConfig:
             import ./systems/buildSystem.nix {
-                inherit systemConfig inputs nixpkgsStable nixpkgsUnstable stateVersion;
+                inherit systemConfig inputs nixpkgsStable nixpkgsUnstable stateVersion customLib;
             }
         ) systemConfigs;
         nixosConfigurations = builtins.mapAttrs (name: system:
@@ -113,7 +120,7 @@
         homeConfigurations = builtins.mapAttrs (systemName: systemConfig:
             (import ./systems/buildHomeConfigs.nix {
                 inherit (systemConfig) systemNixpkgs system homeConfig;
-                inherit inputs stateVersion;
+                inherit inputs stateVersion customLib;
                 stableLib = nixpkgsStable.lib;
                 extraArgs = systems.${systemName}.specialArgs;
             }).standalone

@@ -1,4 +1,4 @@
-{ inputs, nixpkgsStable, nixpkgsUnstable, systemConfig, stateVersion }:
+{ inputs, nixpkgsStable, nixpkgsUnstable, systemConfig, stateVersion, customLib }:
 
 let
     kernelPackages = systemConfig.kernelPackages or nixpkgsStable.legacyPackages.${systemConfig.system}.linuxPackages;
@@ -6,12 +6,9 @@ let
     homeMountPath = systemConfig.persistPath or "/mnt/home";
     batteryChargeLimit = systemConfig.batteryChargeLimit or 100;
 
-    stableLib = nixpkgsStable.lib;
-    toHex = i: import ../util/padStart.nix stableLib { padStr = "0"; len = 2; str = import ../util/decToHex.nix stableLib i;};
-
     accentColor = systemConfig.accentColor // {
-        inherit (import ../util/hsl2rgb.nix stableLib accentColor) r g b;
-        hex = "#${toHex accentColor.r}${toHex accentColor.g}${toHex accentColor.b}";
+        inherit (customLib.hsl2rgb accentColor) r g b;
+        hex = customLib.rgb2hex accentColor;
     };
 
     nixpkgsArgs = {
@@ -21,7 +18,7 @@ let
 
     extraArgs = rec {
         inherit (systemConfig) system systemNixpkgs hostname ssd vpnAddress tailscaleId users;
-        inherit inputs nixpkgsStable nixpkgsUnstable kernelPackages persistPath homeMountPath batteryChargeLimit accentColor stateVersion;
+        inherit inputs nixpkgsStable nixpkgsUnstable kernelPackages persistPath homeMountPath batteryChargeLimit accentColor stateVersion customLib;
         pkgsStable = import nixpkgsStable nixpkgsArgs;
         pkgsUnstable = import nixpkgsUnstable nixpkgsArgs;
         stableLib = pkgsStable.lib;
@@ -48,7 +45,8 @@ in
 
             home-manager = (import ./buildHomeConfigs.nix {
                 inherit (systemConfig) systemNixpkgs system homeConfig;
-                inherit stableLib inputs stateVersion extraArgs;
+                inherit inputs stateVersion extraArgs;
+                stableLib = nixpkgsStable.lib;
             }).nixos;
         }
     ] ++ import systemConfig.nixosConfig;
