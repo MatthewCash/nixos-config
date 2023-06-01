@@ -52,10 +52,6 @@ let
 in
 
 {
-    home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence [
-        ".config/VSCodium"
-    ];
-
     programs.vscode = {
         enable = true;
         package = vscodium;
