@@ -8,12 +8,10 @@
         enable = true;
         settings = {
             PermitRootLogin = "no";
+            PrintLastLog = "no";
+            TCPKeepAlive = "yes";
+            ClientAliveInterval = 30;
         };
-        extraConfig = ''
-            PrintLastLog no
-            TCPKeepAlive yes
-            ClientAliveInterval 30
-        '';
     };
 
     programs.mosh.enable = true;
