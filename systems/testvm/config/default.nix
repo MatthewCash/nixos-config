@@ -21,6 +21,7 @@ builtins.map (path: ../../../config/${path}) [
     "systemd/config.nix"
     "secureboot.nix"
     "dbus.nix"
+    "kmscon.nix"
 
     "applications/general.nix"
 ] ++ [
