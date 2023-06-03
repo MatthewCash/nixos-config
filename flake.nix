@@ -87,18 +87,20 @@
 
     outputs = inputs @ { nixpkgsStable, nixpkgsUnstable, flake-utils, ... }:
     let
+        stableLib = nixpkgsStable.lib;
+
         stateVersion = "23.05";
 
         # Lib
-        customLibs = builtins.map (name: import ./lib/${name} nixpkgsStable.lib) (builtins.attrNames
-            (nixpkgsStable.lib.attrsets.filterAttrs (n: v: v == "regular")
+        customLibs = builtins.map (name: import ./lib/${name} stableLib) (builtins.attrNames
+            (stableLib.attrsets.filterAttrs (n: v: v == "regular")
             (builtins.readDir ./lib)));
 
         customLib = builtins.foldl' (acc: cur: acc // cur) {} customLibs;
 
         # NixOS Configurations
         systemNames = builtins.attrNames
-            (nixpkgsStable.lib.attrsets.filterAttrs (n: v: v == "directory")
+            (stableLib.attrsets.filterAttrs (n: v: v == "directory")
             (builtins.readDir ./systems));
         systemConfigList = builtins.map (name: {
             inherit name;
@@ -149,23 +151,33 @@
             '';
             test = pkgsStable.writeShellScriptBin "test" /* bash */ ''
                 set -e
+                echo "Evaluating system configurations"
                 ${builtins.concatStringsSep "\n"
                     (builtins.map
                         (name: ''
-                            echo "Evaluating ${name}"
+                            echo "Evaluating system:${name}"
                             ${pkgsStable.nixos-rebuild}/bin/nixos-rebuild dry-build --flake path:.#${name}
                         '')
                         systemNames
                     )
                 }
+                echo "Evaluating home configurations"
+                ${builtins.concatStringsSep "\n" (stableLib.flatten (
+                    (stableLib.mapAttrsToList (systemName: value: stableLib.mapAttrsToList (homeName: value: ''
+                        echo "Evaluating homeConfig:${systemName}:${homeName}"
+                        ${pkgsStable.nix}/bin/nix eval --impure --raw path:.#homeConfigurations.${systemName}.${homeName}
+                        echo ""
+                    ''
+                    ) value) homeConfigurations)
+                ))}
                 echo "All systems evaluated successfully!"
             '';
         };
     in
     {
         inherit nixosConfigurations homeConfigurations;
-        packages = nixpkgsStable.lib.listToAttrs (
-            nixpkgsStable.lib.forEach flake-utils.lib.defaultSystems (system:
+        packages = stableLib.listToAttrs (
+            stableLib.forEach flake-utils.lib.defaultSystems (system:
                 let
                     pkgsStable = nixpkgsStable.legacyPackages.${system};
                 in
