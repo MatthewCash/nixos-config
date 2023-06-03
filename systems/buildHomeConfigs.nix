@@ -1,4 +1,4 @@
-{ stableLib, inputs, homeConfig, stateVersion, extraArgs, systemNixpkgs, system }:
+{ stableLib, inputs, homeConfig, stateVersion, extraArgs, systemNixpkgs, system, customLib }:
 
 let
     defaultImports = [

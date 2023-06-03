@@ -45,7 +45,7 @@ in
 
             home-manager = (import ./buildHomeConfigs.nix {
                 inherit (systemConfig) systemNixpkgs system homeConfig;
-                inherit inputs stateVersion extraArgs;
+                inherit inputs stateVersion extraArgs customLib;
                 stableLib = nixpkgsStable.lib;
             }).nixos;
         }
