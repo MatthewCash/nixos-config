@@ -3,11 +3,8 @@
 {
     virtualisation.hypervGuest.enable = true;
 
-    boot.kernelModules = [ "vhci_hcd" ];
+    # Prevent old hyperv_fb driver from loading
+    boot.blacklistedKernelModules = [ "hyperv_fb" ];
 
-    boot.kernelParams = [ "nomodeset" ];
-
-    services.xserver = {
-        videoDrivers = [ "fbdev" ];
-    };
+    boot.kernelParams = [ "video=hyperv_drm" ];
 }
