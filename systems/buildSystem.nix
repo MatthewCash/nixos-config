@@ -49,5 +49,5 @@ in
                 stableLib = nixpkgsStable.lib;
             }).nixos;
         }
-    ] ++ import systemConfig.nixosConfig;
+    ] ++ systemConfig.nixosConfig;
 }

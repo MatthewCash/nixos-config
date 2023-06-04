@@ -11,8 +11,8 @@ let
         systemd.user.startServices = "sd-switch";
     };
 
-    nixosProfiles = builtins.mapAttrs (homeName: homeConfigPath: stableLib.recursiveUpdate {
-        imports = defaultImports ++ import homeConfigPath;
+    nixosProfiles = builtins.mapAttrs (homeName: homeConfig: stableLib.recursiveUpdate {
+        imports = defaultImports ++ homeConfig;
         home.persistence."/mnt/home/${homeName}".allowOther = true;
     } defaultConfig) homeConfig;
 
@@ -25,14 +25,14 @@ let
         };
     };
 
-    standalone = builtins.mapAttrs (homeName: homeConfigPath: (inputs.home-manager.lib.homeManagerConfiguration {
+    standalone = builtins.mapAttrs (homeName: homeConfig: (inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = systemNixpkgs.legacyPackages.${system};
         extraSpecialArgs = extraArgs // {
             persistenceHomePath = "none";
             useImpermanence = false;
             name = builtins.getEnv "USER";
         };
-        modules = defaultImports ++ import homeConfigPath ++ [ (stableLib.recursiveUpdate {
+        modules = defaultImports ++ homeConfig ++ [ (stableLib.recursiveUpdate {
             home = {
                 username =
                     stableLib.warnIf

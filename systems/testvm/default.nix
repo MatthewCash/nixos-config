@@ -17,6 +17,6 @@ rec {
         usePamMount = true;
     };
 
-    nixosConfig = builtins.toString ./config;
-    homeConfig.matthew = builtins.toString ./home;
+    nixosConfig = import ./config;
+    homeConfig.matthew = import ./home;
 }
