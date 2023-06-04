@@ -140,37 +140,37 @@
         }) generatorFormats;
         generators = builtins.listToAttrs generatorList;
 
-        packages = { pkgsStable }: rec {
+        packages = { pkgsStable }: let
+            nix = "${pkgsStable.nix}/bin/nix";
+            eval = path: /* bash */ ''
+                echo "- eval .#${path}:"
+                out=$(${nix} eval --impure --raw path:.#${path})
+                printf "\t$out\n"
+            '';
+        in rec {
             inherit generators;
             apply = pkgsStable.writeShellScriptBin "apply" /* bash */ ''
                 exec ${pkgsStable.nixos-rebuild}/bin/nixos-rebuild switch --flake path:. --use-remote-sudo $@
             '';
             full-upgrade = pkgsStable.writeShellScriptBin "full-upgrade" /* bash */ ''
-                ${pkgsStable.nix}/bin/nix flake update path:.
+                ${nix} flake update path:.
                 exec ${apply}/bin/apply
             '';
             test = pkgsStable.writeShellScriptBin "test" /* bash */ ''
-                set -e
+                set -e -o pipefail; shopt -s inherit_errexit
+
                 echo "Evaluating system configurations"
-                ${builtins.concatStringsSep "\n"
-                    (builtins.map
-                        (name: ''
-                            echo "Evaluating system:${name}"
-                            ${pkgsStable.nixos-rebuild}/bin/nixos-rebuild dry-build --flake path:.#${name}
-                        '')
-                        systemNames
-                    )
-                }
+                ${builtins.concatStringsSep "\n" (builtins.map (name:
+                    eval "nixosConfigurations.${name}.config.system.build.toplevel"
+                ) systemNames)}
+
                 echo "Evaluating home configurations"
                 ${builtins.concatStringsSep "\n" (stableLib.flatten (
-                    (stableLib.mapAttrsToList (systemName: value: stableLib.mapAttrsToList (homeName: value: ''
-                        echo "Evaluating homeConfig:${systemName}:${homeName}"
-                        ${pkgsStable.nix}/bin/nix eval --impure --raw path:.#homeConfigurations.${systemName}.${homeName}
-                        echo ""
-                    ''
+                    (stableLib.mapAttrsToList (systemName: value: stableLib.mapAttrsToList (homeName: value:
+                        eval "homeConfigurations.${systemName}.${homeName}"
                     ) value) homeConfigurations)
                 ))}
-                echo "All systems evaluated successfully!"
+                echo "All evaluations completed successfully!"
             '';
         };
     in
