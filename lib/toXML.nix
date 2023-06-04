@@ -4,10 +4,7 @@ lib:
 # Create an attribute by starting the key with a "_"
 
 let
-    attrsetToList = attrset: lib.lists.zipListsWith
-        (name: value: { inherit name value; })
-        (builtins.attrNames attrset)
-        (builtins.attrValues attrset);
+    attrsetToList = attrset: lib.mapAttrsToList (name: value: { inherit name value; }) attrset;
 
     toString = exp: lib.strings.escapeXML (builtins.toString exp);
     removeUnderscore = str: builtins.substring 1 (builtins.stringLength str) str;
