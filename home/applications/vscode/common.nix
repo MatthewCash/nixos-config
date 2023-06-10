@@ -10,6 +10,7 @@
         octref.vetur
         redhat.java
         ms-dotnettools.csharp
+        ms-vscode.powershell
     ];
     settings = {
         "java.jdt.ls.java.home" = "${pkgsUnstable.jdk17_headless}/lib/openjdk";
@@ -21,5 +22,6 @@
         "omnisharp.enableEditorConfigSupport" = false;
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "${pkgsUnstable.nil}/bin/nil";
+        "powershell.powerShellAdditionalExePaths.main" = "${pkgsUnstable.powershell}/bin/pwsh";
     };
 }
