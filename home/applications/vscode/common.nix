@@ -13,6 +13,7 @@
         ms-vscode.powershell
     ];
     settings = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
         "java.jdt.ls.java.home" = "${pkgsUnstable.jdk17_headless}/lib/openjdk";
         "java.import.gradle.home" = "${pkgsUnstable.gradle}/lib/gradle";
         "java.configuration.updateBuildConfiguration" = "automatic";
