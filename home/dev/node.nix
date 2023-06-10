@@ -19,7 +19,6 @@
 
     home.packages = with pkgsUnstable; with nodePackages; [
         nodejs
-        npm
         typescript
     ];
 
