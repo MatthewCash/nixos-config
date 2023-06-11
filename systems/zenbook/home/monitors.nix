@@ -58,15 +58,26 @@ let
     };
 
     configuration = [
+        # No external monitors connected
         {
-            # No external displays
+            logicalmonitor = [
+                (internal // { x = 0; y = 0; })
+            ];
+        }
+        {
             logicalmonitor = [
                 (internal // { x = 120; y = 0; })
                 (screenpad // { x = 0; y = 1080; })
             ];
         }
+        # Projector connected
         {
-            # Projector connected
+            logicalmonitor = [
+                (internal // { x = 0; y = 0; })
+                (projector // { x = 1920; y = 0; })
+            ];
+        }
+        {
             logicalmonitor = [
                 (internal // { x = 120; y = 0; })
                 (screenpad // { x = 0; y = 1080; })
