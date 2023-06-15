@@ -1,9 +1,11 @@
-{ stableLib, useImpermanence, persistenceHomePath, name, ... }:
+{ stableLib, pkgsUnstable, useImpermanence, persistenceHomePath, name, ... }:
 
 {
     home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence [
         ".ssh"
     ];
+
+    home.packages = with pkgsUnstable; [ openssh ];
 
     programs.ssh = {
         enable = true;
