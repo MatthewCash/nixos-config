@@ -6,7 +6,7 @@ lib:
 let
     attrsetToList = attrset: lib.mapAttrsToList (name: value: { inherit name value; }) attrset;
 
-    toString = exp: lib.strings.escapeXML (builtins.toString exp);
+    toString = exp: if builtins.isBool exp then lib.boolToString exp else lib.strings.escapeXML (builtins.toString exp);
     removeUnderscore = str: builtins.substring 1 (builtins.stringLength str) str;
 
     getAttributes = attrset: builtins.foldl'
