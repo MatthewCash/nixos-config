@@ -1,23 +1,22 @@
-{ pkgsUnstable, stableLib, ... }:
+{ pkgsUnstable, stableLib, customLib, ... }:
 
 let
     settings = import ./formatter.nix;
 
-    valueToString = value: 
-        if (builtins.isBool value) then (stableLib.boolToString value) else (builtins.toString value);
-
-    convertLineToXml = id: value:
-        "<setting id=\"org.eclipse.jdt.core.formatter.${id}\" value=\"${valueToString value}\" />";
-
-    settingsLines = builtins.mapAttrs convertLineToXml settings;
-    settingsText = /* xml */ ''
-    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-    <profiles version="13">
-        <profile kind="CodeFormatterProfile" name="Eclipse" version="13">
-            ${builtins.concatStringsSep "\n        " (builtins.attrValues settingsLines)}
-        </profile>
-    </profiles>
-    '';
+    settingsText = customLib.toXML {
+        profiles = {
+            _version = 13;
+            profile = {
+                _kind = "CodeFormatterProfile";
+                _name = "Eclipse";
+                _version = 13;
+                setting = stableLib.mapAttrsToList (id: value: {
+                    _id = "org.eclipse.jdt.core.formatter.${id}";
+                    _value = value;
+                }) settings;
+            };
+        };
+    };
 in
 
 {
