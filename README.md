@@ -83,6 +83,8 @@ The file `systems/buildSystem.nix` is responsible for taking these system declar
 
 [ragenix](https://github.com/yaxitech/ragenix) is used to encrypt files specified in `secrets.nix` and store them in `secrets/`, which will be decrypted to `/run/agenix.d/` at runtime
 
-### Nix utility functions `util/`
+### Custom library `lib/`
 
-This directory contains small nix functions that may be useful in evaluating configurations
+This directory contains nix functions that may be useful in creating configurations
+
+Functions are exposed to configurations in the `customLib` argument
