@@ -154,4 +154,7 @@
     "devtools.chrome.enabled" = true;
     "devtools.debugger.remote-enabled" = true;
     "devtools.debugger.prompt-connection" = false;
+
+    # Allow addons to modify mozila URLs
+    "extensions.webextensions.restrictedDomains" = "";
 }
