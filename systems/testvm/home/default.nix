@@ -33,4 +33,5 @@ builtins.map (path: ../../../home/${path}) [
     "applications/bat.nix"
 ] ++ [
     ./gnome.nix
+    ./firefox.nix
 ]
