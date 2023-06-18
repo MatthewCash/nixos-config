@@ -1,7 +1,7 @@
 args @ { stableLib, pkgsUnstable, useImpermanence, persistenceHomePath, name, ... }:
 
 let
-    firefox-devedition-bin = pkgsUnstable.firefox-devedition-bin.override (old: {
+    firefox-devedition = pkgsUnstable.firefox-devedition.override (old: {
         icon = "firefox-developer-edition";
         desktopName = "Firefox Developer Edition";
         nameSuffix = "";
@@ -27,7 +27,7 @@ in
 
     programs.firefox = {
         enable = true;
-        package = firefox-devedition-bin;
+        package = firefox-devedition;
         inherit profiles;
     };
 }
