@@ -28,6 +28,8 @@ in
     programs.firefox = {
         enable = true;
         package = firefox-devedition;
-        inherit profiles;
+        profiles = profiles // {
+            "floating".name = "dev-edition-default";
+        };
     };
 }
