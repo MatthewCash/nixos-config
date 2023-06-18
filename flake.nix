@@ -24,11 +24,6 @@
             flake = false;
         };
 
-        agnoster-zsh-theme = {
-            url = "github:MatthewCash/agnoster-zsh-theme";
-            flake = false;
-        };
-
         zsh-nix-shell = {
             url = "github:MatthewCash/zsh-nix-shell";
             flake = false;
