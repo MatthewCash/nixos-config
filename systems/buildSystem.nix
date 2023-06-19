@@ -5,6 +5,7 @@ let
     persistPath = systemConfig.persistPath or "/mnt/persist";
     homeMountPath = systemConfig.persistPath or "/mnt/home";
     batteryChargeLimit = systemConfig.batteryChargeLimit or 100;
+    useImpermanence = systemConfig.useImpermanence or true;
 
     accentColor = systemConfig.accentColor // {
         inherit (customLib.hsl2rgb accentColor) r g b;
@@ -45,7 +46,7 @@ in
 
             home-manager = (import ./buildHomeConfigs.nix {
                 inherit (systemConfig) systemNixpkgs system homeConfig;
-                inherit inputs stateVersion extraArgs customLib;
+                inherit inputs stateVersion extraArgs customLib useImpermanence;
                 stableLib = nixpkgsStable.lib;
             }).nixos;
         }

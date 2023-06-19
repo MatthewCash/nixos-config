@@ -1,4 +1,4 @@
-{ stableLib, inputs, homeConfig, stateVersion, extraArgs, systemNixpkgs, system, customLib }:
+{ stableLib, inputs, homeConfig, stateVersion, extraArgs, systemNixpkgs, system, customLib, useImpermanence }:
 
 let
     defaultImports = [
@@ -21,7 +21,7 @@ let
         users = nixosProfiles;
         extraSpecialArgs = extraArgs // {
             persistenceHomePath = "/mnt/home";
-            useImpermanence = true;
+            inherit useImpermanence;
         };
     };
 
