@@ -1,4 +1,4 @@
-{ ... }:
+{ stableLib, ... }:
 
 {
     # Enable ephemeral SSH server on boot
@@ -7,7 +7,7 @@
     services.openssh = {
         enable = true;
         settings = {
-            PermitRootLogin = "no";
+            PermitRootLogin = stableLib.mkDefault "no";
             PrintLastLog = "no";
             TCPKeepAlive = "yes";
             ClientAliveInterval = 30;
