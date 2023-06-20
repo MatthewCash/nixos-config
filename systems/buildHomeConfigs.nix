@@ -29,8 +29,8 @@ let
         pkgs = systemNixpkgs.legacyPackages.${system};
         extraSpecialArgs = extraArgs // {
             persistenceHomePath = "none";
-            useImpermanence = false;
             name = builtins.getEnv "USER";
+            inherit useImpermanence;
         };
         modules = defaultImports ++ homeConfig ++ [ (stableLib.recursiveUpdate {
             home = {

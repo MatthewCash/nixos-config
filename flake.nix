@@ -120,6 +120,7 @@
                 inherit inputs stateVersion customLib;
                 stableLib = nixpkgsStable.lib;
                 extraArgs = systems.${systemName}.specialArgs;
+                useImpermanence = false;
             }).standalone
         ) systemConfigs;
 
