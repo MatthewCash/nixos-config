@@ -125,7 +125,6 @@
         ) systemConfigs;
 
         # NixOS Generators
-        # FIXME: generation fails, not enough disk space on tmpfs
         generatorFormats = builtins.attrNames inputs.nixos-generators.nixosModules;
         generatorList = builtins.map (formatName: {
             name = formatName;
