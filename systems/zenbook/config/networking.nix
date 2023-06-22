@@ -10,7 +10,7 @@
         "/etc/NetworkManager/system-connections"
     ];
 
-    systemd.services.wpa_supplicant.environment.OPENSSL_CONF = pkgsStable.writeText "openssl.cnf" ''
+    systemd.services.wpa_supplicant.environment.OPENSSL_CONF = pkgsStable.writeText "openssl.cnf" /* ini */ ''
         openssl_conf = openssl_init
         [openssl_init]
         ssl_conf = ssl_sect

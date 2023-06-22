@@ -2,10 +2,10 @@
 
 {
     # Limit "A stop job is running..." delay
-    systemd.extraConfig = ''
+    systemd.extraConfig = /* ini */ ''
         DefaultTimeoutStopSec=10s
     '';
-    systemd.user.extraConfig = ''
+    systemd.user.extraConfig = /* ini */ ''
         DefaultTimeoutStopSec=10s
     '';
 }

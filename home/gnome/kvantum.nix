@@ -3,7 +3,7 @@
 {
     home.sessionVariables.QT_STYLE_OVERRIDE = stableLib.mkForce "kvantum";
 
-    xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
+    xdg.configFile."Kvantum/kvantum.kvconfig".text = /* ini */ ''
         [General]
         theme=KvLibadwaitaDark
     '';
