@@ -23,6 +23,7 @@ builtins.map (path: ../../../home/${path}) [
     "dev/node.nix"
     "dev/java"
 
+    "applications/tools.nix"
     "applications/chromium.nix"
     "applications/evolution.nix"
     "applications/firefox"
