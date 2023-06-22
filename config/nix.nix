@@ -1,4 +1,4 @@
-{ nixpkgsStable, nixpkgsUnstable, system, ... }:
+{ nixpkgsStable, nixpkgsUnstable, ... }:
 
 {
     nix = {
@@ -18,8 +18,7 @@
     };
 
     environment.variables = {
-        nixpkgsStable = builtins.toString nixpkgsStable;
-        nixpkgsUnstable = builtins.toString nixpkgsUnstable;
-        nixpkgs = builtins.toString nixpkgsUnstable;
+        inherit nixpkgsStable nixpkgsUnstable;
+        nixpkgs = nixpkgsUnstable;
     };
 }
