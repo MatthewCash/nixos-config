@@ -54,4 +54,10 @@
             options = [ "nofail" ];
         };
     };
+
+    systemd.tmpfiles.rules = [
+        # Clear /mnt/persist/tmp on boot
+        "D /mnt/persist/tmp 1777 root root -"
+        "R /mnt/persist/tmp/* - - - - -"
+    ];
 }
