@@ -64,7 +64,6 @@
         gnome-maps
         gnome-contacts
         gnome-calendar
-        gnome-screenshot
         gnome-characters
         gnome-calculator
         gnome-sound-recorder
