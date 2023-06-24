@@ -8,29 +8,18 @@
     "media.navigator.mediadatadecoder_vpx_enabled" = true;
     "media.rdd-vpx.enabled" = false;
     "media.videocontrols.picture-in-picture.video-toggle.has-used" = true;
-    "network.dns.disablePrefetch" = true;
-    "network.http.speculative-parallel-limit" = 0;
-    "network.predictor.enabled" = false;
-    "network.prefetch-next" = false;
-    "network.trr.blocklist_cleanup_done" = true;
-    "network.trr.mode" = 2;
-    "network.trr.uri" = "https://mozilla.cloudflare-dns.com/dns-query";
     "pdfjs.enabledCache.state" = true;
     "pdfjs.migrationVersion" = 2;
     "pref.downloads.disable_button.edit_actions" = false;
     "pref.general.disable_button.default_browser" = false;
     "print.more-settings.open" = true;
     "privacy.donottrackheader.enabled" = true;
-    "privacy.purge_trackers.date_in_cookie_database" = "0";
-    "privacy.sanitize.pending" = "[{\"id\":\"newtab-container\" =\"itemsToClear\":[] =\"options\":{}}]";
     "reader.color_scheme" = "dark";
     "reader.content_width" = 5;
     "services.sync.declinedEngines" = "";
     "services.sync.engine.addresses.available" = true;
-    "signon.autologin.proxy" = true;
     "signon.rememberSignons" = false;
     "trailhead.firstrun.didSeeAboutWelcome" = true;
-    "widget.titlebar-x11-use-shape-mask" = true;
 
     # Telemetry
     "browser.newtabpage.activity-stream.feeds.telemetry" = false;
@@ -73,7 +62,7 @@
 
     # UI Customization
     "browser.toolbars.bookmarks.visibility" = "never";
-    "browser.uiCustomization.state" = builtins.toJSON ({
+    "browser.uiCustomization.state" = {
         "placements" = {
             "widget-overflow-fixed-list" = [
                 "downloads-button"
@@ -109,7 +98,7 @@
         ];
         "currentVersion" = 17;
         "newElementCount" = 5;
-    });
+    };
     "browser.urlbar.placeholderName" = "Google";
     "browser.urlbar.placeholderName.private" = "Google";
     "browser.urlbar.quicksuggest.migrationVersion" = 2;
@@ -119,7 +108,7 @@
     "extensions.activeThemeID" = "default-theme@mozilla.org";
 
     # New Tab Page
-    "browser.newtabpage.pinned" = "[]";
+    "browser.newtabpage.pinned" = [];
     "browser.newtabpage.activity-stream.feeds.topsites" = false;
     "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
 
