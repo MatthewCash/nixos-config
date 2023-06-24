@@ -57,7 +57,7 @@
         evince
         authenticator
         gnome-boxes
-#        gnome-books # Broken, upstream is archived :/
+        foliate
         gnome-clocks
         gnome-autoar
         gnome-weather
