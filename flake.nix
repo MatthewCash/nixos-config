@@ -71,7 +71,7 @@
 
         asus-wmi-screenpad = {
             url = "github:MatthewCash/asus-wmi-screenpad-module";
-            inputs.nixpkgs.follows = "nixpkgsUnstable";
+            inputs.nixpkgs.follows = "nixpkgsStable";
         };
 
         codium-theme = {
