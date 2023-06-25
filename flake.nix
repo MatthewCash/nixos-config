@@ -76,7 +76,7 @@
 
         codium-theme = {
             url = "github:MatthewCash/codium-theme";
-            inputs.nixpkgs.follows = "nixpkgsUnstable";
+            inputs.nixpkgs.follows = "nixpkgsStable";
         };
     };
 

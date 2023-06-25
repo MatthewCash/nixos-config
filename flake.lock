@@ -81,7 +81,7 @@
       "inputs": {
         "flake-utils": "flake-utils_3",
         "nixpkgs": [
-          "nixpkgsUnstable"
+          "nixpkgsStable"
         ]
       },
       "locked": {
