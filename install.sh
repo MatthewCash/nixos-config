@@ -65,4 +65,10 @@ mount /dev/disk/by-label/persist /mnt/mnt/persist
 mkdir -p /mnt/mnt/home/matthew
 mount /dev/disk/by-label/home-matthew /mnt/mnt/home/matthew
 
+# Create password file directory
+
 mkdir -p /mnt/mnt/persist/pwd
+
+# Copy this repo to the new installation
+
+cp -r . /mnt/mnt/persist/
