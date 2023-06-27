@@ -1,7 +1,7 @@
 { stableLib, kernelPackages, inputs, system, ... }:
 
 let
-    asus-wmi-screenpad = inputs.asus-wmi-screenpad.defaultPackage.${system}.override kernelPackages.kernel.dev;
+    asus-wmi-screenpad = inputs.asus-wmi-screenpad.defaultPackage.${system}.override kernelPackages.kernel;
 in
 
 {
