@@ -69,5 +69,6 @@
         gnome-sound-recorder
         gnome-podcasts
         gnome-connections
+        gnome-firmware
     ];
 }
