@@ -2,7 +2,6 @@ builtins.map (path: ../../../home/${path}) [
     "env.nix"
 
     "dev/c.nix"
-    "dev/rust.nix"
     "dev/node.nix"
     "dev/java"
     "dev/omnisharp.nix"
