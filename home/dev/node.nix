@@ -3,7 +3,6 @@
 {
     home.persistence."${persistenceHomePath}/${name}" = stableLib.mkIf useImpermanence {
         directories = [
-            ".local/share/.npm"
             ".cache/.npm-global"
             ".cache/typescript"
         ];
@@ -23,7 +22,6 @@
     ];
 
     xdg.configFile."npm/npmrc".text = ''
-        prefix=${config.xdg.dataHome}/npm
         cache=${config.xdg.cacheHome}/npm
         init-module=${config.xdg.configHome}/npm/config/npm-init.js
     '';
