@@ -24,5 +24,6 @@
     xdg.configFile."npm/npmrc".text = ''
         cache=${config.xdg.cacheHome}/npm
         init-module=${config.xdg.configHome}/npm/config/npm-init.js
+        update-notifier=false
     '';
 }
