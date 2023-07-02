@@ -142,6 +142,8 @@
                 out=$(${nix} eval --impure --raw path:.#${path})
                 printf "\t$out\n"
             '';
+            excludeSystems = [ "installer" ];
+            testSystems = builtins.filter (name: !(builtins.elem name excludeSystems)) systemNames;
         in rec {
             inherit generators;
             apply = pkgsStable.writeShellScriptBin "apply" /* bash */ ''
@@ -157,7 +159,7 @@
                 echo "Evaluating system configurations"
                 ${builtins.concatStringsSep "\n" (builtins.map (name:
                     eval "nixosConfigurations.${name}.config.system.build.toplevel"
-                ) systemNames)}
+                ) testSystems)}
 
                 echo "Evaluating home configurations"
                 ${builtins.concatStringsSep "\n" (stableLib.flatten (
