@@ -4,6 +4,7 @@ builtins.map (path: ../../../home/${path}) [
     "dev/c.nix"
     "dev/rust.nix"
     "dev/node.nix"
+    "dev/python.nix"
     "dev/java"
     "dev/omnisharp.nix"
     "dev/prettier.nix"
