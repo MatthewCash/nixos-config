@@ -3,10 +3,7 @@ args @ { stableLib, pkgsUnstable, useImpermanence, persistenceHomePath, name, ..
 let
     firefox-devedition = pkgsUnstable.firefox-devedition.override (old: {
         icon = "firefox-developer-edition";
-        desktopName = "Firefox Developer Edition";
-        nameSuffix = "";
         extraPolicies = import ./policy.nix args;
-        wmClass = "firefox-aurora";
     });
 
     profileNames = builtins.attrNames (stableLib.attrsets.filterAttrs (n: v: v == "regular") (builtins.readDir ./profiles));
