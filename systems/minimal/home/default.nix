@@ -3,6 +3,7 @@ builtins.map (path: ../../../home/${path}) [
 
     "dev/c.nix"
     "dev/node.nix"
+    "dev/python.nix"
     "dev/prettier.nix"
 
     "applications/tools.nix"
