@@ -16,6 +16,7 @@ builtins.map (path: ../../../home/${path}) [
 
     "dev/c.nix"
     "dev/node.nix"
+    "dev/python.nix"
 
     "applications/tools.nix"
     "applications/firefox"
