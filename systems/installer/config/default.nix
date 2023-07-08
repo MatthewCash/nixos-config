@@ -10,6 +10,7 @@ builtins.map (path: ../../../config/${path}) [
     "networking/general.nix"
     "networking/openssh.nix"
     "hardware/keyboard.nix"
+    "fs/lvm.nix"
     "ld.nix"
     "env.nix"
     "docs.nix"
