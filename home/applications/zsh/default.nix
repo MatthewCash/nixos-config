@@ -55,7 +55,7 @@
 
             bindkey "^[[3~" delete-char
 
-            bindkey "^H" backward-kill-word
+            # bindkey "\C-h" backward-kill-word
             bindkey "^[[3;5~" kill-word
 
             bindkey "^[[1;5C" forward-word
