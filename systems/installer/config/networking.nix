@@ -1,8 +1,6 @@
 { pkgsStable, ... }:
 
 {
-    networking.networkmanager.enable = true;
-
     systemd.services.wpa_supplicant.environment.OPENSSL_CONF = pkgsStable.writeText "openssl.cnf" /* ini */ ''
         openssl_conf = openssl_init
         [openssl_init]
