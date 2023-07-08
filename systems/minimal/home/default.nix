@@ -11,7 +11,6 @@ builtins.map (path: ../../../home/${path}) [
     "applications/git.nix"
     "applications/gpg.nix"
     "applications/htop.nix"
-    "applications/neovim.nix"
     "applications/openssh.nix"
     "applications/zsh"
     "applications/zsh/bash2zsh.nix"
