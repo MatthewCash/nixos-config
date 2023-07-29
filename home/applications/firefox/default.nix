@@ -1,7 +1,12 @@
-args @ { stableLib, pkgsUnstable, useImpermanence, persistenceHomePath, name, ... }:
+args @ { stableLib, pkgsStable, pkgsUnstable, useImpermanence, persistenceHomePath, name, ... }:
 
 let
-    firefox-devedition = pkgsUnstable.firefox-devedition.override (old: {
+    # Get the latest package from either channel, shouldn't cause an issues since changes usually get backported
+    firefoxPackages = [ pkgsStable.firefox-devedition pkgsUnstable.firefox-devedition ];
+    latestFirefox = stableLib.lists.last
+        (builtins.sort (a: b: builtins.compareVersions a.version b.version < 0) firefoxPackages);
+
+    firefox-devedition = latestFirefox.override (old: {
         icon = "firefox-developer-edition";
         extraPolicies = import ./policy.nix args;
     });
