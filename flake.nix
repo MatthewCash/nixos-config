@@ -78,6 +78,16 @@
             url = "github:MatthewCash/codium-theme";
             inputs.nixpkgs.follows = "nixpkgsStable";
         };
+
+        plasma-manager = {
+            url = "github:pjones/plasma-manager";
+            inputs.nixpkgs.follows = "nixpkgsUnstable";
+        };
+
+        sweet-kde = {
+            url = "github:EliverLara/Sweet-kde";
+            flake = false;
+        };
     };
 
     outputs = inputs @ { nixpkgsStable, nixpkgsUnstable, flake-utils, ... }:
