@@ -4,7 +4,15 @@ lib:
 # Create an attribute by starting the key with a "_"
 
 let
-    attrsetToList = attrset: lib.mapAttrsToList (name: value: { inherit name value; }) attrset;
+    attrsetToList = attrset: builtins.map
+        (item: {
+            name = item.name;
+            value = if builtins.isAttrs item.value then builtins.removeAttrs item.value [ "__order" ] else item.value;
+        })
+        (builtins.sort
+            (a: b: !b.value ? __order || a.value ? __order && a.value.__order < b.value.__order)
+            (lib.mapAttrsToList (name: value: { inherit name value; }) attrset)
+        );
 
     toString = exp: if builtins.isBool exp then lib.boolToString exp else lib.strings.escapeXML (builtins.toString exp);
     removeUnderscore = str: builtins.substring 1 (builtins.stringLength str) str;
