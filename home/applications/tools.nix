@@ -13,7 +13,6 @@
         unzip
         p7zip
         ripgrep
-        ripgrep-all
         gnutar
         gnused
         gawk
