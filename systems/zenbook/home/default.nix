@@ -49,6 +49,5 @@ builtins.map (path: ../../../home/${path}) [
     "applications/libreoffice.nix"
     "applications/bat.nix"
 ] ++ [
-    ./firefox.nix
     ./monitors.nix
 ]

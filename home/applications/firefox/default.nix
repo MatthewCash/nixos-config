@@ -6,12 +6,15 @@ let
     latestFirefox = stableLib.lists.last
         (builtins.sort (a: b: builtins.compareVersions a.version b.version < 0) firefoxPackages);
 
-    firefox-devedition = latestFirefox.override (old: {
+    firefox-devedition = (latestFirefox.override (old: {
         icon = "firefox-developer-edition";
         extraPolicies = import ./policy.nix args;
         extraPrefsFiles = [
             "${inputs.firefox-mods}/install_dir/config.js"
         ];
+    })).overrideAttrs(oldAttrs: {
+        # Remove default desktop entry (setting desktopEntry to null does not work :/)
+        buildCommand = builtins.replaceStrings [ "install -D -t $out/share/applications" ] [ "#removed" ] oldAttrs.buildCommand;
     });
 
     profileNames = builtins.attrNames (stableLib.attrsets.filterAttrs (n: v: v == "regular") (builtins.readDir ./profiles));
@@ -22,6 +25,15 @@ let
         };
     }) profileNames;
     profiles = builtins.listToAttrs profileList;
+
+    baseDesktopEntry = {
+        name = "Firefox";
+        genericName = "Web Browser";
+        icon = "firefox-developer-edition";
+        terminal = false;
+        categories = [ "Network" "WebBrowser" ];
+        mimeType = [ "text/html" "text/xml" ];
+    };
 in
 
 {
@@ -33,8 +45,24 @@ in
     programs.firefox = {
         enable = true;
         package = firefox-devedition;
-        profiles = profiles // {
-            "floating".name = "dev-edition-default";
+        inherit profiles;
+    };
+
+    xdg.desktopEntries = {
+        firefoxLayout = baseDesktopEntry // {
+            name = "Firefox Layout";
+            exec = "firefox --no-remote -P layout --name ff-layout %U";
+            settings.StartupWMClass = "ff-layout";
+        };
+        firefoxFloating = baseDesktopEntry // {
+            name = "Firefox Floating";
+            exec = "firefox --no-remote -P floating --name ff-floating %U";
+            settings.StartupWMClass = "ff-floating";
+        };
+        firefoxGnome = baseDesktopEntry // {
+            name = "Firefox Gnome";
+            exec = "firefox --no-remote -P gnome --name ff-gnome %U";
+            settings.StartupWMClass = "ff-gnome";
         };
     };
 

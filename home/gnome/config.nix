@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ stableLib, lib, config, ... }:
 
 let
     inherit (lib.hm) gvariant;
@@ -9,6 +9,11 @@ in
 
 {
     home.sessionVariables.STATIC_WALLPAPER_PATH = wallpaperPath;
+
+    xdg.mimeApps.defaultApplications = {
+        "x-scheme-handler/http" = stableLib.mkForce [ "firefoxGnome.desktop" ];
+        "x-scheme-handler/https" = stableLib.mkForce [ "firefoxGnome.desktop" ];
+    };
 
     dconf.settings = {
         "org/gnome/desktop/interface" = {
@@ -58,7 +63,7 @@ in
                 "chromium-browser.desktop"
                 "termius-app.desktop"
                 "codium.desktop"
-                "firefox.desktop"
+                "firefoxGnome.desktop"
                 "steam.desktop"
                 "org.gnome.Boxes.desktop"
                 "org.gnome.Console.desktop"
