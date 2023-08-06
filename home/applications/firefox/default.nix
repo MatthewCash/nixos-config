@@ -1,4 +1,4 @@
-args @ { stableLib, pkgsStable, pkgsUnstable, useImpermanence, persistenceHomePath, name, ... }:
+args @ { stableLib, pkgsStable, pkgsUnstable, useImpermanence, persistenceHomePath, inputs, name, ... }:
 
 let
     # Get the latest package from either channel, shouldn't cause an issues since changes usually get backported
@@ -9,6 +9,9 @@ let
     firefox-devedition = latestFirefox.override (old: {
         icon = "firefox-developer-edition";
         extraPolicies = import ./policy.nix args;
+        extraPrefsFiles = [
+            "${inputs.firefox-mods}/install_dir/config.js"
+        ];
     });
 
     profileNames = builtins.attrNames (stableLib.attrsets.filterAttrs (n: v: v == "regular") (builtins.readDir ./profiles));
@@ -34,4 +37,12 @@ in
             "floating".name = "dev-edition-default";
         };
     };
+
+    # Enable JS mods in 'layout' profile
+    home.file.".mozilla/firefox/layout/chrome/firefox-mods".source = inputs.firefox-mods;
+    home.file.".mozilla/firefox/layout/chrome/chrome.manifest".text = "content mods ./";
+    home.file.".mozilla/firefox/layout/chrome/entrypoint.js".text = /* js */ ''
+        const EXPORTED_SYMBOLS = [];
+        Components.utils.import('chrome://mods/content/firefox-mods/js/main.js');
+    '';
 }

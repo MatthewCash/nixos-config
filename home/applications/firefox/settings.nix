@@ -146,4 +146,7 @@
 
     # Allow addons to modify mozila URLs
     "extensions.webextensions.restrictedDomains" = "";
+
+    # :has() selector
+    "layout.css.has-selector.enabled" = true;
 }
