@@ -11,18 +11,25 @@
         redhat.java
         ms-dotnettools.csharp
         ms-vscode.powershell
+        ms-python.python
     ];
     settings = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
+
         "java.jdt.ls.java.home" = "${pkgsUnstable.jdk17_headless}/lib/openjdk";
         "java.import.gradle.home" = "${pkgsUnstable.gradle}/lib/gradle";
         "java.configuration.updateBuildConfiguration" = "automatic";
         "java.format.settings.url" = "${config.xdg.configHome}/java/java-formatter.xml";
+
         "omnisharp.dotnetPath" = "${pkgsUnstable.dotnet-sdk}/bin";
         "omnisharp.dotNetCliPaths" = [ "${pkgsUnstable.dotnet-sdk}/bin" ];
         "omnisharp.enableEditorConfigSupport" = false;
+
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "${pkgsUnstable.nil}/bin/nil";
+
         "powershell.powerShellAdditionalExePaths.main" = "${pkgsUnstable.powershell}/bin/pwsh";
+
+        "[python]"."editor.defaultFormatter" = "ms-python.python";
     };
 }
