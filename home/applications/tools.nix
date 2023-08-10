@@ -17,5 +17,6 @@
         gnused
         gawk
         tree
+        ldns
     ];
 }
