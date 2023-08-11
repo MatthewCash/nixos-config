@@ -8,7 +8,6 @@
         tcpdump
         htop
         file
-        oathToolkit
         gawk
     ];
 }
