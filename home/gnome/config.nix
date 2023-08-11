@@ -96,5 +96,11 @@ in
         "com/belmoussaoui/Authenticator" = {
             keyrings-migrated = true;
         };
+
+        # USBGuard integration (see config/hardware/usbguard.nix)
+        "org/gnome/desktop/privacy" = {
+            usb-protection = true;
+            usb-protection-level = "lockscreen";
+        };
     };
 }
