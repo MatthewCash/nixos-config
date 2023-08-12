@@ -16,6 +16,10 @@
     ];
     settings = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        "files.exclude" = {
+            "node_modules/" = true;
+            "**/__pycache__" = true;
+        };
 
         "java.jdt.ls.java.home" = "${pkgsUnstable.jdk17_headless}/lib/openjdk";
         "java.import.gradle.home" = "${pkgsUnstable.gradle}/lib/gradle";
