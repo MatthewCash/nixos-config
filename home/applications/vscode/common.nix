@@ -12,6 +12,7 @@
         ms-dotnettools.csharp
         ms-vscode.powershell
         ms-python.python
+        ms-pyright.pyright
     ];
     settings = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
