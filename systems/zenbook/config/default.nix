@@ -37,6 +37,7 @@ builtins.map (path: ../../../config/${path}) [
     "services/evolution.nix"
     "dbus.nix"
     "kmscon.nix"
+    "podman.nix"
 
     "applications/general.nix"
 ] ++ [
