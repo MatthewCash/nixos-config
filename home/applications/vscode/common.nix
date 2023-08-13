@@ -36,5 +36,6 @@
         "powershell.powerShellAdditionalExePaths.main" = "${pkgsUnstable.powershell}/bin/pwsh";
 
         "[python]"."editor.defaultFormatter" = "ms-python.python";
+        "python.formatting.autopep8Path" = "${pkgsUnstable.python3Packages.autopep8}/bin/autopep8";
     };
 }
