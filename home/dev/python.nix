@@ -8,7 +8,7 @@ let
         import readline
 
         history = os.path.realpath('${config.xdg.cacheHome}/python/repl_history')
-        print(history)
+
         try:
             readline.read_history_file(history)
         except OSError:
