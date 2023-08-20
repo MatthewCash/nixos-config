@@ -12,7 +12,7 @@ in
             "${gatewayAddress}" = [ "host" "windows" "inferno" ];
         };
 
-        nameservers = [ "192.168.1.221" "1.1.1.1" ];
+        nameservers = [ "100.100.100.100" "1.1.1.1" ];
         resolvconf.extraOptions = [ "use-vc" ];
 
         interfaces.eth0.ipv4.addresses = [{
