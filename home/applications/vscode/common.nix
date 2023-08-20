@@ -26,9 +26,11 @@
         "java.configuration.updateBuildConfiguration" = "automatic";
         "java.format.settings.url" = "${config.xdg.configHome}/java/java-formatter.xml";
 
+        "[csharp]"."editor.defaultFormatter" = "ms-dotnettools.csharp";
         "omnisharp.dotnetPath" = "${pkgsUnstable.dotnet-sdk}/bin";
         "omnisharp.dotNetCliPaths" = [ "${pkgsUnstable.dotnet-sdk}/bin" ];
         "omnisharp.enableEditorConfigSupport" = false;
+        "omnisharp.organizeImportsOnFormat" = true;
 
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "${pkgsUnstable.nil}/bin/nil";
