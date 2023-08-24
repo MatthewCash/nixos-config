@@ -54,7 +54,6 @@
         caribou
         seahorse
         nautilus
-        evince
         authenticator
         gnome-boxes
         foliate
