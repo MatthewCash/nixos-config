@@ -51,6 +51,10 @@ map (name: { inherit name; indent = { tab-width = 4; unit = "    "; }; }) fourTa
         language-server.command = "${pkgsUnstable.nodePackages.typescript-language-server}/bin/typescript-language-server";
     }
     {
+        name = "python";
+        language-server.command = "${pkgsUnstable.python3Packages.python-lsp-server}/bin/pylsp";
+    }
+    {
         name = "rust";
         language-server.command = "${pkgsUnstable.rust-analyzer}/bin/rust-analyzer";
     }
