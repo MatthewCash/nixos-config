@@ -21,6 +21,7 @@ builtins.map (path: ../../../config/${path}) [
     "hardware/keyboard.nix"
     "hardware/gpu.nix"
     "hardware/battery.nix"
+    "hardware/usbguard.nix"
     "de/gnome.nix"
     "cpu/intel.nix"
     "fs/mounts.nix"
@@ -47,4 +48,5 @@ builtins.map (path: ../../../config/${path}) [
     ./gpu.nix
     ./mounts.nix
     ./lid.nix
+    ./usbguard.nix
 ]
