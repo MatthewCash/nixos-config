@@ -149,4 +149,7 @@
 
     # :has() selector
     "layout.css.has-selector.enabled" = true;
+
+    # Ask where to save downloads
+    "browser.download.useDownloadDir" = false;
 }
