@@ -41,14 +41,15 @@ in
 
         inputs.lanzaboote.nixosModules.lanzaboote
 
-        {
+        ({ config, ... }: {
             system.stateVersion = stateVersion;
 
             home-manager = (import ./buildHomeConfigs.nix {
                 inherit (systemConfig) systemNixpkgs system homeConfig;
                 inherit inputs stateVersion extraArgs customLib useImpermanence;
                 stableLib = nixpkgsStable.lib;
+                systemConfig = config;
             }).nixos;
-        }
+        })
     ] ++ systemConfig.nixosConfig;
 }
