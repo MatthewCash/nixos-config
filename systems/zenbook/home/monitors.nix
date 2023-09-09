@@ -57,6 +57,24 @@ let
         };
     };
 
+    livingRoomTv = {
+        scale = 2;
+        monitor = {
+            monitorspec = {
+                connector = "HDMI-1";
+                vendor = "GSM";
+                product = "LG TV";
+                serial = "0x01010101";
+            };
+            mode = {
+                width = 3840;
+                height = 2160;
+                rate = "60.000";
+            };
+        };
+    };
+
+    # NOTE: all combinations should include the possibility that the screenpad is powered down (not connected)
     configuration = [
         # No external monitors connected
         {
@@ -67,21 +85,35 @@ let
         {
             logicalmonitor = [
                 (internal // { x = 120; y = 0; })
-                (screenpad // { x = 0; y = 1080; })
+                (screenpad // { x = 0; y = internal.monitor.mode.height; })
             ];
         }
         # Projector connected
         {
             logicalmonitor = [
                 (internal // { x = 0; y = 0; })
-                (projector // { x = 1920; y = 0; })
+                (projector // { x = internal.monitor.mode.width; y = 0; })
+            ];
+        }
+        {
+            logicalmonitor = [
+                (internal // { x = 120; y = 0; })
+                (screenpad // { x = 0; y = internal.monitor.mode.height; })
+                (projector // { x = 120 + internal.monitor.mode.width; y = 0; })
+            ];
+        }
+        # Living Room TV connected
+        {
+            logicalmonitor = [
+                (internal // { x = 0; y = 0; })
+                (livingRoomTv // { x = internal.monitor.mode.width; y = 0; })
             ];
         }
         {
             logicalmonitor = [
                 (internal // { x = 120; y = 0; })
                 (screenpad // { x = 0; y = 1080; })
-                (projector // { x = 120 + 1920; y = 0; })
+                (livingRoomTv // { x = 120 + internal.monitor.mode.width; y = 0; })
             ];
         }
     ];
