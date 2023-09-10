@@ -32,7 +32,7 @@ let
         "SpacingAroundBinaryOperator" = "single";
         "IndentBraces" = false;
         "IndentBlock" = true;
-        "IndentSwitchSection" = true;
+        "IndentSwitchSection" = false;
         "IndentSwitchCaseSection" = true;
         "LabelPositioning" = "oneLess";
         "WrappingPreserveSingleLine" = true;
