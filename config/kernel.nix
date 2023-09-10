@@ -1,9 +1,16 @@
 { kernelPackages, ... }:
 
 {
-    boot.kernelPackages = kernelPackages;
+    boot = {
+        kernelPackages = kernelPackages;
 
-    boot.kernel.sysctl = {
-        "kernel.sysrq" = 1;
+        kernel.sysctl = {
+            "kernel.sysrq" = 1;
+        };
+
+        kernelParams = [
+            "rd.shell=0"
+            "rd.emergency=reboot"
+        ];
     };
 }
