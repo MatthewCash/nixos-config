@@ -129,8 +129,6 @@
     "browser.tabs.firefox-view" = false;
 
     # Fonts
-    "font.default.x-western" = "sans-serif";
-    "font.name.serif.x-western" = "sans-serif";
     "browser.display.use_document_fonts" = 0;
 
     # Allow unverified addons
