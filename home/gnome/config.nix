@@ -67,7 +67,6 @@ in
                 "org.gnome.Nautilus.desktop"
             ];
             enabled-extensions = [
-                "screenshot-window-sizer@gnome-shell-extensions.gcampax.github.co"
                 "places-menu@gnome-shell-extensions.gcampax.github.com"
                 "user-theme@gnome-shell-extensions.gcampax.github.com"
             ];
