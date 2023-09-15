@@ -46,11 +46,6 @@ in
             experimental-features = [ "scale-monitor-framebuffer" ];
         };
 
-        "org/gnome/settings-daemon/plugins/color" = {
-            night-light-enabled = true;
-            night-light-schedule-automatic = true;
-        };
-
         "org/gnome/settings-daemon/plugins/power" = {
             idle-dim = false;
             sleep-inactive-ac-type = "nothing";
