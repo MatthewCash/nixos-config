@@ -41,7 +41,7 @@ in
         };
     };
 
-    home.file.".local/share/themes/shell-theme/gnome-shell/gnome-shell.css".text = shellCss;
+    xdg.dataFile."themes/shell-theme/gnome-shell/gnome-shell.css".text = shellCss;
     dconf.settings."org/gnome/shell/extensions/user-theme".name = "shell-theme";
 
     xdg.configFile."gtk-3.0/gtk.css".text = customCss;
