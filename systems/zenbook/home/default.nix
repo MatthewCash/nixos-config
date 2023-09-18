@@ -49,6 +49,7 @@ builtins.map (path: ../../../home/${path}) [
     "applications/editor-config.nix"
     "applications/libreoffice.nix"
     "applications/bat.nix"
+    "applications/gaphor.nix"
 ] ++ [
     ./monitors.nix
 ]
