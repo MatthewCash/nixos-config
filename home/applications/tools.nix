@@ -18,5 +18,6 @@
         gawk
         tree
         ldns
+        jless
     ];
 }
