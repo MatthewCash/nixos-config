@@ -7,7 +7,7 @@ let
     buildUserConfig = name: config: {
         inherit name;
         description = config.displayName or createDisplayName name;
-        passwordFile = "${persistPath}/pwd/${name}";
+        hashedPasswordFile = "${persistPath}/pwd/${name}";
         isNormalUser = true;
         home = "/home/${name}";
         shell = config.shell or pkgsUnstable.zsh;
