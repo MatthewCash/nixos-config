@@ -1,4 +1,4 @@
-{ stableLib, inputs, homeConfig, stateVersion, extraArgs, systemNixpkgs, system, customLib, useImpermanence, systemConfig }:
+{ stableLib, inputs, homeConfig, stateVersion, extraArgs, systemNixpkgs, system, customLib, useImpermanence, systemConfig ? null }:
 
 let
     defaultImports = [
@@ -31,6 +31,7 @@ let
         extraSpecialArgs = extraArgs // {
             persistenceHomePath = "none";
             name = builtins.getEnv "USER";
+            systemConfig = null;
             inherit useImpermanence;
         };
         modules = defaultImports ++ homeConfig ++ [ (stableLib.recursiveUpdate {
