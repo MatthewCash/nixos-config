@@ -17,6 +17,7 @@ The main goal is to be fully declarative and reproducible while not compromising
 
 - Sandboxing applications using something like [bubblewrap](https://github.com/containers/bubblewrap)
 - Setup disks during installation using [disko](https://github.com/nix-community/disko)
+- Configure nix on Android with [nix-on-droid](https://github.com/nix-community/nix-on-droid)
 
 ## Installation
 
