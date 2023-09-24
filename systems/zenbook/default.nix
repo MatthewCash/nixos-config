@@ -21,6 +21,6 @@ rec {
         usePamMount = true;
     };
 
-    nixosConfig = import ./config;
+    nixosConfig = import ./nixos;
     homeConfig.matthew = import ./home;
 }

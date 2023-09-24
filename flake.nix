@@ -114,14 +114,14 @@
             });
         }) systemNames;
         systemConfigs = builtins.listToAttrs systemConfigList;
-        systems = builtins.mapAttrs (name: systemConfig:
-            import ./systems/buildSystem.nix {
+        nixosSystems = builtins.mapAttrs (name: systemConfig:
+            import ./systems/buildNixos.nix {
                 inherit systemConfig inputs nixpkgsStable nixpkgsUnstable stateVersion customLib;
             }
         ) systemConfigs;
         nixosConfigurations = builtins.mapAttrs (name: system:
             system.specialArgs.systemNixpkgs.lib.nixosSystem system
-        ) systems;
+        ) nixosSystems;
 
         # Standalone Home Manager Configurations
         homeConfigurations = builtins.mapAttrs (systemName: systemConfig:
@@ -129,7 +129,7 @@
                 inherit (systemConfig) systemNixpkgs system homeConfig;
                 inherit inputs stateVersion customLib;
                 stableLib = nixpkgsStable.lib;
-                extraArgs = systems.${systemName}.specialArgs;
+                extraArgs = nixosSystems.${systemName}.specialArgs;
                 useImpermanence = false;
             }).standalone
         ) systemConfigs;
@@ -141,7 +141,7 @@
             value = builtins.mapAttrs (systemName: system: inputs.nixos-generators.nixosGenerate ({
                 format = formatName;
                 pkgs = system.specialArgs.systemNixpkgs.legacyPackages.${system.system};
-            } // system)) systems;
+            } // system)) nixosSystems;
         }) generatorFormats;
         generators = builtins.listToAttrs generatorList;
 

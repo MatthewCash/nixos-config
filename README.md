@@ -60,9 +60,9 @@ An installation image for this configuration can be generated with `nix build.#g
 
 ## Directory Structure
 
-### System Configurations `config/`
+### NixOS System Configurations `nixos/`
 
-This directory contains configuration files that modify the system state
+This directory contains configuration files that modify the NixOS system state
 
 ### Home Configurations `home/`
 
@@ -87,9 +87,9 @@ The individual system declarations `systems/systemname/default.nix` contain basi
 
 The declarations also have fields used to specify config imports (for the system or home)
 
-Files are usually imported from `config/` and `home/`, but systems often specify their own individual configs that should not be shared in `systems/systemname/config/`
+Files are usually imported from `nixos/` and `home/`, but systems often specify their own individual configs that should not be shared in `systems/systemname/nixos/`
 
-The file `systems/buildSystem.nix` is responsible for taking these system declarations and building a complete NixOS system from them, it also calls `systems/buildHomeConfigs.nix` to build the home configuration
+The file `systems/buildNixos.nix` is responsible for taking these system declarations and building a complete NixOS system from them, it also calls `systems/buildHomeConfigs.nix` to build the home configuration
 
 ### Secrets `secrets.nix` and `secrets/`
 

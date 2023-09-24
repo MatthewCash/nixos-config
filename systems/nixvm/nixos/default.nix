@@ -1,4 +1,4 @@
-builtins.map (path: ../../../config/${path}) [
+builtins.map (path: ../../../nixos/${path}) [
     "users.nix"
     "time.nix"
     "console.nix"

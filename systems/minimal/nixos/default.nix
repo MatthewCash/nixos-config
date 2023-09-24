@@ -1,4 +1,4 @@
-builtins.map (path: ../../../config/${path}) [
+builtins.map (path: ../../../nixos/${path}) [
     "users.nix"
     "time.nix"
     "console.nix"
@@ -6,19 +6,17 @@ builtins.map (path: ../../../config/${path}) [
     "pam.nix"
     "nix.nix"
     "kernel.nix"
-    "fonts.nix"
+    "boot.nix"
     "networking/general.nix"
     "networking/openssh.nix"
     "hardware/keyboard.nix"
+    "fs/mounts.nix"
     "fs/lvm.nix"
     "ld.nix"
     "env.nix"
     "docs.nix"
     "systemd/config.nix"
-    "kmscon.nix"
+    "dbus.nix"
 
     "applications/general.nix"
-] ++ [
-    ./networking.nix
-    ./kmscon.nix
 ]
