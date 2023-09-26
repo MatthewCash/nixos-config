@@ -39,6 +39,7 @@ builtins.map (path: ../../../nixos/${path}) [
     "dbus.nix"
     "kmscon.nix"
     "podman.nix"
+    "xdg.nix"
 
     "applications/general.nix"
 ] ++ [
