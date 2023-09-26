@@ -47,7 +47,7 @@
 
         initExtra = /* zsh */ ''
             ${builtins.readFile ./git_formatter.sh}
-            ${import ./p10k.nix { inherit accentColor; }  }
+            ${import ./p10k.nix { inherit accentColor; } }
 
             file="/run/current-system/etc/profile" && test -f $file && source $file
 
@@ -70,7 +70,7 @@
             cd() { pushd "''${1:-$HOME}" > /dev/null }
             x() {
                 command xdg-open "$@" 2>/dev/null
-                if [[ $? -eq 4 ]]; then
+                if [[ $? -eq 2 ]]; then
                     >&2 echo "File $1 not found!"
                 fi
             }

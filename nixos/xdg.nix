@@ -1,0 +1,5 @@
+{ ... }:
+
+{
+    xdg.portal.xdgOpenUsePortal = true;
+}
