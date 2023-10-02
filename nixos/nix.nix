@@ -10,9 +10,10 @@
             options = "--delete-older-than 30d";
         };
 
-        extraOptions = ''
-            experimental-features = nix-command flakes
-        '';
+        settings = {
+            experimental-features = [ "nix-command" "flakes" ];
+            use-xdg-base-directories = true;
+        };
 
         nixPath = [ "nixpkgs=${nixpkgsUnstable}" ];
     };
