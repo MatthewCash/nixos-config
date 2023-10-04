@@ -145,7 +145,7 @@
         }) generatorFormats;
         generators = builtins.listToAttrs generatorList;
 
-        packages = { pkgsStable }: let
+        packages = { pkgsStable, pkgsUnstable }: let
             nix = "${pkgsStable.nix}/bin/nix";
             eval = path: /* bash */ ''
                 echo "- eval .#${path}:"
@@ -157,7 +157,7 @@
         in rec {
             inherit generators;
             apply = pkgsStable.writeShellScriptBin "apply" /* bash */ ''
-                exec ${pkgsStable.nixos-rebuild}/bin/nixos-rebuild switch --flake path:. --use-remote-sudo $@
+                exec ${pkgsUnstable.nixos-rebuild}/bin/nixos-rebuild switch --flake path:. --use-remote-sudo $@
             '';
             full-upgrade = pkgsStable.writeShellScriptBin "full-upgrade" /* bash */ ''
                 ${nix} flake update path:.
@@ -187,8 +187,9 @@
             stableLib.forEach flake-utils.lib.defaultSystems (system:
                 let
                     pkgsStable = nixpkgsStable.legacyPackages.${system};
+                    pkgsUnstable = nixpkgsUnstable.legacyPackages.${system};
                 in
-                { name = system; value = packages { inherit pkgsStable; }; }
+                { name = system; value = packages { inherit pkgsStable pkgsUnstable; }; }
             )
         );
     };
