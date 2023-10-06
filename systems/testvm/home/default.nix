@@ -33,6 +33,7 @@ builtins.map (path: ../../../home/${path}) [
     "applications/helix"
     "applications/editor-config.nix"
     "applications/bat.nix"
+    "applications/nix.nix"
 ] ++ [
     ./gnome.nix
 ]
