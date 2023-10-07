@@ -51,6 +51,7 @@ builtins.map (path: ../../../home/${path}) [
     "applications/bat.nix"
     "applications/gaphor.nix"
     "applications/evince.nix"
+    "applications/nix.nix"
 ] ++ [
     ./monitors.nix
 ]
