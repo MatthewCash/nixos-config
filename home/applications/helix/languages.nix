@@ -41,6 +41,7 @@ map (name: { inherit name; indent = { tab-width = 4; unit = "    "; }; }) fourTa
     {
         name = "javascript";
         language-server.command = "${pkgsUnstable.nodePackages.typescript-language-server}/bin/typescript-language-server";
+        language-server.args = [ "--stdio" ];
     }
     {
         name = "json";
@@ -49,6 +50,7 @@ map (name: { inherit name; indent = { tab-width = 4; unit = "    "; }; }) fourTa
     {
         name = "jsx";
         language-server.command = "${pkgsUnstable.nodePackages.typescript-language-server}/bin/typescript-language-server";
+        language-server.args = [ "--stdio" ];
     }
     {
         name = "python";
@@ -65,6 +67,7 @@ map (name: { inherit name; indent = { tab-width = 4; unit = "    "; }; }) fourTa
     {
         name = "typescript";
         language-server.command = "${pkgsUnstable.nodePackages.typescript-language-server}/bin/typescript-language-server";
+        language-server.args = [ "--stdio" ];
     }
     {
         name = "vue";
