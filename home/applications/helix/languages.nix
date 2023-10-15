@@ -24,6 +24,7 @@ map (name: { inherit name; indent = { tab-width = 4; unit = "    "; }; }) fourTa
     {
         name = "css";
         language-server.command = "${pkgsUnstable.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver";
+        language-server.args = [ "--stdio" ];
     }
     {
         name = "go";
