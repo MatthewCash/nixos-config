@@ -50,7 +50,7 @@
         };
 
         gnome-accent-colors = {
-            url = "github:demiskp/custom-accent-colors";
+            url = "github:demiskp/custom-accent-colors/v6";
             flake = false;
         };
 
