@@ -20,7 +20,7 @@
         };
 
         firefox-gnome-theme = {
-            url = "github:rafaelmardojai/firefox-gnome-theme";
+            url = "github:rafaelmardojai/firefox-gnome-theme/beta";
             flake = false;
         };
 
@@ -55,7 +55,7 @@
         };
 
         lanzaboote = {
-            url = "github:nix-community/lanzaboote?ref=v0.3.0";
+            url = "github:nix-community/lanzaboote/v0.3.0";
             inputs.nixpkgs.follows = "nixpkgsStable";
         };
 
