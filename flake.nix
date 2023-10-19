@@ -88,6 +88,11 @@
             url = "github:EliverLara/Sweet-kde";
             flake = false;
         };
+
+        nixpak = {
+            url = "github:MatthewCash/nixpak";
+            inputs.nixpkgs.follows = "nixpkgsUnstable";
+        };
     };
 
     outputs = inputs @ { nixpkgsStable, nixpkgsUnstable, flake-utils, ... }:

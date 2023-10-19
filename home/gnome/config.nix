@@ -11,8 +11,9 @@ in
     home.sessionVariables.STATIC_WALLPAPER_PATH = wallpaperPath;
 
     xdg.mimeApps.defaultApplications = {
-        "x-scheme-handler/http" = stableLib.mkForce [ "firefoxGnome.desktop" ];
-        "x-scheme-handler/https" = stableLib.mkForce [ "firefoxGnome.desktop" ];
+        "x-scheme-handler/http" = stableLib.mkForce [ "org.mozilla.Firefox.gnome.desktop" ];
+        "x-scheme-handler/https" = stableLib.mkForce [ "org.mozilla.Firefox.gnome.desktop" ];
+        "application/pdf" = stableLib.mkForce [ "org.mozilla.Firefox.gnome.desktop" ];
     };
 
     dconf.settings = {
@@ -59,7 +60,7 @@ in
                 "chromium-browser.desktop"
                 "termius-app.desktop"
                 "codium.desktop"
-                "firefoxGnome.desktop"
+                "org.mozilla.Firefox.gnome.desktop"
                 "steam.desktop"
                 "org.gnome.Boxes.desktop"
                 "org.gnome.Console.desktop"
