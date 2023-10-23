@@ -19,5 +19,6 @@
         tree
         ldns
         jless
+        traceroute
     ];
 }
