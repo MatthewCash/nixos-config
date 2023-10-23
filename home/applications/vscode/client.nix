@@ -1,4 +1,4 @@
-args @ { pkgsStable, pkgsUnstable, stableLib, useImpermanence, persistenceHomePath, name, inputs, system, ... }:
+args @ { pkgsStable, pkgsUnstable, inputs, system, ... }:
 
 let
     vscodium = (pkgsUnstable.vscodium.overrideAttrs (oldAttrs: {
@@ -64,7 +64,7 @@ in
             "workbench.colorTheme" = "Main Theme";
             "window.titleBarStyle" = "custom";
             "editor.smoothScrolling" = true;
-            "editor.cursorSmoothCaretAnimation" = true;
+            "editor.cursorSmoothCaretAnimation" = "on";
             "workbench.list.smoothScrolling" = true;
             "terminal.integrated.smoothScrolling" = true;
             "editor.renderWhitespace" = "all";
