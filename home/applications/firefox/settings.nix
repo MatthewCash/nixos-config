@@ -68,15 +68,7 @@
                 "downloads-button"
                 "developer-button"
                 "print-button"
-                "ublock0_raymondhill_net-browser-action"
-                "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
-                "addon_darkreader_org-browser-action"
-                "sponsorblocker_ajay_app-browser-action"
-                "_b86e4813-687a-43e6-ab65-0bde4ab75758_-browser-action"
-                "jid1-kkzogwgsw3ao4q_jetpack-browser-action"
-                "_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action"
-                "_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action"
-                "_b86e4813-687a-43e6-ab65-0bde4ab75758_-browser-action"
+                "firefox-view-button"
             ];
             "nav-bar" = [
                 "back-button"
@@ -84,6 +76,7 @@
                 "stop-reload-button"
                 "urlbar-container"
                 "fxa-toolbar-menu-button"
+                "unified-extensions-button"
             ];
             "toolbar-menubar" = [ "menubar-items" ];
             "TabsToolbar" = [ "tabbrowser-tabs" "alltabs-button" ];
@@ -96,7 +89,7 @@
             "TabsToolbar"
             "widget-overflow-fixed-list"
         ];
-        "currentVersion" = 17;
+        "currentVersion" = 19;
         "newElementCount" = 5;
     };
     "browser.urlbar.placeholderName" = "Google";
