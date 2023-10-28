@@ -1,8 +1,10 @@
-{ accentColor, pkgsUnstable, inputs, ... }:
+{ stableLib, pkgsUnstable, systemConfig, accentColor, inputs, ... }:
 
 let
-    inherit (accentColor) r g b;
-    plasmaAccentColor = "${builtins.toString r},${builtins.toString g},${builtins.toString b}";
+    plasmaAccentColor = stableLib.strings.concatMapStringsSep
+        ","
+        builtins.toString
+        (with accentColor; [r g b]);
 in
 
 {
@@ -15,10 +17,11 @@ in
                     AccentColor = plasmaAccentColor;
                     XftHintStyle = "hintslight";
                     XftSubPixel = "none";
-                    fixed = "CaskaydiaCove Nerd Font Mono,10,-1,5,50,0,0,0,0,0";
+                    fixed = "${builtins.head systemConfig.fonts.fontconfig.defaultFonts.monospace},10,-1,5,50,0,0,0,0,0";
                     ColorScheme = "Sweet";
                 };
                 WM = {
+                    # TODO: get from accentColor
                     activeBackground = "49,54,59";
                     activeBlend = "252,252,252";
                     activeForeground = "252,252,252";
@@ -27,7 +30,6 @@ in
                     inactiveForeground = "161,169,177";
                 };
                 KDE = {
-                    #LookAndFeelPackage = "Sweet";
                     widgetStyle = "kvantum-dark";
                 };
             };
