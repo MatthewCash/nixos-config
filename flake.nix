@@ -151,7 +151,7 @@
         generators = builtins.listToAttrs generatorList;
 
         packages = { pkgsStable, pkgsUnstable }: let
-            nix = "${pkgsStable.nix}/bin/nix";
+            nix = "${pkgsUnstable.nix}/bin/nix";
             eval = path: /* bash */ ''
                 echo "- eval .#${path}:"
                 out=$(${nix} eval --impure --raw path:.#${path})
