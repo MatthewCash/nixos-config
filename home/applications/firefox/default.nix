@@ -46,7 +46,7 @@ let
         (stableLib.lists.zipLists desktopFiles wmClasses);
 
     mkNixPak = inputs.nixpak.lib.nixpak { lib = stableLib; pkgs = pkgsStable; };
-    systemConfigOptionals = stableLib.optionals (!builtins.isNull systemConfig);
+    systemConfigOptionals = stableLib.optionals (systemConfig != null);
     wrapFirefox = mkNixPak {
         config = { sloth, ... }: rec {
             app.package = firefox-devedition.overrideAttrs (oldAttrs: {

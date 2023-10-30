@@ -21,7 +21,7 @@ in
             clock-show-seconds = true;
             clock-show-weekday = true;
             font-antialiasing = "grayscale";
-            monospace-font-name = stableLib.mkIf (!builtins.isNull systemConfig)
+            monospace-font-name = stableLib.mkIf (systemConfig != null)
                 "${builtins.head systemConfig.fonts.fontconfig.defaultFonts.monospace} 12";
             show-battery-percentage = true;
             enable-hot-corners = true;
