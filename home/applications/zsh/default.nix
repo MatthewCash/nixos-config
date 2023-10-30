@@ -34,8 +34,8 @@
 
         enableCompletion = true;
         syntaxHighlighting.enable = true;
-
         enableAutosuggestions = true;
+
         history.share = false;
 
         shellAliases = {
