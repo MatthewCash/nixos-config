@@ -12,5 +12,5 @@ let
 in
 
 {
-    home.file.".prettierrc.json".text = builtins.toJSON settings;
+    home.file."code/.prettierrc.json".text = builtins.toJSON settings;
 }
