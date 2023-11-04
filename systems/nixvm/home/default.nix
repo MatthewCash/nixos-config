@@ -8,6 +8,7 @@ builtins.map (path: ../../../home/${path}) [
     "dev/java"
     "dev/omnisharp.nix"
     "dev/prettier.nix"
+    "dev/editor-config.nix"
 
     "applications/tools.nix"
     "applications/fzf.nix"
@@ -21,7 +22,6 @@ builtins.map (path: ../../../home/${path}) [
     "applications/direnv.nix"
     "applications/helix"
     "applications/gradle.nix"
-    "applications/editor-config.nix"
     "applications/bat.nix"
     "applications/nix.nix"
 ]

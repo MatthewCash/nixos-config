@@ -5,6 +5,7 @@ builtins.map (path: ../../../home/${path}) [
     "dev/node.nix"
     "dev/python.nix"
     "dev/prettier.nix"
+    "dev/editor-config.nix"
 
     "applications/tools.nix"
     "applications/fzf.nix"
@@ -16,7 +17,6 @@ builtins.map (path: ../../../home/${path}) [
     "applications/zsh/bash2zsh.nix"
     "applications/direnv.nix"
     "applications/helix"
-    "applications/editor-config.nix"
     "applications/bat.nix"
     "applications/nix.nix"
 ]

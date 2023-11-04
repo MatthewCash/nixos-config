@@ -25,6 +25,7 @@ builtins.map (path: ../../../home/${path}) [
     "dev/node.nix"
     "dev/python.nix"
     "dev/java"
+    "dev/editor-config.nix"
 
     "applications/tools.nix"
     "applications/chromium.nix"
@@ -47,7 +48,6 @@ builtins.map (path: ../../../home/${path}) [
     "applications/direnv.nix"
     "applications/helvum.nix"
     "applications/helix"
-    "applications/editor-config.nix"
     "applications/libreoffice.nix"
     "applications/bat.nix"
     "applications/gaphor.nix"
