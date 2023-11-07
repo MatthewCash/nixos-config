@@ -1,4 +1,4 @@
-{ pkgsUnstable, stableLib, config, ... }:
+{ pkgsUnstable, ... }:
 
 let
     fourTabLanguages = [
@@ -6,76 +6,60 @@ let
     ];
 in
 
-map (name: { inherit name; indent = { tab-width = 4; unit = "    "; }; }) fourTabLanguages ++
-[
-    {
-        name = "c";
-        language-server.command = "${pkgsUnstable.clang-tools}/bin/clangd";
-    }
-    {
-        name = "c-sharp";
-        language-server.command = "${pkgsUnstable.omnisharp-roslyn}/bin/OmniSharp";
-        language-server.args = [ "--languageserver" ];
-    }
-    {
-        name = "cpp";
-        language-server.command = "${pkgsUnstable.clang-tools}/bin/clangd";
-    }
-    {
-        name = "css";
-        language-server.command = "${pkgsUnstable.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver";
-        language-server.args = [ "--stdio" ];
-    }
-    {
-        name = "go";
-        language-server.command = "${pkgsUnstable.gopls}/bin/gopls";
-    }
-    {
-        name = "html";
-        language-server.command = "${pkgsUnstable.nodePackages.vscode-html-languageserver-bin}/bin/html-languageserver";
-    }
-    ] ++ stableLib.optional config.programs.java.enable { # Make Java optional because total size > 1GB
-        name = "java";
-        language-server.command = "${pkgsUnstable.jdt-language-server}/bin/jdt-language-server";
-        language-server.args = [ "-configuration" ".jdtls/config" "-data" ".jdtls/data" ];
-    } ++ [
-    {
-        name = "javascript";
-        language-server.command = "${pkgsUnstable.nodePackages.typescript-language-server}/bin/typescript-language-server";
-        language-server.args = [ "--stdio" ];
-    }
-    {
-        name = "json";
-        language-server.command = "${pkgsUnstable.nodePackages.vscode-json-languageserver}/bin/vscode-json-languageserver";
-    }
-    {
-        name = "jsx";
-        language-server.command = "${pkgsUnstable.nodePackages.typescript-language-server}/bin/typescript-language-server";
-        language-server.args = [ "--stdio" ];
-    }
-    {
-        name = "python";
-        language-server.command = "${pkgsUnstable.python3Packages.python-lsp-server}/bin/pylsp";
-    }
-    {
-        name = "rust";
-        language-server.command = "${pkgsUnstable.rust-analyzer}/bin/rust-analyzer";
-    }
-    {
-        name = "tsx";
-        language-server.command = "${pkgsUnstable.nodePackages.typescript-language-server}/bin/typescript-language-server";
-    }
-    {
-        name = "typescript";
-        language-server.command = "${pkgsUnstable.nodePackages.typescript-language-server}/bin/typescript-language-server";
-        language-server.args = [ "--stdio" ];
-    }
-    {
-        name = "vue";
-        language-server.command = "${pkgsUnstable.nodePackages.vls}/bin/vls";
-    }
-    {
-        name = "nix";
-        language-server.command = "${pkgsUnstable.nil}/bin/nil";
-    }
-]
+{
+    language-server = {
+        clangd = {
+            command = "${pkgsUnstable.clang-tools}/bin/clangd";
+        };
+        docker-langserver = {
+            command = "${pkgsUnstable.dockerfile-language-server-nodejs}/bin/docker-langserver";
+        };
+        vscode-css-language-server = {
+            command = "${pkgsUnstable.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver";
+            args = [ "--stdio" ];
+        };
+        gopls = {
+            command = "${pkgsUnstable.gopls}/bin/gopls";
+        };
+        vscode-html-language-server = {
+            command = "${pkgsUnstable.nodePackages.vscode-html-languageserver-bin}/bin/html-languageserver";
+            args = [ "--stdio" ];
+        };
+        vscode-json-language-server = {
+            command = "${pkgsUnstable.nodePackages.vscode-json-languageserver}/bin/vscode-json-languageserver";
+            args = [ "--stdio" ];
+        };
+        jdtls = {
+            # Gets LSP from PATH because it is optional (Java is > 1GB)
+            command = "jdt-language-server";
+        };
+        marksman = {
+            command = "${pkgsUnstable.marksman}/bin/marksman";
+        };
+        nil = {
+            command = "${pkgsUnstable.nil}/bin/nil";
+        };
+        omnisharp = {
+            command = "${pkgsUnstable.omnisharp-roslyn}/bin/OmniSharp";
+            args = [ "--languageserver" ];
+        };
+        pylsp = {
+            command = "${pkgsUnstable.python3Packages.python-lsp-server}/bin/pylsp";
+        };
+        rust-analyzer = {
+            command = "${pkgsUnstable.rust-analyzer}/bin/rust-analyzer";
+        };
+        typescript-language-server = {
+            command = "${pkgsUnstable.nodePackages.typescript-language-server}/bin/typescript-language-server";
+            args = [ "--stdio" ];
+        };
+        vuels = {
+            command = "${pkgsUnstable.nodePackages.volar}/bin/vue-language-server";
+        };
+        yaml-language-server = {
+            command = "${pkgsUnstable.yaml-language-server}/bin/yaml-language-server";
+        };
+    };
+
+    language = map (name: { inherit name; indent = { tab-width = 4; unit = "    "; }; }) fourTabLanguages;
+}
