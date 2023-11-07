@@ -25,5 +25,10 @@ in
         package = pkgsUnstable.jdk;
     };
 
+    home.packages = with pkgsUnstable; [
+        jdt-language-server
+        kotlin-language-server
+    ];
+
     xdg.configFile."java/java-formatter.xml".text = settingsText;
 }
