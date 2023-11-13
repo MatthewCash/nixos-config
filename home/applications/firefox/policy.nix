@@ -30,10 +30,6 @@ in
             installation_mode = "normal_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/sponsorblock/latest.xpi";
         };
-        "{762f9885-5a13-4abd-9c77-433dcd38b8fd}" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/return-youtube-dislikes/latest.xpi";
-        };
         "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}" = {
             installation_mode = "normal_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/styl-us/latest.xpi";
