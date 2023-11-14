@@ -1,29 +1,14 @@
-{ inputs, nixpkgsStable, nixpkgsUnstable, systemConfig, stateVersion, customLib }:
+{ buildArgs, inputs, nixpkgsStable, nixpkgsUnstable, systemConfig, stateVersion, customLib, pkgsStable, pkgsUnstable, stableLib, unstableLib, accentColor, ... }:
 
 let
     kernelPackages = systemConfig.kernelPackages or nixpkgsStable.legacyPackages.${systemConfig.system}.linuxPackages;
     persistPath = systemConfig.persistPath or "/mnt/persist";
     homeMountPath = systemConfig.persistPath or "/mnt/home";
     batteryChargeLimit = systemConfig.batteryChargeLimit or 100;
-    useImpermanence = systemConfig.useImpermanence or true;
 
-    accentColor = systemConfig.accentColor // {
-        inherit (customLib.hsl2rgb accentColor) r g b;
-        hex = customLib.rgb2hex accentColor;
-    };
-
-    nixpkgsArgs = {
-        localSystem = systemConfig.system;
-        config.allowUnfreePredicate = pkg: builtins.elem (nixpkgsStable.lib.getName pkg) (systemConfig.unfreePkgs or [ ]);
-    };
-
-    extraArgs = rec {
+    extraArgs = {
         inherit (systemConfig) system systemNixpkgs hostname ssd vpnAddress tailscaleId users;
-        inherit inputs nixpkgsStable nixpkgsUnstable kernelPackages persistPath homeMountPath batteryChargeLimit accentColor stateVersion customLib;
-        pkgsStable = import nixpkgsStable nixpkgsArgs;
-        pkgsUnstable = import nixpkgsUnstable nixpkgsArgs;
-        stableLib = pkgsStable.lib;
-        unstableLib = pkgsUnstable.lib;
+        inherit inputs nixpkgsStable nixpkgsUnstable kernelPackages persistPath homeMountPath batteryChargeLimit stateVersion customLib pkgsStable pkgsUnstable stableLib unstableLib accentColor;
     };
 in
 
@@ -44,12 +29,11 @@ in
         ({ config, ... }: {
             system.stateVersion = stateVersion;
 
-            home-manager = (import ./buildHomeConfigs.nix {
+            home-manager = (import ./buildHomeConfigs.nix (buildArgs // {
                 inherit (systemConfig) systemNixpkgs system homeConfig;
-                inherit inputs stateVersion extraArgs customLib useImpermanence;
-                stableLib = nixpkgsStable.lib;
+                inherit buildArgs inputs stateVersion extraArgs customLib;
                 systemConfig = config;
-            }).nixos;
+            })).nixos;
         })
     ] ++ systemConfig.nixosConfig;
 }

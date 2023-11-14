@@ -1,4 +1,4 @@
-{ stableLib, inputs, homeConfig, stateVersion, extraArgs, systemNixpkgs, system, customLib, useImpermanence, systemConfig ? null }:
+{ stableLib, buildArgs, inputs, homeConfig, stateVersion, systemNixpkgs, system, systemConfig ? null, ... }:
 
 let
     defaultImports = [
@@ -20,22 +20,24 @@ let
     nixos = {
         useGlobalPkgs = true;
         users = nixosProfiles;
-        extraSpecialArgs = extraArgs // {
+        extraSpecialArgs = buildArgs // {
             persistenceHomePath = "/mnt/home";
-            inherit useImpermanence systemConfig;
+            inherit (buildArgs) useImpermanence;
+            inherit systemConfig;
         };
     };
 
     standalone = builtins.mapAttrs (homeName: homeConfig: (inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = systemNixpkgs.legacyPackages.${system};
-        extraSpecialArgs = extraArgs // {
+        extraSpecialArgs = buildArgs // {
             persistenceHomePath = "none";
             name = builtins.getEnv "USER";
             systemConfig = null;
-            inherit useImpermanence;
+            inherit (buildArgs) useImpermanence;
         };
         modules = defaultImports ++ homeConfig ++ [ (stableLib.recursiveUpdate {
             home = {
+                persistence."none/${homeName}".allowOther = false; # Doesn't do anything, just prevents a warning
                 username =
                     stableLib.warnIf
                     stableLib.inPureEvalMode

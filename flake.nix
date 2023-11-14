@@ -108,7 +108,7 @@
 
         customLib = builtins.foldl' (acc: cur: acc // cur) {} customLibs;
 
-        # NixOS Configurations
+        # Systems
         systemNames = builtins.attrNames
             (stableLib.attrsets.filterAttrs (n: v: v == "directory")
             (builtins.readDir ./systems));
@@ -119,25 +119,37 @@
             });
         }) systemNames;
         systemConfigs = builtins.listToAttrs systemConfigList;
-        nixosSystems = builtins.mapAttrs (name: systemConfig:
-            import ./systems/buildNixos.nix {
+        buildArgs = builtins.mapAttrs (name: systemConfig: 
+            import ./systems/buildArgs.nix {
                 inherit systemConfig inputs nixpkgsStable nixpkgsUnstable stateVersion customLib;
             }
         ) systemConfigs;
+
+        # NixOS Configurations
+        nixosSystems = builtins.zipAttrsWith (name: both:
+            let
+                systemConfig = builtins.elemAt both 0;
+                buildArgs = builtins.elemAt both 1;
+            in
+            import ./systems/buildNixos.nix (buildArgs // {
+                inherit systemConfig buildArgs inputs nixpkgsStable nixpkgsUnstable stateVersion customLib;
+            })
+        ) [ systemConfigs buildArgs ];
         nixosConfigurations = builtins.mapAttrs (name: system:
             system.specialArgs.systemNixpkgs.lib.nixosSystem system
         ) nixosSystems;
 
         # Standalone Home Manager Configurations
-        homeConfigurations = builtins.mapAttrs (systemName: systemConfig:
-            (import ./systems/buildHomeConfigs.nix {
+        homeConfigurations = builtins.zipAttrsWith (systemName: both:
+            let
+                systemConfig = builtins.elemAt both 0;
+                buildArgs = builtins.elemAt both 1;
+            in
+            (import ./systems/buildHomeConfigs.nix (buildArgs // {
                 inherit (systemConfig) systemNixpkgs system homeConfig;
-                inherit inputs stateVersion customLib;
-                stableLib = nixpkgsStable.lib;
-                extraArgs = nixosSystems.${systemName}.specialArgs;
-                useImpermanence = false;
-            }).standalone
-        ) systemConfigs;
+                inherit buildArgs;
+            })).standalone
+        ) [ systemConfigs buildArgs];
 
         # NixOS Generators
         generatorFormats = builtins.attrNames inputs.nixos-generators.nixosModules;
@@ -182,6 +194,7 @@
                         eval "homeConfigurations.${systemName}.${homeName}"
                     ) value) homeConfigurations)
                 ))}
+
                 echo "All evaluations completed successfully!"
             '';
         };
