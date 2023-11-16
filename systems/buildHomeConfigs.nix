@@ -33,11 +33,10 @@ let
             persistenceHomePath = "none";
             name = builtins.getEnv "USER";
             systemConfig = null;
-            inherit (buildArgs) useImpermanence;
+            useImpermanence = false;
         };
         modules = defaultImports ++ homeConfig ++ [ (stableLib.recursiveUpdate {
             home = {
-                persistence."none/${homeName}".allowOther = false; # Doesn't do anything, just prevents a warning
                 username =
                     stableLib.warnIf
                     stableLib.inPureEvalMode
