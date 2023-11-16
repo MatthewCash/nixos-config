@@ -7,7 +7,8 @@
             # Web
             "x-scheme-handler/http" = [ "firefoxFloating.desktop" ];
             "x-scheme-handler/https" = [ "firefoxFloating.desktop" ];
-            "application/pdf" = [ "org.gnome.Evince.desktop" ];
+            "application/pdf" = [ "org.gnome.Evince.desktop" "firefoxFloating.desktop" ];
+
             "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
 
             # Mail
