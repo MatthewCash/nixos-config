@@ -15,7 +15,6 @@ builtins.map (path: ../../../home/${path}) [
     "gnome/extensions/tray-icons-reloaded.nix"
     "gnome/extensions/rounded-windows.nix"
     "gnome/extensions/desktop-cube.nix"
-    "gnome/extensions/spacebar.nix"
     "gnome/extensions/blur-my-shell.nix"
     "desktop/defaultApps.nix"
     "desktop/userDirs.nix"
