@@ -2,7 +2,7 @@
     description = "NixOS and Home Manager Configuration";
 
     inputs = {
-        nixpkgsStable.url = "github:nixos/nixpkgs/nixos-23.05";
+        nixpkgsStable.url = "github:nixos/nixpkgs/nixos-23.11";
         nixpkgsUnstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
         flake-utils.url = "github:numtide/flake-utils";
@@ -99,7 +99,7 @@
     let
         stableLib = nixpkgsStable.lib;
 
-        stateVersion = "23.05";
+        stateVersion = "23.11";
 
         # Lib
         customLibs = builtins.map (name: import ./lib/${name} stableLib) (builtins.attrNames
