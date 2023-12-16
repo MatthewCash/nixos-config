@@ -1,10 +1,14 @@
-{ stableLib, useImpermanence, persistenceHomePath, name, ... }:
+{ stableLib, pkgsUnstable, useImpermanence, persistenceHomePath, name, ... }:
 
 {
     home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence [
         ".local/share/evolution"
         ".config/evolution"
         ".cache/evolution"
+    ];
+
+    home.packages = with pkgsUnstable; [
+        (evolutionWithPlugins.override { plugins = [ evolution evolution-ews ]; })
     ];
 
     dconf.settings."org/gnome/evolution/mail" = {
@@ -55,7 +59,6 @@
         x = 0;
         y = 0;
     };
-
 
     # Prefer plain text messages
     dconf.settings."org/gnome/evolution/plugin/prefer-plain" = {
