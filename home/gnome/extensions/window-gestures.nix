@@ -7,6 +7,6 @@
 
     dconf.settings."org/gnome/shell/extensions/windowgestures" = {
         taphold-move = false;
-        swipe4-down = 1;
+        swipe4-updown = 1;
     };
 }
