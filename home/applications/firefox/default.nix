@@ -71,6 +71,7 @@ let
                 bindEntireStore = false;
                 bind.rw = [
                     (sloth.concat' sloth.homeDir "/.mozilla")
+                    (sloth.concat' sloth.xdgCacheHome "/mozilla")
                     (sloth.concat' sloth.runtimeDir "/gvfs")
                     (sloth.concat' sloth.runtimeDir "/gvfsd")
                     (sloth.concat' sloth.runtimeDir "/doc") # For the Document portal
