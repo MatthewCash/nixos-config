@@ -1,4 +1,4 @@
-args @ { accentColor, ... }:
+args:
 
 {
     programs.helix = {
