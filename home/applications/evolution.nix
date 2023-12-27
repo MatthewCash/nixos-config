@@ -1,4 +1,54 @@
-{ stableLib, pkgsUnstable, useImpermanence, persistenceHomePath, name, ... }:
+{ stableLib, pkgsStable, pkgsUnstable, inputs, useImpermanence, config, systemConfig, persistenceHomePath, name, ... }:
+
+let
+    systemConfigOptionals = stableLib.optionals (systemConfig != null);
+
+    wrappedEvolution = inputs.nixpak.lib.nixpak { lib = stableLib; pkgs = pkgsStable; } {
+        config = { sloth, ... }: {
+            app.package = pkgsUnstable.evolutionWithPlugins.override
+                { plugins = with pkgsUnstable; [ evolution evolution-ews ]; };
+            app.binPath = "bin/evolution";
+            dbus.policies = {
+                "org.freedesktop.portal.*" = "talk";
+                "ca.desrt.dconf" = "talk";
+                "org.a11y.Bus" = "talk";
+                "org.gnome.SessionManager" = "talk";
+                "org.gtk.vfs.*" = "talk";
+                "org.freedesktop.Notifications" = "talk";
+                "org.gnome.OnlineAccounts" = "talk";
+                "org.freedesktop.secrets" = "talk";
+                "org.gnome.keyring.SystemPrompter" = "talk";
+            };
+            locale.enable = true;
+            etc.sslCertificates.enable = true;
+            bubblewrap = {
+                bindEntireStore = false;
+                bind.rw = [
+                    (sloth.concat' sloth.xdgDataHome "/evolution")
+                    (sloth.concat' sloth.xdgCacheHome "/evolution")
+                    (sloth.concat' sloth.xdgConfigHome "/evolution")
+                    (sloth.concat' sloth.runtimeDir "/gvfs")
+                    (sloth.concat' sloth.runtimeDir "/gvfsd")
+                    (sloth.concat' sloth.runtimeDir "/doc") # For the Document portal
+                    (sloth.concat' sloth.runtimeDir "/at-spi/bus") # a11y bus
+                ];
+                bind.ro = [
+                    "/etc/fonts"
+                    [ ("${config.gtk.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
+                ];
+                extraStorePaths = systemConfigOptionals [
+                    systemConfig.hardware.opengl.package
+                    (stableLib.strings.removeSuffix "/etc/fonts/" systemConfig.environment.etc.fonts.source) # Fonts
+                ] ++ systemConfigOptionals systemConfig.hardware.opengl.extraPackages; # Video acceleration
+                sockets = {
+                    wayland = true;
+                    pipewire = true;
+                    pulse = true;
+                };
+            };
+        };
+    };
+in
 
 {
     home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence [
@@ -7,9 +57,7 @@
         ".cache/evolution"
     ];
 
-    home.packages = with pkgsUnstable; [
-        (evolutionWithPlugins.override { plugins = [ evolution evolution-ews ]; })
-    ];
+    home.packages = [ wrappedEvolution.config.env ];
 
     dconf.settings."org/gnome/evolution/mail" = {
         layout = 1;
