@@ -32,4 +32,6 @@
     programs.dconf.enable = true;
 
     services.dbus.packages = with pkgsUnstable; [ dconf ];
+
+    xdg.portal.extraPortals = with pkgsUnstable; [ xdg-desktop-portal-gtk ];
 }
