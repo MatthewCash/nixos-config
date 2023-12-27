@@ -1,9 +1,9 @@
 args @ { pkgsStable, pkgsUnstable, systemConfig, config, stableLib, useImpermanence, persistenceHomePath, name, inputs, accentColor, ... }:
 
 let
-    thunderbird = pkgsUnstable.thunderbird.override (old: {
+    thunderbird = pkgsUnstable.thunderbird.override {
         extraPolicies = import ./policy.nix args;
-    });
+    };
 
     systemConfigOptionals = stableLib.optionals (systemConfig != null);
 
@@ -37,11 +37,14 @@ let
                 ];
                 bind.ro = [
                     "/etc/fonts"
+                    config.home-files # Not in extraStorePaths because we do not want it recursively linked
                     [ ("${config.gtk.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
                 ];
-                extraStorePaths = [
-                    config.home-files # Access to declarative configuration
-                ] ++ systemConfigOptionals [
+                extraStorePaths = (
+                    stableLib.attrsets.mapAttrsToList
+                        (n: v: v.source)
+                        (stableLib.attrsets.filterAttrs (n: v: stableLib.strings.hasPrefix ".thunderbird" n) config.home.file)
+                ) ++ systemConfigOptionals [
                     systemConfig.hardware.opengl.package # WebRender acceleration
                     (stableLib.strings.removeSuffix "/etc/fonts/" systemConfig.environment.etc.fonts.source) # Fonts
                 ] ++ systemConfigOptionals systemConfig.hardware.opengl.extraPackages; # Video acceleration

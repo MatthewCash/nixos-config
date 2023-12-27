@@ -83,12 +83,15 @@ let
                 ];
                 bind.ro = [
                     "/etc/fonts"
+                    config.home-files # Not in extraStorePaths because we do not want it recursively linked
                     [ ("${config.gtk.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
                     [ "${app.package}/lib/firefox/mozilla.cfg" "/app/etc/firefox/mozilla.cfg"]
                 ];
-                extraStorePaths = [
-                    config.home-files # Access to declarative configuration
-                ] ++ systemConfigOptionals [
+                extraStorePaths = (
+                    stableLib.attrsets.mapAttrsToList
+                        (n: v: v.source)
+                        (stableLib.attrsets.filterAttrs (n: v: stableLib.strings.hasPrefix ".mozilla" n) config.home.file)
+                ) ++ systemConfigOptionals [
                     systemConfig.hardware.opengl.package # WebRender acceleration
                     (stableLib.strings.removeSuffix "/etc/fonts/" systemConfig.environment.etc.fonts.source) # Fonts
                 ] ++ systemConfigOptionals systemConfig.hardware.opengl.extraPackages; # Video acceleration
