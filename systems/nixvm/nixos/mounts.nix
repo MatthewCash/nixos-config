@@ -46,6 +46,13 @@ in
             options = windowsMountOptions;
         };
 
+        data = {
+            device = "//host/Data";
+            fsType = "cifs";
+            mountPoint = "/mnt/data";
+            options = windowsMountOptions;
+        };
+
         # Windows Bind Mounts
 
         windows-code = {
