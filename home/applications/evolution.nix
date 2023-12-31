@@ -37,6 +37,7 @@ let
                     "/etc/fonts"
                     config.home-files # Not in extraStorePaths because we do not want it recursively linked
                     [ ("${config.gtk.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
+                    [ ("${config.gtk.theme.package}/share/themes") (sloth.concat' sloth.xdgDataHome "/themes") ]
                 ];
                 extraStorePaths = (
                     stableLib.attrsets.mapAttrsToList
