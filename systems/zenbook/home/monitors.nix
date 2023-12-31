@@ -61,10 +61,10 @@ let
         scale = 2;
         monitor = {
             monitorspec = {
-                connector = "HDMI-1";
+                connector = "DP-1";
                 vendor = "GSM";
                 product = "LG TV";
-                serial = "0x01010101";
+                serial = "0x2322f90a";
             };
             mode = {
                 width = 3840;
