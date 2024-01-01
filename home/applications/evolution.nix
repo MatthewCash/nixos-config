@@ -19,6 +19,7 @@ let
                 "org.freedesktop.secrets" = "talk";
                 "org.gnome.keyring.SystemPrompter" = "talk";
                 "org.gnome.Evolution" = "own";
+                "org.gnome.evolution.dataserver.*" = "talk";
             };
             locale.enable = true;
             etc.sslCertificates.enable = true;
