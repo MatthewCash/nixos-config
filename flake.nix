@@ -101,13 +101,6 @@
 
         stateVersion = "23.11";
 
-        # Lib
-        customLibs = builtins.map (name: import ./lib/${name} stableLib) (builtins.attrNames
-            (stableLib.attrsets.filterAttrs (n: v: v == "regular")
-            (builtins.readDir ./lib)));
-
-        customLib = builtins.foldl' (acc: cur: acc // cur) {} customLibs;
-
         # Systems
         systemNames = builtins.attrNames
             (stableLib.attrsets.filterAttrs (n: v: v == "directory")
@@ -121,7 +114,7 @@
         systemConfigs = builtins.listToAttrs systemConfigList;
         buildArgs = builtins.mapAttrs (name: systemConfig: 
             import ./systems/buildArgs.nix {
-                inherit systemConfig inputs nixpkgsStable nixpkgsUnstable stateVersion customLib;
+                inherit systemConfig inputs nixpkgsStable nixpkgsUnstable stateVersion;
             }
         ) systemConfigs;
 
@@ -132,7 +125,7 @@
                 buildArgs = builtins.elemAt both 1;
             in
             import ./systems/buildNixos.nix (buildArgs // {
-                inherit systemConfig buildArgs inputs nixpkgsStable nixpkgsUnstable stateVersion customLib;
+                inherit systemConfig buildArgs inputs nixpkgsStable nixpkgsUnstable stateVersion;
             })
         ) [ systemConfigs buildArgs ];
         nixosConfigurations = builtins.mapAttrs (name: system:
@@ -173,6 +166,7 @@
             testSystems = builtins.filter (name: !(builtins.elem name excludeSystems)) systemNames;
         in rec {
             inherit generators;
+
             apply = pkgsStable.writeShellScriptBin "apply" /* bash */ ''
                 exec ${pkgsUnstable.nixos-rebuild}/bin/nixos-rebuild switch --flake path:. --use-remote-sudo $@
             '';

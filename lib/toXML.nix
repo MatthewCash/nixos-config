@@ -1,4 +1,4 @@
-lib:
+{ lib, ... }:
 
 # The builtin toXML function produces XML that no application I use will accept
 # Create an attribute by starting the key with a "_"

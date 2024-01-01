@@ -1,12 +1,11 @@
-lib:
-with lib;
+{ lib, ... }:
 
 let
-    padStart ={ str, len, padStr ? " " }:
+    padStart = { str, len, padStr ? " " }:
     let
         repeat = { str, count }:
-            concatStringsSep "" (genList (x: str) count);
-        padLength = len - (stringLength str);
+            lib.concatStringsSep "" (lib.genList (x: str) count);
+        padLength = len - (lib.stringLength str);
         padding = if padLength > 0 then repeat { str = padStr; count = padLength; } else "";
     in padding + str;
 in
