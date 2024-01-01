@@ -39,11 +39,12 @@ let
                     config.home-files # Not in extraStorePaths because we do not want it recursively linked
                     [ ("${config.gtk.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
                     [ ("${config.gtk.theme.package}/share/themes") (sloth.concat' sloth.xdgDataHome "/themes") ]
+                    (sloth.concat' sloth.xdgConfigHome "/gtk-3.0")
                 ];
                 extraStorePaths = (
                     stableLib.attrsets.mapAttrsToList
                         (n: v: v.source)
-                        (stableLib.attrsets.filterAttrs (n: v: stableLib.strings.hasPrefix ".thunderbird" n) config.home.file)
+                        (stableLib.attrsets.filterAttrs (n: v: stableLib.strings.hasPrefix "${config.xdg.configHome}/gtk-3.0" n) config.home.file)
                 ) ++ systemConfigOptionals [
                     systemConfig.hardware.opengl.package
                     (stableLib.strings.removeSuffix "/etc/fonts/" systemConfig.environment.etc.fonts.source) # Fonts
