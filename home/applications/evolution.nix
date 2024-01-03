@@ -82,6 +82,8 @@ let
                     (sloth.concat' sloth.xdgDataHome "/evolution")
                     (sloth.concat' sloth.xdgCacheHome "/evolution")
                     (sloth.concat' sloth.xdgConfigHome "/evolution")
+                    (sloth.concat' sloth.xdgDataHome "/keyrings")
+                    (sloth.realpath (sloth.concat' sloth.xdgDataHome "/keyrings"))
                     (sloth.concat' sloth.runtimeDir "/gvfs")
                     (sloth.concat' sloth.runtimeDir "/gvfsd")
                     (sloth.concat' sloth.runtimeDir "/doc") # For the Document portal
