@@ -77,6 +77,7 @@ let
             etc.sslCertificates.enable = true;
             bubblewrap = {
                 bindEntireStore = false;
+                env.GTK_USE_PORTAL = "1";
                 bind.rw = [
                     (sloth.concat' sloth.xdgDataHome "/evolution")
                     (sloth.concat' sloth.xdgCacheHome "/evolution")
