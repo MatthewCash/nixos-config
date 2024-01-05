@@ -10,6 +10,7 @@ let
             show-to-do-bar-sub = false;
             mark-seen-timeout = 0;
             prompt-on-mark-all-read = false;
+            prompt-check-if-default-mailer = false;
         };
         "org/gnome/evolution/mail/browser-window" = {
             height = 400;
