@@ -14,5 +14,6 @@
         enable = true;
         enableExtraSocket = true;
         enableSshSupport = true;
+        pinentryFlavor = "gnome3";
     };
 }

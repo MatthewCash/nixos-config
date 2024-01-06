@@ -6,6 +6,7 @@
         package = pkgsStable.rbw;
         settings = {
             email = "matthew@matthew-cash.com";
+            pinentry = "gnome3";
         };
     };
 }
