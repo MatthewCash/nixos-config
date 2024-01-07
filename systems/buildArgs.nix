@@ -13,17 +13,26 @@ let
     stableLib = pkgsStable.lib;
     unstableLib = pkgsUnstable.lib;
 
-    customLibs = builtins.map
-        (name: import ../lib/${name} {
-            inherit inputs;
-            pkgs = pkgsStable;
-            lib = stableLib;
-        })
+    customLibs = builtins.foldl'
+        (customLibs: name: customLibs // { ${name} = import ../lib/${name}; })
+        {}
         (builtins.attrNames
             (stableLib.attrsets.filterAttrs (n: v: v == "regular") (builtins.readDir ../lib))
         );
 
-    customLib = builtins.foldl' (acc: cur: acc // cur) {} customLibs;
+    fix = c: let
+        pkgs = pkgsStable;
+        lib = stableLib;
+        customLib = {};
+        x = builtins.foldl'
+            (a: b: a // b)
+            {}
+            (stableLib.attrsets.mapAttrsToList (libFileName: f: builtins.mapAttrs
+                (funcName: _: (c.${libFileName} { inherit inputs pkgs lib; customLib = x; }).${funcName})
+                (f { inherit pkgs lib inputs customLib; }) # Dummy args so argument destructuring still works
+            ) c);
+    in x;
+    customLib = fix customLibs;
 
     accentColor = systemConfig.accentColor // {
         inherit (customLib.hsl2rgb accentColor) r g b;

@@ -1,5 +1,5 @@
 # From https://github.com/nix-community/home-manager/blob/master/modules/misc/dconf.nix
-{ pkgs, lib, inputs }:
+{ pkgs, lib, inputs, ... }:
 
 let
     inherit (inputs.home-manager.lib.hm) gvariant;

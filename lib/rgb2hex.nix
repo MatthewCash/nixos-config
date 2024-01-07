@@ -1,10 +1,10 @@
-args:
+{ customLib, ... }:
 
 let
-    toHex = i: (import ./padStart.nix args).padStart {
+    toHex = i: customLib.padStart {
         padStr = "0";
         len = 2;
-        str = (import ./decToHex.nix args).decToHex i;
+        str = customLib.decToHex i;
     };
 
     rgb2hex = rgb: "#${toHex rgb.r}${toHex rgb.g}${toHex rgb.b}";
