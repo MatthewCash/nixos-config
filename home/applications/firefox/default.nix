@@ -24,33 +24,33 @@ let
     getWMClass = profileName: "${flatpakId}.${profileName}";
     wmClasses = builtins.map getWMClass profileNames;
 
-    desktopFiles = builtins.map ({ fst, snd }: firefox-devedition.desktopItem.override (old: {
+    desktopFiles = binName: builtins.map ({ fst, snd }: firefox-devedition.desktopItem.override (old: {
         desktopName = "Firefox ${capitalizeFirstLetter fst}";
-        exec = "firefox -P ${fst} --name ${snd} %U";
+        exec = "${binName} -P ${fst} --name ${snd} %U";
         actions.new-window = {
             inherit (old.actions.new-window) name;
-            exec = "firefox -P ${fst} --name ${snd} --new-window %U";
+            exec = "${binName} -P ${fst} --name ${snd} --new-window %U";
         };
         actions.new-private-window = {
             inherit (old.actions.new-private-window) name;
-            exec = "firefox -P ${fst} --name ${snd} --private-window %U";
+            exec = "${binName} -P ${fst} --name ${snd} --private-window %U";
         };
         actions.profile-manager-window = old.actions.profile-manager-window;
         startupWMClass = snd;
         extraConfig.X-Flatpak = flatpakId;
     })) (stableLib.lists.zipLists profileNames wmClasses);
 
-    installCommands = stableLib.strings.concatMapStringsSep
+    installCommands = binPath: stableLib.strings.concatMapStringsSep
         "\n"
         ({ fst, snd }: "install -D -T ${fst}/share/applications/* $out/share/applications/${snd}.desktop")
-        (stableLib.lists.zipLists desktopFiles wmClasses);
+        (stableLib.lists.zipLists (desktopFiles binPath) wmClasses);
 
     mkNixPak = inputs.nixpak.lib.nixpak { lib = stableLib; pkgs = pkgsStable; };
     systemConfigOptionals = stableLib.optionals (systemConfig != null);
-    wrapFirefox = mkNixPak {
+    wrappedFirefox = mkNixPak {
         config = { sloth, ... }: rec {
             app.package = firefox-devedition.overrideAttrs (oldAttrs: {
-                buildCommand = oldAttrs.buildCommand + installCommands;
+                buildCommand = oldAttrs.buildCommand + (installCommands oldAttrs.meta.mainProgram);
             });
             dbus.policies = {
                 "org.freedesktop.portal.*" = "talk";
@@ -126,7 +126,7 @@ in
         inherit profiles;
     };
 
-    home.packages = [ wrapFirefox.config.env ];
+    home.packages = [ wrappedFirefox.config.env ];
 
     # Enable JS mods in 'layout' profile
     home.file.".mozilla/firefox/layout/chrome/firefox-mods".source = inputs.firefox-mods;
