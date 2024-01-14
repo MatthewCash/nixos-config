@@ -27,7 +27,7 @@
             device = "tmpfs-root";
             fsType = "tmpfs";
             mountPoint = "/";
-            options = [ "defaults" "size=4G" "mode=755" ];
+            options = [ "defaults" "size=4G" "nr_inodes=4M" "mode=755" ];
         };
 
         nix = {
