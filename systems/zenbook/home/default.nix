@@ -49,7 +49,6 @@ builtins.map (path: ../../../home/${path}) [
     "applications/helix"
     "applications/libreoffice.nix"
     "applications/bat.nix"
-    "applications/gaphor.nix"
     "applications/evince.nix"
     "applications/nix.nix"
 ] ++ [
