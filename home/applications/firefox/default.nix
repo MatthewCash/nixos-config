@@ -1,7 +1,9 @@
 args @ { stableLib, pkgsStable, pkgsUnstable, useImpermanence, persistenceHomePath, inputs, name, systemConfig, config, ... }:
 
 let
-    firefox-devedition = (pkgsUnstable.firefox-devedition.override (old: {
+    firefoxPackage = pkgsUnstable.firefox-devedition;
+
+    firefox = (firefoxPackage.override (old: {
         icon = "firefox-developer-edition";
         extraPolicies = import ./policy.nix args;
         extraPrefsFiles = [
@@ -23,8 +25,9 @@ let
     flatpakId = "org.mozilla.Firefox";
     getWMClass = profileName: "${flatpakId}.${profileName}";
     wmClasses = builtins.map getWMClass profileNames;
+    binName = firefox.meta.mainProgram;
 
-    desktopFiles = binName: builtins.map ({ fst, snd }: firefox-devedition.desktopItem.override (old: {
+    desktopFiles = builtins.map ({ fst, snd }: firefox.desktopItem.override (old: {
         desktopName = "Firefox ${capitalizeFirstLetter fst}";
         exec = "${binName} -P ${fst} --name ${snd} %U";
         actions.new-window = {
@@ -40,17 +43,17 @@ let
         extraConfig.X-Flatpak = flatpakId;
     })) (stableLib.lists.zipLists profileNames wmClasses);
 
-    installCommands = binPath: stableLib.strings.concatMapStringsSep
+    installCommands = stableLib.strings.concatMapStringsSep
         "\n"
         ({ fst, snd }: "install -D -T ${fst}/share/applications/* $out/share/applications/${snd}.desktop")
-        (stableLib.lists.zipLists (desktopFiles binPath) wmClasses);
+        (stableLib.lists.zipLists desktopFiles wmClasses);
 
     mkNixPak = inputs.nixpak.lib.nixpak { lib = stableLib; pkgs = pkgsStable; };
     systemConfigOptionals = stableLib.optionals (systemConfig != null);
     wrappedFirefox = mkNixPak {
         config = { sloth, ... }: rec {
-            app.package = firefox-devedition.overrideAttrs (oldAttrs: {
-                buildCommand = oldAttrs.buildCommand + (installCommands oldAttrs.meta.mainProgram);
+            app.package = firefox.overrideAttrs (oldAttrs: {
+                buildCommand = oldAttrs.buildCommand + installCommands;
             });
             dbus.policies = {
                 "org.freedesktop.portal.*" = "talk";
@@ -106,10 +109,7 @@ let
 
     profileList = stableLib.lists.imap0 (i: name: {
         name = builtins.substring 0 (builtins.stringLength name - 4) name;
-        value = import ./profiles/${name} args //
-        import ./common.nix args // {
-            id = i;
-        };
+        value = import ./profiles/${name} args // import ./common.nix args // { id = i; };
     }) profileFileNames;
     profiles = builtins.listToAttrs profileList;
 in
