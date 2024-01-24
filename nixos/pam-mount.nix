@@ -35,14 +35,15 @@ in
         '';
 
         # Verify that mount does not already exist
-        pamCheckLine = "session [success=2 default=ignore] ${pkgsStable.linux-pam}/lib/security/pam_exec.so quiet ${checkScript}";
+        pamCheckLine = "session [success=3 default=ignore] ${pkgsStable.linux-pam}/lib/security/pam_exec.so quiet ${checkScript}";
+        pamEchoLine = "session optional ${pkgsStable.linux-pam}/lib/security/pam_echo.so file=${pkgsStable.writeText "echo" "Initializing Home Directory..."}";
         pamMountLine = "session optional ${pkgsUnstable.pam_mount}/lib/security/pam_mount.so disable_interactive";
         # Run home-manager activation for user
         pamExecLine = "session optional ${pkgsStable.linux-pam}/lib/security/pam_exec.so ${hmScript}";
 
         pamLoginText = builtins.replaceStrings
             [ pamMountLine ]
-            [ "${pamCheckLine}\n${pamMountLine}\n${pamExecLine}" ]
+            [ (builtins.concatStringsSep "\n" [ pamCheckLine pamEchoLine pamMountLine pamExecLine ]) ]
             config.security.pam.services.login.text;
     in { name = "pam.d/${service}"; value.text = stableLib.mkForce pamLoginText; }) pamServices)
 
