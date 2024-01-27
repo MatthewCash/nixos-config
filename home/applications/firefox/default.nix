@@ -93,7 +93,9 @@ let
                 extraStorePaths = (
                     stableLib.attrsets.mapAttrsToList
                         (n: v: v.source)
-                        (stableLib.attrsets.filterAttrs (n: v: stableLib.strings.hasPrefix ".mozilla" n) config.home.file)
+                        (stableLib.attrsets.filterAttrs
+                            (n: v: stableLib.isStorePath v.source && stableLib.strings.hasPrefix ".mozilla" n)
+                            config.home.file)
                 ) ++ systemConfigOptionals [
                     systemConfig.hardware.opengl.package # WebRender acceleration
                     (stableLib.strings.removeSuffix "/etc/fonts/" systemConfig.environment.etc.fonts.source) # Fonts
