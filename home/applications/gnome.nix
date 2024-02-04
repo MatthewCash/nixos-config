@@ -19,12 +19,6 @@
             ".local/share/gnome-podcasts"
             ".local/share/authenticator"
 
-            ".config/fragments"
-            ".config/gnome-control-center"
-            ".config/gnome-boxes"
-            ".config/gnome-session"
-            ".config/eog"
-
             ".cache/gnome-boxes"
             ".cache/gnome-calculator"
             ".cache/gnome-calendar"
@@ -44,7 +38,7 @@
     };
 
     home.packages = with pkgsUnstable; with gnome; [
-        eog
+        loupe
         fragments
         gvfs
         sushi
