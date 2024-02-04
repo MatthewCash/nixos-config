@@ -44,7 +44,7 @@
         sushi
         rygel
         zenity
-        cheese
+        snapshot
         caribou
         seahorse
         nautilus
