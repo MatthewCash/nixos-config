@@ -1,4 +1,4 @@
-{ pkgsUnstable, config, ... }:
+{ pkgsUnstable, stableLib, config, ... }:
 
 {
     extensions = with pkgsUnstable.vscode-extensions; [
@@ -13,6 +13,7 @@
         ms-vscode.powershell
         ms-python.python
         ms-pyright.pyright
+        rust-lang.rust-analyzer
     ];
     settings = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
@@ -39,5 +40,9 @@
 
         "[python]"."editor.defaultFormatter" = "ms-python.python";
         "python.formatting.autopep8Path" = "${pkgsUnstable.python3Packages.autopep8}/bin/autopep8";
+
+        "[rust]"."editor.defaultFormatter" = "rust-lang.rust-analyzer";
+        "rust-analyzer.check.overrideCommand" = [ (stableLib.getExe pkgsUnstable.clippy) ];
+        "rust-analyzer.rustfmt.overrideCommand" = [ (stableLib.getExe pkgsUnstable.rustfmt) "--edition" "2024" ];
     };
 }
