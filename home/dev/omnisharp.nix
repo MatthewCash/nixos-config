@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 
 let
     formattingOptions = {
@@ -56,7 +56,14 @@ let
 in
 
 {
-    home.file.".omnisharp/omnisharp.json".text = builtins.toJSON {
+    xdg.configFile.".omnisharp/omnisharp.json".text = builtins.toJSON {
         FormattingOptions = formattingOptions;
+    };
+
+    home.sessionVariables = {
+        DOTNET_ROOT = "${config.xdg.configHome}/.dotnet";
+        DOTNET_CLI_HOME = config.xdg.configHome;
+        OMNISHARPHOME = config.xdg.configHome;
+        NUGET_PACKAEGS = "${config.xdg.cacheHome}/NuGetPackages";
     };
 }
