@@ -14,6 +14,7 @@
         ms-python.python
         ms-pyright.pyright
         rust-lang.rust-analyzer
+        tamasfe.even-better-toml
     ];
     settings = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
