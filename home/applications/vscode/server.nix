@@ -1,4 +1,4 @@
-args @ { pkgsStable, stableLib, ... }:
+args @ { pkgsStable, stableLib, config, ... }:
 
 let
     common = import ./common.nix args;
@@ -6,8 +6,9 @@ let
     extensions = common.extensions;
     settings = common.settings;
 
-    extensionPath = ".vscodium-server/extensions";
-    settingsPath = ".vscodium-server/data/Machine/settings.json";
+    dataDir = "${config.xdg.configHome}/vscodium-server";
+    extensionPath = "${dataDir}/extensions";
+    settingsPath = "${dataDir}/data/Machine/settings.json";
 
     combinedExtensionsDrv = pkgsStable.buildEnv {
         name = "vscode-extensions";
