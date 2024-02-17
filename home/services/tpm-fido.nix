@@ -1,4 +1,4 @@
-{ pkgsStable, pkgsUnstable, ... }:
+{ pkgsStable, pkgsUnstable, stableLib, ... }:
 
 {
     services.tpm-fido = {
@@ -18,10 +18,10 @@
             ExecStart = pkgsStable.writeShellScript "tpm-fido-node" /* bash */ ''
                 link_path="$XDG_RUNTIME_DIR/tpm-fido-hidrawnode"
 
-                hidraw_node="$(${pkgsStable.coreutils}/bin/basename $(ls /sys/bus/hid/devices/0003:15D9:0A37.????/hidraw/ | ${pkgsStable.gnused}/bin/sed -n 1p))"
+                hidraw_node="$(${stableLib.getExe' pkgsStable.coreutils "basename"} $(ls /sys/bus/hid/devices/0003:15D9:0A37.????/hidraw/ | ${stableLib.getExe pkgsStable.gnused} -n 1p))"
 
-                ${pkgsStable.coreutils}/bin/rm -f $link_path
-                ${pkgsStable.coreutils}/bin/ln -sf "/dev/$hidraw_node" $link_path
+                ${stableLib.getExe' pkgsStable.coreutils "rm"} -f $link_path
+                ${stableLib.getExe' pkgsStable.coreutils "ln"} -sf "/dev/$hidraw_node" $link_path
             '';
         };
         Install.WantedBy = [ "default.target" ];

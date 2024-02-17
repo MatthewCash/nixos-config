@@ -1,8 +1,8 @@
-{ nixpkgsUnstable, nixpkgsStable, pkgsUnstable, ... }:
+{ nixpkgsUnstable, nixpkgsStable, pkgsUnstable, stableLib, ... }:
 
 {
     home.sessionVariables = rec {
-        EDITOR = "${pkgsUnstable.helix}/bin/hx";
+        EDITOR = stableLib.getExe pkgsUnstable.helix;
         VISUAL = EDITOR;
     } // {
         # Same variables from config/nix.nix, for non-NixOS systems

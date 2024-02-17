@@ -6,7 +6,8 @@ let
     isLidClosed = "[[ \"$(cat /proc/acpi/button/lid/LID/state)\" == \"state:      closed\" ]]";
     isPowerConnected = "[[ \"$(cat /sys/class/power_supply/AC?/online)\" -eq 1 ]]";
     isPowerDisconnected = "[[ \"$(cat /sys/class/power_supply/AC?/online)\" -eq 0 ]]";
-    sleep = "${pkgsStable.coreutils}/bin/sleep";
+    sleep = stableLib.getExe' pkgsStable.coreutils "sleep";
+    systemctl = stableLib.getExe' pkgsStable.systemd "systemctl";
 in
 {
     services.acpid = {
@@ -17,7 +18,7 @@ in
             if ${isLidClosed}; then
                 # Suspend if discharging and if lid is still closed after 15 seconds
                 ${isPowerDisconnected} && ${sleep} 15 && ${isPowerDisconnected} \
-                    && ${isLidClosed} && ${pkgsStable.systemd}/bin/systemctl suspend
+                    && ${isLidClosed} && ${systemctl} suspend
             fi
         '';
 
@@ -25,7 +26,7 @@ in
             # If the lid is closed and charger is unplugged, suspend after 15 seconds
             ${sleep} 1 && ${isPowerDisconnected} \
                 && ${isLidClosed} && ${sleep} 5 && ${isPowerDisconnected} \
-                && ${isLidClosed} && ${pkgsStable.systemd}/bin/systemctl suspend
+                && ${isLidClosed} && ${systemctl} suspend
 
             # Set battery limit when plugged in
             ${isPowerConnected} \

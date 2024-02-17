@@ -1,65 +1,49 @@
-{ pkgsUnstable, ... }:
+{ pkgsUnstable, stableLib, ... }:
 
 let
     fourTabLanguages = [
         "c" "c-sharp" "cpp" "css" "go" "html" "java" "javascript" "json" "jsx" "markdown" "nix" "rust" "tsx" "typescript" "vue"
     ];
+
+    inherit (stableLib) getExe getExe';
 in
 
 {
     language-server = {
-        clangd = {
-            command = "${pkgsUnstable.clang-tools}/bin/clangd";
-        };
-        docker-langserver = {
-            command = "${pkgsUnstable.dockerfile-language-server-nodejs}/bin/docker-langserver";
-        };
+        clangd.command = getExe' pkgsUnstable.clang-tools "clangd";
+        docker-langserver.command = getExe pkgsUnstable.dockerfile-language-server-nodejs;
         vscode-css-language-server = {
-            command = "${pkgsUnstable.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver";
+            command = getExe pkgsUnstable.nodePackages.vscode-css-languageserver-bin;
             args = [ "--stdio" ];
         };
-        gopls = {
-            command = "${pkgsUnstable.gopls}/bin/gopls";
-        };
+        gopls.command = getExe pkgsUnstable.gopls;
         vscode-html-language-server = {
-            command = "${pkgsUnstable.nodePackages.vscode-html-languageserver-bin}/bin/html-languageserver";
+            command = getExe pkgsUnstable.nodePackages.vscode-html-languageserver-bin;
             args = [ "--stdio" ];
         };
         vscode-json-language-server = {
-            command = "${pkgsUnstable.nodePackages.vscode-json-languageserver}/bin/vscode-json-languageserver";
+            command = getExe pkgsUnstable.nodePackages.vscode-json-languageserver;
             args = [ "--stdio" ];
         };
-        jdtls = {
-            # Gets LSP from PATH because it is optional (Java is > 1GB)
-            command = "jdt-language-server";
-        };
-        marksman = {
-            command = "${pkgsUnstable.marksman}/bin/marksman";
-        };
-        nil = {
-            command = "${pkgsUnstable.nil}/bin/nil";
-        };
+        jdtls.command = "jdt-language-server"; # Gets LSP from PATH because it is optional (Java is > 1GB)
+        marksman.command = getExe pkgsUnstable.marksman;
+        nil.command = getExe pkgsUnstable.nil;
         omnisharp = {
-            command = "${pkgsUnstable.omnisharp-roslyn}/bin/OmniSharp";
+            command = getExe pkgsUnstable.omnisharp-roslyn;
             args = [ "--languageserver" ];
         };
-        pylsp = {
-            command = "${pkgsUnstable.python3Packages.python-lsp-server}/bin/pylsp";
-        };
-        rust-analyzer = {
-            command = "${pkgsUnstable.rust-analyzer}/bin/rust-analyzer";
-        };
+        pylsp.command = getExe pkgsUnstable.python3Packages.python-lsp-server;
+        rust-analyzer.command = getExe pkgsUnstable.rust-analyzer;
         typescript-language-server = {
-            command = "${pkgsUnstable.nodePackages.typescript-language-server}/bin/typescript-language-server";
+            command = getExe pkgsUnstable.nodePackages.typescript-language-server;
             args = [ "--stdio" ];
         };
         vuels = {
-            command = "${pkgsUnstable.nodePackages.volar}/bin/vue-language-server";
+            command = getExe pkgsUnstable.nodePackages.volar;
+            args = [ "--stdio" ];
         };
-        yaml-language-server = {
-            command = "${pkgsUnstable.yaml-language-server}/bin/yaml-language-server";
-        };
+        yaml-language-server.command = getExe pkgsUnstable.yaml-language-server;
     };
 
-    language = map (name: { inherit name; indent = { tab-width = 4; unit = "    "; }; }) fourTabLanguages;
+    language = builtins.map (name: { inherit name; indent = { tab-width = 4; unit = "    "; }; }) fourTabLanguages;
 }

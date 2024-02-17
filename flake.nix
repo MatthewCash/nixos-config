@@ -18,9 +18,9 @@
             (builtins.readDir ./systems));
         systemConfigList = builtins.map (name: {
             inherit name;
-            value = (import ./systems/${name} {
+            value = import ./systems/${name} {
                 inherit nixpkgsStable nixpkgsUnstable;
-            });
+            };
         }) systemNames;
         systemConfigs = builtins.listToAttrs systemConfigList;
         buildArgs = builtins.mapAttrs (name: systemConfig: 
@@ -67,7 +67,7 @@
         generators = builtins.listToAttrs generatorList;
 
         packages = { pkgsStable, pkgsUnstable }: let
-            nix = "${pkgsUnstable.nix}/bin/nix";
+            nix = stableLib.getExe pkgsUnstable.nix;
             eval = path: /* bash */ ''
                 echo "- eval .#${path}:"
                 out=$(${nix} eval --impure --raw path:.#${path})
@@ -79,11 +79,11 @@
             inherit generators;
 
             apply = pkgsStable.writeShellScriptBin "apply" /* bash */ ''
-                exec ${pkgsUnstable.nixos-rebuild}/bin/nixos-rebuild switch --flake path:. --use-remote-sudo $@
+                exec ${stableLib.getExe pkgsUnstable.nixos-rebuild} switch --flake path:. --use-remote-sudo $@
             '';
             full-upgrade = pkgsStable.writeShellScriptBin "full-upgrade" /* bash */ ''
                 ${nix} flake update path:.
-                exec ${apply}/bin/apply
+                exec ${stableLib.getExe apply}
             '';
             test = pkgsStable.writeShellScriptBin "test" /* bash */ ''
                 set -e -o pipefail; shopt -s inherit_errexit

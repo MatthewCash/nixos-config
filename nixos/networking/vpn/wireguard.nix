@@ -1,4 +1,4 @@
-{ pkgsStable, vpnAddress, config, ... }:
+{ pkgsStable, stableLib, vpnAddress, config, ... }:
 
 {
     age.secrets."wireguard-privatekey-${vpnAddress}".file = ../../../secrets/wireguard/${vpnAddress}/privkey.age;
@@ -16,9 +16,9 @@
             ];
             table = "off";
             privateKeyFile = config.age.secrets."wireguard-privatekey-${vpnAddress}".path;
-            postUp = /* bash */ ''
-                ${pkgsStable.iproute2}/bin/ip route add 10.0.0.0/24 via ${vpnAddress}
-                ${pkgsStable.iproute2}/bin/ip rule add to 172.30.0.0/24 table wg_vpn
+            postUp = let ip = stableLib.getExe' pkgsStable.iproute2 "ip"; in /* bash */ ''
+                ${ip} route add 10.0.0.0/24 via ${vpnAddress}
+                ${ip} rule add to 172.30.0.0/24 table wg_vpn
             '';
         };
     };

@@ -86,7 +86,7 @@
                 fi
 
                 while :; do
-                    ${pkgsStable.inotify-tools}/bin/inotifywait $1 > /dev/null 2>&1
+                    ${stableLib.getExe' pkgsStable.inotify-tools "inotifywait"} $1 > /dev/null 2>&1
                     ''${@:2}
                 done
             }

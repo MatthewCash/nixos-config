@@ -93,7 +93,7 @@ in
     ];
 
     home.activation.webcordConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
-        $DRY_RUN_CMD ${pkgsUnstable.coreutils}/bin/install -m=644 ${configFile} ${config.xdg.configHome}/WebCord/config.json
+        $DRY_RUN_CMD ${stableLib.getExe' pkgsUnstable.coreutils "install"} -m=644 ${configFile} ${config.xdg.configHome}/WebCord/config.json
     '';
 
 

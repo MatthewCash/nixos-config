@@ -3,7 +3,7 @@
 let
     pamServices = [ "login" "sshd" ];
 
-    mountpoint = "${pkgsStable.util-linux}/bin/mountpoint";
+    mountpoint = stableLib.getExe' pkgsStable.util-linux "mountpoint";
 
     pamMountUsers = builtins.attrNames (
         stableLib.attrsets.filterAttrs (name: config: config ? usePamMount && config.usePamMount) users
@@ -24,7 +24,7 @@ in
         (stableLib.attrsets.filterAttrs (name: value: usePamMount name) config.home-manager.users);
 
     environment.etc = builtins.listToAttrs (builtins.map (service: let
-        systemctl = "${pkgsStable.systemd}/bin/systemctl";
+        systemctl = stableLib.getExe' pkgsStable.systemd "systemctl";
         checkScript = pkgsStable.writeShellScript "check_for_mount.sh" /* bash */ ''
             ${mountpoint} -q "${homeMountPath}/$PAM_USER"
         '';
@@ -51,11 +51,11 @@ in
         // { "ssh/get_authorized_keys" = {
             mode = "0555";
             text = /* bash */ ''
-                #!${pkgsStable.bash}/bin/bash
+                #!${stableLib.getExe pkgsStable.bash}
 
                 ${mountpoint} -q "${homeMountPath}/$1" ||
-                echo ${builtins.toString pamMountUsers} | ${pkgsStable.coreutils}/bin/grep -w -q $1 &&
-                ${pkgsStable.coreutils}/bin/cat /etc/ssh/authorized_keys.d/$1
+                echo ${builtins.toString pamMountUsers} | ${stableLib.getExe' pkgsStable.coreutils "grep"} -w -q $1 &&
+                ${stableLib.getExe' pkgsStable.coreutils "cat"} /etc/ssh/authorized_keys.d/$1
             '';
         };
     };

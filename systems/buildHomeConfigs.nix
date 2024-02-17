@@ -37,10 +37,9 @@ let
         };
         modules = defaultImports ++ homeConfig ++ [ (stableLib.recursiveUpdate {
             home = {
-                username =
-                    stableLib.warnIf
+                username = stableLib.warnIf
                     stableLib.inPureEvalMode
-                    "This expression needs to evaluate $USER,$HOME which is not allowed in pure evaluation mode. Run with --impure to fix!"
+                    "This expression needs to evaluate $USER and $HOME which is not allowed in pure evaluation mode. Run with --impure to fix!"
                     builtins.getEnv "USER";
                 homeDirectory = builtins.getEnv "HOME";
             };

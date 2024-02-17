@@ -35,12 +35,12 @@
         "omnisharp.organizeImportsOnFormat" = true;
 
         "nix.enableLanguageServer" = true;
-        "nix.serverPath" = "${pkgsUnstable.nil}/bin/nil";
+        "nix.serverPath" = stableLib.getExe pkgsUnstable.nil;
 
-        "powershell.powerShellAdditionalExePaths.main" = "${pkgsUnstable.powershell}/bin/pwsh";
+        "powershell.powerShellAdditionalExePaths.main" = stableLib.getExe pkgsUnstable.powershell;
 
         "[python]"."editor.defaultFormatter" = "ms-python.python";
-        "python.formatting.autopep8Path" = "${pkgsUnstable.python3Packages.autopep8}/bin/autopep8";
+        "python.formatting.autopep8Path" = stableLib.getExe pkgsUnstable.python3Packages.autopep8;
 
         "[rust]"."editor.defaultFormatter" = "rust-lang.rust-analyzer";
         "rust-analyzer.check.overrideCommand" = [ (stableLib.getExe pkgsUnstable.clippy) ];

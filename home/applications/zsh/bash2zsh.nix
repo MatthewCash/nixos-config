@@ -1,7 +1,7 @@
-{ pkgsUnstable, ... }:
+{ pkgsUnstable, stableLib, ... }:
 
 let
-    zsh = "${pkgsUnstable.zsh}/bin/zsh";
+    zsh = stableLib.getExe pkgsUnstable.zsh;
 in
 
 {

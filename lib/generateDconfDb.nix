@@ -11,7 +11,7 @@ let
     in pkgs.runCommand "user" { } /* bash */ ''
         mkdir key_files
         ln -s ${iniFile} key_files/
-        ${pkgs.dconf}/bin/dconf compile $out key_files
+        ${lib.getExe pkgs.dconf} compile $out key_files
     '';
 in
 
