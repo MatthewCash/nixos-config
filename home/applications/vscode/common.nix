@@ -15,6 +15,7 @@
         ms-pyright.pyright
         rust-lang.rust-analyzer
         tamasfe.even-better-toml
+        llvm-vs-code-extensions.vscode-clangd
     ];
     settings = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
@@ -45,5 +46,7 @@
         "[rust]"."editor.defaultFormatter" = "rust-lang.rust-analyzer";
         "rust-analyzer.check.overrideCommand" = [ (stableLib.getExe pkgsUnstable.clippy) ];
         "rust-analyzer.rustfmt.overrideCommand" = [ (stableLib.getExe pkgsUnstable.rustfmt) "--edition" "2024" ];
+
+        "clangd.path" = stableLib.getExe' pkgsUnstable.clang-tools "clangd";
     };
 }
