@@ -3,9 +3,9 @@
 
     inputs.nix-inputs.url = "github:MatthewCash/nix-inputs";
 
-    outputs = { nix-inputs, ... }:
+    outputs = originalInputs @ { nix-inputs, ... }:
     let
-        inherit (nix-inputs.outputs) inputs;
+        inputs = nix-inputs.outputs.inputs // builtins.removeAttrs originalInputs [ "nix-inputs" ];
         inherit (inputs) nixpkgsStable nixpkgsUnstable flake-utils;
 
         stableLib = nixpkgsStable.lib;
@@ -23,7 +23,7 @@
             };
         }) systemNames;
         systemConfigs = builtins.listToAttrs systemConfigList;
-        buildArgs = builtins.mapAttrs (name: systemConfig: 
+        buildArgs = builtins.mapAttrs (name: systemConfig:
             import ./systems/buildArgs.nix {
                 inherit systemConfig inputs nixpkgsStable nixpkgsUnstable stateVersion;
             }
