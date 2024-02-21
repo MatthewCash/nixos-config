@@ -21,7 +21,10 @@ let
                 "org.mpris.MediaPlayer2.chromium.*" = "own";
                 "org.freedesktop.Screensaver" = "talk";
             };
-            flatpak.appId = "org.google.chromium";
+            flatpak = {
+                appId = "org.google.chromium";
+                desktopFile = "chromium-browser.desktop";
+            };
             locale.enable = true;
             etc.sslCertificates.enable = true;
             bubblewrap = {
