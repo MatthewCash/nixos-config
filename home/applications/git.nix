@@ -17,5 +17,7 @@
             core.whitespace = "trailing-space,space-before-tab";
             push.autoSetupRemote = true;
         };
+
+        difftastic.enable = true;
 	};
 }
