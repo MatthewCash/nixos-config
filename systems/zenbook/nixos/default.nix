@@ -13,7 +13,6 @@ builtins.map (path: ../../../nixos/${path}) [
     "audio.nix"
     "acpi.nix"
     "networking/general.nix"
-    "networking/dispatcherScripts/captivePortal.nix"
     "networking/openssh.nix"
     "networking/firewall/fail2ban.nix"
     "networking/firewall/nftables.nix"
