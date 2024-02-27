@@ -75,7 +75,6 @@
                 "forward-button"
                 "stop-reload-button"
                 "urlbar-container"
-                "fxa-toolbar-menu-button"
                 "unified-extensions-button"
             ];
             "toolbar-menubar" = [ "menubar-items" ];
