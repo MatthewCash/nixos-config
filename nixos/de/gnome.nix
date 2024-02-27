@@ -45,7 +45,10 @@
         };
     };
 
-    environment.variables.QT_STYLE_OVERRIDE = stableLib.mkForce "$QT_STYLE_OVERRIDE";
+    environment.sessionVariables = {
+        QT_STYLE_OVERRIDE = stableLib.mkForce "$QT_STYLE_OVERRIDE";
+        NIXOS_OZONE_WL = "1";
+    };
 
     programs.dconf.enable = true;
 
