@@ -17,6 +17,10 @@
             installation_mode = "normal_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/localcdn-fork-of-decentraleyes/latest.xpi";
         };
+        "owl@beonex.com" = {
+            installation_mode = "normal_installed";
+            install_url = "file://${inputs.owl-patched.defaultPackage.${system}}/addon/owl.xpi";
+        };
         "main-theme@matthew-cash.com" = {
             installation_mode = "normal_installed";
             install_url = "file://${inputs.mozilla-theme.defaultPackage.${system}}/addon/theme.xpi";
