@@ -1,18 +1,12 @@
-{ pkgsStable, pkgsUnstable, stableLib, lib, useImpermanence, persistenceHomePath, name, config, ... }:
+{ pkgsStable, pkgsUnstable, stableLib, lib, useImpermanence, persistenceHomePath, name, config, systemConfig, inputs, ... }:
 
 let
     webcordConfig = {
         settings = {
             general = {
-                menuBar = {
-                    hide = true;
-                };
-                tray = {
-                    disable = false;
-                };
-                taskbar = {
-                    flash = true;
-                };
+                menuBar.hide = true;
+                tray.disable = false;
+                taskbar.flash = true;
                 window = {
                     transparent = true;
                     hideOnClose = false;
@@ -24,7 +18,7 @@ let
                     typingIndicator = true;
                     fingerprinting = true;
                 };
-                permissions= {
+                permissions = {
                     video = true;
                     audio = true;
                     fullscreen = true;
@@ -34,9 +28,7 @@ let
                 };
             };
             advanced = {
-                csp = {
-                    enabled = true;
-                };
+                csp.enabled = true;
                 cspThirdParty = {
                     spotify = true;
                     gif = true;
@@ -53,38 +45,70 @@ let
                     reddit = true;
                     googleStorageApi = true;
                 };
-                currentInstance = {
-                    radio = 0;
-                };
-                devel = {
-                    enabled = false;
-                };
-                redirection = {
-                    warn = true;
-                };
-                optimize = {
-                    gpu = true;
-                };
-                webApi = {
-                    webGl = true;
-                };
-                unix = {
-                    autoscroll = true;
-                };
+                currentInstance.radio = 0;
+                devel.enabled = false;
+                redirection.warn = true;
+                optimize.gpu = false;
+                webApi.webGl = true;
+                unix.autoscroll = true;
             };
         };
-        update = {
-            notification = {
-                version = "";
-                till = "";
-            };
+        update.notification = {
+            version = "";
+            till = "";
         };
-        screenShareStore = {
-            audio = false;
-        };
+        screenShareStore.audio = false;
     };
 
     configFile = pkgsStable.writeText "config.json" (builtins.toJSON webcordConfig);
+
+    mkNixPak = inputs.nixpak.lib.nixpak { lib = stableLib; pkgs = pkgsStable; };
+    systemConfigOptionals = stableLib.optionals (systemConfig != null);
+    wrappedWebcord = mkNixPak {
+        config = { sloth, ... }: {
+            app.package = pkgsUnstable.webcord;
+            dbus.policies = {
+                "org.freedesktop.portal.*" = "talk";
+                "ca.desrt.dconf" = "talk";
+                "org.a11y.Bus" = "talk";
+                "org.freedesktop.Notifications" = "talk";
+            };
+            flatpak = {
+                appId = "org.discord.webcord";
+                desktopFile = "webcord.desktop";
+            };
+            locale.enable = true;
+            etc.sslCertificates.enable = true;
+            bubblewrap = {
+                bindEntireStore = false;
+                bind.rw = [
+                    (sloth.concat' sloth.xdgConfigHome "/WebCord")
+                    (sloth.concat' sloth.runtimeDir "/doc") # For the Document portal
+                    [(sloth.concat' sloth.xdgCacheHome "/webcord/tmp") "/tmp"]
+                ];
+                bind.ro = [
+                    "/etc/fonts"
+                    config.home-files # Not in extraStorePaths because we do not want it recursively linked
+                    [ ("${config.gtk.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
+                    [ ("${config.gtk.theme.package}/share/themes") (sloth.concat' sloth.xdgDataHome "/themes") ]
+                    (sloth.concat' sloth.xdgConfigHome "/gtk-3.0")
+                ];
+                extraStorePaths = (
+                    stableLib.attrsets.mapAttrsToList
+                        (n: v: v.source)
+                        (stableLib.attrsets.filterAttrs (n: v: stableLib.strings.hasPrefix "${config.xdg.configHome}/gtk-3.0" n) config.home.file)
+                ) ++ systemConfigOptionals [
+                    systemConfig.hardware.opengl.package # WebRender acceleration
+                    (stableLib.strings.removeSuffix "/etc/fonts/" systemConfig.environment.etc.fonts.source) # Fonts
+                ] ++ systemConfigOptionals systemConfig.hardware.opengl.extraPackages; # Video acceleration
+                sockets = {
+                    wayland = true;
+                    pipewire = true;
+                    pulse = true;
+                };
+            };
+        };
+    };
 in
 
 {
@@ -97,5 +121,5 @@ in
     '';
 
 
-    home.packages = with pkgsUnstable; [ webcord ];
+    home.packages = [ wrappedWebcord.config.env ];
 }
