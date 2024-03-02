@@ -8,5 +8,8 @@
     };
     xdg.configFile."Kvantum/KvLibadwaita".source = "${inputs.kvlibadwaita}/src/KvLibadwaita";
 
-    home.packages = with pkgsUnstable; [ libsForQt5.qtstyleplugin-kvantum ];
+    home.packages = with pkgsUnstable; [
+        libsForQt5.qtstyleplugin-kvantum
+        kdePackages.qtstyleplugin-kvantum
+    ];
 }
