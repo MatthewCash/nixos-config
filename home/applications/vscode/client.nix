@@ -20,6 +20,7 @@ in
         enableExtensionUpdateCheck = false;
         extensions = with pkgsUnstable.vscode-extensions; [
             inputs.codium-theme.defaultPackage.${system}
+            tomoki1207.pdf
         ] ++ common.extensions;
         userSettings = common.settings // {
             "workbench.colorTheme" = "Main Theme";
