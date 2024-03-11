@@ -1,7 +1,7 @@
 { buildArgs, inputs, nixpkgsStable, nixpkgsUnstable, systemConfig, stateVersion, customLib, pkgsStable, pkgsUnstable, stableLib, unstableLib, accentColor, ... }:
 
 let
-    kernelPackages = systemConfig.kernelPackages or nixpkgsStable.legacyPackages.${systemConfig.system}.linuxPackages;
+    kernelPackages = systemConfig.kernelPackages or nixpkgsUnstable.legacyPackages.${systemConfig.system}.linuxPackages;
     persistPath = systemConfig.persistPath or "/mnt/persist";
     homeMountPath = systemConfig.persistPath or "/mnt/home";
     batteryChargeLimit = systemConfig.batteryChargeLimit or 100;
