@@ -45,7 +45,11 @@
         "python.formatting.autopep8Path" = stableLib.getExe pkgsUnstable.python3Packages.autopep8;
 
         "[rust]"."editor.defaultFormatter" = "rust-lang.rust-analyzer";
-        "rust-analyzer.check.overrideCommand" = [ (stableLib.getExe pkgsUnstable.clippy) ];
+        "rust-analyzer.check.overrideCommand" = [
+            (stableLib.getExe pkgsUnstable.clippy)
+            "check"
+            "--message-format=json"
+        ];
         "rust-analyzer.rustfmt.overrideCommand" = [ (stableLib.getExe pkgsUnstable.rustfmt) "--edition" "2024" ];
 
         "clangd.path" = stableLib.getExe' pkgsUnstable.clang-tools "clangd";
