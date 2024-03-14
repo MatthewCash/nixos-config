@@ -25,7 +25,7 @@ in
             command = getExe pkgsUnstable.nodePackages.vscode-json-languageserver;
             args = [ "--stdio" ];
         };
-        jdtls.command = "jdt-language-server"; # Gets LSP from PATH because it is optional (Java is > 1GB)
+        jdtls.command = "jdtls"; # Gets LSP from PATH because it is optional (Java is > 1GB)
         marksman.command = getExe pkgsUnstable.marksman;
         nil.command = getExe pkgsUnstable.nil;
         omnisharp = {
