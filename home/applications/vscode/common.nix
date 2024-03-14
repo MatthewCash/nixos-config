@@ -16,6 +16,7 @@
         rust-lang.rust-analyzer
         tamasfe.even-better-toml
         llvm-vs-code-extensions.vscode-clangd
+        nvarner.typst-lsp
     ];
     settings = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
@@ -48,5 +49,7 @@
         "rust-analyzer.rustfmt.overrideCommand" = [ (stableLib.getExe pkgsUnstable.rustfmt) "--edition" "2024" ];
 
         "clangd.path" = stableLib.getExe' pkgsUnstable.clang-tools "clangd";
+
+        "[typst]"."editor.defaultFormatter" = "nvarner.typst-lsp";
     };
 }
