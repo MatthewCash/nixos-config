@@ -3,6 +3,7 @@ builtins.map (path: ../../../home/${path}) [
     "services/tpm-fido.nix"
     "gnome/tweaks.nix"
     "gnome/console.nix"
+    "gnome/celluloid.nix"
     "gnome/gtk.nix"
     "gnome/config.nix"
     "gnome/kvantum.nix"
