@@ -1,4 +1,4 @@
-{ stableLib, useImpermanence, persistenceHomePath, name, config, ... }:
+{ stableLib, pkgsUnstable, useImpermanence, persistenceHomePath, name, config, ... }:
 
 {
     programs.gpg = {
@@ -14,6 +14,6 @@
         enable = true;
         enableExtraSocket = true;
         enableSshSupport = true;
-        pinentryFlavor = "gnome3";
+        pinentryPackage = pkgsUnstable.pinentry-gnome3;
     };
 }

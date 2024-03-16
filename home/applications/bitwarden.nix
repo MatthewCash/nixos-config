@@ -1,12 +1,12 @@
-{ pkgsStable, ... }:
+{ pkgsUnstable, ... }:
 
 {
     programs.rbw = {
         enable = true;
-        package = pkgsStable.rbw;
+        package = pkgsUnstable.rbw;
         settings = {
             email = "matthew@matthew-cash.com";
-            pinentry = "gnome3";
+            pinentry = pkgsUnstable.pinentry-gnome3;
         };
     };
 }

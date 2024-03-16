@@ -3,7 +3,7 @@
 {
     services.tpm-fido = {
         enable = true;
-        extraPackages = with pkgsUnstable; [ pinentry-gnome ];
+        extraPackages = with pkgsUnstable; [ pinentry-gnome3 ];
     };
 
     systemd.user.services.tpm-fido-node = {
