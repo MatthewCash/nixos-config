@@ -17,6 +17,7 @@
         tamasfe.even-better-toml
         llvm-vs-code-extensions.vscode-clangd
         nvarner.typst-lsp
+        redhat.vscode-yaml
     ];
     settings = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
@@ -56,5 +57,8 @@
         "clangd.path" = stableLib.getExe' pkgsUnstable.clang-tools "clangd";
 
         "[typst]"."editor.defaultFormatter" = "nvarner.typst-lsp";
+
+        "[yaml]"."editor.defaultFormatter" = "redhat.vscode-yaml";
+        "redhat.telemetry.enabled" = false;
     };
 }
