@@ -12,10 +12,10 @@ The main goal is to be fully declarative and reproducible while not compromising
 - [impermanence](https://github.com/nix-community/impermanence) (/ on a tmpfs) with explicitly persisted paths
 - Standalone [home-manager](https://github.com/nix-community/home-manager) activation script generation
 - Image generation using [nixos-generators](https://github.com/nix-community/nixos-generators) to simplify installation and deployment
+- Appliation sandboxing with [nixpak](https://github.com/nixpak/nixpak)
 
 ## TODO
 
-- Sandboxing applications using something like [bubblewrap](https://github.com/containers/bubblewrap)
 - Setup disks during installation using [disko](https://github.com/nix-community/disko)
 - Configure nix on Android with [nix-on-droid](https://github.com/nix-community/nix-on-droid)
 
