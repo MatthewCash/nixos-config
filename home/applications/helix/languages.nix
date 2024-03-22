@@ -13,16 +13,16 @@ in
         clangd.command = getExe' pkgsUnstable.clang-tools "clangd";
         docker-langserver.command = getExe pkgsUnstable.dockerfile-language-server-nodejs;
         vscode-css-language-server = {
-            command = getExe pkgsUnstable.nodePackages.vscode-css-languageserver-bin;
+            command = getExe' pkgsUnstable.nodePackages.vscode-langservers-extracted "vscode-css-language-server";
             args = [ "--stdio" ];
         };
         gopls.command = getExe pkgsUnstable.gopls;
         vscode-html-language-server = {
-            command = getExe pkgsUnstable.nodePackages.vscode-html-languageserver-bin;
+            command = getExe' pkgsUnstable.nodePackages.vscode-langservers-extracted "vscode-html-language-server";
             args = [ "--stdio" ];
         };
         vscode-json-language-server = {
-            command = getExe pkgsUnstable.nodePackages.vscode-json-languageserver;
+            command = getExe' pkgsUnstable.nodePackages.vscode-langservers-extracted "vscode-json-language-server";
             args = [ "--stdio" ];
         };
         jdtls.command = "jdtls"; # Gets LSP from PATH because it is optional (Java is > 1GB)
