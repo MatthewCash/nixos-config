@@ -67,7 +67,6 @@ in
                     FocusPolicy = "FocusFollowsMouse";
                 };
                 "org.kde.kdecoration2" = {
-                    configGroupNesting = [ "org.kde.kdecoration2" ];
                     ButtonsOnLeft = "F";
                     ButtonsOnRight = "IAX";
                     BorderSize = "None";
