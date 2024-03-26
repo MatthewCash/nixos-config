@@ -1,6 +1,7 @@
 { accentColor }:
 
 /* zsh */ ''
+    typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=234
     typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=( status context dir vcs )
     typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
         command_execution_time background_jobs direnv virtualenv anaconda pyenv goenv nodenv nvm nodeenv
