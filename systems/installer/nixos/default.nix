@@ -15,6 +15,7 @@ builtins.map (path: ../../../nixos/${path}) [
     "env.nix"
     "docs.nix"
     "systemd/config.nix"
+    "systemd/logind.nix"
     "kmscon.nix"
 
     "applications/general.nix"
