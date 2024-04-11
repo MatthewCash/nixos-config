@@ -19,4 +19,5 @@ builtins.map (path: ../../../home/${path}) [
     "applications/helix"
     "applications/bat.nix"
     "applications/nix.nix"
+    "applications/wget.nix"
 ]
