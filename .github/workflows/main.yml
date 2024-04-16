@@ -3,8 +3,6 @@ name: Update Nix Inputs
 on:
   push:
     branches: [main]
-  schedule:
-    - cron: "0 * * * *" # every hour
 
 jobs:
   update-inputs:
