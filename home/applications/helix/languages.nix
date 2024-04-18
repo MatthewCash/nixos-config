@@ -33,6 +33,7 @@ in
             args = [ "--languageserver" ];
         };
         pylsp.command = getExe pkgsUnstable.python3Packages.python-lsp-server;
+        pyright.command = getExe' pkgsUnstable.nodePackages.pyright "pyright-langserver";
         rust-analyzer.command = getExe pkgsUnstable.rust-analyzer;
         typescript-language-server = {
             command = getExe pkgsUnstable.nodePackages.typescript-language-server;
@@ -45,5 +46,10 @@ in
         yaml-language-server.command = getExe pkgsUnstable.yaml-language-server;
     };
 
-    language = builtins.map (name: { inherit name; indent = { tab-width = 4; unit = "    "; }; }) fourTabLanguages;
+    language = builtins.map (name: { inherit name; indent = { tab-width = 4; unit = "    "; }; }) fourTabLanguages ++ [
+        {
+            name = "python";
+            language-servers = [ "pylsp" "pyright" ];
+        }
+    ];
 }
