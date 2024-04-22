@@ -24,4 +24,5 @@ builtins.map (path: ../../../home/${path}) [
     "applications/gradle.nix"
     "applications/bat.nix"
     "applications/nix.nix"
+    "applications/wget.nix"
 ]
