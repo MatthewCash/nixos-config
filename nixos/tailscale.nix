@@ -1,9 +1,7 @@
-{ config, tailscaleId, vpnAddress, ... }:
+{ tailscaleId, ... }:
 
 {
-    services.tailscale = {
-        enable = true;
-    };
+    services.tailscale.enable = true;
 
     age.secrets."tailscale-${tailscaleId}" = {
         file = ../secrets/tailscale/${tailscaleId}.age;
