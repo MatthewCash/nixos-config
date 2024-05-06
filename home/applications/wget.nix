@@ -1,7 +1,7 @@
 { pkgsUnstable, config, ... }:
 
 {
-    home.packages = with pkgsUnstable; [ wget ];
+    home.packages = with pkgsUnstable; [ wget wget2 ];
 
     home.sessionVariables.WGETRC = "${config.xdg.configHome}/wgetrc";
 
