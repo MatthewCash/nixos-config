@@ -26,6 +26,7 @@
             "**/__pycache__" = true;
         };
 
+        "[java]"."editor.defaultFormatter" = "redhat.java";
         "java.jdt.ls.java.home" = "${pkgsUnstable.jdk17_headless}/lib/openjdk";
         "java.import.gradle.home" = "${pkgsUnstable.gradle}/lib/gradle";
         "java.configuration.updateBuildConfiguration" = "automatic";
