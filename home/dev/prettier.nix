@@ -7,7 +7,7 @@ let
         semi = true;
         singleQuote = true;
         arrowParens = "avoid";
-        indOfLine = "lf";
+        endOfLine = "lf";
     };
 in
 
