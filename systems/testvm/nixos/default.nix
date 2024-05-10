@@ -19,6 +19,7 @@ builtins.map (path: ../../../nixos/${path}) [
     "docs.nix"
     "pam-mount.nix"
     "systemd/config.nix"
+    "systemd/logind.nix"
     "secureboot.nix"
     "dbus.nix"
     "kmscon.nix"
