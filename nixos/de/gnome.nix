@@ -27,23 +27,22 @@
 
     environment.gnome.excludePackages = with pkgsUnstable; [ gnome-tour ];
 
-    # Setup /run/gdm directory
-    systemd.tmpfiles.rules = [ "d /run/gdm 0711 gdm gdm -" ];
-
     # GDM UX Settings
-    home-manager.users.gdm.home.stateVersion = stateVersion;
-    home-manager.users.gdm.dconf.settings = {
-        "org/gnome/settings-daemon/plugins/power".sleep-inactive-ac-type = "nothing";
-        "org/gnome/desktop/input-sources".xkb-options = [ "caps:escape" ];
-        "org/gnome/desktop/peripherals/touchpad" = {
-            tap-to-click = true;
-            two-finger-scrolling-enabled = true;
-            click-method = "areas";
-            natural-scroll = true;
-            send-events = "enabled";
-            speed = 0.6;
+    programs.dconf.profiles.gdm.databases = [{
+        settings = {
+            "org/gnome/settings-daemon/plugins/power".sleep-inactive-ac-type = "nothing";
+            "org/gnome/desktop/input-sources".xkb-options = [ "caps:escape" ];
+            "org/gnome/desktop/interface".show-battery-percentage = true;
+                "org/gnome/desktop/peripherals/touchpad" = {
+                tap-to-click = true;
+                two-finger-scrolling-enabled = true;
+                    click-method = "areas";
+                natural-scroll = true;
+                send-events = "enabled";
+                speed = 0.6;
+            };
         };
-    };
+    }];
 
     environment.sessionVariables = {
         QT_STYLE_OVERRIDE = stableLib.mkForce "$QT_STYLE_OVERRIDE";
