@@ -1,4 +1,4 @@
-{ pkgsStable, pkgsUnstable, stableLib, lib, useImpermanence, persistenceHomePath, name, config, systemConfig, inputs, ... }:
+{ pkgsStable, pkgsUnstable, stableLib, lib, useImpermanence, persistenceHomePath, name, config, systemConfig, inputs, accentColor, ... }:
 
 let
     webcordConfig = {
@@ -96,7 +96,10 @@ let
                 extraStorePaths = (
                     stableLib.attrsets.mapAttrsToList
                         (n: v: v.source)
-                        (stableLib.attrsets.filterAttrs (n: v: stableLib.strings.hasPrefix "${config.xdg.configHome}/gtk-3.0" n) config.home.file)
+                        (stableLib.attrsets.filterAttrs (n: v:
+                            stableLib.strings.hasPrefix "${config.xdg.configHome}/gtk-3.0" n ||
+                            stableLib.strings.hasPrefix "${config.xdg.configHome}/WebCord" n) config.home.file
+                        )
                 ) ++ systemConfigOptionals [
                     systemConfig.hardware.opengl.package # WebRender acceleration
                     (stableLib.strings.removeSuffix "/etc/fonts/" systemConfig.environment.etc.fonts.source) # Fonts
@@ -119,6 +122,16 @@ in
     home.activation.webcordConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
         $DRY_RUN_CMD ${stableLib.getExe' pkgsUnstable.coreutils "install"} -m=644 ${configFile} ${config.xdg.configHome}/WebCord/config.json
     '';
+
+    xdg.configFile."WebCord/Themes/style.css".text = /* css */ ''
+        @import "file://${inputs.discord-css}/style.css";
+
+        :root {
+            --system-hue: ${builtins.toString accentColor.h};
+            --system-saturation: ${builtins.toString accentColor.s}%;
+            --system-lightness: ${builtins.toString accentColor.l}%;
+        }
+   '';
 
 
     home.packages = [ wrappedWebcord.config.env ];
