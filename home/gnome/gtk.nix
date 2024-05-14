@@ -1,17 +1,15 @@
 { pkgsUnstable, inputs, accentColor, config, ... }:
 
 let
-    accentColorHex = accentColor.hex;
-
     customCss = /* css */ ''
-        @define-color accent_bg_color ${accentColorHex};
-        @define-color accent_color ${accentColorHex};
+        @define-color accent_bg_color ${accentColor.hex};
+        @define-color accent_color ${accentColor.hex};
     '';
 
     shellCssFile = "${inputs.gnome-accent-colors}/custom-accent-colors@demiskp/resources/magenta/gnome-shell/44/gnome-shell.css";
     shellCss = builtins.replaceStrings
         [ "#c061cb" ]
-        [ accentColorHex ]
+        [ accentColor.hex ]
         (builtins.readFile shellCssFile);
 in
 
