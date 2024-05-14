@@ -20,7 +20,7 @@
             inherit name;
             value = import ./systems/${name} {
                 inherit nixpkgsStable nixpkgsUnstable;
-            };
+            } // (if stableLib.inPureEvalMode then {} else { system = builtins.currentSystem; });
         }) systemNames;
         systemConfigs = builtins.listToAttrs systemConfigList;
         buildArgs = builtins.mapAttrs (name: systemConfig:
