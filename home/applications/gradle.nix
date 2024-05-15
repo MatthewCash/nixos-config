@@ -1,4 +1,4 @@
-{ pkgsUnstable, stableLib, useImpermanence, persistenceHomePath, name, config, ... }:
+{ stableLib, useImpermanence, persistenceHomePath, name, config, ... }:
 
 {
     home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence [
@@ -6,7 +6,13 @@
         ".config/gradle/wrapper"
     ];
 
-    home.sessionVariables.GRADLE_USER_HOME = "${config.xdg.configHome}/gradle";
-
-    home.packages = with pkgsUnstable; [ gradle ];
+    programs.gradle = {
+        enable = true;
+        home = "${config.xdg.configHome}/gradle";
+        settings = {
+            "org.gradle.caching" = true;
+            "org.gradle.parallel" = true;
+            "org.gradle.home" = config.programs.java.package;
+        };
+    };
 }
