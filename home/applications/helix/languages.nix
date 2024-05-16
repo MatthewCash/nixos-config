@@ -56,6 +56,14 @@ in
             };
         }
         {
+            name = "json";
+            language-servers = [ "vscode-json-language-server" ];
+            formatter = {
+                command = getExe pkgsUnstable.nodePackages.prettier;
+                args = [ "--parser" "json" ];
+            };
+        }
+        {
             name = "python";
             language-servers = [ "pylsp" "pyright" ];
         }
