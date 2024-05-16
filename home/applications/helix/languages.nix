@@ -48,6 +48,14 @@ in
 
     language = builtins.map (name: { inherit name; indent = { tab-width = 4; unit = "    "; }; }) fourTabLanguages ++ [
         {
+            name = "css";
+            language-servers = [ "vscode-css-language-server" ];
+            formatter = {
+                command = getExe pkgsUnstable.nodePackages.prettier;
+                args = [ "--parser" "css" ];
+            };
+        }
+        {
             name = "python";
             language-servers = [ "pylsp" "pyright" ];
         }
