@@ -1,4 +1,4 @@
-name: Update Nix Inputs
+name: Test Flake Outputs
 
 on:
   push:
