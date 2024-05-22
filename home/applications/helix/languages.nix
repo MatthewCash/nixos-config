@@ -64,6 +64,14 @@ in
             };
         }
         {
+            name = "html";
+            language-servers = [ "vscode-html-language-server" ];
+            formatter = {
+                command = getExe pkgsUnstable.nodePackages.prettier;
+                args = [ "--parser" "html" ];
+            };
+        }
+        {
             name = "python";
             language-servers = [ "pylsp" "pyright" ];
         }
