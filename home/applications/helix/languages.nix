@@ -75,5 +75,15 @@ in
             name = "python";
             language-servers = [ "pylsp" "pyright" ];
         }
+        {
+            name = "typescript";
+            language-servers = [ "typescript-language-server" ];
+            formatter = {
+                command = getExe pkgsUnstable.nodePackages.prettier;
+                args = [ "--parser" "typescript" ];
+            };
+            auto-format = true;
+        }
+
     ];
 }
