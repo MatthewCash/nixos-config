@@ -65,6 +65,8 @@ in
         ".cache/chromium"
     ];
 
+    systemd.user.tmpfiles.rules = [ "d ${config.xdg.cacheHome}/chromium/tmp - - - - -"];
+
     programs.chromium = {
         enable = true;
         package = wrappedChromium.config.env;
