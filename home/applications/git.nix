@@ -19,5 +19,7 @@
         };
 
         difftastic.enable = true;
+
+        lfs.enable = true;
 	};
 }
