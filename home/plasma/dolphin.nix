@@ -1,7 +1,7 @@
 { pkgsUnstable, ... }:
 
 {
-    home.packages = with pkgsUnstable.libsForQt5; [ dolphin ];
+    home.packages = with pkgsUnstable.kdePackages; [ dolphin ];
 
     programs.plasma.configFile."dolphinrc" = {
         General.Version = 202;
