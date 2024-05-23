@@ -1,27 +1,22 @@
 { pkgsUnstable, ... }:
 
 {
-    services.xserver = {
-        enable = true;
-
-        displayManager = {
-            defaultSession = "plasmawayland";
-            sddm = {
-                enable = true;
-                autoNumlock = true;
-                theme = "Sweet";
-                settings.Theme.ThemeDir = "${pkgsUnstable.sweet-nova}/share/sddm/themes";
-            };
+    services.displayManager = {
+        defaultSession = "plasma";
+        sddm = {
+            enable = true;
+            wayland.enable = true;
+            autoNumlock = true;
+            theme = "Sweet";
+            settings.Theme.ThemeDir = "${pkgsUnstable.sweet-nova}/share/sddm/themes";
         };
-        
-        desktopManager.plasma5.enable = true;
-
-        libinput.enable = true;
-
-        excludePackages = with pkgsUnstable; [ xterm ];
     };
 
-    environment.plasma5.excludePackages = with pkgsUnstable.plasma5Packages; [
+    services.libinput.enable = true;
+
+    services.desktopManager.plasma6.enable = true;
+
+    environment.plasma6.excludePackages = with pkgsUnstable.plasma5Packages; [
         plasma-browser-integration
         konsole
         oxygen
