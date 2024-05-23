@@ -1,7 +1,7 @@
 { customLib, stableLib, pkgsUnstable, ... }:
 
 {
-    home.packages = with pkgsUnstable.libsForQt5; [ konsole ];
+    home.packages = with pkgsUnstable.kdePackages; [ konsole ];
 
     programs.plasma.configFile."konsolerc" = {
         General.ConfigVersion = 1;
