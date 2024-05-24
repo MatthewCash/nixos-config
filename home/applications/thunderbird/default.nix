@@ -39,6 +39,7 @@ let
                     "/etc/fonts"
                     config.home-files # Not in extraStorePaths because we do not want it recursively linked
                     [ ("${config.gtk.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
+                    [ "${app.package}/lib/thunderbird/mozilla.cfg" "/app/etc/thunderbird/mozilla.cfg" ]
                 ];
                 extraStorePaths = (
                     stableLib.attrsets.mapAttrsToList
