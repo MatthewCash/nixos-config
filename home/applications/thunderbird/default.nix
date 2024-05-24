@@ -8,7 +8,7 @@ let
     systemConfigOptionals = stableLib.optionals (systemConfig != null);
 
     wrappedThunderbird = inputs.nixpak.lib.nixpak { lib = stableLib; pkgs = pkgsStable; } {
-        config = { sloth, ... }: {
+        config = { sloth, ... }: rec {
             app.package = thunderbird;
             dbus.policies = {
                 "org.freedesktop.portal.*" = "talk";
