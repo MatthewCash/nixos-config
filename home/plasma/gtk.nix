@@ -4,6 +4,11 @@
     gtk = {
         enable = false;
 
+        theme = {
+            package = pkgsUnstable.kdePackages.breeze-gtk;
+            name = "Breeze-Dark";
+        };
+
         cursorTheme = {
             package = pkgsUnstable.libsForQt5.breeze-qt5;
             name = "breeze_cursors";
