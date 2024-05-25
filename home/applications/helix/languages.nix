@@ -56,6 +56,16 @@ in
             };
         }
         {
+            name = "javascript";
+            language-servers = [ "typescript-language-server" ];
+            formatter = {
+                command = getExe pkgsUnstable.nodePackages.prettier;
+                args = [ "--parser" "babel" ];
+            };
+            auto-format = true;
+        }
+
+        {
             name = "json";
             language-servers = [ "vscode-json-language-server" ];
             formatter = {
@@ -84,6 +94,5 @@ in
             };
             auto-format = true;
         }
-
     ];
 }
