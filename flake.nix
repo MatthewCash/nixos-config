@@ -10,7 +10,7 @@
 
         stableLib = nixpkgsStable.lib;
 
-        stateVersion = "23.11";
+        stateVersion = "24.05";
 
         # Systems
         systemNames = builtins.attrNames
