@@ -27,7 +27,7 @@
         };
 
         "[java]"."editor.defaultFormatter" = "redhat.java";
-        "java.jdt.ls.java.home" = "${pkgsUnstable.jdk17_headless}/lib/openjdk";
+        "java.jdt.ls.java.home" = "${pkgsUnstable.jdk}/lib/openjdk";
         "java.import.gradle.home" = "${pkgsUnstable.gradle}/lib/gradle";
         "java.configuration.updateBuildConfiguration" = "automatic";
         "java.format.settings.url" = "${config.xdg.configHome}/java/java-formatter.xml";
