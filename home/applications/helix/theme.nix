@@ -73,11 +73,11 @@ in {
     "constant.numeric" = { fg = pale_green; };
     "constant.character.escape" = { fg = gold; };
 
-    "markup.heading" = { fg = blue2; modifiers = ["bold"]; };
+    "markup.heading" = { fg = blue2; modifiers = [ "bold" ]; };
     "markup.list" = blue3;
-    "markup.bold" = { fg = blue2; modifiers = ["bold"]; };
-    "markup.italic" = { modifiers = ["italic"]; };
-    "markup.link.url" = { modifiers = ["underlined"]; };
+    "markup.bold" = { fg = blue2; modifiers = [ "bold" ]; };
+    "markup.italic" = { modifiers = [ "italic" ]; };
+    "markup.link.url" = { modifiers = [ "underlined" ]; };
     "markup.link.text" = orange;
     "markup.quote" = dark_green;
     "markup.raw" = orange;
@@ -86,7 +86,7 @@ in {
     "diff.delta" = { fg = gold; };
     "diff.minus" = { fg = red; };
 
-    "ui.background" = { fg = light_gray; bg = "none"; };
+    "ui.background" = { fg = light_gray; };
 
     "ui.window" = { bg = widget; };
     "ui.popup" = { bg = widget; };
@@ -94,9 +94,9 @@ in {
     "ui.menu" = { bg = widget; };
     "ui.menu.selected" = { bg = dark_blue2; };
 
-    "ui.cursor" = { fg = cursor; modifiers = ["reversed"]; };
-    "ui.cursor.primary" = { fg = cursor; modifiers = ["reversed"]; };
-    "ui.cursor.match" = { bg = "#3a3d41"; modifiers = ["underlined"]; };
+    "ui.cursor" = { fg = cursor; modifiers = [ "reversed" ]; };
+    "ui.cursor.primary" = { fg = cursor; modifiers = [ "reversed" ]; };
+    "ui.cursor.match" = { bg = "#3a3d41"; modifiers = [ "underlined" ]; };
 
     "ui.selection" = { bg = "#3a3d41"; };
     "ui.selection.primary" = { bg = dark_blue; };
@@ -119,5 +119,5 @@ in {
     "info" = { fg = light_blue; };
     "hint" = { fg = light_gray3; };
 
-    "diagnostic" = { modifiers = ["underlined"]; };
+    "diagnostic" = { modifiers = [ "underlined" ]; };
 }
