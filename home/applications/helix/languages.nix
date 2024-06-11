@@ -33,7 +33,7 @@ in
             args = [ "--languageserver" ];
         };
         pylsp.command = getExe pkgsUnstable.python3Packages.python-lsp-server;
-        pyright.command = getExe' pkgsUnstable.nodePackages.pyright "pyright-langserver";
+        pyright.command = getExe' pkgsUnstable.basedpyright "basedpyright-langserver";
         rust-analyzer.command = getExe pkgsUnstable.rust-analyzer;
         typescript-language-server = {
             command = getExe pkgsUnstable.nodePackages.typescript-language-server;
