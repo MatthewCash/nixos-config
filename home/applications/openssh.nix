@@ -1,11 +1,9 @@
-{ stableLib, pkgsUnstable, useImpermanence, persistenceHomePath, name, ... }:
+{ stableLib, useImpermanence, persistenceHomePath, name, ... }:
 
 {
     home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence [
         ".ssh"
     ];
-
-    home.packages = with pkgsUnstable; [ openssh ];
 
     programs.ssh = {
         enable = true;
@@ -19,9 +17,6 @@
                 host = "*";
                 identitiesOnly = true;
                 identityFile = [ "~/.ssh/id_${name}" ];
-                extraOptions = {
-                    GSSAPIAuthentication = "no";
-                };
             };
         };
     };
