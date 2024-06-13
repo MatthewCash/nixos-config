@@ -35,7 +35,6 @@ builtins.map (path: ../../../home/${path}) [
     "applications/gnome.nix"
     "applications/gpg.nix"
     "applications/htop.nix"
-    "applications/neovim.nix"
     "applications/openssh.nix"
     "applications/vscode/client.nix"
     "applications/zsh"
