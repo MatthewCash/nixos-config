@@ -128,7 +128,6 @@
             coc-snippets
             coc-highlight
             vim-polyglot
-            copilot-vim
             indentLine
             yats-vim
             vim-markdown
