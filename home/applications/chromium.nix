@@ -5,7 +5,7 @@ let
     systemConfigOptionals = stableLib.optionals (systemConfig != null);
     wrappedChromium = mkNixPak {
         config = { sloth, ... }: {
-            app.package = pkgsUnstable.ungoogled-chromium.override {
+            app.package = pkgsUnstable.chromium.override {
                 commandLineArgs = [
                     "--enable-features=UseOzonePlatform"
                     "--ozone-platform=wayland"
