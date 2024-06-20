@@ -9,5 +9,8 @@
 
     xdg.configFile."Kvantum/Sweet".source = "${pkgsUnstable.sweet-nova}/share/Kvantum/Sweet";
 
-    home.packages = with pkgsUnstable; [ libsForQt5.qtstyleplugin-kvantum ];
+    home.packages = with pkgsUnstable; [
+        libsForQt5.qtstyleplugin-kvantum
+        kdePackages.qtstyleplugin-kvantum
+    ];
 }
