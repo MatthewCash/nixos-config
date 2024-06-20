@@ -10,7 +10,7 @@
         };
 
         cursorTheme = {
-            package = pkgsUnstable.libsForQt5.breeze-qt5;
+            package = pkgsUnstable.kdePackages.breeze;
             name = "breeze_cursors";
         };
 
