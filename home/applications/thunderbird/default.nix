@@ -46,9 +46,9 @@ let
                         (n: v: v.source)
                         (stableLib.attrsets.filterAttrs (n: v: stableLib.strings.hasPrefix ".thunderbird" n) config.home.file)
                 ) ++ systemConfigOptionals [
-                    systemConfig.hardware.opengl.package # WebRender acceleration
+                    systemConfig.hardware.graphics.package # WebRender acceleration
                     (stableLib.strings.removeSuffix "/etc/fonts/" systemConfig.environment.etc.fonts.source) # Fonts
-                ] ++ systemConfigOptionals systemConfig.hardware.opengl.extraPackages; # Video acceleration
+                ] ++ systemConfigOptionals systemConfig.hardware.graphics.extraPackages; # Video acceleration
                 sockets = {
                     wayland = true;
                     pipewire = true;
