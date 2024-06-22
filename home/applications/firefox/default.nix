@@ -105,6 +105,7 @@ let
                     pipewire = true;
                     pulse = true;
                 };
+                monitor = true;
             };
         };
     };
