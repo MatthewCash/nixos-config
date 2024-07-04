@@ -62,27 +62,36 @@ let
 
     configFile = pkgsStable.writeText "config.json" (builtins.toJSON webcordConfig);
 
+    profileNames = [ "personal" "business" ];
+
     mkNixPak = inputs.nixpak.lib.nixpak { lib = stableLib; pkgs = pkgsStable; };
     systemConfigOptionals = stableLib.optionals (systemConfig != null);
-    wrappedWebcord = mkNixPak {
+    wrappedWebcords = builtins.map (profileName: mkNixPak {
         config = { sloth, ... }: {
-            app.package = pkgsUnstable.webcord;
+            app.package = (pkgsStable.symlinkJoin {
+                name = "webcord-${profileName}";
+                    paths = [ (pkgsUnstable.webcord.overrideAttrs {
+                    desktopItems  = [];
+                }) ];
+                buildInputs = [ pkgsStable.makeWrapper ];
+                postBuild = /* bash */ ''
+                    makeWrapper '${stableLib.getExe pkgsUnstable.webcord}' $out/bin/webcord-${profileName}
+                '';
+                meta.mainProgram = "webcord-${profileName}";
+            }).overrideAttrs { desktopItems = []; };
             dbus.policies = {
                 "org.freedesktop.portal.*" = "talk";
                 "ca.desrt.dconf" = "talk";
                 "org.a11y.Bus" = "talk";
                 "org.freedesktop.Notifications" = "talk";
             };
-            flatpak = {
-                appId = "org.discord.webcord";
-                desktopFile = "webcord.desktop";
-            };
+            flatpak.appId = "org.discord.webcord.${profileName}";
             locale.enable = true;
             etc.sslCertificates.enable = true;
             bubblewrap = {
                 bindEntireStore = false;
                 bind.rw = [
-                    (sloth.concat' sloth.xdgConfigHome "/WebCord")
+                    [(sloth.concat' sloth.xdgConfigHome "/webcord-${profileName}") (sloth.concat' sloth.xdgConfigHome "/WebCord")]
                     (sloth.concat' sloth.runtimeDir "/doc") # For the Document portal
                     [(sloth.concat' sloth.xdgCacheHome "/webcord/tmp") "/tmp"]
                 ];
@@ -112,17 +121,15 @@ let
                 monitor = true;
             };
         };
-    };
+    }) profileNames;
 in
 
 {
-    home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence [
-        ".config/WebCord"
-    ];
+    home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence (stableLib.map (name: ".config/webcord-${name}")profileNames);
 
-    home.activation.webcordConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
-        $DRY_RUN_CMD ${stableLib.getExe' pkgsUnstable.coreutils "install"} -m=644 ${configFile} ${config.xdg.configHome}/WebCord/config.json
-    '';
+    home.activation.webcordConfig = lib.hm.dag.entryAfter ["writeBoundary"] (stableLib.strings.concatMapStringsSep "\n" (name: ''
+        $DRY_RUN_CMD ${stableLib.getExe' pkgsUnstable.coreutils "install"} -m=644 ${configFile} ${config.xdg.configHome}/webcord-${name}/config.json
+    '') profileNames);
 
     xdg.configFile."WebCord/Themes/style.css".text = /* css */ ''
         @import "file://${inputs.discord-css}/style.css";
@@ -135,5 +142,5 @@ in
    '';
 
 
-    home.packages = [ wrappedWebcord.config.env ];
+    home.packages = builtins.map (webcord: webcord.config.env) wrappedWebcords;
 }
