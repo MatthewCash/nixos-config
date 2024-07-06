@@ -35,7 +35,7 @@
         ];
     };
 
-    home.packages = with pkgsUnstable; with gnome; [
+    home.packages = with pkgsUnstable; [
         loupe
         fragments
         gvfs
@@ -43,23 +43,24 @@
         rygel
         zenity
         snapshot
-        caribou
         seahorse
         nautilus
         authenticator
-        gnome-boxes
         foliate
-        gnome-clocks
         gnome-autoar
+        gnome-calendar
+        gnome-calculator
+    ] ++ (with pkgsUnstable.gnome; [
+        caribou
+        gnome-boxes
+        gnome-clocks
         gnome-weather
         gnome-maps
         gnome-contacts
-        gnome-calendar
         gnome-characters
-        gnome-calculator
         gnome-sound-recorder
         gnome-podcasts
         gnome-connections
         gnome-firmware
-    ];
+    ]);
 }

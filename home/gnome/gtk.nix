@@ -28,7 +28,7 @@ in
         };
 
         cursorTheme = {
-            package = pkgsUnstable.gnome.adwaita-icon-theme;
+            package = pkgsUnstable.adwaita-icon-theme;
             name = "Adwaita";
         };
 

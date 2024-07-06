@@ -1,7 +1,7 @@
 { pkgsUnstable, ... }:
 
 {
-    home.packages = with pkgsUnstable.gnome; [ gnome-tweaks ];
+    home.packages = with pkgsUnstable; [ gnome-tweaks ];
 
     dconf.settings = {
         "org/gnome/tweaks" = {
