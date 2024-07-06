@@ -40,7 +40,7 @@ in
             args = [ "--stdio" ];
         };
         vuels = {
-            command = getExe pkgsUnstable.nodePackages.volar;
+            command = getExe pkgsUnstable.vue-language-server;
             args = [ "--stdio" ];
         };
         yaml-language-server.command = getExe pkgsUnstable.yaml-language-server;
