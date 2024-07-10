@@ -45,7 +45,7 @@
     }];
 
     environment.sessionVariables = {
-        QT_STYLE_OVERRIDE = stableLib.mkForce "$QT_STYLE_OVERRIDE";
+        QT_STYLE_OVERRIDE = stableLib.mkForce "\${QT_STYLE_OVERRIDE}";
         NIXOS_OZONE_WL = "1";
     };
 
