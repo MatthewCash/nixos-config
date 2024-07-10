@@ -1,4 +1,4 @@
-{ pkgsStable, pkgsUnstable, stableLib, lib, useImpermanence, persistenceHomePath, name, config, systemConfig, inputs, accentColor, ... }:
+{ pkgsStable, pkgsUnstable, stableLib, lib, customLib, useImpermanence, persistenceHomePath, name, config, systemConfig, inputs, accentColor, ... }:
 
 let
     webcordConfig = {
@@ -70,11 +70,17 @@ let
         config = { sloth, ... }: {
             app.package = (pkgsStable.symlinkJoin {
                 name = "webcord-${profileName}";
-                    paths = [ (pkgsUnstable.webcord.overrideAttrs {
-                    desktopItems  = [];
-                }) ];
+                paths = [ pkgsUnstable.webcord ];
                 buildInputs = [ pkgsStable.makeWrapper ];
-                postBuild = /* bash */ ''
+                postBuild = let
+                    desktopEntry = (builtins.elemAt pkgsUnstable.webcord.desktopItems 0).override rec {
+                        name = "webcord-${profileName}";
+                        exec = name;
+                        desktopName = "Webcord ${customLib.capitalizeFirstLetter profileName}";
+                    };
+                in /* bash */ ''
+                    rm $out/share/applications/webcord.desktop
+                    install -D -T ${desktopEntry}/share/applications/* "$out/share/applications/org.discord.webcord.${profileName}.desktop"
                     makeWrapper '${stableLib.getExe pkgsUnstable.webcord}' $out/bin/webcord-${profileName}
                 '';
                 meta.mainProgram = "webcord-${profileName}";
@@ -140,7 +146,6 @@ in
             --system-lightness: ${builtins.toString accentColor.l}%;
         }
    '';
-
 
     home.packages = builtins.map (webcord: webcord.config.env) wrappedWebcords;
 }
