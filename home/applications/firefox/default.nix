@@ -1,4 +1,4 @@
-args @ { stableLib, pkgsStable, pkgsUnstable, useImpermanence, persistenceHomePath, inputs, name, systemConfig, config, ... }:
+args @ { stableLib, customLib, pkgsStable, pkgsUnstable, useImpermanence, persistenceHomePath, inputs, name, systemConfig, config, ... }:
 
 let
     firefoxPackage = pkgsUnstable.firefox-devedition;
@@ -19,8 +19,6 @@ let
         (builtins.readDir ./profiles));
 
     profileNames = builtins.map (stableLib.strings.removeSuffix ".nix") profileFileNames;
-    capitalizeFirstLetter = str: stableLib.strings.toUpper (builtins.substring 0 1 str) +
-        builtins.substring 1 (builtins.stringLength str) str;
 
     flatpakId = "org.mozilla.Firefox";
     getWMClass = profileName: "${flatpakId}.${profileName}";
@@ -28,7 +26,7 @@ let
     binName = firefox.meta.mainProgram;
 
     desktopFiles = builtins.map ({ fst, snd }: firefox.desktopItem.override (old: {
-        desktopName = "Firefox ${capitalizeFirstLetter fst}";
+        desktopName = "Firefox ${customLib.capitalizeFirstLetter fst}";
         exec = "${binName} -P ${fst} --name ${snd} %U";
         actions.new-window = {
             inherit (old.actions.new-window) name;
