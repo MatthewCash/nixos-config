@@ -113,7 +113,7 @@ let
                         (n: v: v.source)
                         (stableLib.attrsets.filterAttrs (n: v:
                             stableLib.strings.hasPrefix "${config.xdg.configHome}/gtk-3.0" n ||
-                            stableLib.strings.hasPrefix "${config.xdg.configHome}/WebCord" n) config.home.file
+                            stableLib.strings.hasPrefix "${config.xdg.configHome}/webcord-${profileName}/" n) config.home.file
                         )
                 ) ++ systemConfigOptionals [
                     systemConfig.hardware.graphics.package # WebRender acceleration
@@ -133,19 +133,22 @@ in
 {
     home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence (stableLib.map (name: ".config/webcord-${name}")profileNames);
 
-    home.activation.webcordConfig = lib.hm.dag.entryAfter ["writeBoundary"] (stableLib.strings.concatMapStringsSep "\n" (name: ''
+    home.activation.webcordConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] (stableLib.strings.concatMapStringsSep "\n" (name: ''
         $DRY_RUN_CMD ${stableLib.getExe' pkgsUnstable.coreutils "install"} -m=644 ${configFile} ${config.xdg.configHome}/webcord-${name}/config.json
     '') profileNames);
 
-    xdg.configFile."WebCord/Themes/style.css".text = /* css */ ''
-        @import "file://${inputs.discord-css}/style.css";
+    xdg.configFile = builtins.listToAttrs (builtins.map (profileName: {
+        name = "webcord-${profileName}/Themes/style.css";
+        value.text = /* css */ ''
+            @import "file://${inputs.discord-css}/style.css";
 
-        :root {
-            --system-hue: ${builtins.toString accentColor.h};
-            --system-saturation: ${builtins.toString accentColor.s}%;
-            --system-lightness: ${builtins.toString accentColor.l}%;
-        }
-   '';
+            :root {
+                --system-hue: ${builtins.toString accentColor.h};
+                --system-saturation: ${builtins.toString accentColor.s}%;
+                --system-lightness: ${builtins.toString accentColor.l}%;
+            }
+       '';
+    }) profileNames);
 
     home.packages = builtins.map (webcord: webcord.config.env) wrappedWebcords;
 }
