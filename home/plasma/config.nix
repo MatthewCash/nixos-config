@@ -17,7 +17,8 @@ in
                     AccentColor = plasmaAccentColor;
                     XftHintStyle = "hintslight";
                     XftSubPixel = "none";
-                    fixed = "${builtins.head systemConfig.fonts.fontconfig.defaultFonts.monospace},10,-1,5,50,0,0,0,0,0";
+                    fixed = stableLib.mkIf (systemConfig != null)
+                        "${builtins.head systemConfig.fonts.fontconfig.defaultFonts.monospace},10,-1,5,50,0,0,0,0,0";
                     ColorScheme = "Sweet";
                 };
                 WM = {
