@@ -1,4 +1,4 @@
-{ stableLib, config, persistenceHomePath, name, useImpermanence, ... }:
+{ stableLib, pkgsUnstable, config, persistenceHomePath, name, useImpermanence, ... }:
 
 let
     wallpaperPath = "${config.xdg.dataHome}/backgrounds/current_wallpaper.png";
@@ -154,6 +154,8 @@ in
     home.persistence."${persistenceHomePath}/${name}" = stableLib.mkIf useImpermanence {
         directories = [ ".local/share/backgrounds" ];
     };
+
+    home.packages = with pkgsUnstable; [ nixos-icons ];
 
     home.sessionVariables.STATIC_WALLPAPER_PATH = wallpaperPath;
 
