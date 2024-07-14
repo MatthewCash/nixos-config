@@ -10,4 +10,5 @@
 
     "mailnews.emptyTrash.dontAskAgain" = true;
     "mailnews.display.html_as" = 3;
+    "mailnews.start_page.enabled" = false;
 }
