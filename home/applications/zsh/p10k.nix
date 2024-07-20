@@ -8,7 +8,10 @@
         rbenv rvm fvm luaenv jenv plenv phpenv scalaenv haskell_stack midnight_commander nix_shell
     )
     typeset -g POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR="\uE0BC"
-    typeset -g POWERLEVEL9K_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL="\uE0B0"
+    typeset -g POWERLEVEL9K_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL="\ue0b6"
+    typeset -g POWERLEVEL9K_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL="\ue0b4"
+    typeset -g POWERLEVEL9K_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL="\ue0b6"
+    typeset -g POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL="\ue0b4"
     typeset -g POWERLEVEL9K_DIR_FOREGROUND=254
     typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
     typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=
