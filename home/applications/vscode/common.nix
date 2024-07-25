@@ -18,6 +18,7 @@
         llvm-vs-code-extensions.vscode-clangd
         nvarner.typst-lsp
         redhat.vscode-yaml
+        svelte.svelte-vscode
     ];
     settings = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
