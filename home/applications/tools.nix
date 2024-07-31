@@ -20,5 +20,6 @@
         ldns
         jless
         traceroute
+        curlFull
     ];
 }
