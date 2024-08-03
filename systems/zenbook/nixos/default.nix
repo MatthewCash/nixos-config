@@ -10,6 +10,7 @@ builtins.map (path: ../../../nixos/${path}) [
     "fonts.nix"
     "boot.nix"
     "secureboot.nix"
+    "audio.nix"
     "acpi.nix"
     "networking/general.nix"
     "networking/openssh.nix"
