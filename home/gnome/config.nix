@@ -56,7 +56,8 @@ in
 
         "org/gnome/shell" = {
             favorite-apps = [
-                "org.discord.webcord.desktop"
+                "org.discord.webcord.personal.desktop"
+                "org.discord.webcord.business.desktop"
                 "org.google.chromium.desktop"
                 "termius-app.desktop"
                 "codium.desktop"
