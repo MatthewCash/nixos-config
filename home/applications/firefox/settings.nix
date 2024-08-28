@@ -121,9 +121,6 @@
     # Hide Firefox View
     "browser.tabs.firefox-view" = false;
 
-    # Fonts
-    "browser.display.use_document_fonts" = 0;
-
     # Allow unverified addons
     "xpinstall.signatures.required" = false;
 
