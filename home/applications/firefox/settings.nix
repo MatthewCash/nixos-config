@@ -98,6 +98,7 @@
     # Theme
     "devtools.theme" = "dark";
     "extensions.activeThemeID" = "default-theme@mozilla.org";
+    "browser.tabs.allow_transparent_browser" = true;
 
     # New Tab Page
     "browser.newtabpage.pinned" = [];
