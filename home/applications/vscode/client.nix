@@ -2,7 +2,7 @@ args @ { pkgsUnstable, inputs, system, ... }:
 
 let
     vscodium = (pkgsUnstable.vscodium.overrideAttrs (oldAttrs: {
-         desktopItems = map (x: x // { icon = "vscode"; }) oldAttrs.desktopItems;
+         desktopItems = map (x: x.override { icon = "vscode"; }) oldAttrs.desktopItems;
     })).override {
         commandLineArgs = "--touch-events";
     };
