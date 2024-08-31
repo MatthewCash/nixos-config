@@ -50,7 +50,6 @@
         gnome-autoar
         gnome-calendar
         gnome-calculator
-    ] ++ (with pkgsUnstable.gnome; [
         caribou
         gnome-boxes
         gnome-clocks
@@ -59,6 +58,7 @@
         gnome-contacts
         gnome-characters
         gnome-sound-recorder
+    ] ++ (with pkgsUnstable.gnome; [
         gnome-podcasts
         gnome-connections
         gnome-firmware
