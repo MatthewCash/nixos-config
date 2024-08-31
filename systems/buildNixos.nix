@@ -29,6 +29,8 @@ in
         ({ config, ... }: {
             system.stateVersion = stateVersion;
 
+            environment.persistence.${persistPath}.enableWarnings = false;
+
             home-manager = (import ./buildHomeConfigs.nix (buildArgs // {
                 inherit (systemConfig) systemNixpkgs system homeConfig;
                 inherit buildArgs inputs stateVersion extraArgs customLib;
