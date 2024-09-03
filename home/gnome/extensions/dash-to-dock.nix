@@ -6,7 +6,7 @@
     dconf.settings."org/gnome/shell".enabled-extensions = [ "dash-to-dock@micxgx.gmail.com" ];
 
     dconf.settings."org/gnome/shell/extensions/dash-to-dock" = {
-        apply-custom-theme = false;
+        apply-custom-theme = true;
         background-opacity = 0.30;
         custom-background-color = false;
         custom-theme-shrink = false;
