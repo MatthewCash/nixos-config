@@ -55,6 +55,7 @@
         gnome-clocks
         gnome-weather
         gnome-maps
+        gnome-network-displays
         gnome-contacts
         gnome-characters
         gnome-sound-recorder
