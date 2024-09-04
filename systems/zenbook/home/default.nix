@@ -41,7 +41,6 @@ builtins.map (path: ../../../home/${path}) [
     "applications/steam.nix"
     "applications/prismlauncher.nix"
     "applications/webcord.nix"
-    "applications/setzer.nix"
     "applications/bitwarden.nix"
     "applications/direnv.nix"
     "applications/helvum.nix"
