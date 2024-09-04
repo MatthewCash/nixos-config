@@ -11,6 +11,10 @@ table inet filter {
         icmp type echo-request limit rate 5/second accept;
 
         tcp dport ssh accept;
+
+        # Miracast
+        tcp dport 7250 accept;
+        udp dport 5353 accept;
     }
 
     chain forward {
