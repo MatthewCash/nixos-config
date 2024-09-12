@@ -1,4 +1,4 @@
-{ pkgsUnstable, stableLib, stateVersion, ... }:
+{ pkgsUnstable, stableLib, ... }:
 
 {
     services.xserver = {
@@ -53,5 +53,5 @@
 
     services.dbus.packages = with pkgsUnstable; [ dconf gcr ];
 
-    services.udev.packages = with pkgsUnstable; [ gnome.gnome-settings-daemon ];
+    services.udev.packages = with pkgsUnstable; [ gnome-settings-daemon ];
 }
