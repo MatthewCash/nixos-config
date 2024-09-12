@@ -147,6 +147,10 @@ in
                 --system-saturation: ${builtins.toString accentColor.s}%;
                 --system-lightness: ${builtins.toString accentColor.l}%;
             }
+
+            html * {
+                font-family: "Aurebesh AF" !important;
+            }
        '';
     }) profileNames);
 
