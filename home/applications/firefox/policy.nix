@@ -22,9 +22,9 @@ in
             installation_mode = "normal_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/istilldontcareaboutcookies/latest.xpi";
         };
-        "addon@darkreader.org" = {
+        "{7c7f6dea-3957-4bb9-9eec-2ef2b9e5bcec}" = {
             installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/ultimadark/latest.xpi";
         };
         "sponsorBlocker@ajay.app" = {
             installation_mode = "normal_installed";
