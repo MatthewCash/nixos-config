@@ -40,6 +40,7 @@ builtins.map (path: ../../../nixos/${path}) [
     "kmscon.nix"
     "podman.nix"
     "xdg.nix"
+    "waydroid.nix"
 
     "applications/general.nix"
 ] ++ [
