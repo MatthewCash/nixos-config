@@ -7,7 +7,6 @@
         github.vscode-pull-request-github
         eamodio.gitlens
         esbenp.prettier-vscode
-        octref.vetur
         redhat.java
         ms-dotnettools.csharp
         ms-vscode.powershell
@@ -19,6 +18,7 @@
         nvarner.typst-lsp
         redhat.vscode-yaml
         svelte.svelte-vscode
+        vue.volar
     ];
     settings = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
