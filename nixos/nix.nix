@@ -2,7 +2,6 @@
 
 {
     nix = {
-        settings.auto-optimise-store = true;
 
         gc = {
             automatic = true;
@@ -11,8 +10,10 @@
         };
 
         settings = {
+            auto-optimise-store = true;
             experimental-features = [ "nix-command" "flakes" ];
             use-xdg-base-directories = true;
+            trusted-users = [ "@wheel" ];
         };
 
         nixPath = [ "nixpkgs=${nixpkgsUnstable}" ];
