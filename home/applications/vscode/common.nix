@@ -19,6 +19,7 @@
         redhat.vscode-yaml
         svelte.svelte-vscode
         vue.volar
+        bradlc.vscode-tailwindcss
     ];
     settings = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
