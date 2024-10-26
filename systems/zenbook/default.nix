@@ -8,7 +8,7 @@ rec {
     ssd = true;
     vpnAddress = "10.0.0.9";
     tailscaleId = "zeta";
-    unfreePkgs = [ "steam" "steam-original" ];
+    unfreePkgs = [ "steam" "steam-unwrapped" ];
     batteryChargeLimit = 100;
     accentColor = {
         h = 300;
