@@ -82,7 +82,7 @@
                 exec ${stableLib.getExe pkgsUnstable.nixos-rebuild} switch --flake path:. --use-remote-sudo $@
             '';
             full-upgrade = pkgsStable.writeShellScriptBin "full-upgrade" /* bash */ ''
-                ${nix} flake update path:.
+                ${nix} flake update
                 exec ${stableLib.getExe apply}
             '';
             test = pkgsStable.writeShellScriptBin "test" /* bash */ ''
