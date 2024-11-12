@@ -7,7 +7,6 @@ builtins.map (path: ../../../home/${path}) [
     "gnome/config.nix"
     "gnome/input/keyboard.nix"
     "gnome/extensions/dash-to-dock.nix"
-    "gnome/extensions/gesture-improvements.nix"
     "gnome/extensions/just-perfection.nix"
     "gnome/extensions/tray-icons-reloaded.nix"
     "desktop/defaultApps.nix"
