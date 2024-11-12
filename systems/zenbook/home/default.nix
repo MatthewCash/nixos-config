@@ -13,7 +13,6 @@ builtins.map (path: ../../../home/${path}) [
     "gnome/extensions/window-gestures.nix"
     "gnome/extensions/just-perfection.nix"
     "gnome/extensions/tray-icons-reloaded.nix"
-    "gnome/extensions/rounded-windows.nix"
     "gnome/extensions/desktop-cube.nix"
     "gnome/extensions/blur-my-shell.nix"
     "desktop/defaultApps.nix"
