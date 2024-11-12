@@ -10,7 +10,6 @@ builtins.map (path: ../../../home/${path}) [
     "gnome/extensions/gesture-improvements.nix"
     "gnome/extensions/just-perfection.nix"
     "gnome/extensions/tray-icons-reloaded.nix"
-    "gnome/extensions/rounded-windows.nix"
     "desktop/defaultApps.nix"
     "desktop/userDirs.nix"
 
