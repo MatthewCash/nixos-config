@@ -54,6 +54,10 @@ in
             sleep-inactive-battery-timeout = 1800;
         };
 
+        "org/gnome/settings-daemon/plugins/media-keys" = {
+            volume-step = 3;
+        };
+
         "org/gnome/shell" = {
             favorite-apps = [
                 "org.discord.webcord.personal.desktop"
