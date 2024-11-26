@@ -17,6 +17,8 @@
         };
 
         nixPath = [ "nixpkgs=${nixpkgsUnstable}" ];
+
+        daemonCPUSchedPolicy = "batch";
     };
 
     environment.variables = {
