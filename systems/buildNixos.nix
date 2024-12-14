@@ -29,6 +29,8 @@ in
         ({ config, ... }: {
             system.stateVersion = stateVersion;
 
+            nixpkgs.config = buildArgs.nixpkgsArgs.config;
+
             environment.persistence.${persistPath}.enableWarnings = false;
 
             home-manager = (import ./buildHomeConfigs.nix (buildArgs // {
