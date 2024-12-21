@@ -7,7 +7,7 @@
     services.openssh = {
         enable = true;
         settings = {
-            PermitRootLogin = stableLib.mkDefault "no";
+            PermitRootLogin = stableLib.mkOverride 900 "no";
             PrintLastLog = "no";
             TCPKeepAlive = "yes";
             ClientAliveInterval = 30;
