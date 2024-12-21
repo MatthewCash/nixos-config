@@ -165,7 +165,6 @@
             name = formatName;
             value = builtins.mapAttrs (systemName: system: inputs.nixos-generators.nixosGenerate ({
                 format = formatName;
-                pkgs = system.specialArgs.systemNixpkgs.legacyPackages.${system.system};
             } // system)) nixosSystems;
         }) generatorFormats;
         generators = builtins.listToAttrs generatorList;

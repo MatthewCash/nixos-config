@@ -17,6 +17,8 @@ in
 
     specialArgs = extraArgs;
 
+    pkgs = import systemConfig.systemNixpkgs buildArgs.nixpkgsArgs;
+
     modules = [
         inputs.ragenix.nixosModules.default
 
@@ -28,8 +30,6 @@ in
 
         ({ config, ... }: {
             system.stateVersion = stateVersion;
-
-            nixpkgs.config = buildArgs.nixpkgsArgs.config;
 
             environment.persistence.${persistPath}.enableWarnings = false;
 
