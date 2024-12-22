@@ -23,5 +23,5 @@ in
 
 {
     users.mutableUsers = false;
-    users.extraUsers = builtins.mapAttrs buildUserConfig users;
+    users.users = builtins.mapAttrs buildUserConfig users;
 }

@@ -41,5 +41,11 @@ in
                 systemConfig = config;
             })).nixos;
         })
-    ] ++ systemConfig.nixosConfig;
+
+        (args: builtins.foldl'
+            (a: b: stableLib.recursiveUpdate a b)
+            {}
+            (builtins.map (path: import path args) systemConfig.nixosConfig)
+        )
+    ];
 }
