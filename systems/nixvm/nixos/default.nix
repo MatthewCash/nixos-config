@@ -13,7 +13,7 @@ builtins.map (path: ../../../nixos/${path}) [
     "networking/firewall/nftables.nix"
     "hardware/keyboard.nix"
     "hardware/hyperv.nix"
-    "fs/mounts.nix"
+    "fs/disks.nix"
     "fs/lvm.nix"
     "ld.nix"
     "env.nix"
@@ -28,5 +28,5 @@ builtins.map (path: ../../../nixos/${path}) [
 ] ++ [
     ./networking.nix
     ./firewall/nftables.nix
-    ./mounts.nix
+    ./disks.nix
 ]

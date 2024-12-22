@@ -6,18 +6,38 @@ let
 in
 
 {
-    age.secrets.nixvm-smb-creds.file = ../../../secrets/nixvm-smb-creds.age;
-
-    services.samba.enable = true;
-
-    fileSystems = {
-        home-matthew = {
-            device = "/dev/disk/by-label/home-matthew";
-            fsType = "btrfs";
-            mountPoint = "/mnt/home/matthew";
-            options = [ "rw" "noatime" ];
+    disko.devices = {
+        disk.main = {
+            device = "/dev/sda";
+            content.partitions.main = {
+                size = "100%";
+                content = {
+                    type = "lvm_pv";
+                    vg = "main";
+                };
+            };
         };
 
+        lvm_vg.main.lvs = {
+            nix.size = "100G";
+            persist.size = "100G";
+            home-matthew = {
+                size = "100G";
+                lvm_type = "thinlv";
+                pool = "thin-main";
+                content = {
+                    type = "filesystem";
+                    format = "btrfs";
+                    mountpoint = "/mnt/home/matthew";
+                    mountOptions = [ "noatime" ];
+                };
+            };
+        };
+    };
+
+    age.secrets.nixvm-smb-creds.file = ../../../secrets/nixvm-smb-creds.age;
+
+    fileSystems = {
         windows = {
             device = "//host/Windows";
             fsType = "cifs";
