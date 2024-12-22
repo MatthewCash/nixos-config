@@ -28,6 +28,8 @@ in
 
         inputs.lanzaboote.nixosModules.lanzaboote
 
+        inputs.disko.nixosModules.default
+
         ({ config, ... }: {
             system.stateVersion = stateVersion;
 

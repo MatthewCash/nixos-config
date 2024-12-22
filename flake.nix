@@ -159,6 +159,13 @@
             })).standalone
         ) [ systemConfigs buildArgs];
 
+        # Disk Configurations
+        diskConfigurations = builtins.mapAttrs (systemName: system:
+            system.pkgs.writeShellScriptBin "setup-disks" /* bash */ ''
+                exec ${system.config.system.build.diskoScript}
+            ''
+        ) nixosConfigurations;
+
         # NixOS Generators
         generatorFormats = builtins.attrNames inputs.nixos-generators.nixosModules;
         generatorList = builtins.map (formatName: {
@@ -208,7 +215,7 @@
         };
     in
     {
-        inherit nixosConfigurations homeConfigurations;
+        inherit nixosConfigurations homeConfigurations diskConfigurations;
         packages = stableLib.listToAttrs (
             stableLib.forEach flake-utils.lib.defaultSystems (system:
                 let
