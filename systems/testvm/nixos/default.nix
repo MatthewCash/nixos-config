@@ -27,6 +27,5 @@ builtins.map (path: ../../../nixos/${path}) [
     "applications/general.nix"
 ] ++ [
     ./networking.nix
-    ./gnome.nix
     ./mounts.nix
 ]
