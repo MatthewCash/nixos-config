@@ -17,6 +17,6 @@
             options = "--delete-older-than 30d";
         };
 
-        settings.auto-optimize-store = true;
+        settings.auto-optimise-store = true;
     } else {});
 }
