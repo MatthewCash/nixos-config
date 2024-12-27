@@ -17,8 +17,6 @@
 
         enableVteIntegration = true;
 
-        oh-my-zsh.enable = true;
-
         plugins = [
             {
                 name = "zsh-nix-shell";
