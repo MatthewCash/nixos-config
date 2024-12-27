@@ -12,7 +12,7 @@ mount /dev/main/nix /installroot/nix
 mount /dev/main/persist /installroot/mnt/persist
 
 mkdir -p /installroot/mnt/home/matthew
-mount /dev/mapper/home-matthew /installroot/mnt/home/matthew
+mount /dev/disk/by-label/home-matthew /installroot/mnt/home/matthew
 
 # Create password file directory
 
