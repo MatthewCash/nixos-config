@@ -13,19 +13,18 @@ builtins.map (path: ../../../nixos/${path}) [
     "hardware/keyboard.nix"
     "hardware/hyperv.nix"
     "de/gnome.nix"
-    "fs/mounts.nix"
+    "fs/disks.nix"
     "fs/lvm.nix"
     "env.nix"
     "docs.nix"
     "pam-mount.nix"
     "systemd/config.nix"
     "systemd/logind.nix"
-    "secureboot.nix"
     "dbus.nix"
     "kmscon.nix"
 
     "applications/general.nix"
 ] ++ [
     ./networking.nix
-    ./mounts.nix
+    ./disks.nix
 ]
