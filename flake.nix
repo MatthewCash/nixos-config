@@ -37,8 +37,6 @@
             flake = false;
         };
 
-        flake-utils.url = "github:numtide/flake-utils";
-
         gnome-accent-colors = {
             url = "github:demiskp/custom-accent-colors/v6";
             flake = false;
@@ -110,7 +108,7 @@
         };
     };
 
-    outputs = inputs @ { nixpkgsStable, nixpkgsUnstable, flake-utils, ... }:
+    outputs = inputs @ { nixpkgsStable, nixpkgsUnstable, ... }:
     let
         stableLib = nixpkgsStable.lib;
 
@@ -216,14 +214,12 @@
     in
     {
         inherit nixosConfigurations homeConfigurations diskConfigurations;
-        packages = stableLib.listToAttrs (
-            stableLib.forEach flake-utils.lib.defaultSystems (system:
-                let
-                    pkgsStable = nixpkgsStable.legacyPackages.${system};
-                    pkgsUnstable = nixpkgsUnstable.legacyPackages.${system};
-                in
-                { name = system; value = packages { inherit pkgsStable pkgsUnstable; }; }
-            )
+
+        packages = stableLib.genAttrs stableLib.systems.flakeExposed (system:
+            packages {
+                pkgsStable = nixpkgsStable.legacyPackages.${system};
+                pkgsUnstable = nixpkgsUnstable.legacyPackages.${system};
+            }
         );
     };
 }
