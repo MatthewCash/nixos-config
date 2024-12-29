@@ -91,7 +91,10 @@ let
                 "org.a11y.Bus" = "talk";
                 "org.freedesktop.Notifications" = "talk";
             };
-            flatpak.appId = "org.discord.webcord.${profileName}";
+            flatpak = {
+                appId = "org.discord.webcord.${profileName}";
+                session-helper.enable = true;
+            };
             locale.enable = true;
             etc.sslCertificates.enable = true;
             bubblewrap = {
@@ -103,7 +106,7 @@ let
                 ];
                 bind.ro = [
                     "/etc/fonts"
-                    config.home-files # Not in extraStorePaths because we do not want it recursively linked
+                    (builtins.toString config.home-files) # Not in extraStorePaths because we do not want it recursively linked
                     [ ("${config.gtk.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
                     [ ("${config.gtk.theme.package}/share/themes") (sloth.concat' sloth.xdgDataHome "/themes") ]
                     (sloth.concat' sloth.xdgConfigHome "/gtk-3.0")
@@ -124,7 +127,6 @@ let
                     pipewire = true;
                     pulse = true;
                 };
-                monitor = true;
             };
         };
     }) profileNames;

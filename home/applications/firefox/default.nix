@@ -65,7 +65,10 @@ let
                 "org.mozilla.firefox.*" = "own";
                 "org.mozilla.firefox_beta.*" = "own";
             };
-            flatpak.appId = flatpakId;
+            flatpak = {
+                appId = flatpakId;
+                session-helper.enable = true;
+            };
             locale.enable = true;
             etc.sslCertificates.enable = true;
             bubblewrap = {
@@ -84,7 +87,7 @@ let
                 ];
                 bind.ro = [
                     "/etc/fonts"
-                    config.home-files # Not in extraStorePaths because we do not want it recursively linked
+                    (builtins.toString config.home-files) # Not in extraStorePaths because we do not want it recursively linked
                     [ ("${config.gtk.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
                     [ "${app.package}/lib/firefox/mozilla.cfg" "/app/etc/firefox/mozilla.cfg" ]
                 ];
@@ -103,7 +106,6 @@ let
                     pipewire = true;
                     pulse = true;
                 };
-                monitor = true;
             };
         };
     };

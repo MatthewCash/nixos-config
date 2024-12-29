@@ -21,6 +21,7 @@ let
             };
             locale.enable = true;
             etc.sslCertificates.enable = true;
+            flatpak.session-helper.enable = true;
             bubblewrap = {
                 bindEntireStore = false;
                 bind.rw = [
@@ -37,7 +38,7 @@ let
                 ];
                 bind.ro = [
                     "/etc/fonts"
-                    config.home-files # Not in extraStorePaths because we do not want it recursively linked
+                    (builtins.toString config.home-files) # Not in extraStorePaths because we do not want it recursively linked
                     [ ("${config.gtk.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
                     [ "${app.package}/lib/thunderbird/mozilla.cfg" "/app/etc/thunderbird/mozilla.cfg" ]
                 ];
@@ -54,7 +55,6 @@ let
                     pipewire = true;
                     pulse = true;
                 };
-                monitor = true;
             };
         };
     };
