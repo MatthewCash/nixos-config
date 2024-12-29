@@ -1,102 +1,55 @@
 { ... }:
 
-let
-    espSizeMiB = 512;
-in
-
 {
-    disk = {
-        mainDisk = {
-            type = "disk";
+    boot.initrd.luks.devices.lvm = {
+        device = "/dev/disk/by-partlabel/disk-main-crypt-main";
+        bypassWorkqueues = true;
+    };
+
+    disko.devices = {
+        disk.main = {
             device = "/dev/sda";
-            content = {
-                type = "table";
-                format = "gpt";
-                partitions = [
-                    {
-                        type = "partition";
-                        name = "efi";
-                        start = "1MiB";
-                        end = "${builtins.toString espSizeMiB}MiB";
-                        bootable = true;
-                        content = {
-                            type = "filesystem";
-                            format = "vfat";
-                            mountpoint = "/boot";
-                        };
-                    }
-                    {
-                        type = "partition";
-                        name = "lvm";
-                        start = "${builtins.toString.espSizeMiB}MiB";
-                        end = "100%";
-                        content = {
-                            type = "luks";
-                            name = "crypt-name";
-                            content = {
-                                type = "lvm_pv";
-                                vg = "main";
-                            };
-                        };
-                    }
-                ];
-            };
-        };
-    };
-
-    lvm_vg = {
-        pool = {
-            type = "lvm_vg";
-            lvs = {
-                nix = {
-                    type = "lvm_lv";
-                    size = "100G";
+            content.partitions.crypt-main = {
+                size = "100%";
+                content = {
+                    type = "luks";
+                    name = "crypt-main";
+                    initrdUnlock = false;
                     content = {
-                        type = "filesystem";
-                        format = "btrfs";
-                        mountPoint = "/nix";
-                        mountOptions = [ "noatime" ];
-                    };
-                };
-                persist = {
-                    type = "lvm_lv";
-                    size = "100G";
-                    content = {
-                        type = "filesystem";
-                        format = "btrfs";
-                        mountPoint = "/nix";
-                        mountOptions = [ "noatime" ];
-                    };
-                };
-                swap = {
-                    type = "lvm_lv";
-                    size = "30G";
-                    content = {
-                        type = "swap";
-                    };
-                };
-                home-matthew = {
-                    type = "lvm_lv";
-                    size = "100G";
-                    content = {
-                        type = "luks";
-                        name = "crypt-home-matthew";
-                        content = {
-                            type = "filesystem";
-                            format = "brtfs";
-                            mountOptions = [ "noatime" ];
-                        };
+                        type = "lvm_pv";
+                        vg = "main";
                     };
                 };
             };
         };
-    };
 
-    tmpfs = {
-        root = {
-            type = "tmpfs";
-            mountPoint = "/";
-            mountOptions = [ "size=4G" ];
+        lvm_vg.main.lvs = {
+            nix.size = "100G";
+            persist.size = "100G";
+            swap = {
+                size = "30G";
+                lvm_type = "thinlv";
+                pool = "thin-main";
+                content = {
+                    type = "swap";
+                    randomEncryption = true;
+                };
+            };
+            crypt-home-matthew = {
+                size = "100G";
+                lvm_type = "thinlv";
+                pool = "thin-main";
+                content = {
+                    type = "luks";
+                    name = "home-matthew";
+                    initrdUnlock = false; # Unlocked on login with config/pam-mount.nix
+                    content = {
+                        type = "filesystem";
+                        format = "btrfs";
+                        mountOptions = [ "noatime" ];
+                    };
+                };
+            };
         };
     };
 }

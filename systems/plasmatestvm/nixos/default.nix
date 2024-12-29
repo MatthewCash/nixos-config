@@ -14,7 +14,7 @@ builtins.map (path: ../../../nixos/${path}) [
     "hardware/keyboard.nix"
     "hardware/hyperv.nix"
     "de/plasma.nix"
-    "fs/mounts.nix"
+    "fs/disks.nix"
     "fs/lvm.nix"
     "ld.nix"
     "env.nix"
@@ -29,5 +29,5 @@ builtins.map (path: ../../../nixos/${path}) [
     "applications/general.nix"
 ] ++ [
     ./networking.nix
-    ./mounts.nix
+    ./disks.nix
 ]
