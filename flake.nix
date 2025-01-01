@@ -4,7 +4,7 @@
     inputs = {
         asus-wmi-screenpad = {
             url = "github:MatthewCash/asus-wmi-screenpad-module";
-            inputs.nixpkgs.follows = "nixpkgsStable";
+            inputs.nixpkgs.follows = "nixpkgsUnstable";
         };
 
         aurebesh-fonts = {

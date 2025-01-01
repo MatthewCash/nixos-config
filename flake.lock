@@ -29,7 +29,7 @@
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
         "nixpkgs": [
-          "nixpkgsStable"
+          "nixpkgsUnstable"
         ]
       },
       "locked": {
