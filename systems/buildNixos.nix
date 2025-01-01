@@ -45,7 +45,10 @@ in
         (args: builtins.foldl'
             (a: b: stableLib.recursiveUpdate a b)
             {}
-            (builtins.map (path: import path args) systemConfig.nixosConfig)
+            (builtins.map (path: stableLib.filterAttrs (n: v: n == "disko") (import path args)) systemConfig.nixosConfig)
         )
-    ];
+    ] ++ (builtins.map
+        (path: args: builtins.removeAttrs (import path args) [ "disko" ])
+        systemConfig.nixosConfig
+    );
 }
