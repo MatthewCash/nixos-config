@@ -181,6 +181,12 @@
                 out=$(${nix} eval --impure --raw path:.#${path})
                 printf "\t$out\n"
             '';
+            build = path: /* bash */ ''
+                echo "- build .#${path}:"
+                out=$(${nix} build --no-link --print-out-paths path:.#${path})
+                printf "\t$out\n"
+            '';
+
             excludeSystems = [ "installer" ];
             testSystems = builtins.filter (name: !(builtins.elem name excludeSystems)) systemNames;
         in rec {
@@ -209,6 +215,23 @@
                 ))}
 
                 echo "All evaluations completed successfully!"
+            '';
+            build-test = pkgsStable.writeShellScriptBin "build-test" /* bash */ ''
+                set -e -o pipefail; shopt -s inherit_errexit
+
+                echo "Building system configurations"
+                ${builtins.concatStringsSep "\n" (builtins.map (name:
+                    build "nixosConfigurations.${name}.config.system.build.toplevel"
+                ) testSystems)}
+
+                echo "Building home configurations"
+                ${builtins.concatStringsSep "\n" (stableLib.flatten (
+                    (stableLib.mapAttrsToList (systemName: value: stableLib.mapAttrsToList (homeName: value:
+                        build "homeConfigurations.${systemName}.${homeName}"
+                    ) value) homeConfigurations)
+                ))}
+
+                echo "All builds completed successfully!"
             '';
         };
     in
