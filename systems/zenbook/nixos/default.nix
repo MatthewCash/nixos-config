@@ -23,7 +23,7 @@ builtins.map (path: ../../../nixos/${path}) [
     "hardware/usbguard.nix"
     "de/gnome.nix"
     "cpu/intel.nix"
-    "fs/mounts.nix"
+    "fs/disks.nix"
     "fs/lvm.nix"
     "ld.nix"
     "env.nix"
@@ -48,7 +48,7 @@ builtins.map (path: ../../../nixos/${path}) [
     ./networking.nix
     ./firewall/nftables.nix
     ./gpu.nix
-    ./mounts.nix
+    ./disks.nix
     ./lid.nix
     ./usbguard.nix
 ]
