@@ -22,6 +22,7 @@ builtins.map (path: ../../../nixos/${path}) [
     "hardware/battery.nix"
     "hardware/usbguard.nix"
     "de/gnome.nix"
+    "cpu/scheduler.nix"
     "cpu/intel.nix"
     "fs/disks.nix"
     "fs/lvm.nix"
