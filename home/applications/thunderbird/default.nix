@@ -22,6 +22,7 @@ let
             locale.enable = true;
             etc.sslCertificates.enable = true;
             flatpak.session-helper.enable = true;
+            gpu.enable = true;
             bubblewrap = {
                 bindEntireStore = false;
                 bind.rw = [
