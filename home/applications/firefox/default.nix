@@ -71,6 +71,7 @@ let
             };
             locale.enable = true;
             etc.sslCertificates.enable = true;
+            gpu.enable = true;
             bubblewrap = {
                 bindEntireStore = false;
                 bind.rw = [
