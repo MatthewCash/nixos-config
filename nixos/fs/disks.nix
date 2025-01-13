@@ -9,7 +9,6 @@
 
     environment.persistence.${persistPath} = {
         directories = [
-            "/var/lib/systemd/coredump"
             "/var/log"
         ];
 
