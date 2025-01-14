@@ -10,7 +10,7 @@ builtins.map (path: ../../../nixos/${path}) [
     "networking/general.nix"
     "networking/openssh.nix"
     "hardware/keyboard.nix"
-    "fs/mounts.nix"
+    "fs/disks.nix"
     "fs/lvm.nix"
     "ld.nix"
     "env.nix"
