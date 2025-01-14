@@ -9,6 +9,7 @@
         esbenp.prettier-vscode
         redhat.java
         ms-dotnettools.csharp
+        ms-dotnettools.vscode-dotnet-runtime
         ms-vscode.powershell
         ms-python.python
         ms-pyright.pyright
@@ -35,10 +36,8 @@
         "java.format.settings.url" = "${config.xdg.configHome}/java/java-formatter.xml";
 
         "[csharp]"."editor.defaultFormatter" = "ms-dotnettools.csharp";
-        "omnisharp.dotnetPath" = "${pkgsUnstable.dotnet-sdk}/bin";
-        "omnisharp.dotNetCliPaths" = [ "${pkgsUnstable.dotnet-sdk}/bin" ];
-        "omnisharp.enableEditorConfigSupport" = false;
-        "omnisharp.organizeImportsOnFormat" = true;
+        "dotnet.dotnetPath" = "${pkgsUnstable.dotnet-sdk}/share/dotnet";
+        "dotnetAcquisitionExtension.sharedExistingDotnetPath" = "${pkgsUnstable.dotnet-sdk}/share/dotnet";
 
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = stableLib.getExe pkgsUnstable.nil;
