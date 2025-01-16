@@ -18,6 +18,7 @@
         llvm-vs-code-extensions.vscode-clangd
         nvarner.typst-lsp
         redhat.vscode-yaml
+        editorconfig.editorconfig
         svelte.svelte-vscode
         vue.volar
         bradlc.vscode-tailwindcss
