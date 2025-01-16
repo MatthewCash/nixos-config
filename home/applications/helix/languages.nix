@@ -28,10 +28,7 @@ in
         jdtls.command = "jdtls"; # Gets LSP from PATH because it is optional (Java is > 1GB)
         marksman.command = getExe pkgsUnstable.marksman;
         nil.command = getExe pkgsUnstable.nil;
-        omnisharp = {
-            command = getExe pkgsUnstable.omnisharp-roslyn;
-            args = [ "--languageserver" ];
-        };
+        omnisharp.command = getExe pkgsUnstable.csharp-ls;
         pylsp.command = getExe pkgsUnstable.python3Packages.python-lsp-server;
         pyright.command = getExe' pkgsUnstable.basedpyright "basedpyright-langserver";
         rust-analyzer.command = getExe pkgsUnstable.rust-analyzer;
@@ -64,7 +61,6 @@ in
             };
             auto-format = true;
         }
-
         {
             name = "json";
             language-servers = [ "vscode-json-language-server" ];
