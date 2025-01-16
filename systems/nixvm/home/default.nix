@@ -7,7 +7,6 @@ builtins.map (path: ../../../home/${path}) [
     "dev/python.nix"
     "dev/java"
     "dev/gradle.nix"
-    "dev/omnisharp.nix"
     "dev/dotnet.nix"
     "dev/prettier.nix"
     "dev/editor-config.nix"
