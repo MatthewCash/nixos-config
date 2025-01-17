@@ -63,7 +63,7 @@
             bindkey "^[[H" beginning-of-line
             bindkey "^[[F" end-of-line
 
-            typeset -g WORDCHARS="''${WORDCHARS/\//}"
+            typeset -g WORDCHARS="*"
 
             cd() { pushd "''${1:-$HOME}" > /dev/null }
             x() {
