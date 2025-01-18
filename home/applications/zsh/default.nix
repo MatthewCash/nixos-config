@@ -28,6 +28,11 @@
                 file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
                 src = pkgsUnstable.zsh-powerlevel10k;
             }
+            {
+                name = "fzf-tab";
+                file = "share/fzf-tab/fzf-tab.plugin.zsh";
+                src = pkgsUnstable.zsh-fzf-tab;
+            }
         ];
 
         enableCompletion = true;
