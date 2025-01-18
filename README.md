@@ -1,8 +1,8 @@
 # nixos-config
 
-This is the configuration for my machines running NixOS
+This is the configuration for my machines running NixOS.
 
-The main goal is to be fully declarative and reproducible while not compromising usability or security
+The main goal is to be fully declarative and reproducible while not compromising usability or security.
 
 ## Implemented Features
 
@@ -13,62 +13,63 @@ The main goal is to be fully declarative and reproducible while not compromising
 - Standalone [home-manager](https://github.com/nix-community/home-manager) activation script generation
 - Image generation using [nixos-generators](https://github.com/nix-community/nixos-generators) to simplify installation and deployment
 - Appliation sandboxing with [nixpak](https://github.com/nixpak/nixpak)
+- Declarative disk partitioning using [disko](https://github.com/nix-community/disko)
 
 ## TODO
 
-- Setup disks during installation using [disko](https://github.com/nix-community/disko)
+- Improve install script
 - Configure nix on Android with [nix-on-droid](https://github.com/nix-community/nix-on-droid)
 
 ## Installation
 
-There is no easy way to install this configuration yet, you are expected to be very famililar with NixOS, flakes, and disk partitioning
+Your nix installation should have `nix-command` and `flakes` features set to enabled, [nix-installer](https://github.com/DeterminateSystems/nix-installer) will do this automatically.
 
-Your nix installation should have `nix-command` and `flakes` features set to enabled, [nix-installer](https://github.com/DeterminateSystems/nix-installer) will do this automatically
+[Images](#image-generation) can be built that contain nix and a copy of this repository to make installation simpler.
 
-[Images](#image-generation) can be built that contain a copy of this repository to make installation simpler
+Run the disk partition script for a given system with `nix run .#diskConfigurations.<system>` replacing `<system>` with the appropriate system in `systems/`.
 
-A basic [install script](install.sh) exists to somewhat automate installation but must be modified for each system
+A basic [install script](install.sh) exists to automate the rest of the installation but must be modified for each system.
 
 ## Updating and Applying Changes
 
-The [flake](flake.nix) contains small scripts to make applying changes and updating the system easier
+The [flake](flake.nix) contains small scripts to make applying changes and updating the system easier.
 
-After modifying the configuration run `nix run .#apply` to apply the changes
+After modifying the configuration run `nix run .#apply` to apply the changes.
 
-To update the flake's inputs and apply the changes run `nix run .#full-upgrade`
+To update the flake's inputs and apply the changes run `nix run .#full-upgrade`.
 
-Use `nix run .#test` to verify that all systems evaluate successfully before committing
+Use `nix run .#test` to verify that all systems evaluate successfully before committing.
 
 ## Standalone Home Manager Configurations
 
-Home Manager configurations can be applied without applying the entire system configuration
+Home Manager configurations can be applied without applying the entire system configuration.
 
-Impermanence is disabled when using a standalone configuration
+Impermanence is disabled when using a standalone configuration.
 
-To apply the configuration run `nix run .#homeConfigurations.<system>.<name>` replacing `<system>` with the appropriate system in `systems/` and `<name>` with a username listed in that system's home config
+To apply the configuration run `nix run .#homeConfigurations.<system>.<name>` replacing `<system>` with the appropriate system in `systems/` and `<name>` with a username listed in that system's home config.
 
 ## Image Generation
 
-Images can be easily generated using [nixos-generators](https://github.com/nix-community/nixos-generators)
+Images can be easily generated using [nixos-generators](https://github.com/nix-community/nixos-generators).
 
-Run `nix build .#generators.<format>.<system>`, replacing `<format>` with an image format (e.g. `qcow`, `iso`) and `<system>` with the appropriate system in `systems/`
+Run `nix build .#generators.<format>.<system>`, replacing `<format>` with an image format (e.g. `qcow`, `iso`) and `<system>` with the appropriate system in `systems/`.
 
-An installation image for this configuration can be generated with `nix build.#generators.install-iso.installer`
+An installation image for this configuration can be generated with `nix build.#generators.install-iso.installer`.
 
 > **Note**
-> Generating images requires a large $TMPDIR, consider running `nix build` with `NIX_REMOTE=local TMPDIR=/mnt/persist/tmp` to ensure adequate space is available
+> Generating images requires a large $TMPDIR, consider running `nix build` with `NIX_REMOTE=local TMPDIR=/mnt/persist/tmp` to ensure adequate space is available.
 
 ## Directory Structure
 
 ### NixOS System Configurations `nixos/`
 
-This directory contains configuration files that modify the NixOS system state
+This directory contains configuration files that modify the NixOS system state.
 
 ### Home Configurations `home/`
 
-This directory contains configuration files that modify the user's home directory using [home-manager](https://github.com/nix-community/home-manager)
+This directory contains configuration files that modify the user's home directory using [home-manager](https://github.com/nix-community/home-manager).
 
-If the configuration would affect a home directory, or the option could be user-specific, it should go here
+If the configuration would affect a home directory, or the option could be user-specific, it should go here.
 
 - Applications (web browser, file browser, shell, development utils) and their configurations
 - Themes (shell, applications)
@@ -76,27 +77,27 @@ If the configuration would affect a home directory, or the option could be user-
 
 ### System Declarations `systems/`
 
-This directory contains the declarations for individual systems, config imports, and system-specific configurations
+This directory contains the declarations for individual systems, config imports, and system-specific configurations.
 
-The individual system declarations `systems/systemname/default.nix` contain basic information that imported configs would need, such as
+The individual system declarations `systems/systemname/default.nix` contain basic information that imported configs would need, such as.
 
 - System Name
 - Architecture
 - Kernel packages set
 - nixpkgs Channel
 
-The declarations also have fields used to specify config imports (for the system or home)
+The declarations also have fields used to specify config imports (for the system or home).
 
-Files are usually imported from `nixos/` and `home/`, but systems often specify their own individual configs that should not be shared in `systems/systemname/nixos/`
+Files are usually imported from `nixos/` and `home/`, but systems often specify their own individual configs that should not be shared in `systems/systemname/nixos/`.
 
-The file `systems/buildNixos.nix` is responsible for taking these system declarations and building a complete NixOS system from them, it also calls `systems/buildHomeConfigs.nix` to build the home configuration
+The file `systems/buildNixos.nix` is responsible for taking these system declarations and building a complete NixOS system from them, it also calls `systems/buildHomeConfigs.nix` to build the home configuration.
 
 ### Secrets `secrets.nix` and `secrets/`
 
-[ragenix](https://github.com/yaxitech/ragenix) is used to encrypt files specified in `secrets.nix` and store them in `secrets/`, which will be decrypted to `/run/agenix.d/` at runtime
+[ragenix](https://github.com/yaxitech/ragenix) is used to encrypt files specified in `secrets.nix` and store them in `secrets/`, which will be decrypted to `/run/agenix.d/` at runtime.
 
 ### Custom library `lib/`
 
-This directory contains nix functions that may be useful in creating configurations
+This directory contains nix functions that may be useful in creating configurations.
 
-Functions are exposed to configurations in the `customLib` argument
+Functions are exposed to configurations in the `customLib` argument.
