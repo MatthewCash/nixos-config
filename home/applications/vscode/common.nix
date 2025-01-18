@@ -3,6 +3,7 @@
 {
     extensions = with pkgsUnstable.vscode-extensions; [
         jnoortheen.nix-ide
+        mkhl.direnv
         dbaeumer.vscode-eslint
         github.vscode-pull-request-github
         eamodio.gitlens
