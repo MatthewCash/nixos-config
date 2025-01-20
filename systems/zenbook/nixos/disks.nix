@@ -1,11 +1,6 @@
 { ... }:
 
 {
-    boot.initrd.luks.devices.lvm = {
-        device = "/dev/disk/by-partlabel/disk-main-crypt-main";
-        bypassWorkqueues = true;
-    };
-
     disko.devices = {
         disk.main = {
             device = "/dev/disk/by-id/nvme-INTEL_SSDPEKNW010T8_BTNH036520891P0B";
@@ -14,10 +9,13 @@
                 content = {
                     type = "luks";
                     name = "crypt-main";
-                    initrdUnlock = false;
                     content = {
                         type = "lvm_pv";
                         vg = "main";
+                    };
+                    settings = {
+                        bypassWorkqueues = true;
+                        allowDiscards = true;
                     };
                 };
             };
