@@ -16,6 +16,7 @@
                     settings = {
                         bypassWorkqueues = true;
                         allowDiscards = true;
+                        crypttabExtraOpts = [ "tpm2-device=auto" "tpm2-measure-pcr=yes" ];
                     };
                 };
             };
