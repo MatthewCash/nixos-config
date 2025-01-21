@@ -1,11 +1,6 @@
 { ... }:
 
 {
-    boot.initrd.luks.devices.lvm = {
-        device = "/dev/disk/by-partlabel/disk-main-crypt-main";
-        bypassWorkqueues = true;
-    };
-
     disko.devices = {
         disk.main = {
             device = "/dev/sda";
@@ -14,10 +9,14 @@
                 content = {
                     type = "luks";
                     name = "crypt-main";
-                    initrdUnlock = false;
                     content = {
                         type = "lvm_pv";
                         vg = "main";
+                    };
+                    settings = {
+                        bypassWorkqueues = true;
+                        allowDiscards = true;
+                        crypttabExtraOpts = [ "tpm2-device=auto" "tpm2-measure-pcr=yes" ];
                     };
                 };
             };
