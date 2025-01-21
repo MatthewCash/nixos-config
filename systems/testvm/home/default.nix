@@ -5,6 +5,7 @@ builtins.map (path: ../../../home/${path}) [
     "gnome/console.nix"
     "gnome/gtk.nix"
     "gnome/config.nix"
+    "gnome/kvantum.nix"
     "gnome/input/keyboard.nix"
     "gnome/extensions/dash-to-dock.nix"
     "gnome/extensions/just-perfection.nix"
