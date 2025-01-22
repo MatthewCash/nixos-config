@@ -70,6 +70,18 @@
 
             typeset -g WORDCHARS="*"
 
+            set_terminal_title() {
+                echo -ne "\033]0;$1\007"
+            }
+
+            preexec() {
+                set_terminal_title "$USER@$HOST: $1"
+            }
+
+            precmd() {
+                set_terminal_title "$USER@$HOST: ''${PWD/#$HOME/~}"
+            }
+
             cd() { pushd "''${1:-$HOME}" > /dev/null }
             x() {
                 command xdg-open "$@" 2>/dev/null
