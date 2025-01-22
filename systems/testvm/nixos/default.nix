@@ -24,6 +24,7 @@ builtins.map (path: ../../../nixos/${path}) [
     "services/evolution.nix"
     "dbus.nix"
     "kmscon.nix"
+    "xdg.nix"
 
     "applications/general.nix"
 ] ++ [
