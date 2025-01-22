@@ -15,11 +15,13 @@ builtins.map (path: ../../../nixos/${path}) [
     "de/gnome.nix"
     "fs/disks.nix"
     "fs/lvm.nix"
+    "ld.nix"
     "env.nix"
     "docs.nix"
     "pam-mount.nix"
     "systemd/config.nix"
     "systemd/logind.nix"
+    "services/evolution.nix"
     "dbus.nix"
     "kmscon.nix"
 
