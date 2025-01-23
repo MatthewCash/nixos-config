@@ -3,6 +3,7 @@
 {
     fonts = {
         packages = with pkgsStable; [
+            open-sans
             (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
             ipafont
             inputs.aurebesh-fonts.defaultPackage.${system}
