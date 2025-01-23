@@ -8,6 +8,7 @@ in
     environment = {
         inherit shells;
         variables.EDITOR = stableLib.mkForce "$EDITOR";
+        shellAliases = stableLib.mkForce {};
     };
 
     programs = builtins.listToAttrs

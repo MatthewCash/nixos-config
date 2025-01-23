@@ -46,6 +46,8 @@
             c = "wl-copy";
             p = "wl-paste";
             e = "$EDITOR";
+            l = "ls -alh";
+            ls = "ls --color=tty";
         };
 
         initExtra = /* zsh */ ''
