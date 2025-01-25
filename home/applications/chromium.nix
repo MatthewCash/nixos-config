@@ -24,6 +24,7 @@ let
             flatpak = {
                 appId = "org.google.chromium";
                 desktopFile = "chromium-browser.desktop";
+                session-helper.enable = true;
             };
             locale.enable = true;
             etc.sslCertificates.enable = true;
