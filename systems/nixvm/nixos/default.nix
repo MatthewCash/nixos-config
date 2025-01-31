@@ -29,4 +29,5 @@ builtins.map (path: ../../../nixos/${path}) [
     ./networking.nix
     ./firewall/nftables.nix
     ./disks.nix
+    ./kernel.nix
 ]
