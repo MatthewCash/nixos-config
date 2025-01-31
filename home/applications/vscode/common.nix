@@ -17,7 +17,7 @@
         rust-lang.rust-analyzer
         tamasfe.even-better-toml
         llvm-vs-code-extensions.vscode-clangd
-        nvarner.typst-lsp
+        myriad-dreamin.tinymist
         redhat.vscode-yaml
         editorconfig.editorconfig
         svelte.svelte-vscode
@@ -60,7 +60,7 @@
 
         "clangd.path" = stableLib.getExe' pkgsUnstable.clang-tools "clangd";
 
-        "[typst]"."editor.defaultFormatter" = "nvarner.typst-lsp";
+        "[typst]"."editor.defaultFormatter" = "myriad-dreamin.tinymist";
 
         "[yaml]"."editor.defaultFormatter" = "redhat.vscode-yaml";
         "redhat.telemetry.enabled" = false;
