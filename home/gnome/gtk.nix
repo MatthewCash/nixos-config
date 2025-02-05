@@ -4,6 +4,11 @@ let
     customCss = /* css */ ''
         @define-color accent_bg_color ${accentColor.hex};
         @define-color accent_color ${accentColor.hex};
+
+        :root {
+            --accent-color: ${accentColor.hex};
+            --accent-bg-color: ${accentColor.hex};
+        }
     '';
 
     shellCssFile = "${inputs.gnome-accent-colors}/custom-accent-colors@demiskp/resources/magenta/gnome-shell/44/gnome-shell.css";
