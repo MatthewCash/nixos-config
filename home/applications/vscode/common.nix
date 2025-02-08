@@ -64,5 +64,7 @@
 
         "[yaml]"."editor.defaultFormatter" = "redhat.vscode-yaml";
         "redhat.telemetry.enabled" = false;
+
+        "[toml]"."editor.defaultFormatter" = "tamasfe.even-better-toml";
     };
 }
