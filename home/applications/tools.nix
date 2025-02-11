@@ -21,5 +21,6 @@
         jless
         traceroute
         curlFull
+        usbutils
     ];
 }
