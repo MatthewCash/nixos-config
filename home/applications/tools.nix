@@ -24,5 +24,6 @@
         usbutils
         killall
         file
+        pciutils
     ];
 }
