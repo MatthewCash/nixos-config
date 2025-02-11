@@ -23,5 +23,6 @@
         curlFull
         usbutils
         killall
+        file
     ];
 }
