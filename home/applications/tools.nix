@@ -22,5 +22,6 @@
         traceroute
         curlFull
         usbutils
+        killall
     ];
 }
