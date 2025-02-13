@@ -25,8 +25,6 @@ builtins.map (path: ../../../nixos/${path}) [
     "kmscon.nix"
     "flatpak.nix"
     "podman.nix"
-
-    "applications/general.nix"
 ] ++ [
     ./networking.nix
     ./disks.nix
