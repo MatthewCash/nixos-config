@@ -18,6 +18,4 @@ builtins.map (path: ../../../nixos/${path}) [
     "systemd/config.nix"
     "systemd/logind.nix"
     "dbus.nix"
-
-    "applications/general.nix"
 ]
