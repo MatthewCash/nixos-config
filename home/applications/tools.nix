@@ -25,5 +25,6 @@
         killall
         file
         pciutils
+        netcat-gnu
     ];
 }
