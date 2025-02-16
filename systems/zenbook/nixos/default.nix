@@ -42,8 +42,6 @@ builtins.map (path: ../../../nixos/${path}) [
     "podman.nix"
     "xdg.nix"
     "waydroid.nix"
-
-    "applications/general.nix"
 ] ++ [
     ./kernel.nix
     ./networking.nix
