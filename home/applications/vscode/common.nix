@@ -6,7 +6,6 @@
         mkhl.direnv
         dbaeumer.vscode-eslint
         github.vscode-pull-request-github
-        eamodio.gitlens
         esbenp.prettier-vscode
         redhat.java
         ms-dotnettools.csharp
