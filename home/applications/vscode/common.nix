@@ -25,6 +25,8 @@
     ];
     settings = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        "editor.formatOnSave" = true;
+
         "files.exclude" = {
             "node_modules/" = true;
             "**/__pycache__" = true;
