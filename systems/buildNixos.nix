@@ -24,7 +24,7 @@ in
 
         inputs.impermanence.nixosModule
 
-        inputs.home-manager.nixosModule
+        inputs.home-manager.nixosModules.home-manager
 
         inputs.lanzaboote.nixosModules.lanzaboote
 
