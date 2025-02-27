@@ -31,4 +31,5 @@ builtins.map (path: ../../../home/${path}) [
     "applications/nix.nix"
     "applications/evolution.nix"
     "applications/webcord.nix"
+    "applications/wget.nix"
 ]
