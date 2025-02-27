@@ -67,9 +67,11 @@ in
         ".cache/thunderbird"
     ];
 
+    home.packages = [ wrappedThunderbird.config.env ];
+
     programs.thunderbird = {
         enable = true;
-        package = wrappedThunderbird.config.env;
+        package = pkgsUnstable.gnused; # Since Thunderbird is already wrapped (with nixpak) it is not specified here;
         profiles = {
             "main" = {
                 isDefault = true;
