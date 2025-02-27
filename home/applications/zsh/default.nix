@@ -73,6 +73,7 @@
             typeset -g WORDCHARS="*"
 
             zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+            zstyle ':fzf-tab:*' use-fzf-default-opts yes
 
             set_terminal_title() {
                 echo -ne "\033]0;$1\007"
