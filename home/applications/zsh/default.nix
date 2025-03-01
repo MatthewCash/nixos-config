@@ -3,8 +3,8 @@
 {
     home.packages = with pkgsStable; [ wl-clipboard ];
 
-    home.persistence."${persistenceHomePath}/${name}".files = stableLib.mkIf useImpermanence [
-        ".cache/zsh/history"
+    home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence [
+        ".cache/zsh"
     ];
 
     home.sessionVariables.COLORTERM = "truecolor";
@@ -56,7 +56,7 @@
 
             file="/run/current-system/etc/profile" && test -f $file && source $file
 
-            unsetopt HIST_SAVE_BY_COPY
+            setopt INC_APPEND_HISTORY
 
             bindkey "^[[3~" delete-char
 
