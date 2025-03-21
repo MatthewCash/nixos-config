@@ -96,9 +96,9 @@ let
                     "/etc/fonts"
                     (builtins.toString config.home-files) # Not in extraStorePaths because we do not want it recursively linked
                     [ ("${config.gtk.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
-                    [ "${app.package}/lib/firefox/mozilla.cfg" "/app/etc/firefox/mozilla.cfg" ]
                     [ (builtins.toString dconfDb) (sloth.concat' sloth.xdgConfigHome "/dconf/user") ]
                     [ ("${config.gtk.theme.package}/share/themes") (sloth.concat' sloth.xdgDataHome "/themes") ]
+                    [ "${app.package}/lib/${app.package.pname}/mozilla.cfg" "/app/etc/firefox/mozilla.cfg" ]
                 ];
                 extraStorePaths = (
                     stableLib.attrsets.mapAttrsToList
