@@ -4,6 +4,9 @@ let
     systemConfigOptionals = stableLib.optionals (systemConfig != null);
 
     dconfSettings = {
+        "org/gnome/desktop/interface" = stableLib.optionalAttrs (config.gtk.theme.name != null) {
+            gtk-theme = config.gtk.theme.name;
+        };
         "org/gnome/evolution/mail" = {
             layout = 1;
             show-to-do-bar = false;
