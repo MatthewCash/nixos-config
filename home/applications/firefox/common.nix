@@ -18,8 +18,8 @@
 
             "Wikipedia" = {
                 urls = [{ template = "https://"; }];
-                iconUpdateURL = "https://upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svghttps://upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg";
-                definedAliases = [ "wiki"];
+                icon = "https://upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svghttps://upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg";
+                definedAliases = [ "wiki" ];
             };
         };
     };
