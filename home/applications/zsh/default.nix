@@ -50,7 +50,7 @@
             ls = "ls --color=tty";
         };
 
-        initExtra = /* zsh */ ''
+        initContent = /* zsh */ ''
             ${builtins.readFile ./git_formatter.sh}
             ${import ./p10k.nix { inherit accentColor; } }
 

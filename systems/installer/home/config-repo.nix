@@ -7,7 +7,7 @@
         $DRY_RUN_CMD chmod -R 755 ~/nixos-config
     '';
 
-    programs.zsh.initExtra = /* zsh */ ''
+    programs.zsh.initContent = /* zsh */ ''
         cd ~/nixos-config
     '';
 }
