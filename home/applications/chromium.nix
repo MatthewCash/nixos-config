@@ -1,6 +1,12 @@
-{ pkgsUnstable, pkgsStable, stableLib, useImpermanence, persistenceHomePath, name, inputs, config, systemConfig, ... }:
+{ pkgsUnstable, pkgsStable, customLib, stableLib, useImpermanence, persistenceHomePath, name, inputs, config, systemConfig, ... }:
 
 let
+    dconfSettings = stableLib.optionalAttrs (config.gtk.theme.name != null) {
+        "org/gnome/desktop/interface".gtk-theme = config.gtk.theme.name;
+    };
+
+    dconfDb = customLib.generateDconfDb dconfSettings;
+
     mkNixPak = inputs.nixpak.lib.nixpak { lib = stableLib; pkgs = pkgsStable; };
     systemConfigOptionals = stableLib.optionals (systemConfig != null);
     wrappedChromium = mkNixPak {
@@ -41,6 +47,7 @@ let
                     "/etc/fonts"
                     [ ("${config.gtk.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
                     [ ("${config.gtk.theme.package}/share/themes") (sloth.concat' sloth.xdgDataHome "/themes") ]
+                    [ (builtins.toString dconfDb) (sloth.concat' sloth.xdgConfigHome "/dconf/user") ]
                     (sloth.concat' sloth.xdgConfigHome "/gtk-3.0")
                 ];
                 extraStorePaths = (
