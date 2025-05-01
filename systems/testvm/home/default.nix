@@ -33,6 +33,7 @@ builtins.map (path: ../../../home/${path}) [
     "applications/bat.nix"
     "applications/nix.nix"
     "applications/wget.nix"
+    "applications/evolution.nix"
 ] ++ [
     ./gnome.nix
 ]
