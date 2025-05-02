@@ -14,6 +14,6 @@
         enable = true;
         enableExtraSocket = true;
         enableSshSupport = true;
-        pinentryPackage = pkgsUnstable.pinentry-gnome3;
+        pinentry.package = pkgsUnstable.pinentry-gnome3;
     };
 }
