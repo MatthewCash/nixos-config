@@ -22,6 +22,7 @@
         svelte.svelte-vscode
         vue.volar
         bradlc.vscode-tailwindcss
+        streetsidesoftware.code-spell-checker
     ];
     settings = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
