@@ -21,6 +21,12 @@ in
         lvm_vg.main.lvs = {
             nix.size = "100G";
             persist.size = "100G";
+            swap = {
+                size = "10G";
+                lvm_type = "thinlv";
+                pool = "thin-main";
+                content.type = "swap";
+            };
             home-matthew = {
                 size = "100G";
                 lvm_type = "thinlv";
