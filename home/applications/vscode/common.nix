@@ -8,8 +8,6 @@
         github.vscode-pull-request-github
         esbenp.prettier-vscode
         redhat.java
-        ms-dotnettools.csharp
-        ms-dotnettools.vscode-dotnet-runtime
         ms-vscode.powershell
         ms-python.python
         ms-pyright.pyright
@@ -38,10 +36,6 @@
         "java.import.gradle.home" = "${pkgsUnstable.gradle}/lib/gradle";
         "java.configuration.updateBuildConfiguration" = "automatic";
         "java.format.settings.url" = "${config.xdg.configHome}/java/java-formatter.xml";
-
-        "[csharp]"."editor.defaultFormatter" = "ms-dotnettools.csharp";
-        "dotnet.dotnetPath" = "${pkgsUnstable.dotnet-sdk}/share/dotnet";
-        "dotnetAcquisitionExtension.sharedExistingDotnetPath" = "${pkgsUnstable.dotnet-sdk}/share/dotnet";
 
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = stableLib.getExe pkgsUnstable.nil;
