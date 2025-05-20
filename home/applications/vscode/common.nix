@@ -52,7 +52,6 @@
             "--message-format=json"
         ];
         "rust-analyzer.rustfmt.overrideCommand" = [ (stableLib.getExe pkgsUnstable.rustfmt) "--edition" "2024" ];
-        "rust-analyzer.inlayHints.typeHints.enable" = false;
 
         "clangd.path" = stableLib.getExe' pkgsUnstable.clang-tools "clangd";
 
