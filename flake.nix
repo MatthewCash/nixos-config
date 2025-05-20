@@ -37,11 +37,6 @@
             flake = false;
         };
 
-        gnome-accent-colors = {
-            url = "github:demiskp/custom-accent-colors/v6";
-            flake = false;
-        };
-
         home-manager = {
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgsUnstable";

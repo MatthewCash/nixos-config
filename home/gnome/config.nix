@@ -75,7 +75,6 @@ in
             ];
             enabled-extensions = [
                 "places-menu@gnome-shell-extensions.gcampax.github.com"
-                "user-theme@gnome-shell-extensions.gcampax.github.com"
             ];
             disabled-extensions = [ ];
             disable-extension-version-validation = true;
