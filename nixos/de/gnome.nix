@@ -15,13 +15,9 @@
     users.extraUsers.gdm.extraGroups = [ "video" ];
 
     services.gnome = {
-        # Do not install default GNOME apps
-        core-utilities.enable = false;
-
+        core-apps.enable = false;
         gnome-keyring.enable = true;
-
         gnome-browser-connector.enable = true;
-
         gnome-settings-daemon.enable = true;
     };
 
