@@ -73,7 +73,6 @@
             typeset -g WORDCHARS="*"
 
             zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-            zstyle ':completion:*' matcher-list 'r:|?=**'
             zstyle ':fzf-tab:*' use-fzf-default-opts yes
 
             set_terminal_title() {
