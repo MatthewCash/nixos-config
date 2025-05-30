@@ -4,7 +4,7 @@
     fonts = {
         packages = with pkgsStable; [
             open-sans
-            (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
+            nerd-fonts.caskaydia-mono
             ipafont
             inputs.aurebesh-fonts.defaultPackage.${system}
         ];
