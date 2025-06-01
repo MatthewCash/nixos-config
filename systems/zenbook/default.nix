@@ -7,7 +7,6 @@ rec {
     kernelPackages = nixpkgsUnstable.legacyPackages.${system}.linuxPackages_6_14;
     ssd = true;
     vpnAddress = "10.0.0.9";
-    tailscaleId = "zeta";
     unfreePkgs = [ "steam" "steam-unwrapped" ];
     batteryChargeLimit = 100;
     accentColor = {

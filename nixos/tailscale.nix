@@ -1,6 +1,8 @@
-{ tailscaleId, ... }:
+{ persistPath, ... }:
 
 {
+    environment.persistence.${persistPath}.files = [ "/var/lib/tailscale/tailscaled.state" ];
+
     services.tailscale.enable = true;
 
     systemd.services.tailscaled.serviceConfig = {
@@ -8,10 +10,5 @@
         Environment = [
             "TS_DEBUG_FIREWALL_MODE=auto"
         ];
-    };
-
-    age.secrets."tailscale-${tailscaleId}" = {
-        file = ../secrets/tailscale/${tailscaleId}.age;
-        path = "/var/lib/tailscale/tailscaled.state";
     };
 }
