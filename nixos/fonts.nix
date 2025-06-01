@@ -12,7 +12,7 @@
         fontconfig.defaultFonts = rec {
             serif = sansSerif;
             sansSerif = [ "DejaVu Sans" ];
-            monospace = [ "CaskaydiaCove Nerd Font Mono" ];
+            monospace = [ "CaskaydiaMono Nerd Font Mono" ];
             emoji = [ "Noto Color Emoji" ];
         };
     };
