@@ -1,7 +1,7 @@
 { config, ... }:
 
 let
-    windowsMountOptions = [ "credentials=${config.age.secrets.nixvm-smb-creds.path}" "uid=matthew" "gid=users" "nofail" "noauto" "noatime" "exec" "x-systemd.automount" "x-systemd.device-timeout=5s" "x-systemd.mount-timeout=5s" "mfsymlinks" ];
+    windowsMountOptions = [ "credentials=${config.age.secrets.nixvm-smb-creds.path}" "uid=matthew" "gid=users" "nofail" "noauto" "noatime" "exec" "x-systemd.automount" "x-systemd.mount-timeout=5s" "mfsymlinks" "vers=3.1.1" ];
     windowsBindMountOptions = [ "bind" "nofail" ];
 in
 
