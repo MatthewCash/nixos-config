@@ -15,6 +15,8 @@ in
         nameservers = [ "100.100.100.100" "1.1.1.1" ];
         resolvconf.extraOptions = [ "use-vc" ];
 
+        dhcpcd.enable = false;
+
         interfaces.eth0.ipv4.addresses = [{
             inherit prefixLength;
             address = systemAddress;
