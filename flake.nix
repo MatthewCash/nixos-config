@@ -188,7 +188,7 @@
             inherit generators;
 
             apply = pkgsStable.writeShellScriptBin "apply" /* bash */ ''
-                exec ${stableLib.getExe pkgsUnstable.nixos-rebuild} switch --flake path:. --use-remote-sudo $@
+                exec ${stableLib.getExe pkgsUnstable.nixos-rebuild} switch --flake path:. --sudo $@
             '';
             full-upgrade = pkgsStable.writeShellScriptBin "full-upgrade" /* bash */ ''
                 ${nix} flake update
