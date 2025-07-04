@@ -38,6 +38,7 @@ in
     home.packages = with pkgsUnstable; [
         (python3.withPackages (pyPkgs: with pyPkgs; [
             requests
+            uv
         ]))
     ];
 }
