@@ -10,7 +10,8 @@
         redhat.java
         ms-vscode.powershell
         ms-python.python
-        ms-pyright.pyright
+        detachhead.basedpyright
+        charliermarsh.ruff
         rust-lang.rust-analyzer
         tamasfe.even-better-toml
         llvm-vs-code-extensions.vscode-clangd
