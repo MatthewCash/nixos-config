@@ -193,11 +193,11 @@
     "firefox-gnome-theme": {
       "flake": false,
       "locked": {
-        "lastModified": 1752607306,
-        "narHash": "sha256-/pTDAny47X1og2pSAoMY/GfJ9teSOEQZAENhszPJMKo=",
+        "lastModified": 1754312136,
+        "narHash": "sha256-9veVYpPCwKNjIK5gOigl5nEUN6tmrSHXUv4bVZkRuOE=",
         "owner": "rafaelmardojai",
         "repo": "firefox-gnome-theme",
-        "rev": "0382100f9e50633ee832535b25b3bd022245a255",
+        "rev": "6f173d0873dd33c5653dee89a831af3e49db3e36",
         "type": "github"
       },
       "original": {
@@ -472,11 +472,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1753470191,
-        "narHash": "sha256-hOUWU5L62G9sm8NxdiLWlLIJZz9H52VuFiDllHdwmVA=",
+        "lastModified": 1754575993,
+        "narHash": "sha256-0ut8TM76DeMnexgwNyMx2c5flhp4IPtqQ79XR0hpmY0=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "a1817d1c0e5eabe7dfdfe4caa46c94d9d8f3fdb6",
+        "rev": "d8a475e179888553b6863204a93295da6ee13eb4",
         "type": "github"
       },
       "original": {
@@ -683,11 +683,11 @@
     },
     "nixpkgsStable": {
       "locked": {
-        "lastModified": 1753345091,
-        "narHash": "sha256-CdX2Rtvp5I8HGu9swBmYuq+ILwRxpXdJwlpg8jvN4tU=",
+        "lastModified": 1754292888,
+        "narHash": "sha256-1ziydHSiDuSnaiPzCQh1mRFBsM2d2yRX9I+5OPGEmIE=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "3ff0e34b1383648053bba8ed03f201d3466f90c9",
+        "rev": "ce01daebf8489ba97bd1609d185ea276efdeb121",
         "type": "github"
       },
       "original": {
@@ -699,11 +699,11 @@
     },
     "nixpkgsUnstable": {
       "locked": {
-        "lastModified": 1753250450,
-        "narHash": "sha256-i+CQV2rPmP8wHxj0aq4siYyohHwVlsh40kV89f3nw1s=",
+        "lastModified": 1754498491,
+        "narHash": "sha256-erbiH2agUTD0Z30xcVSFcDHzkRvkRXOQ3lb887bcVrs=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "fc02ee70efb805d3b2865908a13ddd4474557ecf",
+        "rev": "c2ae88e026f9525daf89587f3cbee584b92b6134",
         "type": "github"
       },
       "original": {
@@ -734,11 +734,11 @@
         "original-owl": "original-owl"
       },
       "locked": {
-        "lastModified": 1753334312,
-        "narHash": "sha256-VhuBOJ2njQbrOd+yUIGQUSGZCAmKLvgnC4BvibP5Lqs=",
+        "lastModified": 1754579652,
+        "narHash": "sha256-uZt7jzDqaO6p17uO174HJx70+3xPHGpqX2nRbhuD9pw=",
         "owner": "MatthewCash",
         "repo": "owl-patched",
-        "rev": "1133a9beee10de524da436d80a1663562528aa04",
+        "rev": "53f3492e0961ccee3c1c8368c7243172e29917fe",
         "type": "github"
       },
       "original": {
