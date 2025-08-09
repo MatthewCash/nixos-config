@@ -5,7 +5,6 @@
         jnoortheen.nix-ide
         mkhl.direnv
         dbaeumer.vscode-eslint
-        github.vscode-pull-request-github
         esbenp.prettier-vscode
         redhat.java
         ms-vscode.powershell
