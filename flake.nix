@@ -72,11 +72,6 @@
             inputs.nixpkgs.follows = "nixpkgsUnstable";
         };
 
-        owl-patched = {
-            url = "github:MatthewCash/owl-patched";
-            inputs.nixpkgs.follows = "nixpkgsUnstable";
-        };
-
         plasma-manager = {
             url = "github:MatthewCash/plasma-manager";
             inputs.nixpkgs.follows = "nixpkgsUnstable";
