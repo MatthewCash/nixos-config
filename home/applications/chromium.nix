@@ -1,8 +1,8 @@
 { pkgsUnstable, pkgsStable, customLib, stableLib, useImpermanence, persistenceHomePath, name, inputs, config, systemConfig, ... }:
 
 let
-    dconfSettings = stableLib.optionalAttrs (config.gtk.theme.name != null) {
-        "org/gnome/desktop/interface".gtk-theme = config.gtk.theme.name;
+    dconfSettings = stableLib.optionalAttrs (config.gtk.gtk3.theme.name != null) {
+        "org/gnome/desktop/interface".gtk-theme = config.gtk.gtk3.theme.name;
     };
 
     dconfDb = customLib.generateDconfDb dconfSettings;
@@ -46,7 +46,7 @@ let
                 bind.ro = [
                     "/etc/fonts"
                     [ ("${config.gtk.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
-                    [ ("${config.gtk.theme.package}/share/themes") (sloth.concat' sloth.xdgDataHome "/themes") ]
+                    [ ("${config.gtk.gtk3.theme.package}/share/themes") (sloth.concat' sloth.xdgDataHome "/themes") ]
                     [ (builtins.toString dconfDb) (sloth.concat' sloth.xdgConfigHome "/dconf/user") ]
                     (sloth.concat' sloth.xdgConfigHome "/gtk-3.0")
                 ];

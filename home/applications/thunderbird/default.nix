@@ -7,8 +7,8 @@ let
 
     systemConfigOptionals = stableLib.optionals (systemConfig != null);
 
-    dconfSettings = stableLib.optionalAttrs (config.gtk.theme.name != null) {
-        "org/gnome/desktop/interface".gtk-theme = config.gtk.theme.name;
+    dconfSettings = stableLib.optionalAttrs (config.gtk.gtk3.theme.name != null) {
+        "org/gnome/desktop/interface".gtk-theme = config.gtk.gtk3.theme.name;
     };
 
     dconfDb = customLib.generateDconfDb dconfSettings;
@@ -46,7 +46,7 @@ let
                 bind.ro = [
                     "/etc/fonts"
                     (builtins.toString config.home-files) # Not in extraStorePaths because we do not want it recursively linked
-                    [ ("${config.gtk.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
+                    [ ("${config.gtk.gtk3.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
                     [ (builtins.toString dconfDb) (sloth.concat' sloth.xdgConfigHome "/dconf/user") ]
                     [ "${app.package}/lib/thunderbird/mozilla.cfg" "/app/etc/thunderbird/mozilla.cfg" ]
                 ];

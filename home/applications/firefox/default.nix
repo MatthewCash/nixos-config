@@ -46,8 +46,8 @@ let
         ({ fst, snd }: "install -D -T ${fst}/share/applications/* $out/share/applications/${snd}.desktop")
         (stableLib.lists.zipLists desktopFiles wmClasses);
 
-    dconfSettings = stableLib.optionalAttrs (config.gtk.theme.name != null) {
-        "org/gnome/desktop/interface".gtk-theme = config.gtk.theme.name;
+    dconfSettings = stableLib.optionalAttrs (config.gtk.gtk3.theme.name != null) {
+        "org/gnome/desktop/interface".gtk-theme = config.gtk.gtk3.theme.name;
     };
 
     dconfDb = customLib.generateDconfDb dconfSettings;
@@ -97,7 +97,7 @@ let
                     (builtins.toString config.home-files) # Not in extraStorePaths because we do not want it recursively linked
                     [ ("${config.gtk.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
                     [ (builtins.toString dconfDb) (sloth.concat' sloth.xdgConfigHome "/dconf/user") ]
-                    [ ("${config.gtk.theme.package}/share/themes") (sloth.concat' sloth.xdgDataHome "/themes") ]
+                    [ ("${config.gtk.gtk3.theme.package}/share/themes") (sloth.concat' sloth.xdgDataHome "/themes") ]
                     [ "${app.package}/lib/${app.package.pname}/mozilla.cfg" "/app/etc/firefox/mozilla.cfg" ]
                 ];
                 extraStorePaths = (

@@ -4,8 +4,8 @@ let
     systemConfigOptionals = stableLib.optionals (systemConfig != null);
 
     dconfSettings = {
-        "org/gnome/desktop/interface" = stableLib.optionalAttrs (config.gtk.theme.name != null) {
-            gtk-theme = config.gtk.theme.name;
+        "org/gnome/desktop/interface" = stableLib.optionalAttrs (config.gtk.gtk3.theme.name != null) {
+            gtk-theme = config.gtk.gtk3.theme.name;
         };
         "org/gnome/evolution/mail" = {
             layout = 1;
@@ -99,7 +99,7 @@ let
                     "/etc/fonts"
                     (builtins.toString config.home-files) # Not in extraStorePaths because we do not want it recursively linked
                     [ ("${config.gtk.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
-                    [ ("${config.gtk.theme.package}/share/themes") (sloth.concat' sloth.xdgDataHome "/themes") ]
+                    [ ("${config.gtk.gtk3.theme.package}/share/themes") (sloth.concat' sloth.xdgDataHome "/themes") ]
                     (sloth.concat' sloth.xdgConfigHome "/gtk-3.0")
                     [ (builtins.toString dconfDb) (sloth.concat' sloth.xdgConfigHome "/dconf/user") ]
                 ];
