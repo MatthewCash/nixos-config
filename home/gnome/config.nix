@@ -1,13 +1,37 @@
-{ stableLib, lib, systemConfig, config, ... }:
+{ stableLib, lib, pkgsStable, systemConfig, config, persistenceHomePath, name, useImpermanence, ... }:
 
 let
     inherit (lib.hm) gvariant;
     inherit (gvariant) mkUint32;
 
     wallpaperPath = "${config.xdg.dataHome}/backgrounds/current_wallpaper";
+
+    monitorsSyncScript = pkgsStable.writeShellScript "gnome-monitors-config-sync" /* sh */ ''
+        SRC="${config.xdg.configHome}/monitors.xml"
+        DEST="${persistenceHomePath}/${name}/.config/monitors.xml"
+        ${stableLib.getExe' pkgsStable.coreutils "cp"} "$DEST" "$SRC"
+
+        ${stableLib.getExe' pkgsStable.inotify-tools "inotifywait"} -m "$SRC" |
+            while read -r; do
+                if [[ -f "$SRC" ]]; then
+                    ${stableLib.getExe' pkgsStable.coreutils "cp"} --preserve=mode,timestamps "$SRC" "$DEST"
+                fi
+            done
+    '';
 in
 
 {
+    systemd.user.services.gnome-monitors-config-sync = stableLib.mkIf useImpermanence {
+        Unit = {
+            Description = "Sync gnome monitors.xml to persistent config";
+            Before = "gnome-session-manager@gnome.service";
+        };
+        Install.WantedBy = [ "graphical-session-pre.target" ];
+        Service = {
+            ExecStart = "${stableLib.getExe pkgsStable.bash} ${monitorsSyncScript}";
+        };
+    };
+
     home.sessionVariables.STATIC_WALLPAPER_PATH = wallpaperPath;
 
     xdg.mimeApps.defaultApplications = {

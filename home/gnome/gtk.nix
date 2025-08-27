@@ -3,7 +3,7 @@
 let
     shellCss = pkgsStable.runCommand "gnome-shell-css" { } /* bash */ ''
         ${pkgsUnstable.glib.dev}/bin/gresource \
-             extract \
+            extract \
             ${pkgsUnstable.gnome-shell}/share/gnome-shell/gnome-shell-theme.gresource \
             /org/gnome/shell/theme/gnome-shell-dark.css \
         | sed s/-st-accent-color/${accentColor.hex}/g\
