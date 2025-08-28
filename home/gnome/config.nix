@@ -11,9 +11,9 @@ let
         DEST="${persistenceHomePath}/${name}/.config/monitors.xml"
         ${stableLib.getExe' pkgsStable.coreutils "cp"} "$DEST" "$SRC"
 
-        ${stableLib.getExe' pkgsStable.inotify-tools "inotifywait"} -m "$SRC" |
-            while read -r; do
-                if [[ -f "$SRC" ]]; then
+        ${stableLib.getExe' pkgsStable.inotify-tools "inotifywait"} -m "$(dirname "$SRC")" |
+            while read -r path event filename; do
+                if [[ "$filename" == "$(basename "$SRC")" && "$event" == "CLOSE_WRITE,CLOSE" ]]; then
                     ${stableLib.getExe' pkgsStable.coreutils "cp"} --preserve=mode,timestamps "$SRC" "$DEST"
                 fi
             done
