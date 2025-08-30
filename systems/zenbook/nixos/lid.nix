@@ -1,9 +1,9 @@
 { ... }:
 
 {
-    services.logind = {
-        lidSwitch = "lock";
-        lidSwitchExternalPower = "lock";
-        lidSwitchDocked = "ignore";
+    services.logind.settings.Login = {
+        HandleLidSwitch = "lock";
+        HandleLidSwitchExternalPower = "lock";
+        HandleLidSwitchDocked = "ignore";
     };
 }
