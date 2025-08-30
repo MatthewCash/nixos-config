@@ -16,7 +16,7 @@
 
     services.desktopManager.plasma6.enable = true;
 
-    environment.plasma6.excludePackages = with pkgsUnstable.plasma5Packages; [
+    environment.plasma6.excludePackages = with pkgsUnstable.kdePackages; [
         plasma-browser-integration
         konsole
         oxygen
