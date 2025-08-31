@@ -13,7 +13,7 @@
     } // (if systemConfig == null then {
         gc = {
             automatic = true;
-            frequency = "weekly";
+            dates = "1 week";
             options = "--delete-older-than 30d";
         };
 
