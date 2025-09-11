@@ -12,7 +12,7 @@
         detachhead.basedpyright
         charliermarsh.ruff
         rust-lang.rust-analyzer
-        tamasfe.even-better-toml
+        bungcip.better-toml
         llvm-vs-code-extensions.vscode-clangd
         myriad-dreamin.tinymist
         redhat.vscode-yaml
