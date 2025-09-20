@@ -11,7 +11,7 @@ in
 {
     language-server = {
         clangd.command = getExe' pkgsUnstable.clang-tools "clangd";
-        docker-langserver.command = getExe pkgsUnstable.dockerfile-language-server-nodejs;
+        docker-langserver.command = getExe pkgsUnstable.dockerfile-language-server;
         vscode-css-language-server = {
             command = getExe' pkgsUnstable.nodePackages.vscode-langservers-extracted "vscode-css-language-server";
             args = [ "--stdio" ];
