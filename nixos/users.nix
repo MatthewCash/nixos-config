@@ -22,6 +22,10 @@ let
 in
 
 {
-    users.mutableUsers = false;
-    users.users = builtins.mapAttrs buildUserConfig users;
+    environment.persistence.${persistPath}.directories = [ "/var/lib/nixos" ];
+
+    users = {
+        users = builtins.mapAttrs buildUserConfig users;
+        mutableUsers = false;
+    };
 }
