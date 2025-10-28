@@ -29,7 +29,7 @@
             partitions.efi = {
                 type = "EF00";
                 start = "1MiB";
-                end = "512MiB";
+                end = "2GiB";
                 content = {
                     type = "filesystem";
                     format = "vfat";
