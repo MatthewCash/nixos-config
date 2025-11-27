@@ -3,7 +3,11 @@
 {
     environment.persistence.${persistPath}.files = [ "/var/lib/tailscale/tailscaled.state" ];
 
-    services.tailscale.enable = true;
+    services.tailscale = {
+        enable = true;
+        disableUpstreamLogging = true;
+        extraDaemonFlags = [ "--encrypt-state=false" ];
+    };
 
     systemd.services.tailscaled.serviceConfig = {
         LogLevelMax = "notice";
