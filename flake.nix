@@ -64,7 +64,7 @@
             inputs.nixpkgs.follows = "nixpkgsUnstable";
         };
 
-        nixpkgsStable.url = "github:nixos/nixpkgs/nixos-25.05";
+        nixpkgsStable.url = "github:nixos/nixpkgs/nixos-25.11";
         nixpkgsUnstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
         nixpak = {
@@ -102,7 +102,7 @@
     let
         stableLib = nixpkgsStable.lib;
 
-        stateVersion = "24.11";
+        stateVersion = "25.11";
 
         # Systems
         systemNames = builtins.attrNames
