@@ -82,6 +82,10 @@ in
             volume-step = 3;
         };
 
+        "org/gnome/settings-daemon/plugins/housekeeping" = {
+            donation-reminder-enabled = false;
+        };
+
         "org/gnome/shell" = {
             favorite-apps = [
                 "org.discord.webcord.personal.desktop"
