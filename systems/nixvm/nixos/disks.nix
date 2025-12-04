@@ -35,7 +35,7 @@ in
                     type = "filesystem";
                     format = "btrfs";
                     mountpoint = "/mnt/home/matthew";
-                    mountOptions = [ "noatime" ];
+                    mountOptions = [ "noatime" "compress=zstd" ];
                 };
             };
         };
