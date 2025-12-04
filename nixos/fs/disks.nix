@@ -53,7 +53,7 @@
                         type = "filesystem";
                         format = "btrfs";
                         mountpoint = "/nix";
-                        mountOptions = [ "noatime" ];
+                        mountOptions = [ "noatime" "compress=zstd" ];
                     };
                 };
                 persist = {
@@ -63,7 +63,7 @@
                         type = "filesystem";
                         format = "btrfs";
                         mountpoint = "/mnt/persist";
-                        mountOptions = [ "noatime" ];
+                        mountOptions = [ "noatime" "compress=zstd" ];
                     };
                 };
             };
