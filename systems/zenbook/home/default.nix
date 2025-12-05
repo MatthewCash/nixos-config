@@ -17,6 +17,7 @@ builtins.map (path: ../../../home/${path}) [
     "gnome/extensions/blur-my-shell.nix"
     "desktop/defaultApps.nix"
     "desktop/userDirs.nix"
+    "desktop/wireplumber.nix"
 
     "dev/c.nix"
     "dev/rust.nix"
