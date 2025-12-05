@@ -45,7 +45,7 @@
                     content = {
                         type = "filesystem";
                         format = "btrfs";
-                        mountOptions = [ "noatime" ];
+                        mountOptions = [ "noatime" "compress=zstd" ];
                     };
                 };
             };
