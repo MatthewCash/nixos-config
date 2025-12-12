@@ -5,8 +5,6 @@ rec {
     system = "x86_64-linux";
     systemNixpkgs = nixpkgsUnstable;
     kernelPackages = nixpkgsUnstable.legacyPackages.${system}.linuxPackages_6_17;
-    ssd = true;
-    vpnAddress = "10.0.0.9";
     unfreePkgs = [ "steam" "steam-unwrapped" ];
     batteryChargeLimit = 100;
     accentColor = {

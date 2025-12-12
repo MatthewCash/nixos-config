@@ -7,7 +7,7 @@ let
     batteryChargeLimit = systemConfig.batteryChargeLimit or 100;
 
     extraArgs = {
-        inherit (systemConfig) system systemNixpkgs hostname ssd vpnAddress users;
+        inherit (systemConfig) system systemNixpkgs hostname users;
         inherit inputs nixpkgsStable nixpkgsUnstable kernelPackages persistPath homeMountPath batteryChargeLimit stateVersion customLib pkgsStable pkgsUnstable stableLib unstableLib accentColor;
     };
 in

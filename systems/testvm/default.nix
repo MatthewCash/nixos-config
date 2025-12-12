@@ -5,7 +5,6 @@ rec {
     system = "x86_64-linux";
     kernelPackages = nixpkgsUnstable.legacyPackages.${system}.linuxPackages_latest;
     systemNixpkgs = nixpkgsUnstable;
-    ssd = false;
     accentColor = {
         h = 300;
         s = 60;
