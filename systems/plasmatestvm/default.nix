@@ -6,9 +6,9 @@ rec {
     kernelPackages = nixpkgsUnstable.legacyPackages.${system}.linuxPackages_latest;
     systemNixpkgs = nixpkgsUnstable;
     accentColor = {
-        h = 300;
-        s = 60;
-        l = 70;
+        h = 0;
+        s = 40;
+        l = 50;
     };
 
     users.matthew = {
