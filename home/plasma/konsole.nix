@@ -105,26 +105,4 @@
             };
         };
     };
-
-    # xdg.dataFile."kxmlgui5/konsole/sessionui.rc".text = customLib.toXML {
-        # gui = {
-            # _name = "session";
-            # _version = 33;
-            # ToolBar = {
-                # _alreadyVisited = true;
-                # _noMerge = true;
-                # _name = "sessionToolbar";
-                # text = "Session Toolbar";
-                # index = 1;
-                # Spacer = {
-                    # __order = 0;
-                    # _name = "Spacer_0";
-                # };
-                # Action = builtins.map (x: { _name = x; }) [
-                    # "edit_find"
-                    # "hamburger_menu"
-                # ];
-            # };
-        # };
-    # };
 }
