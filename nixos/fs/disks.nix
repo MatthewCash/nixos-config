@@ -45,6 +45,7 @@
                 thin-main = {
                     size = "95%FREE";
                     lvm_type = "thin-pool";
+                    extraArgs = [ "--errorwhenfull y" ];
                 };
                 nix = {
                     lvm_type = "thinlv";
