@@ -47,6 +47,10 @@
                         format = "btrfs";
                         mountOptions = [ "noatime" "compress=zstd" ];
                     };
+                    settings = {
+                        bypassWorkqueues = true;
+                        allowDiscards = true;
+                    };
                 };
             };
         };
