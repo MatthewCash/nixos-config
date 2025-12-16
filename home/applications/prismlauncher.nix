@@ -2,7 +2,7 @@
 
 {
     home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence [
-        ".local/share/prismlauncher"
+        ".local/share/PrismLauncher"
     ];
 
     home.packages = with pkgsUnstable; [ prismlauncher ];
