@@ -2,7 +2,10 @@ args @ { pkgsUnstable, inputs, system, ... }:
 
 let
     vscodium = (pkgsUnstable.vscodium.overrideAttrs (oldAttrs: {
-         desktopItems = map (x: x.override { icon = "vscode"; }) oldAttrs.desktopItems;
+         desktopItems = map (x: x.override {
+            # I have no idea why the vm class is 'codium' and not 'vscodium'
+            startupWMClass = "codium";
+        }) oldAttrs.desktopItems;
     })).override {
         commandLineArgs = "--touch-events";
     };
