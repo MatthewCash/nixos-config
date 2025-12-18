@@ -9,7 +9,10 @@
     services.kanata = {
         enable = true;
         keyboards.default = {
-            extraDefCfg = "process-unmapped-keys yes";
+            extraDefCfg = ''
+                process-unmapped-keys yes
+                linux-device-detect-mode keyboard-only
+            '';
             config = /* lisp */ ''
                 (defsrc
                     caps
