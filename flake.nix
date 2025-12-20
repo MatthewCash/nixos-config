@@ -168,7 +168,7 @@
             nix = stableLib.getExe pkgsUnstable.nix;
             eval = path: /* bash */ ''
                 echo "- eval .#${path}:"
-                out=$(${nix} eval --impure --raw path:.#${path})
+                out=$(${nix} eval --option allow-import-from-derivation false --impure --raw path:.#${path})
                 printf "\t$out\n"
             '';
             build = path: /* bash */ ''
