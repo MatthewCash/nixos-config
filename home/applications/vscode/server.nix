@@ -1,34 +1,19 @@
-args @ { pkgsStable, stableLib, config, ... }:
+args @ { pkgsStable, config, ... }:
 
 let
     common = import ./common.nix args;
 
-    extensions = common.extensions;
-    settings = common.settings;
-
     dataDir = "${config.xdg.configHome}/vscodium-server";
-    extensionPath = "${dataDir}/extensions";
-    settingsPath = "${dataDir}/data/Machine/settings.json";
 
-    combinedExtensionsDrv = pkgsStable.buildEnv {
+    combinedExtensions = pkgsStable.buildEnv {
         name = "vscode-extensions";
-        paths = extensions;
+        paths = common.extensions;
     };
-
-    extensionsFolder = "${combinedExtensionsDrv}/share/vscode/extensions";
-
-    addSymlinkToExtension = k: {
-        "${extensionPath}/${k}".source = "${extensionsFolder}/${k}";
-    };
-
-    extensionFiles = builtins.attrNames (builtins.readDir extensionsFolder);
-
-    extensionLinks = stableLib.mkMerge (map addSymlinkToExtension extensionFiles);
 in
 
 {
-    home.file = stableLib.mkMerge [
-        extensionLinks
-        { ${settingsPath}.text = builtins.toJSON settings; }
-    ];
+    home.file = {
+        "${dataDir}/extensions".source = "${combinedExtensions}/share/vscode/extensions";
+        "${dataDir}/data/Machine/settings.json".text = builtins.toJSON common.settings;
+    };
 }
