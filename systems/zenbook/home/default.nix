@@ -25,6 +25,7 @@ builtins.map (path: ../../../home/${path}) [
     "dev/python.nix"
     "dev/java"
     "dev/editor-config.nix"
+    "dev/prettier.nix"
 
     "applications/tools.nix"
     "applications/chromium.nix"
