@@ -40,7 +40,7 @@ builtins.map (path: ../../../home/${path}) [
     "applications/zsh"
     "applications/steam.nix"
     "applications/prismlauncher.nix"
-    "applications/webcord.nix"
+    "applications/vesktop/default.nix"
     "applications/bitwarden.nix"
     "applications/direnv.nix"
     "applications/helvum.nix"
