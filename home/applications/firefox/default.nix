@@ -145,6 +145,6 @@ in
     home.file.".mozilla/firefox/layout/chrome/chrome.manifest".text = "content mods ./";
     home.file.".mozilla/firefox/layout/chrome/entrypoint.js".text = /* js */ ''
         const EXPORTED_SYMBOLS = [];
-        Components.utils.import('chrome://mods/content/firefox-mods/js/main.js');
+        ChromeUtils.importESModule('chrome://mods/content/firefox-mods/js/main.js');
     '';
 }
