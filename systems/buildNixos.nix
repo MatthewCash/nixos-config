@@ -40,6 +40,10 @@ in
                 inherit buildArgs inputs stateVersion extraArgs customLib;
                 systemConfig = config;
             })).nixos;
+
+            systemd.services = stableLib.mapAttrs' (user: _: stableLib.nameValuePair
+                "home-manager-${user}" { serviceConfig.RemainAfterExit = "yes"; }
+            ) systemConfig.homeConfig;
         })
 
         (args: builtins.foldl'
