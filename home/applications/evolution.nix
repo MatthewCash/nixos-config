@@ -1,8 +1,6 @@
-{ stableLib, pkgsStable, pkgsUnstable, inputs, useImpermanence, config, systemConfig, persistenceHomePath, name, customLib, ... }:
+{ stableLib, pkgsStable, pkgsUnstable, inputs, useImpermanence, config, persistenceHomePath, name, customLib, ... }:
 
 let
-    systemConfigOptionals = stableLib.optionals (systemConfig != null);
-
     dconfSettings = {
         "org/gnome/desktop/interface" = stableLib.optionalAttrs (config.gtk.gtk3.theme.name != null) {
             gtk-theme = config.gtk.gtk3.theme.name;
@@ -82,7 +80,6 @@ let
             flatpak.session-helper.enable = true;
             gpu.enable = true;
             bubblewrap = {
-                bindEntireStore = false;
                 env.GTK_USE_PORTAL = "1";
                 bind.rw = [
                     (sloth.concat' sloth.xdgDataHome "/evolution")
@@ -97,20 +94,11 @@ let
                 ];
                 bind.ro = [
                     "/etc/fonts"
-                    (builtins.toString config.home-files) # Not in extraStorePaths because we do not want it recursively linked
                     [ ("${config.gtk.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
                     [ ("${config.gtk.gtk3.theme.package}/share/themes") (sloth.concat' sloth.xdgDataHome "/themes") ]
                     (sloth.concat' sloth.xdgConfigHome "/gtk-3.0")
                     [ (builtins.toString dconfDb) (sloth.concat' sloth.xdgConfigHome "/dconf/user") ]
                 ];
-                extraStorePaths = [ dconfDb ] ++ (
-                    stableLib.attrsets.mapAttrsToList
-                        (n: v: v.source)
-                        (stableLib.attrsets.filterAttrs (n: v: stableLib.strings.hasPrefix "${config.xdg.configHome}/gtk-3.0" n) config.home.file)
-                ) ++ systemConfigOptionals [
-                    systemConfig.hardware.graphics.package
-                    (stableLib.strings.removeSuffix "/etc/fonts/" systemConfig.environment.etc.fonts.source) # Fonts
-                ] ++ systemConfigOptionals systemConfig.hardware.graphics.extraPackages; # Video acceleration
                 sockets = {
                     wayland = true;
                     pipewire = true;

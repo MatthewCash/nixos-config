@@ -1,4 +1,4 @@
-{ pkgsUnstable, pkgsStable, customLib, stableLib, useImpermanence, persistenceHomePath, name, inputs, config, systemConfig, ... }:
+{ pkgsUnstable, pkgsStable, customLib, stableLib, useImpermanence, persistenceHomePath, name, inputs, config, ... }:
 
 let
     dconfSettings = stableLib.optionalAttrs (config.gtk.gtk3.theme.name != null) {
@@ -8,7 +8,6 @@ let
     dconfDb = customLib.generateDconfDb dconfSettings;
 
     mkNixPak = inputs.nixpak.lib.nixpak { lib = stableLib; pkgs = pkgsStable; };
-    systemConfigOptionals = stableLib.optionals (systemConfig != null);
     wrappedChromium = mkNixPak {
         config = { sloth, ... }: {
             app.package = pkgsUnstable.chromium.override {
@@ -36,7 +35,6 @@ let
             etc.sslCertificates.enable = true;
             gpu.enable = true;
             bubblewrap = {
-                bindEntireStore = false;
                 bind.rw = [
                     (sloth.concat' sloth.runtimeDir "/doc") # For the Document portal
                     (sloth.concat' sloth.xdgConfigHome "/chromium")
@@ -50,14 +48,6 @@ let
                     [ (builtins.toString dconfDb) (sloth.concat' sloth.xdgConfigHome "/dconf/user") ]
                     (sloth.concat' sloth.xdgConfigHome "/gtk-3.0")
                 ];
-                extraStorePaths = (
-                    stableLib.attrsets.mapAttrsToList
-                        (n: v: v.source)
-                        (stableLib.attrsets.filterAttrs (n: v: stableLib.strings.hasPrefix "${config.xdg.configHome}/gtk-3.0" n) config.home.file)
-                ) ++ systemConfigOptionals [
-                    systemConfig.hardware.graphics.package
-                    (stableLib.strings.removeSuffix "/etc/fonts/" systemConfig.environment.etc.fonts.source) # Fonts
-                ] ++ systemConfigOptionals systemConfig.hardware.graphics.extraPackages; # Video acceleration
                 sockets = {
                     wayland = true;
                     pipewire = true;

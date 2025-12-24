@@ -1,4 +1,4 @@
-args @ { stableLib, customLib, pkgsStable, pkgsUnstable, useImpermanence, persistenceHomePath, inputs, name, systemConfig, config, ... }:
+args @ { stableLib, customLib, pkgsStable, pkgsUnstable, useImpermanence, persistenceHomePath, inputs, name, config, ... }:
 
 let
     firefoxPackage = pkgsUnstable.firefox-devedition;
@@ -53,7 +53,6 @@ let
     dconfDb = customLib.generateDconfDb dconfSettings;
 
     mkNixPak = inputs.nixpak.lib.nixpak { lib = stableLib; pkgs = pkgsStable; };
-    systemConfigOptionals = stableLib.optionals (systemConfig != null);
     wrappedFirefox = mkNixPak {
         config = { sloth, ... }: rec {
             app.package = firefox.overrideAttrs (oldAttrs: {
@@ -79,7 +78,6 @@ let
             etc.sslCertificates.enable = true;
             gpu.enable = true;
             bubblewrap = {
-                bindEntireStore = false;
                 bind.rw = [
                     (sloth.concat' sloth.homeDir "/.mozilla")
                     (sloth.concat' sloth.xdgCacheHome "/mozilla")
@@ -94,22 +92,11 @@ let
                 ];
                 bind.ro = [
                     "/etc/fonts"
-                    (builtins.toString config.home-files) # Not in extraStorePaths because we do not want it recursively linked
                     [ ("${config.gtk.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
                     [ (builtins.toString dconfDb) (sloth.concat' sloth.xdgConfigHome "/dconf/user") ]
                     [ ("${config.gtk.gtk3.theme.package}/share/themes") (sloth.concat' sloth.xdgDataHome "/themes") ]
                     [ "${app.package}/lib/${app.package.pname}/mozilla.cfg" "/app/etc/firefox/mozilla.cfg" ]
                 ];
-                extraStorePaths = (
-                    stableLib.attrsets.mapAttrsToList
-                        (n: v: v.source)
-                        (stableLib.attrsets.filterAttrs
-                            (n: v: stableLib.isStorePath v.source && stableLib.strings.hasPrefix ".mozilla" n)
-                            config.home.file)
-                ) ++ systemConfigOptionals [
-                    systemConfig.hardware.graphics.package # WebRender acceleration
-                    (stableLib.strings.removeSuffix "/etc/fonts/" systemConfig.environment.etc.fonts.source) # Fonts
-                ] ++ systemConfigOptionals systemConfig.hardware.graphics.extraPackages; # Video acceleration
                 sockets = {
                     wayland = true;
                     pipewire = true;

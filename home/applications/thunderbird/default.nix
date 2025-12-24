@@ -1,11 +1,9 @@
-args @ { pkgsStable, pkgsUnstable, customLib, systemConfig, config, stableLib, useImpermanence, persistenceHomePath, name, inputs, accentColor, ... }:
+args @ { pkgsStable, pkgsUnstable, customLib, config, stableLib, useImpermanence, persistenceHomePath, name, inputs, lib, ... }:
 
 let
     thunderbird = pkgsUnstable.thunderbird.override {
         extraPolicies = import ./policy.nix args;
     };
-
-    systemConfigOptionals = stableLib.optionals (systemConfig != null);
 
     dconfSettings = stableLib.optionalAttrs (config.gtk.gtk3.theme.name != null) {
         "org/gnome/desktop/interface".gtk-theme = config.gtk.gtk3.theme.name;
@@ -30,7 +28,6 @@ let
             flatpak.session-helper.enable = true;
             gpu.enable = true;
             bubblewrap = {
-                bindEntireStore = false;
                 bind.rw = [
                     (sloth.concat' sloth.homeDir "/.thunderbird")
                     (sloth.concat' sloth.xdgCacheHome "/thunderbird")
@@ -45,19 +42,10 @@ let
                 ];
                 bind.ro = [
                     "/etc/fonts"
-                    (builtins.toString config.home-files) # Not in extraStorePaths because we do not want it recursively linked
                     [ ("${config.gtk.gtk3.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
                     [ (builtins.toString dconfDb) (sloth.concat' sloth.xdgConfigHome "/dconf/user") ]
                     [ "${app.package}/lib/thunderbird/mozilla.cfg" "/app/etc/thunderbird/mozilla.cfg" ]
                 ];
-                extraStorePaths = (
-                    stableLib.attrsets.mapAttrsToList
-                        (n: v: v.source)
-                        (stableLib.attrsets.filterAttrs (n: v: stableLib.strings.hasPrefix ".thunderbird" n) config.home.file)
-                ) ++ systemConfigOptionals [
-                    systemConfig.hardware.graphics.package # WebRender acceleration
-                    (stableLib.strings.removeSuffix "/etc/fonts/" systemConfig.environment.etc.fonts.source) # Fonts
-                ] ++ systemConfigOptionals systemConfig.hardware.graphics.extraPackages; # Video acceleration
                 sockets = {
                     wayland = true;
                     pipewire = true;
