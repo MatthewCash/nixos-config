@@ -5,6 +5,7 @@ let
          desktopItems = map (x: x.override {
             # I have no idea why the vm class is 'codium' and not 'vscodium'
             startupWMClass = "codium";
+            icon = "vscode";
         }) oldAttrs.desktopItems;
     })).override {
         commandLineArgs = "--touch-events";
