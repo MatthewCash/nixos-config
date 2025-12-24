@@ -87,20 +87,6 @@ in
         };
 
         "org/gnome/shell" = {
-            favorite-apps = [
-                "org.discord.webcord.personal.desktop"
-                "org.discord.webcord.business.desktop"
-                "org.google.chromium.desktop"
-                "termius-app.desktop"
-                "codium.desktop"
-                "org.mozilla.Firefox.gnome.desktop"
-                "steam.desktop"
-                "org.gnome.Boxes.desktop"
-                "org.gnome.Console.desktop"
-                "org.gnome.Evolution.desktop"
-                "org.gnome.Settings.desktop"
-                "org.gnome.Nautilus.desktop"
-            ];
             enabled-extensions = [
                 "places-menu@gnome-shell-extensions.gcampax.github.com"
             ];
