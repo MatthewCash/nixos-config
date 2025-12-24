@@ -1,6 +1,6 @@
 let
     mkColumn = visible: ordinal: { inherit visible ordinal; };
-    columns = {
+    columns = builtins.toJSON {
         selectCol = mkColumn false 1;
         threadCol = mkColumn true 5;
         flaggedCol = mkColumn true 7;
@@ -34,7 +34,19 @@ in
 
     "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 
+    "browser.display.background_color" = "#000000";
+    "browser.display.use_system_colors" = false;
+    "browser.theme.content-theme" = 0;
+    "browser.theme.dark-toolbar-theme" = true;
+    "browser.theme.toolbar-theme" = 0;
+
     "mail.tabs.drawInTitlebar" = true;
+    "mail.tabs.extraDragSpace" = true;
+    "mail.threadpane.listview" = 1;
+    "mail.folderpane.showColumns" = true;
+    "mail.fixed_width_messages" = false;
+    "mail.show_headers" = 2;
+    "mail.showCondensedAddresses" = false;
 
     "mailnews.emptyTrash.dontAskAgain" = true;
     "mailnews.display.html_as" = 3;

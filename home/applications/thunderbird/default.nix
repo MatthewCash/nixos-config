@@ -70,17 +70,22 @@ in
         profiles = {
             "main" = {
                 isDefault = true;
-                userContent = /* css */ ''
-                    @import "${inputs.firefox-mods}/userContent.css";
-
-                    :root {
-                        --system-hue: ${builtins.toString accentColor.h};
-                        --system-saturation: ${builtins.toString accentColor.s}%;
-                        --system-lightness: ${builtins.toString accentColor.l}%;
-                    }
-                '';
+                # TODO: port home-manager's firefox drv support to thunderbird
+                # userChrome = import ./userChrome.nix args;
+                # userContent = import ./userContent.nix args;
                 settings = import ./settings.nix;
             };
         };
     };
+
+    # thunderbird will overwrite xulstore everytime it is launched
+    home.activation.thunderbirdConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        $DRY_RUN_CMD ${stableLib.getExe' pkgsUnstable.coreutils "install"} -D -m=444 ${
+            pkgsStable.writeText "xulstore.json" (builtins.toJSON (import ./xul-settings.nix))
+        } ".thunderbird/main/xulstore.json"
+    '';
+
+    # the home-manager module doesn't support user{Chrome,Content} from source
+    home.file.".thunderbird/main/chrome/userChrome.css".source = import ./userChrome.nix args;
+    home.file.".thunderbird/main/chrome/userContent.css".source = import ./userContent.nix args;
 }
