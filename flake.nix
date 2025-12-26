@@ -87,11 +87,6 @@
             flake = false;
         };
 
-        tpm-fido = {
-            url = "github:MatthewCash/tpm-fido";
-            inputs.nixpkgs.follows = "nixpkgsStable";
-        };
-
         zsh-nix-shell = {
             url = "github:MatthewCash/zsh-nix-shell";
             flake = false;

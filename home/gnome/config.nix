@@ -1,4 +1,4 @@
-{ stableLib, lib, pkgsStable, systemConfig, config, persistenceHomePath, name, useImpermanence, ... }:
+{ stableLib, lib, pkgsStable, pkgsUnstable, systemConfig, config, persistenceHomePath, name, useImpermanence, ... }:
 
 let
     inherit (lib.hm) gvariant;
@@ -21,6 +21,8 @@ let
 in
 
 {
+    home.packages = with pkgsUnstable; [ pinentry-gnome3 ];
+
     systemd.user.services.gnome-monitors-config-sync = stableLib.mkIf useImpermanence {
         Unit = {
             Description = "Sync gnome monitors.xml to persistent config";

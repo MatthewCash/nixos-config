@@ -8,6 +8,10 @@ let
 in
 
 {
+    home.packages = with pkgsUnstable; [
+        pinentry-qt
+    ];
+
     programs.plasma = {
         enable = true;
         overrideConfig = true;
