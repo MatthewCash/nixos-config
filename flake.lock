@@ -210,11 +210,11 @@
     "firefox-mods": {
       "flake": false,
       "locked": {
-        "lastModified": 1766176633,
-        "narHash": "sha256-b0H+KME3tpJOJzIVSshQdFibyKzFLLRIV9o5h17+WPc=",
+        "lastModified": 1766433639,
+        "narHash": "sha256-idO9X8ajNEJ8PUX1L0cZbk0xsCUTYZ7sfqwBYafNbRo=",
         "owner": "MatthewCash",
         "repo": "firefox-mods",
-        "rev": "34444f2c88ec3d8845e057288e4271952cc71ab7",
+        "rev": "536cf13ff5d914b7dd1b6c6a8509e9a5cc3bdb14",
         "type": "github"
       },
       "original": {
@@ -261,11 +261,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1763759067,
-        "narHash": "sha256-LlLt2Jo/gMNYAwOgdRQBrsRoOz7BPRkzvNaI/fzXi2Q=",
+        "lastModified": 1765835352,
+        "narHash": "sha256-XswHlK/Qtjasvhd1nOa1e8MgZ8GS//jBoTqWtrS1Giw=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "2cccadc7357c0ba201788ae99c4dfa90728ef5e0",
+        "rev": "a34fae9c08a15ad73f295041fec82323541400a9",
         "type": "github"
       },
       "original": {
@@ -361,24 +361,6 @@
         "type": "github"
       }
     },
-    "flake-utils_6": {
-      "inputs": {
-        "systems": "systems_6"
-      },
-      "locked": {
-        "lastModified": 1731533236,
-        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -413,11 +395,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1763182882,
-        "narHash": "sha256-jZi+9yKmeTMsJ4ZNqRei/wL16+QwYGrCl4EJ3QHfoDU=",
+        "lastModified": 1765774562,
+        "narHash": "sha256-UQhfCggNGDc7eam+EittlYmeW89CZVT1KkFIHZWBH7k=",
         "owner": "hercules-ci",
         "repo": "hercules-ci-effects",
-        "rev": "b0585849abe7d02a774a853f7952d07bb910fd9e",
+        "rev": "edcbb19948b6caf1700434e369fde6ff9e6a3c93",
         "type": "github"
       },
       "original": {
@@ -433,11 +415,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1766171975,
-        "narHash": "sha256-47Ee0bTidhF/3/sHuYnWRuxcCrrm0mBNDxBkOTd3wWQ=",
+        "lastModified": 1766682973,
+        "narHash": "sha256-GKO35onS711ThCxwWcfuvbIBKXwriahGqs+WZuJ3v9E=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "bb35f07cc95a73aacbaf1f7f46bb8a3f40f265b5",
+        "rev": "91cdb0e2d574c64fae80d221f4bf09d5592e9ec2",
         "type": "github"
       },
       "original": {
@@ -610,11 +592,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1765665053,
-        "narHash": "sha256-j+fA6d3qNUFOqbyboU8rYFGmI8uAKdCY4HUzzjrm9PQ=",
+        "lastModified": 1766649936,
+        "narHash": "sha256-MQjsjuIm2w90vygYXJhEQw7rKxnqa6CP8zQcsG7MIlE=",
         "owner": "MatthewCash",
         "repo": "nixpak",
-        "rev": "be862ff49ee1a4b3677f500ce74bcde3e6633918",
+        "rev": "8aa3f96672353fa65922ce6f76511c5fd723094d",
         "type": "github"
       },
       "original": {
@@ -625,11 +607,11 @@
     },
     "nixpkgsStable": {
       "locked": {
-        "lastModified": 1765838191,
-        "narHash": "sha256-m5KWt1nOm76ILk/JSCxBM4MfK3rYY7Wq9/TZIIeGnT8=",
+        "lastModified": 1766736597,
+        "narHash": "sha256-BASnpCLodmgiVn0M1MU2Pqyoz0aHwar/0qLkp7CjvSQ=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c6f52ebd45e5925c188d1a20119978aa4ffd5ef6",
+        "rev": "f560ccec6b1116b22e6ed15f4c510997d99d5852",
         "type": "github"
       },
       "original": {
@@ -641,11 +623,11 @@
     },
     "nixpkgsUnstable": {
       "locked": {
-        "lastModified": 1765779637,
-        "narHash": "sha256-KJ2wa/BLSrTqDjbfyNx70ov/HdgNBCBBSQP3BIzKnv4=",
+        "lastModified": 1766651565,
+        "narHash": "sha256-QEhk0eXgyIqTpJ/ehZKg9IKS7EtlWxF3N7DXy42zPfU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "1306659b587dc277866c7b69eb97e5f07864d8c4",
+        "rev": "3e2499d5539c16d0d173ba53552a4ff8547f4539",
         "type": "github"
       },
       "original": {
@@ -663,15 +645,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1763909441,
-        "narHash": "sha256-56LwV51TX/FhgX+5LCG6akQ5KrOWuKgcJa+eUsRMxsc=",
-        "owner": "nix-community",
+        "lastModified": 1766778352,
+        "narHash": "sha256-9QNT80lUyhsZ4Yi7InP9LaAThhd/CL1T2B4JCIw5aI8=",
+        "owner": "MatthewCash",
         "repo": "plasma-manager",
-        "rev": "b24ed4b272256dfc1cc2291f89a9821d5f9e14b4",
+        "rev": "ae2da31fd7677d74bdcffc2de3d6bc5e1971d4dc",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "MatthewCash",
         "repo": "plasma-manager",
         "type": "github"
       }
@@ -744,7 +726,6 @@
         "plasma-manager": "plasma-manager",
         "ragenix": "ragenix",
         "sweet-kde": "sweet-kde",
-        "tpm-fido": "tpm-fido",
         "zsh-nix-shell": "zsh-nix-shell"
       }
     },
@@ -878,42 +859,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "systems_6": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
-    "tpm-fido": {
-      "inputs": {
-        "flake-utils": "flake-utils_6",
-        "nixpkgs": [
-          "nixpkgsStable"
-        ]
-      },
-      "locked": {
-        "lastModified": 1748629582,
-        "narHash": "sha256-PMgcxCXc61n0okMaNOPoHLSIH1CNTWtysIEkO23ChZY=",
-        "owner": "MatthewCash",
-        "repo": "tpm-fido",
-        "rev": "cc3e0a5b23f2958aec500e85bc593be31f593167",
-        "type": "github"
-      },
-      "original": {
-        "owner": "MatthewCash",
-        "repo": "tpm-fido",
         "type": "github"
       }
     },
