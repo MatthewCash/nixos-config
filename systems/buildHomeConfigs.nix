@@ -3,7 +3,6 @@
 let
     defaultImports = [
         inputs.impermanence.nixosModules.home-manager.impermanence
-        inputs.tpm-fido.nixosModules.home-manager.default
         inputs.plasma-manager.homeModules.plasma-manager
     ];
 
