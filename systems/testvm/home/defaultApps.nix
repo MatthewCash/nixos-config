@@ -5,9 +5,9 @@
         enable = true;
         defaultApplications = {
             # Web
-            "x-scheme-handler/http" = [ "firefoxFloating.desktop" ];
-            "x-scheme-handler/https" = [ "firefoxFloating.desktop" ];
-            "application/pdf" = [ "org.gnome.Evince.desktop" "firefoxFloating.desktop" ];
+            "x-scheme-handler/http" = [ "org.mozilla.Firefox.gnome.desktop" ];
+            "x-scheme-handler/https" = [ "org.mozilla.Firefox.gnome.desktop" ];
+            "application/pdf" = [ "org.gnome.Evince.desktop" "org.mozilla.Firefox.gnome.desktop" ];
 
             "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
 

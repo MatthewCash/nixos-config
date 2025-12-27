@@ -1,6 +1,8 @@
 builtins.map (path: ../../../home/${path}) [
     "env.nix"
+
     "services/tpm-fido.nix"
+
     "gnome/tweaks.nix"
     "gnome/console.nix"
     "gnome/celluloid.nix"
@@ -15,7 +17,6 @@ builtins.map (path: ../../../home/${path}) [
     "gnome/extensions/tray-icons-reloaded.nix"
     "gnome/extensions/desktop-cube.nix"
     "gnome/extensions/blur-my-shell.nix"
-    "desktop/defaultApps.nix"
     "desktop/userDirs.nix"
     "desktop/wireplumber.nix"
 
@@ -53,4 +54,5 @@ builtins.map (path: ../../../home/${path}) [
     "applications/wget.nix"
 ] ++ [
     ./gnome.nix
+    ./defaultApps.nix
 ]

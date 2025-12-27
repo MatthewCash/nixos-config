@@ -10,7 +10,7 @@ builtins.map (path: ../../../home/${path}) [
     "gnome/extensions/dash-to-dock.nix"
     "gnome/extensions/just-perfection.nix"
     "gnome/extensions/tray-icons-reloaded.nix"
-    "desktop/defaultApps.nix"
+
     "desktop/userDirs.nix"
 
     "dev/c.nix"
@@ -35,5 +35,7 @@ builtins.map (path: ../../../home/${path}) [
     "applications/wget.nix"
     "applications/evolution.nix"
 ] ++ [
+    ./defaultApps.nix
+
     ./gnome.nix
 ]

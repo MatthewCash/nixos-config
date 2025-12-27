@@ -36,12 +36,6 @@ in
 
     home.sessionVariables.STATIC_WALLPAPER_PATH = wallpaperPath;
 
-    xdg.mimeApps.defaultApplications = {
-        "x-scheme-handler/http" = stableLib.mkForce [ "org.mozilla.Firefox.gnome.desktop" ];
-        "x-scheme-handler/https" = stableLib.mkForce [ "org.mozilla.Firefox.gnome.desktop" ];
-        "application/pdf" = stableLib.mkForce [ "org.mozilla.Firefox.gnome.desktop" ];
-    };
-
     dconf.settings = {
         "org/gnome/desktop/interface" = {
             clock-show-seconds = true;

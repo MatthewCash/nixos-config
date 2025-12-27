@@ -8,7 +8,6 @@ builtins.map (path: ../../../home/${path}) [
     "plasma/gtk.nix"
     "plasma/applets.nix"
 
-    "desktop/defaultApps.nix"
     "desktop/userDirs.nix"
 
     "dev/node.nix"
@@ -32,4 +31,6 @@ builtins.map (path: ../../../home/${path}) [
     "applications/evolution.nix"
     "applications/vesktop/default.nix"
     "applications/wget.nix"
+] ++ [
+    ./defaultApps.nix
 ]
