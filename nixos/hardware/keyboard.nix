@@ -10,7 +10,6 @@
         enable = true;
         keyboards.default = {
             extraDefCfg = ''
-                process-unmapped-keys yes
                 linux-device-detect-mode keyboard-only
             '';
             config = /* lisp */ ''
@@ -18,18 +17,21 @@
                     caps
                     mfwd
                     mbck
-                )
-
-                ;; set some aliases for raising/lowering windows
-                (defalias
-                    mf (fork mfwd (multi (release-key lctl) M-pgup) (lctl mmid))
-                    mb (fork mbck (multi (release-key lctl) M-pgdn) (lctl mmid))
+                    lctrl
+                    mmid
                 )
 
                 (deflayer default
                     esc ;; map caps locks -> escape
-                    @mf
-                    @mb
+                    mfwd
+                    mbck
+                    (multi lctrl (layer-while-held wm))
+                    (multi mmid (layer-while-held wm))
+                )
+
+                (deflayermap wm
+                    mfwd (multi (release-key lctl) M-pgup)
+                    mbck (multi (release-key lctl) M-pgdn)
                 )
             '';
         };
