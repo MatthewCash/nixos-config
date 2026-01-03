@@ -19,5 +19,7 @@
             --system-lightness: ${builtins.toString accentColor.l}%;
         }
     '';
-    settings = import ../settings.nix;
+    settings = import ../settings.nix // {
+        "browser.tabs.closeWindowWithLastTab" = false;
+    };
 }
