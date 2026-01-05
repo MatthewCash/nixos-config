@@ -26,7 +26,6 @@ let
                 bind.ro = [
                     "/run/current-system"
                     "/etc/fonts"
-                    (builtins.toString config.home-files) # Not in extraStorePaths because we do not want it recursively linked
                 ];
                 sockets = {
                     wayland = true;
@@ -34,6 +33,7 @@ let
                     pipewire = true;
                     pulse = true;
                 };
+                env.PATH = "${pkgsUnstable.jdk}/bin/";
             };
         };
     };
