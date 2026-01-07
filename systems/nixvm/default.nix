@@ -3,7 +3,7 @@
 rec {
     hostname = "nixvm";
     system = "x86_64-linux";
-    kernelPackages = nixpkgsUnstable.legacyPackages.${system}.linuxPackages_6_17;
+    kernelPackages = nixpkgsUnstable.legacyPackages.${system}.linuxPackages_latest;
     systemNixpkgs = nixpkgsUnstable;
     accentColor = {
         h = 300;
