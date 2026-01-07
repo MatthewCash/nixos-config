@@ -1,5 +1,8 @@
 args @ { pkgsStable, config, ... }:
 
+# Because this uses an REH directly from source, nix-ld is required
+# make sure "nixos/ld.nix" is applied to the system!
+
 let
     common = import ./common.nix args;
 
