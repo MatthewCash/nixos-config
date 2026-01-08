@@ -9,6 +9,7 @@
         lanzaboote = {
             enable = true;
             pkiBundle = "/etc/secureboot";
+            autoGenerateKeys.enable = true; # this doesn't actually work yet
         };
     };
 }
