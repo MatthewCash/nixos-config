@@ -14,7 +14,7 @@ in
 
     programs.plasma = {
         enable = true;
-        overrideConfig = true;
+
         configFile = {
             kcminputrc.Keyboard.NumLock = 0;
             kdeglobals = {
