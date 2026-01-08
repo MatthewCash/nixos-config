@@ -10,10 +10,13 @@ in
 {
     home.packages = with pkgsUnstable; [
         pinentry-qt
+        beauty-line-icon-theme
     ];
 
     programs.plasma = {
         enable = true;
+
+        workspace.iconTheme = "BeautyLine";
 
         configFile = {
             kcminputrc.Keyboard.NumLock = 0;
