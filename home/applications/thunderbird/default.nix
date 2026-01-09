@@ -1,4 +1,4 @@
-args @ { pkgsStable, pkgsUnstable, customLib, config, stableLib, useImpermanence, persistenceHomePath, name, inputs, lib, ... }:
+args @ { pkgsStable, pkgsUnstable, customLib, config, stableLib, persistenceHomePath, inputs, lib, ... }:
 
 let
     thunderbird = pkgsUnstable.thunderbird.override {
@@ -57,7 +57,7 @@ let
 in
 
 {
-    home.persistence."${persistenceHomePath}".directories = stableLib.mkIf useImpermanence [
+    home.persistence."${persistenceHomePath}".directories = [
         ".thunderbird"
         ".cache/thunderbird"
     ];

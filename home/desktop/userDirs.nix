@@ -1,4 +1,4 @@
-{ persistenceHomePath, useImpermanence, name, stableLib, ... }:
+{ persistenceHomePath, name, ... }:
 
 let
     persistHome = "${persistenceHomePath}/${name}";
@@ -15,7 +15,7 @@ in
         videos = "${persistHome}/videos";
     };
 
-    home.persistence.${persistenceHomePath}.directories = stableLib.mkIf useImpermanence [
+    home.persistence.${persistenceHomePath}.directories = [
         "code"
         "documents"
         "downloads"

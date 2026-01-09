@@ -1,4 +1,4 @@
-args @ { stableLib, customLib, pkgsStable, pkgsUnstable, useImpermanence, persistenceHomePath, inputs, name, config, ... }:
+args @ { stableLib, customLib, pkgsStable, pkgsUnstable, persistenceHomePath, inputs, config, ... }:
 
 let
     firefoxPackage = pkgsUnstable.firefox-devedition;
@@ -114,7 +114,7 @@ let
 in
 
 {
-    home.persistence."${persistenceHomePath}".directories = stableLib.mkIf useImpermanence [
+    home.persistence."${persistenceHomePath}".directories = [
         ".mozilla"
         ".cache/mozilla"
     ];

@@ -1,9 +1,9 @@
-{ pkgsStable, pkgsUnstable, stableLib, useImpermanence, persistenceHomePath, name, inputs, accentColor, config, ... }:
+{ pkgsStable, pkgsUnstable, stableLib, persistenceHomePath, inputs, accentColor, config, ... }:
 
 {
     home.packages = with pkgsStable; [ wl-clipboard ];
 
-    home.persistence."${persistenceHomePath}".directories = stableLib.mkIf useImpermanence [
+    home.persistence."${persistenceHomePath}".directories = [
         ".cache/zsh"
     ];
 

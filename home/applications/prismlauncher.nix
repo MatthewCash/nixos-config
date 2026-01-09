@@ -1,4 +1,4 @@
-{ pkgsStable, pkgsUnstable, config, stableLib, useImpermanence, persistenceHomePath, name, inputs, ... }:
+{ pkgsStable, pkgsUnstable, stableLib, persistenceHomePath, inputs, ... }:
 
 let
     wrappedPrismlauncher = inputs.nixpak.lib.nixpak { lib = stableLib; pkgs = pkgsStable; } {
@@ -40,7 +40,7 @@ let
 in
 
 {
-    home.persistence."${persistenceHomePath}".directories = stableLib.mkIf useImpermanence [
+    home.persistence."${persistenceHomePath}".directories = [
         ".local/share/PrismLauncher"
     ];
 

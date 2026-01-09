@@ -1,4 +1,4 @@
-{ pkgsStable, pkgsUnstable, stableLib, useImpermanence, persistenceHomePath, name, ... }:
+{ pkgsStable, pkgsUnstable, stableLib, persistenceHomePath, ... }:
 
 let
     discordConfig = {
@@ -18,7 +18,7 @@ let
 in
 
 {
-    home.persistence."${persistenceHomePath}".directories = stableLib.mkIf useImpermanence [
+    home.persistence."${persistenceHomePath}".directories = [
         ".config/discord"
     ];
 

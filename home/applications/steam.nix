@@ -1,7 +1,7 @@
-{ pkgsUnstable, stableLib, useImpermanence, persistenceHomePath, name, ... }:
+{ pkgsUnstable, persistenceHomePath, ... }:
 
 {
-    home.persistence."${persistenceHomePath}".directories = stableLib.mkIf useImpermanence [
+    home.persistence."${persistenceHomePath}".directories = [
         ".local/share/Steam"
         ".local/share/vulkan"
         ".config/unity3d"

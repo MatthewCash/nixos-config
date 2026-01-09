@@ -1,7 +1,7 @@
-{ pkgsUnstable, stableLib, useImpermanence, persistenceHomePath, name, config, ... }:
+{ pkgsUnstable, persistenceHomePath, config, ... }:
 
 {
-    home.persistence."${persistenceHomePath}" = stableLib.mkIf useImpermanence {
+    home.persistence."${persistenceHomePath}" = {
         directories = [
             ".cache/.npm-global"
             ".cache/typescript"

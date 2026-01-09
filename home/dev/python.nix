@@ -1,4 +1,4 @@
-{ pkgsStable, pkgsUnstable, stableLib, useImpermanence, persistenceHomePath, name, config, ... }:
+{ pkgsStable, pkgsUnstable, persistenceHomePath, config, ... }:
 
 let
     # Adapted from https://unix.stackexchange.com/a/675631
@@ -25,7 +25,7 @@ let
 in
 
 {
-    home.persistence."${persistenceHomePath}" = stableLib.mkIf useImpermanence {
+    home.persistence."${persistenceHomePath}" = {
         files = [
             ".cache/python/repl_history"
         ];

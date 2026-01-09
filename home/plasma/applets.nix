@@ -1,11 +1,11 @@
-{ stableLib, pkgsUnstable, config, persistenceHomePath, name, useImpermanence, ... }:
+{ pkgsUnstable, config, persistenceHomePath, ... }:
 
 let
     wallpaperPath = "${config.xdg.dataHome}/backgrounds/current_wallpaper.png";
 in
 
 {
-    home.persistence."${persistenceHomePath}" = stableLib.mkIf useImpermanence {
+    home.persistence."${persistenceHomePath}" = {
         directories = [ ".local/share/backgrounds" ];
     };
 

@@ -1,9 +1,9 @@
-{ pkgsUnstable, stableLib, useImpermanence, persistenceHomePath, name, ... }:
+{ pkgsUnstable, persistenceHomePath, ... }:
 
 {
-    home.persistence."${persistenceHomePath}" = stableLib.mkIf useImpermanence {
-        files = [ ".local/share/containers/storage" ];
-    };
+    home.persistence."${persistenceHomePath}".files = [
+        ".local/share/containers/storage"
+    ];
 
     home.packages = with pkgsUnstable; [ podman podman-compose ];
 }

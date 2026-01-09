@@ -3,6 +3,11 @@
 let
     defaultImports = [
         inputs.plasma-manager.homeModules.plasma-manager
+
+        {
+            # Dummy option for a noop when not running nixos
+            options.home.persistence = stableLib.mkOption {};
+        }
     ];
 
     defaultConfig = {

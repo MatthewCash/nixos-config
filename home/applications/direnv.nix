@@ -1,7 +1,7 @@
-{ stableLib, useImpermanence, persistenceHomePath, name, ... }:
+{ persistenceHomePath, ... }:
 
 {
-    home.persistence."${persistenceHomePath}".directories = stableLib.mkIf useImpermanence [
+    home.persistence."${persistenceHomePath}".directories = [
         ".local/share/direnv/allow"
     ];
 

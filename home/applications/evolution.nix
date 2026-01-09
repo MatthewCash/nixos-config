@@ -1,4 +1,4 @@
-{ stableLib, pkgsStable, pkgsUnstable, inputs, useImpermanence, config, persistenceHomePath, name, customLib, ... }:
+{ stableLib, pkgsStable, pkgsUnstable, inputs, config, persistenceHomePath, customLib, ... }:
 
 let
     dconfSettings = {
@@ -110,7 +110,7 @@ let
 in
 
 {
-    home.persistence."${persistenceHomePath}".directories = stableLib.mkIf useImpermanence [
+    home.persistence."${persistenceHomePath}".directories = [
         ".local/share/evolution"
         ".config/evolution"
         ".cache/evolution"

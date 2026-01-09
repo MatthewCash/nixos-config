@@ -1,7 +1,7 @@
-{ stableLib, useImpermanence, persistenceHomePath, name, ... }:
+{ persistenceHomePath, name, ... }:
 
 {
-    home.persistence."${persistenceHomePath}".directories = stableLib.mkIf useImpermanence [
+    home.persistence."${persistenceHomePath}".directories = [
         ".ssh"
     ];
 

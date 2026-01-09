@@ -1,4 +1,4 @@
-{ pkgsUnstable, pkgsStable, customLib, stableLib, useImpermanence, persistenceHomePath, name, inputs, config, ... }:
+{ pkgsUnstable, pkgsStable, customLib, stableLib, persistenceHomePath, inputs, config, ... }:
 
 let
     dconfSettings = stableLib.optionalAttrs (config.gtk.gtk3.theme.name != null) {
@@ -59,7 +59,7 @@ let
 in
 
 {
-    home.persistence."${persistenceHomePath}".directories = stableLib.mkIf useImpermanence [
+    home.persistence."${persistenceHomePath}".directories = [
         ".config/chromium"
         ".cache/chromium"
     ];

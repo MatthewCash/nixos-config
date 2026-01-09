@@ -1,9 +1,9 @@
-{ pkgsUnstable, stableLib, useImpermanence, persistenceHomePath, name, ... }:
+{ pkgsUnstable, persistenceHomePath, ... }:
 
 {
     # TODO: move persistence option to move relevant config files
 
-    home.persistence."${persistenceHomePath}" = stableLib.mkIf useImpermanence {
+    home.persistence."${persistenceHomePath}" = {
         directories = [
             ".local/share/gnome-podcasts"
             ".local/share/gnome-boxes"
