@@ -15,7 +15,7 @@ in
         videos = "${persistHome}/videos";
     };
 
-    home.persistence.${persistHome}.directories = stableLib.mkIf useImpermanence [
+    home.persistence.${persistenceHomePath}.directories = stableLib.mkIf useImpermanence [
         "code"
         "documents"
         "downloads"

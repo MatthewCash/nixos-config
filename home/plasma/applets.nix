@@ -5,7 +5,7 @@ let
 in
 
 {
-    home.persistence."${persistenceHomePath}/${name}" = stableLib.mkIf useImpermanence {
+    home.persistence."${persistenceHomePath}" = stableLib.mkIf useImpermanence {
         directories = [ ".local/share/backgrounds" ];
     };
 

@@ -1,7 +1,7 @@
 { stableLib, useImpermanence, persistenceHomePath, name, config, ... }:
 
 {
-    home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence [
+    home.persistence."${persistenceHomePath}".directories = stableLib.mkIf useImpermanence [
         ".config/gradle/cache"
         ".config/gradle/wrapper"
     ];

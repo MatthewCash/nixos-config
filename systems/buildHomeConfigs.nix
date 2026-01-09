@@ -2,7 +2,6 @@
 
 let
     defaultImports = [
-        inputs.impermanence.nixosModules.home-manager.impermanence
         inputs.plasma-manager.homeModules.plasma-manager
     ];
 
@@ -13,14 +12,13 @@ let
 
     nixosProfiles = builtins.mapAttrs (homeName: homeConfig: stableLib.recursiveUpdate {
         imports = defaultImports ++ homeConfig;
-        home.persistence."/mnt/home/${homeName}".allowOther = true;
     } defaultConfig) homeConfig;
 
     nixos = {
         useGlobalPkgs = true;
         users = nixosProfiles;
         extraSpecialArgs = buildArgs // {
-            persistenceHomePath = "/mnt/home";
+            persistenceHomePath = "/mnt/";
             inherit (buildArgs) useImpermanence;
             inherit systemConfig;
         };

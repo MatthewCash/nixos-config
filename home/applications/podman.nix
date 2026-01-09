@@ -1,7 +1,7 @@
 { pkgsUnstable, stableLib, useImpermanence, persistenceHomePath, name, ... }:
 
 {
-    home.persistence."${persistenceHomePath}/${name}" = stableLib.mkIf useImpermanence {
+    home.persistence."${persistenceHomePath}" = stableLib.mkIf useImpermanence {
         files = [ ".local/share/containers/storage" ];
     };
 

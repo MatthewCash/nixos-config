@@ -25,7 +25,7 @@ let
 in
 
 {
-    home.persistence."${persistenceHomePath}/${name}" = stableLib.mkIf useImpermanence {
+    home.persistence."${persistenceHomePath}" = stableLib.mkIf useImpermanence {
         files = [
             ".cache/python/repl_history"
         ];

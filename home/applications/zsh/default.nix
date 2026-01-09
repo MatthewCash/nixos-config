@@ -3,7 +3,7 @@
 {
     home.packages = with pkgsStable; [ wl-clipboard ];
 
-    home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence [
+    home.persistence."${persistenceHomePath}".directories = stableLib.mkIf useImpermanence [
         ".cache/zsh"
     ];
 

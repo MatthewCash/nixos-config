@@ -1,7 +1,7 @@
 { pkgsUnstable, stableLib, useImpermanence, persistenceHomePath, name, ... }:
 
 {
-    home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence [
+    home.persistence."${persistenceHomePath}".directories = stableLib.mkIf useImpermanence [
         ".config/Termius"
     ];
 

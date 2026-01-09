@@ -29,6 +29,7 @@ in
             ${mountpoint} -q "${homeMountPath}/$PAM_USER"
         '';
         hmScript = pkgsStable.writeShellScript "run_hm.sh" /* bash */ ''
+            ${systemctl} start home-files.target
             if [[ -n $(${systemctl} list-unit-files | grep "^home-manager-$PAM_USER") ]]; then
                 ${systemctl} restart home-manager-$PAM_USER
             fi

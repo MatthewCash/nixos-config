@@ -42,7 +42,11 @@
             inputs.nixpkgs.follows = "nixpkgsUnstable";
         };
 
-        impermanence.url = "github:nix-community/impermanence";
+        impermanence = {
+            url = "github:MatthewCash/impermanence";
+            inputs.nixpkgs.follows = "nixpkgsUnstable";
+            inputs.home-manager.follows = "home-manager";
+        };
 
         kvlibadwaita = {
             url = "github:GabePoel/KvLibadwaita";

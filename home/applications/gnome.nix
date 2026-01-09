@@ -3,7 +3,7 @@
 {
     # TODO: move persistence option to move relevant config files
 
-    home.persistence."${persistenceHomePath}/${name}" = stableLib.mkIf useImpermanence {
+    home.persistence."${persistenceHomePath}" = stableLib.mkIf useImpermanence {
         directories = [
             ".local/share/gnome-podcasts"
             ".local/share/gnome-boxes"
@@ -15,8 +15,8 @@
             ".local/share/flatpak"
             ".local/share/backgrounds"
             ".local/share/nautilus"
-            ".local/share/gnome-podcasts"
             ".local/share/authenticator"
+            ".local/share/keyrings"
 
             ".cache/gnome-boxes"
             ".cache/gnome-calculator"
@@ -27,11 +27,6 @@
             ".cache/thumbnails"
             ".cache/org.gnome.Books"
             ".cache/org.gnome.SoundRecorder"
-        ];
-        files = [
-            # gnome-keyring-daemon misbehaves in bindfs, symlinks are fine
-            # seems to be similar to https://gitlab.gnome.org/GNOME/gnome-keyring/-/issues/84
-            ".local/share/keyrings"
         ];
     };
 

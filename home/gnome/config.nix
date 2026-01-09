@@ -8,7 +8,7 @@ let
 
     monitorsSyncScript = pkgsStable.writeShellScript "gnome-monitors-config-sync" /* sh */ ''
         SRC="${config.xdg.configHome}/monitors.xml"
-        DEST="${persistenceHomePath}/${name}/.config/monitors.xml"
+        DEST="${persistenceHomePath}/home/${name}/.config/monitors.xml"
         ${stableLib.getExe' pkgsStable.coreutils "cp"} "$DEST" "$SRC"
 
         ${stableLib.getExe' pkgsStable.inotify-tools "inotifywait"} -m "$(dirname "$SRC")" |

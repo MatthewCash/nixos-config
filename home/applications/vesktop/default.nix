@@ -68,7 +68,7 @@ let
 in
 
 {
-    home.persistence."${persistenceHomePath}/${name}".directories = stableLib.mkIf useImpermanence (stableLib.map (name: ".config/vesktop-${name}")profileNames);
+    home.persistence."${persistenceHomePath}".directories = stableLib.mkIf useImpermanence (stableLib.map (name: ".config/vesktop-${name}")profileNames);
 
     xdg.configFile = stableLib.mergeAttrsList (builtins.map (profileName: {
         "vesktop-${profileName}/themes/theme.css".source = import ./theme.nix args;
