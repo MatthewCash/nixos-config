@@ -12,7 +12,6 @@ builtins.map (path: ../../../home/${path}) [
     "gnome/input/touchpad.nix"
     "gnome/input/keyboard.nix"
     "gnome/extensions/dash-to-dock.nix"
-    "gnome/extensions/window-gestures.nix"
     "gnome/extensions/just-perfection.nix"
     "gnome/extensions/tray-icons-reloaded.nix"
     "gnome/extensions/desktop-cube.nix"
