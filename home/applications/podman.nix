@@ -1,7 +1,7 @@
 { pkgsUnstable, persistenceHomePath, ... }:
 
 {
-    home.persistence."${persistenceHomePath}".files = [
+    home.persistence."${persistenceHomePath}".directories = [
         ".local/share/containers/storage"
     ];
 
