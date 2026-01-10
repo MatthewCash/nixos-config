@@ -1,7 +1,8 @@
 { config, ... }:
 
 let
-    windowsMountOptions = [ "credentials=${config.age.secrets.nixvm-smb-creds.path}" "uid=matthew" "gid=users" "nofail" "noauto" "noatime" "exec" "x-systemd.automount" "x-systemd.mount-timeout=5s" "mfsymlinks" "vers=3.1.1" ];
+    owningUser = "matthew";
+    windowsMountOptions = [ "credentials=${config.age.secrets.nixvm-smb-creds.path}" "uid=${owningUser}" "gid=users" "nofail" "noauto" "noatime" "exec" "x-systemd.automount" "x-systemd.mount-timeout=5s" "mfsymlinks" "vers=3.1.1" ];
     windowsBindMountOptions = [ "bind" "nofail" ];
 in
 
@@ -83,37 +84,37 @@ in
 
         windows-code = {
             device = "/mnt/win/Users/Matthew/Code";
-            mountPoint = "/home/matthew/code";
+            mountPoint = "/home/${owningUser}/code";
             options = windowsBindMountOptions;
         };
 
         windows-downloads = {
             device = "/mnt/win/Users/Matthew/Downloads";
-            mountPoint = "/home/matthew/downloads";
+            mountPoint = "/home/${owningUser}/downloads";
             options = windowsBindMountOptions;
         };
 
         storage-documents = {
             device = "/mnt/storage/Libraries/Documents";
-            mountPoint = "/home/matthew/documents";
+            mountPoint = "/home/${owningUser}/documents";
             options = windowsBindMountOptions;
         };
 
         storage-videos = {
             device = "/mnt/storage/Libraries/Videos";
-            mountPoint = "/home/matthew/videos";
+            mountPoint = "/home/${owningUser}/videos";
             options = windowsBindMountOptions;
         };
 
         storage-pictures = {
             device = "/mnt/storage/Libraries/Pictures";
-            mountPoint = "/home/matthew/pictures";
+            mountPoint = "/home/${owningUser}/pictures";
             options = windowsBindMountOptions;
         };
 
         archive-torrents = {
             device = "/mnt/archive/Torrents";
-            mountPoint = "/home/matthew/torrents";
+            mountPoint = "/home/${owningUser}/torrents";
             options = windowsBindMountOptions;
         };
     };
