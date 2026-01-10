@@ -69,6 +69,7 @@ in
                 TabBox = {
                     LayoutName = "thumbnails";
                     OrderMinimizedMode = 1;
+                    MultiScreenMode = 1; # only windows from current display
                 };
                 Windows = {
                     DelayFocusInterval = 0;
