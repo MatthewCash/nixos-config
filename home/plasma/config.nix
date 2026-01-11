@@ -73,7 +73,6 @@ in
                 };
                 Windows = {
                     DelayFocusInterval = 0;
-                    ElectricBorderMaximize = false;
                     FocusPolicy = "FocusFollowsMouse";
                 };
                 "org.kde.kdecoration2" = {
