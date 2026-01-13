@@ -83,6 +83,10 @@ in
                     library = "org.kde.kwin.aurorae";
                     theme = "__aurorae__svg__Sweet-Dark-transparent";
                 };
+                NightColor = {
+                    Active = true;
+                    NightTemperature = 5600;
+                };
                 Wayland.EnablePrimarySelection = false;
             };
             ksplashrc.KSplash = {
