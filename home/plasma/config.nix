@@ -83,6 +83,7 @@ in
                     library = "org.kde.kwin.aurorae";
                     theme = "__aurorae__svg__Sweet-Dark-transparent";
                 };
+                Wayland.EnablePrimarySelection = false;
             };
             ksplashrc.KSplash = {
                 Engine = "KSplashQML";
