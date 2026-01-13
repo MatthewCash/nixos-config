@@ -99,6 +99,10 @@ in
                 ResetOldOptions = true;
             };
             plasma-localerc.Formats.LC_TIME = "C";
+            plasmaparc.General = {
+                AudioFeedback = false;
+                VolumeOsd = false;
+            };
         };
     };
 
