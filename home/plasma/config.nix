@@ -74,6 +74,7 @@ in
                 Windows = {
                     DelayFocusInterval = 0;
                     FocusPolicy = "FocusFollowsMouse";
+                    FocusStealingPreventionLevel = 0;
                 };
                 "org.kde.kdecoration2" = {
                     ButtonsOnLeft = "F";
