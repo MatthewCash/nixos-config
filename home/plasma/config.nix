@@ -47,7 +47,10 @@ in
                 plasmashell._k_friendly_name = "Activity switching";
             };
             kscreenlockerrc = {
-                Daemon.Autolock = false;
+                Daemon = {
+                    Autolock = false;
+                    Timeout = 0;
+                };
                 Greeter.Theme = "Sweet";
             };
             ksmserverrc.General.confirmLogout = false;
