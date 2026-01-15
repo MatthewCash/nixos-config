@@ -172,7 +172,7 @@
             '';
             build = path: /* bash */ ''
                 echo "- build .#${path}:"
-                out=$(${nix} build --no-link --print-out-paths path:.#${path})
+                out=$(${nix} build --impure --no-link --print-out-paths path:.#${path})
                 printf "\t$out\n"
             '';
 
