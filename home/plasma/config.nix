@@ -19,7 +19,10 @@ in
         workspace.iconTheme = "BeautyLine";
 
         configFile = {
-            kcminputrc.Keyboard.NumLock = 0;
+            kcminputrc = {
+                Keyboard.NumLock = 0;
+                "Libinput/1/1/kanata".PointerAccelerationProfile = 1;
+            };
             kdeglobals = {
                 General = {
                     AccentColor = plasmaAccentColor;
