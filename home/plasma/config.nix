@@ -105,6 +105,7 @@ in
             plasma-localerc.Formats.LC_TIME = "C";
             plasmaparc.General = {
                 AudioFeedback = false;
+                VolumeStep = 1;
                 VolumeOsd = false;
             };
         };
