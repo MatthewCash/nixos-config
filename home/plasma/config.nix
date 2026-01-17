@@ -112,6 +112,13 @@ in
                 VolumeOsd = false;
             };
         };
+
+        powerdevil.AC = {
+            dimDisplay.enable = false;
+            turnOffDisplay.idleTimeout = "never";
+            autoSuspend.action = "nothing";
+            powerButtonAction = "sleep";
+        };
     };
 
     # Theme files
