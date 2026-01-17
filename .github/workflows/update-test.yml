@@ -1,0 +1,43 @@
+name: Nix Update Test
+
+on:
+  push:
+    branches:
+      - updates
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: wimpysworld/nothing-but-nix@v6
+
+      - uses: DeterminateSystems/nix-installer-action@v21
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Ensure outputs build
+        id: build-test
+        run: nix run .#build-test
+
+      - name: Update tracking branch on success
+        if: steps.build-test.outcome == 'success'
+        run: |
+          git fetch origin main updates
+          git checkout -B latest-successful-update origin/main
+
+          # Get the diff between main and updates, apply it as one commit
+          git diff origin/main origin/updates | git apply
+          git add -A
+          git commit -m "Update flake inputs"
+          git push -u origin latest-successful-update --force

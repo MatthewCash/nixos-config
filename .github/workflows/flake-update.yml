@@ -15,8 +15,16 @@ jobs:
   update-flake:
     runs-on: ubuntu-latest
     steps:
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
       - uses: actions/checkout@v4
         with:
+          token: ${{ steps.app-token.outputs.token }}
           ref: main
           fetch-depth: 0
 
@@ -53,14 +61,3 @@ jobs:
       - name: Push updates branch
         run: |
           git diff --quiet origin/updates || git push -u origin updates --force
-
-      - name: Ensure outputs build
-        id: build-test
-        run:  nix run .#build-test
-        continue-on-error: true
-
-      - name: Update tracking branch on success
-        if: steps.build-test.outcome == 'success'
-        run: |
-          git checkout -B latest-successful-update
-          git push -u origin latest-successful-update --force
