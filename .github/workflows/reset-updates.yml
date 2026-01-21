@@ -1,0 +1,34 @@
+name: Immediately Reset Branches on Main Push
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  reset-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with: 
+          ref: main
+          fetch-depth: 0
+
+      - name: Reset updates branch
+        run: |
+          git fetch origin
+          if ! git merge-base --is-ancestor origin/main origin/updates 2>/dev/null; then
+            git checkout -B updates origin/main
+            git push -u origin updates --force
+          fi
+
+      - name: Reset latest-successful-update branch
+        run: |
+          git fetch origin
+          if ! git merge-base --is-ancestor origin/main origin/latest-successful-update 2>/dev/null; then
+            git checkout -B latest-successful-update origin/main
+            git push -u origin latest-successful-update --force
+          fi
