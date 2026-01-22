@@ -41,12 +41,6 @@
     "datareporting.sessions.current.clean" = true;
     "toolkit.telemetry.server" = "";
 
-    # No Pocket
-    "extensions.pocket.enabled" = false;
-    "extensions.pocket.onSaveRecs" = false;
-
-    # Prevent memory leak
-    "accessibility.force_disabled" = false;
 
     # No warning on fullscreen
     "full-screen-api.warning.timeouts" = false;
@@ -134,9 +128,6 @@
 
     # Allow addons to modify mozila URLs
     "extensions.webextensions.restrictedDomains" = "";
-
-    # :has() selector
-    "layout.css.has-selector.enabled" = true;
 
     # Ask where to save downloads
     "browser.download.useDownloadDir" = false;
