@@ -45,7 +45,9 @@ in
                 "home-manager-${user}" { serviceConfig.RemainAfterExit = "yes"; }
             ) systemConfig.homeConfig;
 
-            systemd.targets.home-files.wantedBy = stableLib.mkForce []; # prevent being pulled in by local-fs.target
+            systemd.targets = stableLib.mapAttrs' (user: _: stableLib.nameValuePair
+                "home-files-home-${user}" { wantedBy = stableLib.mkForce [ ]; }
+            ) systemConfig.homeConfig;
         })
 
         (args: builtins.foldl'

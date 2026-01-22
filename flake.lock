@@ -481,11 +481,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1767846723,
-        "narHash": "sha256-7br3fHeKTC+XD++kqi+fuONona4+p5WsNtSH6qNyHds=",
+        "lastModified": 1768189267,
+        "narHash": "sha256-lb2j8pmP2PDDoapbHLa9zUAPkiKgaGW7MdBON1qKf3E=",
         "owner": "MatthewCash",
         "repo": "impermanence",
-        "rev": "4470f3911eb85b5153588c1e47834f983214cab1",
+        "rev": "a8f1e400cd87605d55f7610405ccb54a53339583",
         "type": "github"
       },
       "original": {
