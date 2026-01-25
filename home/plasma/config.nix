@@ -11,6 +11,7 @@ in
     home.packages = with pkgsUnstable; [
         pinentry-qt
         beauty-line-icon-theme
+        kdePackages.qtmultimedia
     ];
 
     programs.plasma = {
