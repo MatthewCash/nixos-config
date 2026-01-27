@@ -22,6 +22,8 @@
             RestorePositionForNextInstance = false;
             ToolBarsMovable = "Disabled";
         };
+
+        "Notification Messages".CloseAllEmptyTabs = true;
     };
 
     programs.plasma.dataFile."konsole/Main.profile" = {
