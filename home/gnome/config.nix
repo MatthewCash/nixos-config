@@ -58,6 +58,13 @@ in
             resize-with-right-button = true;
         };
 
+        "org/gnome/desktop/wm/keybindings" = {
+            close = [
+                "<Super>q"
+                "<Alt>f4"
+            ];
+        };
+
         "org/gnome/mutter" = {
             attach-modal-dialogs = true;
             center-new-windows = false;

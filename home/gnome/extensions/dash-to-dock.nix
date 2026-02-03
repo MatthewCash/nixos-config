@@ -27,5 +27,6 @@
         shift-middle-click-action = "launch";
         show-favorites = true;
         transparency-mode = "FIXED";
+        hot-keys = false;
     };
 }
