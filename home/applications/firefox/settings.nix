@@ -59,16 +59,17 @@
     "browser.uiCustomization.state" = {
         "placements" = {
             "widget-overflow-fixed-list" = [
-                "downloads-button"
                 "developer-button"
+                "panic-button"
                 "print-button"
-                "firefox-view-button"
+                "screenshot-button"
             ];
             "nav-bar" = [
                 "back-button"
                 "forward-button"
                 "stop-reload-button"
                 "urlbar-container"
+                "downloads-button"
                 "unified-extensions-button"
             ];
             "toolbar-menubar" = [ "menubar-items" ];
@@ -82,12 +83,17 @@
             "TabsToolbar"
             "widget-overflow-fixed-list"
         ];
-        "currentVersion" = 19;
-        "newElementCount" = 5;
+        "seen" = [
+            "sponsorblocker_ajay_app-browser-action"
+            "ublock0_raymondhill_net-browser-action"
+        ];
+        "currentVersion" = 23;
+        "newElementCount" = 6;
     };
     "browser.urlbar.placeholderName" = "Google";
     "browser.urlbar.placeholderName.private" = "Google";
     "browser.urlbar.quicksuggest.migrationVersion" = 2;
+    "browser.download.autohideButton" = true;
 
     # Theme
     "devtools.theme" = "dark";
