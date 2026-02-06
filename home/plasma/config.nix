@@ -64,6 +64,7 @@ in
                     NoiseStrength = 10;
                 };
                 Effect-windowview.BorderActivateAll = 9;
+                Effect-overview.BorderActivate = 9;
                 MouseBindings = {
                     CommandAllKey = "Alt";
                     CommandAllWheel = "Change Opacity";
