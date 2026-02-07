@@ -1,0 +1,56 @@
+builtins.map (path: ../../../nixos/${path}) [
+    "users.nix"
+    "time.nix"
+    "console.nix"
+    "sudo.nix"
+    "printing.nix"
+    "pam.nix"
+    "nix.nix"
+    "kernel.nix"
+    "fonts.nix"
+    "boot.nix"
+    "secureboot.nix"
+    "audio.nix"
+    "acpi.nix"
+    "networking/general.nix"
+    "networking/openssh.nix"
+    "networking/firewall/fail2ban.nix"
+    "networking/firewall/nftables.nix"
+    "hardware/tpm.nix"
+    "hardware/keyboard.nix"
+    "hardware/gpu.nix"
+    # "hardware/usbguard.nix"
+    "de/plasma.nix"
+    "ld.nix"
+    "cpu/scheduler.nix"
+    "cpu/intel.nix"
+    "cpu/scheduler.nix"
+    "services/sunshine.nix"
+    "fs/disks.nix"
+    "fs/lvm.nix"
+    "ld.nix"
+    "env.nix"
+    "docs.nix"
+    "tailscale.nix"
+    "pam-mount.nix"
+    "uhid.nix"
+    "systemd/config.nix"
+    "systemd/logind.nix"
+    "systemd/sleep.nix"
+    "bluetooth.nix"
+    "fwupd.nix"
+    "dbus.nix"
+    "kmscon.nix"
+    "podman.nix"
+    "xdg.nix"
+    "waydroid.nix"
+    "hardware/wheel.nix"
+] ++ [
+    ./kernel.nix
+    ./networking.nix
+    ./firewall/nftables.nix
+    ./disks.nix
+    ./gpu.nix
+    ./keyboard.nix
+    # ./usbguard.nix
+]

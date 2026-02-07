@@ -666,6 +666,26 @@
         "type": "github"
       }
     },
+    "plasma-smart-video-wallpaper-reborn": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgsUnstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1766612559,
+        "narHash": "sha256-Im3m5tZqe+zRgeEnzpqVVOZdDppvZn+sD3wDnPhipiw=",
+        "owner": "MatthewCash",
+        "repo": "plasma-smart-video-wallpaper-reborn",
+        "rev": "e27a23e1a2418184f9caafdd18511d332db9fa70",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MatthewCash",
+        "repo": "plasma-smart-video-wallpaper-reborn",
+        "type": "github"
+      }
+    },
     "pre-commit": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -732,6 +752,7 @@
         "nixpkgsStable": "nixpkgsStable",
         "nixpkgsUnstable": "nixpkgsUnstable",
         "plasma-manager": "plasma-manager",
+        "plasma-smart-video-wallpaper-reborn": "plasma-smart-video-wallpaper-reborn",
         "ragenix": "ragenix",
         "sweet-kde": "sweet-kde",
         "zsh-nix-shell": "zsh-nix-shell"

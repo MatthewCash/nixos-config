@@ -1,0 +1,30 @@
+table inet filter {
+    chain input {
+        type filter hook input priority filter; policy drop;
+
+        ct state invalid drop;
+        ct state { established, related } accept;
+
+        iifname lo accept;
+        ip saddr 127.0.0.1/8 accept;
+
+        icmp type echo-request limit rate 5/second accept;
+
+        tcp dport ssh accept;
+
+        # Miracast
+        tcp dport 7250 accept;
+        udp dport 5353 accept;
+
+        # Sunshine
+        udp dport { 47984, 47998, 47999, 48000, 48010 } accept;
+        tcp dport { 47984, 47989, 47998, 48010 } accept;
+
+        # KDE Connect
+        tcp dport 1714-1764 accept;
+    }
+
+    chain forward {
+        type filter hook forward priority filter; policy drop;
+    }
+}

@@ -81,6 +81,11 @@
             inputs.nixpkgs.follows = "nixpkgsUnstable";
         };
 
+        plasma-smart-video-wallpaper-reborn = {
+            url = "github:MatthewCash/plasma-smart-video-wallpaper-reborn";
+            inputs.nixpkgs.follows = "nixpkgsUnstable";
+        };
+
         ragenix = {
             url = "github:yaxitech/ragenix";
             inputs.nixpkgs.follows = "nixpkgsStable";
