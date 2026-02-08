@@ -5,7 +5,7 @@ let
         "thunderbird"
         "org.kde.dolphin"
         "org.kde.konsole"
-        "org.mozillaFirefox.floating"
+        "org.mozilla.Firefox.floating"
         "org.prismlauncher.PrismLauncher"
 
         "org.mozilla.Firefox.layout"
