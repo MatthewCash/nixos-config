@@ -1,7 +1,7 @@
 { nixpkgsUnstable, ... }:
 
 rec {
-    hostname = "testvm";
+    hostname = "gnometestvm";
     system = "x86_64-linux";
     kernelPackages = nixpkgsUnstable.legacyPackages.${system}.linuxPackages_latest;
     systemNixpkgs = nixpkgsUnstable;
