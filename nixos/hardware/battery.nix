@@ -10,7 +10,6 @@ in
     '';
 
     powerManagement.powertop.enable = true;
-    services.thermald.enable = true;
     services.power-profiles-daemon.enable = true;
 
     boot.kernelParams = [ "ahci.mobile_lpm_policy=3" ];
