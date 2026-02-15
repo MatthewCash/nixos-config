@@ -7,6 +7,7 @@ let
         "org.kde.konsole"
         "org.mozilla.Firefox.floating"
         "org.prismlauncher.PrismLauncher"
+        "steam"
 
         "org.mozilla.Firefox.layout"
         "com.discord.vesktop.personal"
