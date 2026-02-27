@@ -1,5 +1,11 @@
 { pkgsUnstable, persistenceHomePath, ... }:
 
+let
+    steam = pkgsUnstable.steam.override {
+        extraPkgs = pkgs: with pkgs; [ kdePackages.breeze ];
+    };
+in
+
 {
     home.persistence."${persistenceHomePath}".directories = [
         ".local/share/Steam"
@@ -11,5 +17,5 @@
         ".local/share/Colossal Order"
     ];
 
-    home.packages = with pkgsUnstable; [ steam ];
+    home.packages = [ steam ];
 }
