@@ -18,4 +18,12 @@ in
     ];
 
     home.packages = [ steam ];
+
+    xdg.desktopEntries.assetto-corsa = {
+        name = "Assetto Corsa";
+        comment = "Launch Assetto Corsa via Steam";
+        exec = "steam -applaunch 244210";
+        terminal = false;
+        categories = [ "Game" ];
+    };
 }
