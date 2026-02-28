@@ -117,6 +117,7 @@
 
     # Disable tab restore page
     "browser.sessionstore.max_resumed_crashes" = 0;
+    "browser.sessionstore.restore_on_demand" = false;
 
     # Hide Firefox View
     "browser.tabs.firefox-view" = false;
