@@ -1,10 +1,7 @@
-{ pkgsStable, persistPath, config, ... }:
+{ pkgsStable, persistPath, ... }:
 
 {
-    networking.networkmanager = {
-        enable = true;
-        appendNameservers = [ "1.1.1.1" ];
-    };
+    networking.networkmanager.enable = true;
 
     environment.persistence.${persistPath}.directories = [
         "/etc/NetworkManager/system-connections"
