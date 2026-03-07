@@ -47,8 +47,8 @@ in
     Handlers = {
         mimeTypes = {
             "application/pdf" = {
-                action = 3;
-                extensions = [ "pdf" ];
+                action = "handleInternally";
+                ask = false;
             };
         };
     };

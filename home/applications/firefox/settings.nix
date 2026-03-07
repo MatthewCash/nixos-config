@@ -138,4 +138,7 @@
 
     # Ask where to save downloads
     "browser.download.useDownloadDir" = false;
+
+    # Open PDFs without downloading
+    "browser.download.open_pdf_attachments_inline" = true;
 }
