@@ -3,6 +3,50 @@
 {
     programs.plasma.window-rules = [
         {
+            description = "Position Thunderbird";
+            match.window-class = {
+                value = "thunderbird";
+                match-whole = false;
+            };
+            apply = {
+                position = "0,500";
+                maximizehoriz = true;
+                maximizevert = true;
+            };
+        }
+        {
+            description = "Position Dolphin";
+            match.window-class = {
+                value = "org.kde.dolphin";
+                match-whole = false;
+            };
+            apply.position = "800,350";
+        }
+        {
+            description = "Position Konsole";
+            match.window-class = {
+                value = "org.kde.konsole";
+                match-whole = false;
+            };
+            apply.position = "500,650";
+        }
+        {
+            description = "Position Firefox Floating";
+            match.window-class = {
+                value = "org.mozilla.Firefox.floating";
+                match-whole = false;
+            };
+            apply.position = "500,600";
+        }
+        {
+            description = "Position Prism Launcher";
+            match.window-class = {
+                value = "org.prismlauncher.PrismLauncher";
+                match-whole = false;
+            };
+            apply.position = "500,600";
+        }
+        {
             description = "Hide titlebar for Minecraft";
             match.window-class = {
                 value = "Minecraft";
