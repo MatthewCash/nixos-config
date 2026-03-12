@@ -3,13 +3,7 @@
 {
     services.displayManager = {
         defaultSession = "plasma";
-        sddm = {
-            enable = true;
-            wayland.enable = true;
-            autoNumlock = true;
-            theme = "Sweet";
-            settings.Theme.ThemeDir = "${pkgsUnstable.sweet-nova}/share/sddm/themes";
-        };
+        plasma-login-manager.enable = true;
     };
 
     services.libinput.enable = true;
