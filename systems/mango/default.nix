@@ -4,7 +4,7 @@ rec {
     hostname = "mango";
     system = "x86_64-linux";
     systemNixpkgs = nixpkgsUnstable;
-    kernelPackages = nixpkgsUnstable.legacyPackages.${system}.linuxPackages_6_18;
+    kernelPackages = nixpkgsUnstable.legacyPackages.${system}.linuxPackages_6_19;
     unfreePkgs = [ "steam" "steam-unwrapped" ];
     accentColor = {
         h = 300;
