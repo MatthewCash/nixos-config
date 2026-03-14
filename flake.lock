@@ -157,11 +157,11 @@
     "discord-css": {
       "flake": false,
       "locked": {
-        "lastModified": 1759543893,
-        "narHash": "sha256-+xhEVWwx61DRI0evQ8OHFpTg9nnrMU2xXAuBszEfxjE=",
+        "lastModified": 1773361439,
+        "narHash": "sha256-qlLeIeu3eNTM4wKuppw08BBDq32ZJ0Jvj2MPE5NgL/g=",
         "owner": "MatthewCash",
         "repo": "discord-css",
-        "rev": "c50bb8cbcd6974f0404f6accdcd655aeb6a44e6e",
+        "rev": "047d70a634f3b1ea7b1148fce0f56609910c66ef",
         "type": "github"
       },
       "original": {
@@ -177,11 +177,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1772420042,
-        "narHash": "sha256-naZz40TUFMa0E0CutvwWsSPhgD5JldyTUDEgP9ADpfU=",
+        "lastModified": 1773025010,
+        "narHash": "sha256-khlHllTsovXgT2GZ0WxT4+RvuMjNeR5OW0UYeEHPYQo=",
         "owner": "nix-community",
         "repo": "disko",
-        "rev": "5af7af10f14706e4095bd6bc0d9373eb097283c6",
+        "rev": "7b9f7f88ab3b339f8142dc246445abb3c370d3d3",
         "type": "github"
       },
       "original": {
@@ -210,11 +210,11 @@
     "firefox-mods": {
       "flake": false,
       "locked": {
-        "lastModified": 1769957546,
-        "narHash": "sha256-nyNi0f599aEFa0CgIwjOL5Bkw8cHxQ+hQmdEj5H6rWI=",
+        "lastModified": 1773361423,
+        "narHash": "sha256-ONwYpndpml6DAlhE5RlQLbxy8sXhN286NEtLQHcDuIE=",
         "owner": "MatthewCash",
         "repo": "firefox-mods",
-        "rev": "60409b5343ce558d6f2b14d7386c471e14cbfaca",
+        "rev": "fa04ea96fc2165681151a996d972a15aac906b2d",
         "type": "github"
       },
       "original": {
@@ -415,11 +415,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1772380461,
-        "narHash": "sha256-O3ukj3Bb3V0Tiy/4LUfLlBpWypJ9P0JeUgsKl2nmZZY=",
+        "lastModified": 1773422513,
+        "narHash": "sha256-MPjR48roW7CUMU6lu0+qQGqj92Kuh3paIulMWFZy+NQ=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "f140aa04d7d14f8a50ab27f3691b5766b17ae961",
+        "rev": "ef12a9a2b0f77c8fa3dda1e7e494fca668909056",
         "type": "github"
       },
       "original": {
@@ -615,11 +615,11 @@
     },
     "nixpkgsStable": {
       "locked": {
-        "lastModified": 1772047000,
-        "narHash": "sha256-7DaQVv4R97cii/Qdfy4tmDZMB2xxtyIvNGSwXBBhSmo=",
+        "lastModified": 1773375660,
+        "narHash": "sha256-SEzUWw2Rf5Ki3bcM26nSKgbeoqi2uYy8IHVBqOKjX3w=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "1267bb4920d0fc06ea916734c11b0bf004bbe17e",
+        "rev": "3e20095fe3c6cbb1ddcef89b26969a69a1570776",
         "type": "github"
       },
       "original": {
@@ -631,11 +631,11 @@
     },
     "nixpkgsUnstable": {
       "locked": {
-        "lastModified": 1772433332,
-        "narHash": "sha256-izhTDFKsg6KeVBxJS9EblGeQ8y+O8eCa6RcW874vxEc=",
+        "lastModified": 1773282481,
+        "narHash": "sha256-b/GV2ysM8mKHhinse2wz+uP37epUrSE+sAKXy/xvBY4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "cf59864ef8aa2e178cccedbe2c178185b0365705",
+        "rev": "fe416aaedd397cacb33a610b33d60ff2b431b127",
         "type": "github"
       },
       "original": {
@@ -673,11 +673,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1766612559,
-        "narHash": "sha256-Im3m5tZqe+zRgeEnzpqVVOZdDppvZn+sD3wDnPhipiw=",
+        "lastModified": 1773271838,
+        "narHash": "sha256-sPEkFJuvd5PjZmZFfRkhvAb2A0AmAbS9iQhMBD7nTnM=",
         "owner": "MatthewCash",
         "repo": "plasma-smart-video-wallpaper-reborn",
-        "rev": "e27a23e1a2418184f9caafdd18511d332db9fa70",
+        "rev": "7901218a04abdc4b97aaf44b3aa2f8d7c1d05a08",
         "type": "github"
       },
       "original": {
