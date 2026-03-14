@@ -52,5 +52,6 @@ builtins.map (path: ../../../nixos/${path}) [
     ./disks.nix
     ./gpu.nix
     ./keyboard.nix
+    ./plasma.nix
     # ./usbguard.nix
 ]
