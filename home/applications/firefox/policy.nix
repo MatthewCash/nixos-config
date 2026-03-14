@@ -38,6 +38,10 @@ in
             installation_mode = "normal_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/localcdn-fork-of-decentraleyes/latest.xpi";
         };
+        "betterlyrics@boidu.dev" = {
+            installation_mode = "normal_installed";
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/better-lyrics/latest.xpi";
+        };
         "main-theme@matthew-cash.com" = {
             installation_mode = "normal_installed";
             install_url = "file://${mozilla-theme}/addon/theme.xpi";
