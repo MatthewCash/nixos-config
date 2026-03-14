@@ -141,4 +141,7 @@
 
     # Open PDFs without downloading
     "browser.download.open_pdf_attachments_inline" = true;
+
+    # Re-open existing tabs
+    "browser.startup.page" = 3;
 }
