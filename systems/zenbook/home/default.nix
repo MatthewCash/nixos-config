@@ -44,7 +44,7 @@ builtins.map (path: ../../../home/${path}) [
     "applications/vesktop/default.nix"
     "applications/bitwarden.nix"
     "applications/direnv.nix"
-    "applications/helvum.nix"
+    "applications/crosspipe.nix"
     "applications/helix"
     "applications/libreoffice.nix"
     "applications/bat.nix"
