@@ -149,4 +149,7 @@
     "browser.urlbar.suggest.engines" = false;
     "browser.urlbar.suggest.quicksuggest.all" = false;
     "browser.urlbar.suggest.quicksuggest.sponsored" = false;
+
+    # Quit immediately
+    "browser.warnOnQuitShortcut" = false;
 }
