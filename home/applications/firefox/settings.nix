@@ -144,4 +144,9 @@
 
     # Re-open existing tabs
     "browser.startup.page" = 3;
+
+    # Remove sponsored stuff
+    "browser.urlbar.suggest.engines" = false;
+    "browser.urlbar.suggest.quicksuggest.all" = false;
+    "browser.urlbar.suggest.quicksuggest.sponsored" = false;
 }
