@@ -62,6 +62,7 @@ let
                     pipewire = true;
                     pulse = true;
                 };
+                env.PATH = stableLib.makeBinPath [ pkgsUnstable.xdg-utils ];
             };
         };
     }) profileNames;
