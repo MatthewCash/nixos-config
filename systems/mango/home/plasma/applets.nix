@@ -38,14 +38,7 @@ in
                         config.General = {
                             showOnlyCurrentScreen = true;
                             taskMaxWidth = "Narrow";
-                            launchers = stableLib.concatMapStringsSep "," (x: "applications:${x}") [
-                                "thunderbird.desktop"
-                                "org.mozilla.Firefox.layout.desktop"
-                                "org.kde.dolphin.desktop"
-                                "org.kde.konsole.desktop"
-                                "org.mozilla.Firefox.floating.desktop"
-                                "org.prismlauncher.PrismLauncher.desktop"
-                            ];
+                            launchers = [];
                         };
                     }
                     "org.kde.plasma.systemtray"
@@ -79,11 +72,7 @@ in
                         config.General = {
                             showOnlyCurrentScreen = true;
                             taskMaxWidth = "Narrow";
-                            launchers = stableLib.concatMapStringsSep "," (x: "applications:${x}") [
-                                "org.mozilla.Firefox.layout.desktop"
-                                "com.discord.vesktop.personal.desktop"
-                                "com.discord.vesktop.business.desktop"
-                            ];
+                            launchers = [];
                         };
                     }
                     "org.kde.plasma.systemmonitor.cpucore"
