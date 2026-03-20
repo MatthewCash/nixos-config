@@ -1,8 +1,16 @@
-{ stableLib, ... }:
+{ stableLib, persistPath, ... }:
 
 {
-    # Enable ephemeral SSH server on boot
-    boot.initrd.network.ssh.enable = true;
+    age.identityPaths = [
+        "${persistPath}/etc/ssh/ssh_host_ed25519_key"
+    ];
+
+    environment.persistence.${persistPath}.files = [
+        "/etc/ssh/ssh_host_rsa_key"
+        "/etc/ssh/ssh_host_rsa_key.pub"
+        "/etc/ssh/ssh_host_ed25519_key"
+        "/etc/ssh/ssh_host_ed25519_key.pub"
+    ];
 
     services.openssh = {
         enable = true;
