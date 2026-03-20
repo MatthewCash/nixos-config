@@ -1,8 +1,6 @@
 { persistPath, ... }:
 
 {
-    programs.fuse.userAllowOther = true;
-
     environment.persistence.${persistPath} = {
         directories = [
             "/var/log"
