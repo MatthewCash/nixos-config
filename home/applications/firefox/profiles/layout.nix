@@ -19,6 +19,13 @@
             --system-saturation: ${builtins.toString accentColor.s}%;
             --system-lightness: ${builtins.toString accentColor.l}%;
         }
+
+        @-moz-document regexp("^moz-extension:\/\/.*\/sidebar\/sidebar\.html.*$") {
+            span {
+                font-size: 12px !important;
+                font-family: 'Aurebesh AF', sans-serif !important;
+            }
+        }
     '';
     settings = import ../settings.nix;
 }
