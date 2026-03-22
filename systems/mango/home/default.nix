@@ -47,6 +47,7 @@ builtins.map (path: ../../../home/${path}) [
     "applications/nix.nix"
     "applications/wget.nix"
     "applications/podman.nix"
+    "applications/haruna.nix"
 ] ++ [
     ./defaultApps.nix
 
