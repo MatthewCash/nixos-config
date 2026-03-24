@@ -50,6 +50,7 @@ let
                     [(sloth.concat' sloth.xdgConfigHome "/vesktop-${profileName}") (sloth.concat' sloth.xdgConfigHome "/vesktop")]
                     (sloth.concat' sloth.runtimeDir "/doc") # For the Document portal
                     [(sloth.concat' sloth.xdgCacheHome "/vesktop/tmp") "/tmp"]
+                    (sloth.concat' sloth.runtimeDir "/speech-dispatcher") # For TTS
                 ];
                 bind.ro = [
                     "/etc/fonts"
