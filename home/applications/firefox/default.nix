@@ -127,10 +127,10 @@ in
 
     home.packages = [ wrappedFirefox.config.env ];
 
-    # Enable JS mods in 'layout' profile
-    home.file.".mozilla/firefox/layout/chrome/firefox-mods".source = inputs.firefox-mods;
-    home.file.".mozilla/firefox/layout/chrome/chrome.manifest".text = "content mods ./";
-    home.file.".mozilla/firefox/layout/chrome/entrypoint.js".text = /* js */ ''
+    # Enable JS mods in 'transparent' profile
+    home.file.".mozilla/firefox/transparent/chrome/firefox-mods".source = inputs.firefox-mods;
+    home.file.".mozilla/firefox/transparent/chrome/chrome.manifest".text = "content mods ./";
+    home.file.".mozilla/firefox/transparent/chrome/entrypoint.js".text = /* js */ ''
         const EXPORTED_SYMBOLS = [];
         ChromeUtils.importESModule('chrome://mods/content/firefox-mods/js/main.js');
     '';

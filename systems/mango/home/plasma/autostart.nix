@@ -3,13 +3,14 @@
 let
     autoStartApps = [
         "thunderbird"
+        "org.mozilla.Firefox.layout"
         "org.kde.dolphin"
         "org.kde.konsole"
         "org.mozilla.Firefox.floating"
         "org.prismlauncher.PrismLauncher"
         "assetto-corsa"
 
-        "org.mozilla.Firefox.layout"
+        "org.mozilla.Firefox.transparent"
         "com.discord.vesktop.personal"
         "com.discord.vesktop.business"
     ];
