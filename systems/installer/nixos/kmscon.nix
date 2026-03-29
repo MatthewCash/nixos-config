@@ -1,5 +1,5 @@
 { ... }:
 
 {
-    services.kmscon.autologinUser = "main";
+    services.getty.autologinUser = "main";
 }
