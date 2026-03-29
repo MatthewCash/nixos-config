@@ -1,5 +1,5 @@
-{ ... }:
+{ stableLib, ... }:
 
 {
-    services.getty.autologinUser = "main";
+    services.getty.autologinUser = stableLib.mkForce "main";
 }
