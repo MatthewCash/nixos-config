@@ -15,6 +15,18 @@
             };
         }
         {
+            description = "Position Firefox Layout";
+            match.window-class = {
+                value = "org.mozilla.Firefox.layout";
+                match-whole = false;
+            };
+            apply = {
+                position = "0,500";
+                maximizehoriz = true;
+                maximizevert = true;
+            };
+        }
+        {
             description = "Position Dolphin";
             match.window-class = {
                 value = "org.kde.dolphin";
@@ -70,6 +82,19 @@
                 maximizehoriz = true;
                 maximizevert = true;
                 noborder = true;
+            };
+        }
+
+        {
+            description = "Position Firefox Transparent";
+            match.window-class = {
+                value = "org.mozilla.Firefox.transparent";
+                match-whole = false;
+            };
+            apply = {
+                position = "2569,9";
+                size = "1907,1391";
+                ignoregeometry = true;
             };
         }
         {
