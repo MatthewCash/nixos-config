@@ -13,16 +13,16 @@ in
         clangd.command = getExe' pkgsUnstable.clang-tools "clangd";
         docker-langserver.command = getExe pkgsUnstable.dockerfile-language-server;
         vscode-css-language-server = {
-            command = getExe' pkgsUnstable.nodePackages.vscode-langservers-extracted "vscode-css-language-server";
+            command = getExe' pkgsUnstable.vscode-langservers-extracted "vscode-css-language-server";
             args = [ "--stdio" ];
         };
         gopls.command = getExe pkgsUnstable.gopls;
         vscode-html-language-server = {
-            command = getExe' pkgsUnstable.nodePackages.vscode-langservers-extracted "vscode-html-language-server";
+            command = getExe' pkgsUnstable.vscode-langservers-extracted "vscode-html-language-server";
             args = [ "--stdio" ];
         };
         vscode-json-language-server = {
-            command = getExe' pkgsUnstable.nodePackages.vscode-langservers-extracted "vscode-json-language-server";
+            command = getExe' pkgsUnstable.vscode-langservers-extracted "vscode-json-language-server";
             args = [ "--stdio" ];
         };
         jdtls.command = "jdtls"; # Gets LSP from PATH because it is optional (Java is > 1GB)
@@ -33,7 +33,7 @@ in
         pyright.command = getExe' pkgsUnstable.basedpyright "basedpyright-langserver";
         rust-analyzer.command = getExe pkgsUnstable.rust-analyzer;
         typescript-language-server = {
-            command = getExe pkgsUnstable.nodePackages.typescript-language-server;
+            command = getExe pkgsUnstable.typescript-language-server;
             args = [ "--stdio" ];
         };
         vuels = {
@@ -48,7 +48,7 @@ in
             name = "css";
             language-servers = [ "vscode-css-language-server" ];
             formatter = {
-                command = getExe pkgsUnstable.nodePackages.prettier;
+                command = getExe pkgsUnstable.prettier;
                 args = [ "--parser" "css" ];
             };
         }
@@ -56,7 +56,7 @@ in
             name = "javascript";
             language-servers = [ "typescript-language-server" ];
             formatter = {
-                command = getExe pkgsUnstable.nodePackages.prettier;
+                command = getExe pkgsUnstable.prettier;
                 args = [ "--parser" "babel" ];
             };
             auto-format = true;
@@ -65,7 +65,7 @@ in
             name = "json";
             language-servers = [ "vscode-json-language-server" ];
             formatter = {
-                command = getExe pkgsUnstable.nodePackages.prettier;
+                command = getExe pkgsUnstable.prettier;
                 args = [ "--parser" "json" ];
             };
         }
@@ -73,7 +73,7 @@ in
             name = "html";
             language-servers = [ "vscode-html-language-server" ];
             formatter = {
-                command = getExe pkgsUnstable.nodePackages.prettier;
+                command = getExe pkgsUnstable.prettier;
                 args = [ "--parser" "html" ];
             };
         }
@@ -85,7 +85,7 @@ in
             name = "typescript";
             language-servers = [ "typescript-language-server" ];
             formatter = {
-                command = getExe pkgsUnstable.nodePackages.prettier;
+                command = getExe pkgsUnstable.prettier;
                 args = [ "--parser" "typescript" ];
             };
             auto-format = true;

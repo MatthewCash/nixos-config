@@ -16,7 +16,7 @@
         NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
     };
 
-    home.packages = with pkgsUnstable; with nodePackages; [
+    home.packages = with pkgsUnstable; [
         nodejs
         typescript
     ];
