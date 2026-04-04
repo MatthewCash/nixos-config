@@ -7,6 +7,7 @@ in
 {
     xdg.userDirs = {
         enable = true;
+        setSessionVariables = true;
 
         documents = "${persistHome}/documents";
         download = "${persistHome}/downloads";
