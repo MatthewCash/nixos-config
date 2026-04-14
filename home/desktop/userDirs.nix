@@ -1,7 +1,7 @@
 { persistenceHomePath, name, ... }:
 
 let
-    persistHome = "${persistenceHomePath}/${name}";
+    persistHome = "${persistenceHomePath}home/${name}";
 in
 
 {
