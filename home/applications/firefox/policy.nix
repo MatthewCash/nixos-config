@@ -1,8 +1,4 @@
-{ inputs, system, accentColor, ... }:
-
-let
-    mozilla-theme = inputs.mozilla-theme.defaultPackage.${system}.override { inherit accentColor; };
-in
+{ ... }:
 
 {
     DisableAppUpdate = true;
@@ -41,11 +37,6 @@ in
         "betterlyrics@boidu.dev" = {
             installation_mode = "normal_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/better-lyrics/latest.xpi";
-        };
-        "main-theme@matthew-cash.com" = {
-            installation_mode = "normal_installed";
-            install_url = "file://${mozilla-theme}/addon/theme.xpi";
-            allowed_types = [ "theme" ];
         };
     };
     Handlers = {

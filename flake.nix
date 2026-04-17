@@ -58,11 +58,6 @@
             inputs.nixpkgs.follows = "nixpkgsStable";
         };
 
-        mozilla-theme = {
-            url = "github:MatthewCash/mozilla-theme";
-            inputs.nixpkgs.follows = "nixpkgsStable";
-        };
-
         nixos-generators = {
             url = "github:nix-community/nixos-generators";
             inputs.nixpkgs.follows = "nixpkgsUnstable";
