@@ -45,4 +45,12 @@ in
     ];
 
     home.packages = [ wrappedPrismlauncher.config.env ];
+
+    xdg.desktopEntries.prismlauncher-enderscale = {
+        name = "Enderscale Creative";
+        comment = "Launch Minecraft via Prism Launcher and join Enderscale Creative";
+        exec = "prismlauncher -l Modern -s creative.coral.zero --show-window";
+        terminal = false;
+        categories = [ "Game" ];
+    };
 }
