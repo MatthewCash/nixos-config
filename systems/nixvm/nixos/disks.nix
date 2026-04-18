@@ -86,36 +86,42 @@ in
             device = "/mnt/win/Users/Matthew/Code";
             mountPoint = "/home/${owningUser}/code";
             options = windowsBindMountOptions;
+            fsType = "none";
         };
 
         windows-downloads = {
             device = "/mnt/win/Users/Matthew/Downloads";
             mountPoint = "/home/${owningUser}/downloads";
             options = windowsBindMountOptions;
+            fsType = "none";
         };
 
         storage-documents = {
             device = "/mnt/storage/Libraries/Documents";
             mountPoint = "/home/${owningUser}/documents";
             options = windowsBindMountOptions;
+            fsType = "none";
         };
 
         storage-videos = {
             device = "/mnt/storage/Libraries/Videos";
             mountPoint = "/home/${owningUser}/videos";
             options = windowsBindMountOptions;
+            fsType = "none";
         };
 
         storage-pictures = {
             device = "/mnt/storage/Libraries/Pictures";
             mountPoint = "/home/${owningUser}/pictures";
             options = windowsBindMountOptions;
+            fsType = "none";
         };
 
         archive-torrents = {
             device = "/mnt/archive/Torrents";
             mountPoint = "/home/${owningUser}/torrents";
             options = windowsBindMountOptions;
+            fsType = "none";
         };
     };
 }
