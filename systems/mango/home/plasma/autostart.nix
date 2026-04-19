@@ -7,7 +7,7 @@ let
         "org.kde.dolphin"
         "org.kde.konsole"
         "org.mozilla.Firefox.floating"
-        "org.prismlauncher.PrismLauncher"
+        "prismlauncher-enderscale"
         "assetto-corsa"
 
         "org.mozilla.Firefox.transparent"
