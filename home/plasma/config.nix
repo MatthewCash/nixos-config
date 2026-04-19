@@ -1,4 +1,4 @@
-{ stableLib, pkgsUnstable, systemConfig, accentColor, inputs, ... }:
+args @ { stableLib, pkgsUnstable, systemConfig, accentColor, inputs, ... }:
 
 let
     plasmaAccentColor = stableLib.strings.concatMapStringsSep
@@ -31,10 +31,9 @@ in
                     XftSubPixel = "none";
                     fixed = stableLib.mkIf (systemConfig != null)
                         "${builtins.head systemConfig.fonts.fontconfig.defaultFonts.monospace},10,-1,5,50,0,0,0,0,0";
-                    ColorScheme = "Sweet";
+                    ColorScheme = "Main";
                 };
                 WM = {
-                    # TODO: get from accentColor
                     activeBackground = "49,54,59";
                     activeBlend = "252,252,252";
                     activeForeground = "252,252,252";
@@ -128,6 +127,6 @@ in
         "plasma/look-and-feel/Sweet".source = "${pkgsUnstable.sweet-nova}/share/plasma/look-and-feel/com.github.eliverlara.sweet/";
         "plasma/desktoptheme/Sweet".source = inputs.sweet-kde;
         "aurorae/themes/Sweet-Dark-transparent".source = "${pkgsUnstable.sweet-nova}/share/aurorae/themes/Sweet-Dark-transparent";
-        "color-schemes/Sweet.colors".source = "${pkgsUnstable.sweet-nova}/share/color-schemes/Sweet.colors";
+        "color-schemes/Main.colors".source = pkgsUnstable.writeText "Main.colors" (import ./colors.nix args);
     };
 }
