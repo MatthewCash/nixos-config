@@ -4,7 +4,7 @@ rec {
     hostname = "zenbook";
     system = "x86_64-linux";
     systemNixpkgs = nixpkgsUnstable;
-    kernelPackages = nixpkgsUnstable.legacyPackages.${system}.linuxPackages_6_19;
+    kernelPackages = nixpkgsUnstable.legacyPackages.${system}.linuxPackages_latest;
     unfreePkgs = [ "steam" "steam-unwrapped" ];
     batteryChargeLimit = 100;
     accentColor = {
