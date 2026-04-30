@@ -1,4 +1,4 @@
-args @ { pkgsUnstable, inputs, system, ... }:
+args @ { pkgsUnstable, inputs, system, accentColor, ... }:
 
 let
     vscodium = (pkgsUnstable.vscodium.overrideAttrs (oldAttrs: {
@@ -22,7 +22,7 @@ in
             enableUpdateCheck = false;
             enableExtensionUpdateCheck = false;
             extensions = with pkgsUnstable.vscode-extensions; [
-                inputs.codium-theme.defaultPackage.${system}
+                (inputs.codium-theme.defaultPackage.${system}.override { inherit accentColor; })
                 tomoki1207.pdf
             ] ++ common.extensions;
             userSettings = common.settings // {
