@@ -210,11 +210,11 @@
     "firefox-mods": {
       "flake": false,
       "locked": {
-        "lastModified": 1776384964,
-        "narHash": "sha256-j9qIBRbESmRPLeJPZh/NXas4CC5ZcHfJpbRnbrdjcnc=",
+        "lastModified": 1777678572,
+        "narHash": "sha256-fnoFTZTjx8oF5gpTYn2Ur15uVJmGvdPFdmglcmIOqW4=",
         "owner": "MatthewCash",
         "repo": "firefox-mods",
-        "rev": "a67de023103cccc0a527ac3c2c65880b10cff7ec",
+        "rev": "ec508930a7b724ba0dc52bc5d7c64e5d48b41211",
         "type": "github"
       },
       "original": {
@@ -400,11 +400,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777659959,
-        "narHash": "sha256-ax3229dUvNuwTQwo2o68kOQ24dvOlJ/BrVYY4miD1bI=",
+        "lastModified": 1777679572,
+        "narHash": "sha256-egYNbRrkn+6SwTHinhdb6WUfzzdC3nXfCRqS321VylY=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "5c1b74905c7261e8280dcda3623dbe677a1bc158",
+        "rev": "9cb587ade2aa1b4a7257f0238d41072690b0ca4f",
         "type": "github"
       },
       "original": {
