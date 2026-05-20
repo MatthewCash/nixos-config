@@ -15,7 +15,7 @@ let
 in
 
 {
-    programs.vscode = {
+    programs.vscodium = {
         enable = true;
         package = vscodium;
         profiles.default = {
