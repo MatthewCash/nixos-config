@@ -23,7 +23,9 @@
 
     xdg.configFile."npm/npmrc".text = ''
         cache=${config.xdg.cacheHome}/npm
+        ignore-scripts=true
         init-module=${config.xdg.configHome}/npm/config/npm-init.js
+        min-release-age=10080
         update-notifier=false
     '';
 }
