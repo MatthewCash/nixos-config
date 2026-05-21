@@ -1,4 +1,4 @@
-{ stableLib, pkgsStable, config, lib, ... }:
+{ config, lib, ... }:
 
 let
     autoStartApps = [
@@ -17,10 +17,11 @@ let
 in
 
 {
-    # There has to be a better way to do this ???
-    home.activation.plasmaAutostartApps = lib.hm.dag.entryAfter [ "writeBoundary" ] (stableLib.concatMapStringsSep "\n" (entry: ''
-        $DRY_RUN_CMD ${stableLib.getExe' pkgsStable.coreutils "ln"} -sf \
-            "${config.home.profileDirectory}/share/applications/${entry}.desktop" \
-            "${config.xdg.configHome}/autostart/${entry}.desktop"
-    '') autoStartApps);
+    xdg.configFile = lib.listToAttrs (map (entry: {
+        name = "autostart/${entry}.desktop";
+        value = {
+            force = true;
+            source = config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/applications/${entry}.desktop";
+        };
+    }) autoStartApps);
 }
