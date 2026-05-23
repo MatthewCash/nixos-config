@@ -14,5 +14,5 @@ let
 in
 
 {
-    decToHex = v: toHex' v "";
+    decToHex = v: if v == 0 then "0" else toHex' v "";
 }
