@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
     programs.git = {
@@ -24,4 +24,6 @@
 	};
 
 	programs.difftastic.enable = true;
+
+	home.packages = with pkgs; [ github-cli ];
 }
