@@ -8,16 +8,14 @@
     programs.ssh = {
         enable = true;
         enableDefaultConfig = false;
-        matchBlocks = {
-            github = {
-                host = "github.com";
-                identitiesOnly = true;
-                identityFile = [ "~/.ssh/id_git" ];
+        settings = {
+            "github.com" = {
+                IdentitiesOnly = true;
+                IdentityFile = [ "~/.ssh/id_git" ];
             };
-            all = {
-                host = "*";
-                identitiesOnly = true;
-                identityFile = [ "~/.ssh/id_${name}" ];
+            "*" = {
+                IdentitiesOnly = true;
+                IdentityFile = [ "~/.ssh/id_${name}" ];
             };
         };
     };
