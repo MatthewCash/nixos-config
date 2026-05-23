@@ -29,7 +29,7 @@
     programs.plasma.dataFile."konsole/Main.profile" = {
         Appearance = {
             ColorScheme = "Main";
-            UseFontLineChararacters = false;
+            UseFontLineCharacters = false;
         };
 
         "Cursor Options".CursorShape = 1;
@@ -41,7 +41,7 @@
 
         "Interaction Options" = {
             CopyTextAsHTML = false;
-            TrimLeadingSpacesInSelectedTextt = true;
+            TrimLeadingSpacesInSelectedText = true;
             TrimTrailingSpacesInSelectedText = true;
             UnderlineFilesEnabled = true;
         };

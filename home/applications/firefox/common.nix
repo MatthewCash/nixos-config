@@ -18,7 +18,7 @@
 
             "Wikipedia" = {
                 urls = [{ template = "https://"; }];
-                icon = "https://upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svghttps://upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg";
+                icon = "https://upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg";
                 definedAliases = [ "wiki" ];
             };
         };

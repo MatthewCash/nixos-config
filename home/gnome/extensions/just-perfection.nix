@@ -7,7 +7,7 @@
 
     dconf.settings."org/gnome/shell/extensions/just-perfection" = {
         search = false;
-        acitivities-button = true;
+        activities-button = true;
         support-notifier-type = 0;
     };
 }

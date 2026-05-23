@@ -54,7 +54,7 @@ Images can be easily generated using [nixos-generators](https://github.com/nix-c
 
 Run `nix build .#generators.<format>.<system>`, replacing `<format>` with an image format (e.g. `qcow`, `iso`) and `<system>` with the appropriate system in `systems/`.
 
-An installation image for this configuration can be generated with `nix build.#generators.install-iso.installer`.
+An installation image for this configuration can be generated with `nix build .#generators.install-iso.installer`.
 
 > **Note**
 > Generating images requires a large $TMPDIR, consider running `nix build` with `NIX_REMOTE=local TMPDIR=/mnt/persist/tmp` to ensure adequate space is available.

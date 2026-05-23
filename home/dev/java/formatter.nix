@@ -276,7 +276,7 @@
     "join_wrapped_lines" = false;
     "keep_else_statement_on_same_line" = false;
     "keep_empty_array_initializer_on_one_line" = false;
-    "keep_imple_if_on_one_line" = false;
+    "keep_simple_if_on_one_line" = false;
     "keep_then_statement_on_same_line" = false;
     "lineSplit" = 80;
     "never_indent_block_comments_on_first_column" = false;
@@ -286,10 +286,10 @@
     "parentheses_positions_in_annotation" = "separate_lines_if_wrapped";
     "parentheses_positions_in_catch_clause" = "separate_lines_if_wrapped";
     "parentheses_positions_in_enum_constant_declaration" = "separate_lines_if_wrapped";
-    "parentheses_positions_in_for_statment" = "separate_lines_if_wrapped";
+    "parentheses_positions_in_for_statement" = "separate_lines_if_wrapped";
     "parentheses_positions_in_if_while_statement" = "separate_lines_if_wrapped";
     "parentheses_positions_in_lambda_declaration" = "separate_lines_if_wrapped";
-    "parentheses_positions_in_method_delcaration" = "separate_lines_if_wrapped";
+    "parentheses_positions_in_method_declaration" = "separate_lines_if_wrapped";
     "parentheses_positions_in_method_invocation" = "separate_lines_if_wrapped";
     "parentheses_positions_in_switch_statement" = "separate_lines_if_wrapped";
     "parentheses_positions_in_try_clause" = "separate_lines_if_wrapped";

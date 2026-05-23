@@ -3,7 +3,7 @@
 {
     systemd.user.services = {
         tpm-fido = {
-            Unit.Description = "tmp-fido service";
+            Unit.Description = "tpm-fido service";
             Service = {
                 ExecStart = stableLib.getExe pkgsUnstable.tpm-fido;
                 Environment = "PATH=${config.home.profileDirectory}/bin"; # to find profile's pinentry
