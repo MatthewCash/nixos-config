@@ -50,6 +50,7 @@ builtins.map (path: ../../../home/${path}) [
     "applications/bat.nix"
     "applications/evince.nix"
     "applications/nix.nix"
+    "applications/opencode.nix"
     "applications/wget.nix"
 ] ++ [
     ./gnome.nix
