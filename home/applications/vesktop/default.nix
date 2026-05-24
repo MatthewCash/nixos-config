@@ -1,11 +1,19 @@
 args @ { pkgsStable, pkgsUnstable, stableLib, customLib, persistenceHomePath, config, inputs,  ... }:
 
 let
-    profileNames = [ "personal" "business" ];
+    profiles = {
+        personal = {};
+        business = {
+            startupUrl = "discord:///channels/192035476352401409/766775760962060309";
+        };
+    };
+
+    profileNames = builtins.attrNames profiles;
 
     mkNixPak = inputs.nixpak.lib.nixpak { lib = stableLib; pkgs = pkgsStable; };
     wrappedVesktops = builtins.map (profileName: mkNixPak {
         config = { sloth, ... }: let
+            profile = profiles.${profileName};
             vesktop =  ((pkgsUnstable.vesktop.override { withSystemVencord = true; }).overrideAttrs (old: {
                 # patch to override wayland app_id
                 postPatch = old.postPatch or "" + ''
@@ -21,14 +29,14 @@ let
                 postBuild = let
                     desktopEntry = (builtins.elemAt pkgsUnstable.vesktop.desktopItems 0).override rec {
                         name = "vesktop-${profileName}";
-                        exec = name;
+                        exec = "${name} %U";
                         icon = "discord";
                         desktopName = "Vesktop ${customLib.capitalizeFirstLetter profileName}";
                         startupWMClass = "com.discord.vesktop.${profileName}";
                     };
                 in /* bash */ ''
                     install -D -T ${desktopEntry}/share/applications/* "$out/share/applications/com.discord.vesktop.${profileName}.desktop"
-                    makeWrapper '${stableLib.getExe vesktop}' $out/bin/vesktop-${profileName}
+                    makeWrapper '${stableLib.getExe vesktop}' $out/bin/vesktop-${profileName} ${if profile ? startupUrl then "--add-flags \"${profile.startupUrl}\"" else ""}
                 '';
                 meta.mainProgram = "vesktop-${profileName}";
             }).overrideAttrs { desktopItems = []; };
