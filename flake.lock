@@ -8,7 +8,7 @@
           "ragenix",
           "nixpkgs"
         ],
-        "systems": "systems_4"
+        "systems": "systems_3"
       },
       "locked": {
         "lastModified": 1761656077,
@@ -46,32 +46,18 @@
         "type": "github"
       }
     },
-    "aurabesh": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-6UtUBJgjSpX4wFpk7CaEsVXTva8bvfSpBQ3QHhyqLws=",
-        "type": "file",
-        "url": "https://github.com/AurekFonts/AurekFonts.github.io/raw/master/AurebeshAF/AurebeshAF-Legends.otf"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://github.com/AurekFonts/AurekFonts.github.io/raw/master/AurebeshAF/AurebeshAF-Legends.otf"
-      }
-    },
     "aurebesh-fonts": {
       "inputs": {
-        "aurabesh": "aurabesh",
-        "flake-utils": "flake-utils_2",
         "nixpkgs": [
           "nixpkgsStable"
         ]
       },
       "locked": {
-        "lastModified": 1690670073,
-        "narHash": "sha256-oFh5bE9fzuhryPlKte5Cvc9BW9u0jaVtblTCqL5LD/Q=",
+        "lastModified": 1779723913,
+        "narHash": "sha256-S54B7Ep5+2eKtlmdwUpLhMdfO81T472svVVT+AZ18T0=",
         "owner": "MatthewCash",
         "repo": "aurebesh-fonts",
-        "rev": "8a029e8e466b0ce1c8140071c3cfa2e9ec74887a",
+        "rev": "1e109da34bc01b1189e03903c799b849544aea59",
         "type": "github"
       },
       "original": {
@@ -82,7 +68,7 @@
     },
     "codium-theme": {
       "inputs": {
-        "flake-utils": "flake-utils_3",
+        "flake-utils": "flake-utils_2",
         "nixpkgs": [
           "nixpkgsStable"
         ]
@@ -177,11 +163,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777713215,
-        "narHash": "sha256-8GzXDOXckDWwST8TY5DbwYFjdvQLlP7K9CLSVx6iTTo=",
+        "lastModified": 1779226674,
+        "narHash": "sha256-wuOkjI6pRiN4sEn/EPBRnNW5cmcpvd7xtIM8y5LooAs=",
         "owner": "nix-community",
         "repo": "disko",
-        "rev": "63b4e7e6cf75307c1d26ac3762b886b5b0247267",
+        "rev": "65fb947964bd44fc0008faf77d1fcb7a9f40bb32",
         "type": "github"
       },
       "original": {
@@ -297,24 +283,6 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1689068808,
-        "narHash": "sha256-6ixXo3wt24N/melDWjq70UuHQLxGV8jZvooRanIHXw0=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "919d646de7be200f3bf08cb76ae1f09402b6f9b4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_3": {
-      "inputs": {
-        "systems": "systems_3"
-      },
-      "locked": {
         "lastModified": 1681037374,
         "narHash": "sha256-XL6X3VGbEFJZDUouv2xpKg2Aljzu/etPLv5e1FPt1q0=",
         "owner": "numtide",
@@ -328,9 +296,9 @@
         "type": "github"
       }
     },
-    "flake-utils_4": {
+    "flake-utils_3": {
       "inputs": {
-        "systems": "systems_5"
+        "systems": "systems_4"
       },
       "locked": {
         "lastModified": 1731533236,
@@ -400,11 +368,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778248595,
-        "narHash": "sha256-dhFgEjoeJMYN/7OY6xfxS799YB4IjbbYXTjyGIJyLpc=",
+        "lastModified": 1779627636,
+        "narHash": "sha256-J6JGf42zNzLo/CrRdKb5dNznpLI+eGxN/5KTLG1Mo5s=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "fdb2ccba9d5e1238d32e0c4a3ec1a277efa80c1d",
+        "rev": "044c30c19550c0557997dece4ce9e54d2fa77ba1",
         "type": "github"
       },
       "original": {
@@ -579,11 +547,11 @@
     },
     "nixpkgsStable": {
       "locked": {
-        "lastModified": 1778003029,
-        "narHash": "sha256-q/nkKLDtHIyLjZpKhWk3cSK5IYsFqtMd6UtXF3ddjgA=",
+        "lastModified": 1779467186,
+        "narHash": "sha256-nOesoDCiXcUftqbRBMz9tt4blI5PvljMWbm3kuCA+0s=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "0c88e1f2bdb93d5999019e99cb0e61e1fe2af4c5",
+        "rev": "b77b3de8775677f84492abe84635f87b0e153f0f",
         "type": "github"
       },
       "original": {
@@ -595,11 +563,9 @@
     },
     "nixpkgsUnstable": {
       "locked": {
-        "lastModified": 1777954456,
-        "narHash": "sha256-hGdgeU2Nk87RAuZyYjyDjFL6LK7dAZN5RE9+hrDTkDU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "549bd84d6279f9852cae6225e372cc67fb91a4c1",
+        "rev": "d233902339c02a9c334e7e593de68855ad26c4cb",
         "type": "github"
       },
       "original": {
@@ -630,21 +596,24 @@
         "type": "github"
       }
     },
-    "plasma-smart-video-wallpaper-reborn": {
+    "plasma-video-wallpaper": {
       "inputs": {
         "nixpkgs": [
           "nixpkgsUnstable"
         ]
       },
       "locked": {
-        "lastModified": 1778191841,
-        "narHash": "sha256-ErzgwQB/6xQl6JQUk5Zfm1s1gLMANH9n5tQ6e1FyTxk=",
-        "path": "/home/matthew/code/plasma-smart-video-wallpaper-reborn",
-        "type": "path"
+        "lastModified": 1779654375,
+        "narHash": "sha256-GITuS7Mpe+XE3M8tvJAsD9UV28KMKiNNpD0386U8LUE=",
+        "owner": "MatthewCash",
+        "repo": "plasma-video-wallpaper",
+        "rev": "b2fbbaa517d9ff6d40d90cbba65ef1f7e84c724f",
+        "type": "github"
       },
       "original": {
-        "path": "/home/matthew/code/plasma-smart-video-wallpaper-reborn",
-        "type": "path"
+        "owner": "MatthewCash",
+        "repo": "plasma-video-wallpaper",
+        "type": "github"
       }
     },
     "pre-commit": {
@@ -674,7 +643,7 @@
       "inputs": {
         "agenix": "agenix",
         "crane": "crane_2",
-        "flake-utils": "flake-utils_4",
+        "flake-utils": "flake-utils_3",
         "nixpkgs": [
           "nixpkgsStable"
         ],
@@ -712,7 +681,7 @@
         "nixpkgsStable": "nixpkgsStable",
         "nixpkgsUnstable": "nixpkgsUnstable",
         "plasma-manager": "plasma-manager",
-        "plasma-smart-video-wallpaper-reborn": "plasma-smart-video-wallpaper-reborn",
+        "plasma-video-wallpaper": "plasma-video-wallpaper",
         "ragenix": "ragenix",
         "sweet-kde": "sweet-kde",
         "zsh-nix-shell": "zsh-nix-shell"
@@ -822,21 +791,6 @@
       }
     },
     "systems_4": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
-    "systems_5": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",

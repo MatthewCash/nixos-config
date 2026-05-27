@@ -1,8 +1,12 @@
 { stableLib, inputs, system, persistPath, ... }:
 
+let
+    plasma-video-wallpaper = inputs.plasma-video-wallpaper.packages.${system}.default;
+in
+
 {
     environment.systemPackages = [
-        inputs.plasma-smart-video-wallpaper-reborn.packages.${system}.default
+        plasma-video-wallpaper
     ];
 
     environment.persistence.${persistPath}.files = [
@@ -11,17 +15,9 @@
 
     # for some reason wallpaper config can't be in /etc/plasmalogin.conf.d
     environment.etc."plasmalogin.conf".text = stableLib.generators.toINI { mkSectionName = stableLib.id; } {
-        Greeter.WallpaperPluginId = "luisbocanegra.smart.video.wallpaper.reborn";
-        "Greeter][Wallpaper][luisbocanegra.smart.video.wallpaper.reborn][General" = {
-            VideoUrls = builtins.toJSON [
-                {
-                    filename = "/etc/plasma/wallpaper_video";
-                    enabled = true;
-                }
-            ];
-            BatteryPausesVideo = false;
-            FillMode = 1;
-            PauseMode = 3;
+        Greeter.WallpaperPluginId = "simplevideowallpaper";
+        "Greeter][Wallpaper][simplevideowallpaper][General" = {
+            source = "/etc/plasma/wallpaper_video";
         };
     };
 }

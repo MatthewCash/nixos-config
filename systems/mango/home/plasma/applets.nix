@@ -1,14 +1,11 @@
-{ stableLib, pkgsUnstable, inputs, system, ... }:
+{ pkgsUnstable, inputs, system, ... }:
 
 let
+    plasmaVideoWallpaper = inputs.plasma-video-wallpaper.packages.${system}.default;
+
     wallpaperConfig = {
-        plugin = "luisbocanegra.smart.video.wallpaper.reborn";
-        config.General.VideoUrls = builtins.toJSON [
-            {
-                filename = "/mnt/home/matthew/videos/toronto_wallpaper.mp4";
-                enabled = true;
-            }
-        ];
+        plugin = "simplevideowallpaper";
+        config.General.source = "file:///mnt/home/matthew/videos/toronto_wallpaper.mp4";
     };
 
 in
@@ -16,7 +13,7 @@ in
 {
     home.packages = with pkgsUnstable; [
         nixos-icons
-        inputs.plasma-smart-video-wallpaper-reborn.packages.${system}.default
+        plasmaVideoWallpaper
     ];
 
     programs.plasma = {
