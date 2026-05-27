@@ -23,7 +23,7 @@
         @-moz-document regexp("^moz-extension:\/\/.*\/sidebar\/sidebar\.html.*$") {
             span {
                 font-size: 12px !important;
-                font-family: 'Aurebesh AF', sans-serif !important;
+                font-family: 'Aurebesh', sans-serif !important;
             }
         }
     '';

@@ -11,7 +11,7 @@ let
         }
 
         html * {
-            font-family: "Aurebesh AF" !important;
+            font-family: "Aurebesh" !important;
         }
     '';
 in
