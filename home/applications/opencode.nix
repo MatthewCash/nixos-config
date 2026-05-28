@@ -1,4 +1,4 @@
-{ persistenceHomePath, accentColor, ... }:
+{ lib, pkgsUnstable, persistenceHomePath, accentColor, ... }:
 
 {
     programs.opencode = {
@@ -7,11 +7,36 @@
         settings = {
             autoupdate = false;
             model = "openai/gpt-5.5";
+
+            mcp.playwright = {
+                type = "local";
+                command = [
+                    (lib.getExe pkgsUnstable.playwright-mcp)
+                    "--browser"
+                    "firefox"
+                    "--isolated"
+                ];
+                enabled = true;
+            };
+
+            mcp.nixos = {
+                type = "local";
+                command = [ (lib.getExe pkgsUnstable.mcp-nixos) ];
+                enabled = true;
+            };
+
+            mcp.context7 = {
+                type = "local";
+                command = [ (lib.getExe pkgsUnstable.context7-mcp) ];
+                enabled = true;
+            };
+
+            permission."playwright_*" = "ask";
         };
 
-        tui.theme = "accent";
+        tui.theme = "main";
 
-        themes.accent.theme = {
+        themes.main.theme = {
             primary = accentColor.hex;
             secondary = accentColor.hex;
             accent = accentColor.hex;
@@ -23,7 +48,7 @@
             textMuted = "#888888";
             background = "none";
             backgroundPanel = "none";
-            backgroundElement = "#1a1a1a";
+            backgroundElement = "#3a3a3a";
             border = "#333333";
             borderActive = accentColor.hex;
             borderSubtle = "#222222";
