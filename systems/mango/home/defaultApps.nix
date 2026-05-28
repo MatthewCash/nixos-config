@@ -13,7 +13,7 @@
             "inode/directory" = [ "org.kde.dolphin.desktop" ];
 
             # Mail
-            "x-scheme-handler/mailto" = [ "org.kde.kmail.desktop" ];
+            "x-scheme-handler/mailto" = [ "thunderbird.desktop" ];
 
             # Images
             "image/jpeg"  = [ "org.kde.gwenview.desktop" ];
