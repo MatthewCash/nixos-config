@@ -45,6 +45,7 @@ builtins.map (path: ../../../home/${path}) [
     "applications/libreoffice.nix"
     "applications/bat.nix"
     "applications/nix.nix"
+    "applications/opencode.nix"
     "applications/wget.nix"
     "applications/podman.nix"
     "applications/haruna.nix"
