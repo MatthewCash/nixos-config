@@ -90,7 +90,10 @@
         };
     };
 
-  home.persistence."${persistenceHomePath}".files = [
-    ".local/share/opencode/auth.json"
-  ];
+    home.persistence."${persistenceHomePath}" = {
+        files = [
+            ".local/share/opencode/auth.json"
+            ".local/share/opencode/opencode-stable.db"
+        ];
+    };
 }
