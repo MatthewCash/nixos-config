@@ -37,6 +37,60 @@ let
             };
         };
     };
+
+    muteMinecraftWhenUnfocused = pkgsUnstable.writeShellApplication {
+        name = "mute-minecraft-when-unfocused";
+        runtimeInputs = with pkgsUnstable; [
+            kdotool
+            pulseaudio
+        ];
+        text = ''
+            set_minecraft_mute() {
+                local muted="$1"
+                local current_id=""
+                local is_java=false
+                local is_game=false
+
+                flush_input() {
+                    if [[ -n "$current_id" && "$is_java" == true && "$is_game" == true ]]; then
+                        pactl set-sink-input-mute "$current_id" "$muted" || true
+                    fi
+                }
+
+                while IFS= read -r line; do
+                    if [[ "$line" == Sink\ Input\ \#* ]]; then
+                        flush_input
+                        current_id="''${line#Sink Input #}"
+                        is_java=false
+                        is_game=false
+                        continue
+                    fi
+
+                    case "$line" in
+                        *'node.name = "java"'*) is_java=true ;;
+                        *'application.process.binary = "java"'*) is_java=true ;;
+                        *'media.role = "game"'*) is_game=true ;;
+                        *'media.role = "Game"'*) is_game=true ;;
+                    esac
+                done < <(pactl list sink-inputs)
+
+                flush_input
+            }
+
+            while true; do
+                class="$(kdotool getactivewindow getwindowclassname 2>/dev/null || true)"
+
+                if [[ "$class" == *Minecraft* || "$class" == *AxolotlClient* ]]; then
+                    muted=false
+                else
+                    muted=true
+                fi
+
+                set_minecraft_mute "$muted"
+                sleep 0.5
+            done
+        '';
+    };
 in
 
 {
@@ -52,5 +106,21 @@ in
         exec = "prismlauncher -l Modern -s creative.coral.zero --show-window";
         terminal = false;
         categories = [ "Game" ];
+    };
+
+    systemd.user.services.mute-minecraft-when-unfocused = {
+        Unit = {
+            Description = "Mute Minecraft when it is not focused";
+            After = [ "graphical-session.target" "pipewire-pulse.service" ];
+            PartOf = [ "graphical-session.target" ];
+        };
+
+        Service = {
+            ExecStart = "${muteMinecraftWhenUnfocused}/bin/mute-minecraft-when-unfocused";
+            Restart = "always";
+            RestartSec = 1;
+        };
+
+        Install.WantedBy = [ "graphical-session.target" ];
     };
 }
