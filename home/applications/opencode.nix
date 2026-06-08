@@ -8,6 +8,73 @@
             autoupdate = false;
             model = "openai/gpt-5.5";
 
+            lsp = {
+                clangd = {
+                    command = [ (lib.getExe' pkgsUnstable.clang-tools "clangd") ];
+                    extensions = [ ".c" ".cpp" ".cc" ".cxx" ".c++" ".h" ".hpp" ".hh" ".hxx" ".h++" ];
+                };
+
+                docker-langserver = {
+                    command = [ (lib.getExe pkgsUnstable.dockerfile-language-server) ];
+                    extensions = [ "Dockerfile" ".dockerfile" ];
+                };
+
+                gopls = {
+                    command = [ (lib.getExe pkgsUnstable.gopls) ];
+                    extensions = [ ".go" ];
+                };
+
+                marksman = {
+                    command = [ (lib.getExe pkgsUnstable.marksman) ];
+                    extensions = [ ".md" ".markdown" ];
+                };
+
+                nil = {
+                    command = [ (lib.getExe pkgsUnstable.nil) ];
+                    extensions = [ ".nix" ];
+                };
+
+                pyright = {
+                    command = [ (lib.getExe' pkgsUnstable.basedpyright "basedpyright-langserver") "--stdio" ];
+                    extensions = [ ".py" ".pyi" ];
+                };
+
+                rust = {
+                    command = [ (lib.getExe pkgsUnstable.rust-analyzer) ];
+                    extensions = [ ".rs" ];
+                };
+
+                typescript = {
+                    command = [ (lib.getExe pkgsUnstable.typescript-language-server) "--stdio" ];
+                    extensions = [ ".ts" ".tsx" ".js" ".jsx" ".mjs" ".cjs" ".mts" ".cts" ];
+                };
+
+                vscode-css-language-server = {
+                    command = [ (lib.getExe' pkgsUnstable.vscode-langservers-extracted "vscode-css-language-server") "--stdio" ];
+                    extensions = [ ".css" ];
+                };
+
+                vscode-html-language-server = {
+                    command = [ (lib.getExe' pkgsUnstable.vscode-langservers-extracted "vscode-html-language-server") "--stdio" ];
+                    extensions = [ ".html" ];
+                };
+
+                vscode-json-language-server = {
+                    command = [ (lib.getExe' pkgsUnstable.vscode-langservers-extracted "vscode-json-language-server") "--stdio" ];
+                    extensions = [ ".json" ".jsonc" ];
+                };
+
+                vue = {
+                    command = [ (lib.getExe pkgsUnstable.vue-language-server) "--stdio" ];
+                    extensions = [ ".vue" ];
+                };
+
+                yaml-ls = {
+                    command = [ (lib.getExe pkgsUnstable.yaml-language-server) "--stdio" ];
+                    extensions = [ ".yaml" ".yml" ];
+                };
+            };
+
             mcp.playwright = {
                 type = "local";
                 command = [
@@ -30,8 +97,6 @@
                 command = [ (lib.getExe pkgsUnstable.context7-mcp) ];
                 enabled = true;
             };
-
-            permission."playwright_*" = "ask";
         };
 
         tui.theme = "main";
