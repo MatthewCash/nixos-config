@@ -9,6 +9,7 @@ let
         "org.mozilla.Firefox.floating"
         "prismlauncher-enderscale"
         "assetto-corsa"
+        "guitarix"
 
         "org.mozilla.Firefox.transparent"
         "com.discord.vesktop.personal"
