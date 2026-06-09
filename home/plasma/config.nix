@@ -66,6 +66,7 @@ in
                 Effect-overview.BorderActivate = 9;
                 MouseBindings = {
                     CommandAllKey = "Alt";
+                    CommandAll1 = "Activate, raise and move";
                     CommandAllWheel = "Change Opacity";
                     CommandTitlebarWheel = "Change Opacity";
                 };
