@@ -27,6 +27,8 @@ let
 in
 
 {
+    "mail.shell.checkDefaultClient" = false;
+
     "general.autoScroll" = true;
 
     # Allow unverified addons
