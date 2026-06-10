@@ -3,8 +3,8 @@
 let
   rgbText = lib.concatStringsSep "," (map toString (with accentColor; [ r g b ]));
   background = "0,0,0";
-
-  scheme = {
+in
+  {
     "ColorEffects:Disabled" = {
       Color = "56,56,56";
       ColorAmount = 0;
@@ -120,6 +120,4 @@ let
       inactiveBlend = background;
       inactiveForeground = "102,106,115";
     };
-  };
-in
-  lib.generators.toINI {} scheme
+  }

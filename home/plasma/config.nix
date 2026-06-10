@@ -5,6 +5,8 @@ let
         ","
         builtins.toString
         (with accentColor; [r g b]);
+    colorScheme = import ./colors.nix args;
+    colorSchemeText = stableLib.generators.toINI {} colorScheme;
 in
 
 {
@@ -18,30 +20,22 @@ in
         enable = true;
 
         workspace.iconTheme = "BeautyLine";
+        workspace.colorScheme = "Main";
 
         configFile = {
             kcminputrc = {
                 Keyboard.NumLock = 0;
                 "Libinput/1/1/kanata".PointerAccelerationProfile = 1;
             };
-            kdeglobals = {
-                General = {
+            kdeglobals = colorScheme // {
+                General = colorScheme.General // {
                     AccentColor = plasmaAccentColor;
                     XftHintStyle = "hintslight";
                     XftSubPixel = "none";
                     fixed = stableLib.mkIf (systemConfig != null)
                         "${builtins.head systemConfig.fonts.fontconfig.defaultFonts.monospace},10,-1,5,50,0,0,0,0,0";
-                    ColorScheme = "Main";
                 };
-                WM = {
-                    activeBackground = "49,54,59";
-                    activeBlend = "252,252,252";
-                    activeForeground = "252,252,252";
-                    inactiveBackground = "42,46,50";
-                    inactiveBlend = "161,169,177";
-                    inactiveForeground = "161,169,177";
-                };
-                KDE = {
+                KDE = colorScheme.KDE // {
                     widgetStyle = "kvantum-dark";
                 };
             };
@@ -128,6 +122,6 @@ in
         "plasma/look-and-feel/Sweet".source = "${pkgsUnstable.sweet-nova}/share/plasma/look-and-feel/com.github.eliverlara.sweet/";
         "plasma/desktoptheme/Sweet".source = inputs.sweet-kde;
         "aurorae/themes/Sweet-Dark-transparent".source = "${pkgsUnstable.sweet-nova}/share/aurorae/themes/Sweet-Dark-transparent";
-        "color-schemes/Main.colors".source = pkgsUnstable.writeText "Main.colors" (import ./colors.nix args);
+        "color-schemes/Main.colors".source = pkgsUnstable.writeText "Main.colors" colorSchemeText;
     };
 }

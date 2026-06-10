@@ -1,4 +1,4 @@
-{ pkgsUnstable, config, persistenceHomePath, ... }:
+{ config, persistenceHomePath, ... }:
 
 let
     wallpaperPath = "${config.xdg.dataHome}/backgrounds/current_wallpaper.png";
