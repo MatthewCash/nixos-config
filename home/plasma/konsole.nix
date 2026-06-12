@@ -23,7 +23,11 @@
             ToolBarsMovable = "Disabled";
         };
 
-        "Notification Messages".CloseAllEmptyTabs = true;
+        "Notification Messages" = {
+            CloseAllEmptyTabs = true;
+            CloseAllTabs = true;
+            CloseSingleTab = true;
+        };
     };
 
     programs.plasma.dataFile."konsole/Main.profile" = {
