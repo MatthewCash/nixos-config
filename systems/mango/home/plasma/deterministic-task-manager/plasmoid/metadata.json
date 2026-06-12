@@ -1,0 +1,21 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "matthew@carenas.org",
+                "Name": "Matthew Carenas"
+            }
+        ],
+        "Category": "Windows and Tasks",
+        "Description": "Deterministically ordered task manager",
+        "EnabledByDefault": false,
+        "Icon": "preferences-system-windows",
+        "License": "GPL-2.0+",
+        "Name": "Ordered Task Manager",
+        "Website": "https://github.com/anomalyco/nixos-config"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-Provides": [
+        "org.kde.plasma.multitasking"
+    ]
+}

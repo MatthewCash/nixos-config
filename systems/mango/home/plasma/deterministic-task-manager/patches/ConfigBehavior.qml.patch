@@ -1,0 +1,42 @@
+--- a/ConfigBehavior.qml
++++ b/ConfigBehavior.qml
+@@ -22,6 +22,7 @@
+     property alias cfg_groupPopups: groupPopups.checked
+     property alias cfg_onlyGroupWhenFull: onlyGroupWhenFull.checked
+     property int cfg_sortingStrategy
++    property var cfg_orderedAppIds: []
+     property alias cfg_separateLaunchers: separateLaunchers.checked
+     property alias cfg_hideLauncherOnStart: hideLauncherOnStart.checked
+     property alias cfg_middleClickAction: middleClickAction.currentIndex
+@@ -148,11 +149,31 @@
+                 {
+                     "text": i18nc("@item:inlistbox sort tasks in grouped task", "By horizontal window position"),
+                     "value": TaskManager.TasksModel.SortWindowPositionHorizontal,
++                },
++                {
++                    "text": i18nc("@item:inlistbox sort tasks in grouped task", "By ordered app list"),
++                    "value": 7,
+                 },
+             ]
+             onActivated: root.cfg_sortingStrategy = currentValue
+             Component.onCompleted: currentIndex = indexOfValue(root.cfg_sortingStrategy)
+         }
+ 
++        QQC2.TextArea {
++            id: orderedAppIds
++            Kirigami.FormData.label: i18nc("@label:listbox ordered task app ids", "Ordered apps:")
++            Layout.fillWidth: true
++            Layout.preferredHeight: Kirigami.Units.gridUnit * 8
++            visible: sortingStrategy.currentValue === 7
++            text: cfg_orderedAppIds.join("\n")
++            placeholderText: i18nc("@info:placeholder ordered task app ids", "One WM_CLASS, app id, or launcher URL per line")
++            wrapMode: TextEdit.NoWrap
++            onTextChanged: {
++                if (activeFocus) {
++                    cfg_orderedAppIds = text.split(/[\n,]+/).map(item => item.trim()).filter(item => item.length > 0)
++                }
++            }
++        }
++
+         QQC2.CheckBox {
+             id: separateLaunchers

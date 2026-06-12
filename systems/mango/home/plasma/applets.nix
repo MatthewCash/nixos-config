@@ -3,6 +3,38 @@
 let
     plasmaVideoWallpaper = inputs.plasma-video-wallpaper.packages.${system}.default;
 
+    deterministicTaskManager = pkgsUnstable.kdePackages.callPackage
+        ./deterministic-task-manager/default.nix {};
+
+    taskManagerOrderedAppIds = [
+        # screen 1
+        "thunderbird"
+        "org.mozilla.Firefox.layout"
+        "org.kde.dolphin"
+        "org.kde.konsole"
+        "org.mozilla.Firefox.floating"
+        "org.prismlauncher.PrismLauncher"
+        "AxolotlClient 1.21.11"
+        "steam"
+        "steam_app_244210" # content manager
+        "assetto-corsa"
+        # screen 2
+        "org.mozilla.Firefox.transparent"
+        "com.discord.vesktop.personal"
+        "com.discord.vesktop.business"
+        "guitarix"
+        "channel-mixer"
+    ];
+
+    taskManagerConfig = {
+        showOnlyCurrentScreen = true;
+        taskMaxWidth = "Narrow";
+        launchers = [];
+        orderedAppIds = taskManagerOrderedAppIds;
+
+        sortingStrategy = 7;
+    };
+
     wallpaperConfig = {
         plugin = "simplevideowallpaper";
         config.General.source = "file:///mnt/home/matthew/videos/toronto_wallpaper.mp4";
@@ -14,6 +46,7 @@ in
     home.packages = with pkgsUnstable; [
         nixos-icons
         plasmaVideoWallpaper
+        deterministicTaskManager
     ];
 
     programs.plasma = {
@@ -31,12 +64,8 @@ in
                         config.General.icon = "nix-snowflake-white";
                     }
                     {
-                        name = "org.kde.plasma.taskmanager";
-                        config.General = {
-                            showOnlyCurrentScreen = true;
-                            taskMaxWidth = "Narrow";
-                            launchers = [];
-                        };
+                        name = "org.kde.plasma.taskmanagerordered";
+                        config.General = taskManagerConfig;
                     }
                     "org.kde.plasma.systemtray"
                     {
@@ -65,12 +94,8 @@ in
                 hiding = "windowsgobelow";
                 widgets = [
                     {
-                        name = "org.kde.plasma.taskmanager";
-                        config.General = {
-                            showOnlyCurrentScreen = true;
-                            taskMaxWidth = "Narrow";
-                            launchers = [];
-                        };
+                        name = "org.kde.plasma.taskmanagerordered";
+                        config.General = taskManagerConfig;
                     }
                     "org.kde.plasma.systemmonitor.cpucore"
                     "org.kde.plasma.systemmonitor.memory"
