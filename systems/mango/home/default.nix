@@ -51,6 +51,7 @@ builtins.map (path: ../../../home/${path}) [
     "applications/haruna.nix"
 ] ++ [
     ./defaultApps.nix
+    ./channel-mixer
 
     ./plasma/mouse.nix
     ./plasma/applets.nix
