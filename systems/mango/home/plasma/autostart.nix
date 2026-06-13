@@ -10,6 +10,7 @@ let
         "prismlauncher-enderscale"
         "assetto-corsa"
         "guitarix"
+        "channel-mixer"
 
         "org.mozilla.Firefox.transparent"
         "com.discord.vesktop.personal"
