@@ -55,7 +55,6 @@ builtins.map (path: ../../../home/${path}) [
 
     ./plasma/mouse.nix
     ./plasma/applets.nix
-    ./plasma/tiling.nix
     ./plasma/window-rules.nix
     ./plasma/autostart.nix
     ./plasma/monitors.nix
