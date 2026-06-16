@@ -263,6 +263,7 @@ in
                 match-whole = false;
             };
             apply = {
+                position = "${toString leftScreen.x},${toString leftScreen.y}";
                 maximizehoriz = true;
                 maximizevert = true;
                 noborder = true;
@@ -276,6 +277,7 @@ in
                 match-whole = false;
             };
             apply = {
+                position = "${toString leftScreen.x},${toString leftScreen.y}";
                 maximizehoriz = true;
                 maximizevert = true;
                 noborder = true;
