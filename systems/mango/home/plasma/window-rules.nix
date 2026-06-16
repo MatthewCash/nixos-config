@@ -230,6 +230,18 @@ in
             apply.position = "500,600";
         }
         {
+            description = "Position Guitarix";
+            match.window-class = {
+                value = "guitarix";
+                match-whole = false;
+            };
+            apply = {
+                position.value = ruleGeometry.guitarix.position;
+                size.value = ruleGeometry.guitarix.size;
+                noborder = true;
+            };
+        }
+        {
             description = "Hide titlebar for Minecraft";
             match.window-class = {
                 value = "Minecraft";
