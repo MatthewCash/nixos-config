@@ -242,6 +242,20 @@ in
             };
         }
         {
+            description = "Position Channel Mixer";
+            match = {
+                window-class = {
+                    value = "channel-mixer";
+                    match-whole = false;
+                };
+                title = "Channel Mixer";
+            };
+            apply = {
+                position.value = ruleGeometry.pipewireBusMixer.position;
+                size.value = ruleGeometry.pipewireBusMixer.size;
+            };
+        }
+        {
             description = "Hide titlebar for Minecraft";
             match.window-class = {
                 value = "Minecraft";
