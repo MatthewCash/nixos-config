@@ -13,14 +13,14 @@ provide deterministic app ordering - no patches to `plasma-workspace` or
    and patches `ConfigBehavior.qml` plus upstream `main.xml` to add the
    `orderedAppIds` config entry.
 3. Ordered mode uses config value `7`. The QML maps that to upstream
-   `SortAlpha`, then the subclass applies configured app priorities before the
-   stock alphabetical comparison handles equal-priority and unknown apps.
+   `SortDisabled`, then the subclass applies configured app priorities before
+   the stock source-order comparison handles equal-priority and unknown apps.
 
 Matching first tries the raw Wayland `app_id` reported by KWin, then model roles
 `AppId`, `LauncherUrlWithoutIcon`, `LauncherUrl`, `AppName`, and `DisplayRole`.
 PID-based app IDs are used only as an unambiguous fallback. Values are
 normalized by lowercasing and stripping `applications:` and `.desktop`. Unknown
-apps sort alphabetically after known ones.
+apps sort after known ones, ordered by task creation/source insertion order.
 
 ## Files
 

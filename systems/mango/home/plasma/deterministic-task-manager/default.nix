@@ -101,7 +101,7 @@ import OrderedTaskManager 1.0 as OrderedTaskManager' \
                            '        id: tasksModel
         orderedAppIds: Plasmoid.configuration.sortingStrategy === 7 ? (Plasmoid.configuration.orderedAppIds || []) : []' \
             --replace-fail '        sortMode: sortModeEnumValue(Plasmoid.configuration.sortingStrategy)' \
-                           '        sortMode: Plasmoid.configuration.sortingStrategy === 7 ? TaskManager.TasksModel.SortAlpha : sortModeEnumValue(Plasmoid.configuration.sortingStrategy)'
+                           '        sortMode: Plasmoid.configuration.sortingStrategy === 7 ? TaskManager.TasksModel.SortDisabled : sortModeEnumValue(Plasmoid.configuration.sortingStrategy)'
 
         substituteInPlace applet/main.xml \
             --replace-fail '<label>Values from TaskManager::TasksModel::SortMode</label>
