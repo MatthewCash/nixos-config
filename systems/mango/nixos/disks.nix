@@ -12,12 +12,16 @@ let
         description = "Mount BitLocker volume ${name}";
         requires = [ "systemd-cryptsetup@${name}.service" ];
         after = [ "systemd-cryptsetup@${name}.service" ];
-        wantedBy = [ "multi-user.target" ];
 
         what = "/dev/mapper/${name}";
         where = "/mnt/${name}";
         type = "ntfs3";
         options = "ro,uid=1000,nofail";
+    }) names;
+
+    mkWindowsAutomounts = names: builtins.map (name: {
+        where = "/mnt/${name}";
+        wantedBy = [ "multi-user.target" ];
     }) names;
 in
 
@@ -25,10 +29,11 @@ in
     environment.etc."crypttab".text = stableLib.concatStringsSep
         "\n"
         (stableLib.mapAttrsToList
-            (name: uuid: "${name} UUID=${uuid} /mnt/persist/etc/bitlk-keys/${name} bitlk,nofail")
+            (name: uuid: "${name} UUID=${uuid} /mnt/persist/etc/bitlk-keys/${name} bitlk,nofail,noauto")
         windowsMounts);
 
     systemd.mounts = mkWindowsMounts (builtins.attrNames windowsMounts);
+    systemd.automounts = mkWindowsAutomounts (builtins.attrNames windowsMounts);
 
     disko.devices = {
         disk.main = {
