@@ -178,16 +178,9 @@
 
             excludeSystems = [ "installer" ];
             testSystems = builtins.filter (name: !(builtins.elem name excludeSystems)) systemNames;
-        in rec {
+        in {
             inherit generators;
 
-            apply = pkgsStable.writeShellScriptBin "apply" /* bash */ ''
-                exec ${stableLib.getExe pkgsUnstable.nixos-rebuild} switch --flake path:. --sudo $@
-            '';
-            full-upgrade = pkgsStable.writeShellScriptBin "full-upgrade" /* bash */ ''
-                ${nix} flake update
-                exec ${stableLib.getExe apply}
-            '';
             test = pkgsStable.writeShellScriptBin "test" /* bash */ ''
                 set -e -o pipefail; shopt -s inherit_errexit
 
