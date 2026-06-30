@@ -32,6 +32,7 @@ let
         launchers = [];
         orderedAppIds = taskManagerOrderedAppIds;
 
+        groupingStrategy = 0;
         sortingStrategy = 7;
     };
 
