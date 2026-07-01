@@ -46,12 +46,14 @@ builtins.map (path: ../../../home/${path}) [
     "applications/bat.nix"
     "applications/nix.nix"
     "applications/opencode.nix"
+    "applications/qpwgraph.nix"
     "applications/wget.nix"
     "applications/podman.nix"
     "applications/haruna.nix"
 ] ++ [
     ./defaultApps.nix
     ./channel-mixer
+    ./audio-buses.nix
 
     ./plasma/mouse.nix
     ./plasma/applets.nix

@@ -38,57 +38,124 @@ let
         };
     };
 
-    muteMinecraftWhenUnfocused = pkgsUnstable.writeShellApplication {
+    kwinScriptId = "prismlaunchermute";
+    kwinScriptBusName = "dev.matthew.PrismLauncherMute";
+    kwinScriptPath = "/dev/matthew/PrismLauncherMute";
+    mutePythonEnv = pkgsUnstable.python313.withPackages (ps: with ps; [ dbus-fast psutil pulsectl-asyncio ]);
+
+    kwinMuteScript = pkgsUnstable.writeText "prismlaunchermute-main.js" /* javascript */ ''
+        function notifyActiveWindow(window) {
+            const pid = window && window.pid ? window.pid : 0;
+            callDBus(
+                "${kwinScriptBusName}",
+                "${kwinScriptPath}",
+                "${kwinScriptBusName}",
+                "SetActivePid",
+                pid
+            );
+        }
+
+        workspace.windowActivated.connect(notifyActiveWindow);
+        notifyActiveWindow(workspace.activeWindow);
+    '';
+
+    kwinMuteMetadata = pkgsUnstable.writeText "prismlaunchermute-metadata.json" (builtins.toJSON {
+        KPlugin = {
+            Name = "PrismLauncher Mute";
+            Description = "Notify a helper service when the active window changes";
+            Id = kwinScriptId;
+            Version = "1.0";
+            License = "MIT";
+        };
+        "X-Plasma-API" = "javascript";
+        "X-Plasma-MainScript" = "code/main.js";
+        KPackageStructure = "KWin/Script";
+    });
+
+    muteMinecraftWhenUnfocused = pkgsUnstable.writeTextFile {
         name = "mute-minecraft-when-unfocused";
-        runtimeInputs = with pkgsUnstable; [
-            kdotool
-            pulseaudio
-        ];
-        text = ''
-            set_minecraft_mute() {
-                local muted="$1"
-                local current_id=""
-                local is_java=false
-                local is_game=false
+        destination = "/bin/mute-minecraft-when-unfocused";
+        executable = true;
+        text = /* python */ ''
+        #!${mutePythonEnv}/bin/python3
+        import asyncio, subprocess, psutil
+        from dbus_fast.aio import MessageBus
+        from dbus_fast.annotations import DBusInt32
+        from dbus_fast.service import ServiceInterface, dbus_method
+        from pulsectl_asyncio import PulseAsync
 
-                flush_input() {
-                    if [[ -n "$current_id" && "$is_java" == true && "$is_game" == true ]]; then
-                        pactl set-sink-input-mute "$current_id" "$muted" || true
-                    fi
-                }
+        kdotool = "${pkgsUnstable.kdotool}/bin/kdotool"
+        BUS_NAME = "${kwinScriptBusName}"
+        OBJECT_PATH = "${kwinScriptPath}"
 
-                while IFS= read -r line; do
-                    if [[ "$line" == Sink\ Input\ \#* ]]; then
-                        flush_input
-                        current_id="''${line#Sink Input #}"
-                        is_java=false
-                        is_game=false
+        async def _active_pid():
+            proc = await asyncio.create_subprocess_exec(
+                kdotool, "getactivewindow", "getwindowpid",
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.DEVNULL
+            )
+            out, _ = await proc.communicate()
+            try:
+                return int(out.decode().strip())
+            except (ValueError, TypeError):
+                return None
+
+        def _prism_child(pid):
+            try:
+                p = psutil.Process(pid)
+                while p:
+                    if "prismlauncher" in p.name().lower():
+                        return True
+                    p = p.parent()
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                pass
+            return False
+
+        class PrismLauncherMute(ServiceInterface):
+            def __init__(self, pulse):
+                super().__init__(BUS_NAME)
+                self.pulse = pulse
+                self.last_pid = object()
+
+            async def _sync_mute(self, pid):
+                if pid == self.last_pid:
+                    return
+                self.last_pid = pid
+                muted = not (pid and _prism_child(pid))
+                await self._set_matching_inputs(muted)
+
+            async def _set_matching_inputs(self, muted):
+                sink_inputs = await self.pulse.sink_input_list()
+                seen = set()
+                for si in sink_inputs:
+                    if si.index in seen:
                         continue
-                    fi
+                    seen.add(si.index)
+                    props = si.proplist
+                    name = (props.get("node.name", "") or "").lower()
+                    binary = (props.get("application.process.binary", "") or "").lower()
+                    role = (props.get("media.role", "") or "").lower()
+                    if ("java" in name or "java" in binary) and "game" in role:
+                        await self.pulse.sink_input_mute(si.index, mute=muted)
 
-                    case "$line" in
-                        *'node.name = "java"'*) is_java=true ;;
-                        *'application.process.binary = "java"'*) is_java=true ;;
-                        *'media.role = "game"'*) is_game=true ;;
-                        *'media.role = "Game"'*) is_game=true ;;
-                    esac
-                done < <(pactl list sink-inputs)
+            @dbus_method()
+            async def SetActivePid(self, pid: DBusInt32):
+                await self._sync_mute(pid if pid > 0 else None)
 
-                flush_input
-            }
+        async def main():
+            async with PulseAsync("mute-minecraft") as pulse:
+                bus = await MessageBus().connect()
+                interface = PrismLauncherMute(pulse)
+                bus.export(OBJECT_PATH, interface)
+                await bus.request_name(BUS_NAME)
 
-            while true; do
-                class="$(kdotool getactivewindow getwindowclassname 2>/dev/null || true)"
+                # Seed the initial state in case the KWin script sent its first
+                # activation event before this service owned the bus name.
+                await interface._sync_mute(await _active_pid())
 
-                if [[ "$class" == *Minecraft* || "$class" == *AxolotlClient* ]]; then
-                    muted=false
-                else
-                    muted=true
-                fi
+                await bus.wait_for_disconnect()
 
-                set_minecraft_mute "$muted"
-                sleep 0.5
-            done
+        asyncio.run(main())
         '';
     };
 in
@@ -99,6 +166,13 @@ in
     ];
 
     home.packages = [ wrappedPrismlauncher.config.env ];
+
+    programs.plasma.configFile.kwinrc.Plugins."${kwinScriptId}Enabled" = true;
+
+    xdg.dataFile = {
+        "kwin/scripts/${kwinScriptId}/contents/code/main.js".source = kwinMuteScript;
+        "kwin/scripts/${kwinScriptId}/metadata.json".source = kwinMuteMetadata;
+    };
 
     xdg.desktopEntries.prismlauncher-enderscale = {
         name = "Enderscale Creative";
@@ -117,6 +191,7 @@ in
 
         Service = {
             ExecStart = "${muteMinecraftWhenUnfocused}/bin/mute-minecraft-when-unfocused";
+            ExecStartPost = "${pkgsUnstable.qt6.qttools}/bin/qdbus org.kde.KWin /KWin reconfigure";
             Restart = "always";
             RestartSec = 1;
         };

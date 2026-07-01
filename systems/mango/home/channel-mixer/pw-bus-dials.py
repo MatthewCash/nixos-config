@@ -25,8 +25,10 @@ ANIMATION_INTERVAL_MS = 16
 REFRESH_DELAY_MS = 25
 WINDOW_WIDTH = 620
 WINDOW_HEIGHT = 600
-SLIDER_MIN_WIDTH = 110
+SLIDER_MIN_WIDTH = 92
 SLIDER_MIN_HEIGHT = 380
+SLIDER_HORIZONTAL_MARGIN = 6
+MIXER_SPACING = 9
 
 
 class LargeSliderStyle(QProxyStyle):
@@ -80,10 +82,11 @@ class PulseBackend:
         except pulsectl.PulseError:
             pass
 
-    def toggle_mute(self, sink, muted):
+    def toggle_mute(self, sink):
         try:
-            self.pulse.mute(sink, muted)
-        except pulsectl.PulseError:
+            current = next(candidate for candidate in self.pulse.sink_list() if candidate.name == sink.name)
+            self.pulse.mute(current, not bool(current.mute))
+        except (StopIteration, pulsectl.PulseError):
             pass
 
     def listen(self):
@@ -162,7 +165,7 @@ class SinkSlider(QFrame):
         self.styled_widgets = (self, self.title, self.value_label, self.slider)
 
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(9, 9, 9, 9)
+        layout.setContentsMargins(SLIDER_HORIZONTAL_MARGIN, 9, SLIDER_HORIZONTAL_MARGIN, 9)
         layout.setSpacing(6)
         layout.addWidget(self.title, alignment=Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(self.slider, alignment=Qt.AlignmentFlag.AlignCenter)
@@ -231,8 +234,7 @@ class SinkSlider(QFrame):
 
     def toggle_mute(self):
         if self.sink_info is not None:
-            self.set_muted(not self.is_muted)
-            self.backend.toggle_mute(self.sink_info, self.is_muted)
+            self.backend.toggle_mute(self.sink_info)
 
     def set_muted(self, muted):
         if self.is_muted == muted:
@@ -308,7 +310,7 @@ class Mixer(QWidget):
 
         layout = QHBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
-        layout.setSpacing(9)
+        layout.setSpacing(MIXER_SPACING)
         for slider in self.sliders:
             layout.addWidget(slider)
 
@@ -380,9 +382,9 @@ def main():
             background: rgba(5, 5, 5, 165);
         }
         QSlider::handle:vertical {
-            width: 76px;
+            width: 64px;
             height: 28px;
-            margin: 0 -29px;
+            margin: 0 -23px;
             border-radius: 0px;
             background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
                 stop:0 rgba(92, 92, 92, 245),
