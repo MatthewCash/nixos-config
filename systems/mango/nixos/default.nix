@@ -42,7 +42,7 @@ builtins.map (path: ../../../nixos/${path}) [
     "podman.nix"
     "xdg.nix"
     "waydroid.nix"
-    "hardware/wheel.nix"
+    "hardware/wheel"
 ] ++ [
     ./kernel.nix
     ./networking.nix

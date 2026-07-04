@@ -21,6 +21,9 @@ RECONNECT_INTERVAL = 1.0
 LOOP_SLEEP = 0.005
 AC_READ_INTERVAL = 0.02
 AC_RESCAN_INTERVAL = 1.0
+AC_SCAN_LOG_INTERVAL = 5.0
+AC_STALE_PACKET_TIMEOUT = 0.5
+AC_EXISTING_PROCESS_GRACE = 10.0
 AC_MAP_SIZE = 4096
 DISCONNECT_ERRNOS = (errno.ENODEV, errno.EIO, errno.ENOENT, errno.ENXIO, errno.EBADF, errno.EPIPE)
 
@@ -79,15 +82,33 @@ def valid_max_rpm(value):
     return 1000 < value < 30000
 
 
+def process_start_ticks(pid):
+    try:
+        with open("/proc/{}/stat".format(pid)) as f:
+            fields = f.read().rsplit(") ", 1)[1].split()
+        return int(fields[19])
+    except (OSError, IndexError, ValueError):
+        return None
+
+
 class AcSharedMemory:
-    def __init__(self):
+    def __init__(self, verbose=False):
+        self.verbose = verbose
+        self.started_at = time.monotonic()
+        self.started_process_ticks = process_start_ticks(os.getpid())
         self.pid = None
+        self.pid_start_ticks = None
         self.mem_fd = None
         self.static_addr = None
         self.physics_addr = None
         self.next_scan = 0.0
+        self.next_process_check = 0.0
         self.last_car = None
         self.last_error = None
+        self.last_packet_id = None
+        self.last_packet_time = 0.0
+        self.last_scan_summary = None
+        self.last_scan_log_time = 0.0
 
     def close(self):
         if self.mem_fd is not None:
@@ -96,17 +117,27 @@ class AcSharedMemory:
             except OSError:
                 pass
         self.pid = None
+        self.pid_start_ticks = None
         self.mem_fd = None
         self.static_addr = None
         self.physics_addr = None
         self.last_car = None
+        self.last_packet_id = None
+        self.last_packet_time = 0.0
 
     def read_region(self, address, size):
         if self.mem_fd is None:
             raise OSError(errno.EBADF, "AC memory is not open")
-        return os.pread(self.mem_fd, size, address)
+        data = os.pread(self.mem_fd, size, address)
+        if len(data) != size:
+            raise OSError(
+                errno.EIO,
+                "short AC memory read at 0x{:x}: expected {} bytes, got {}".format(address, size, len(data)),
+            )
+        return data
 
-    def process_ids(self):
+    def matching_processes(self):
+        processes = []
         for name in os.listdir("/proc"):
             if not name.isdigit():
                 continue
@@ -119,7 +150,35 @@ class AcSharedMemory:
             except OSError:
                 continue
             if comm.startswith("AC:") or "acs.exe" in cmdline.lower():
-                yield pid
+                start_ticks = process_start_ticks(pid)
+                processes.append((start_ticks if start_ticks is not None else -1, pid, start_ticks))
+        for _sort_ticks, pid, start_ticks in sorted(processes, reverse=True):
+            yield pid, start_ticks
+
+    def defer_existing_process(self, now, pid, start_ticks):
+        if self.started_process_ticks is None or start_ticks is None:
+            return False
+        if start_ticks >= self.started_process_ticks:
+            return False
+        if now - self.started_at >= AC_EXISTING_PROCESS_GRACE:
+            return False
+
+        message = "deferring older Assetto Corsa process pid={} during startup grace".format(pid)
+        if message != self.last_error:
+            log(message)
+            self.last_error = message
+        return True
+
+    def newer_process_exists(self, now):
+        if self.pid is None or self.pid_start_ticks is None or now < self.next_process_check:
+            return False
+        self.next_process_check = now + AC_RESCAN_INTERVAL
+
+        for pid, start_ticks in self.matching_processes():
+            if pid != self.pid and start_ticks is not None and start_ticks > self.pid_start_ticks:
+                log("newer Assetto Corsa process detected pid={} replacing pid={}".format(pid, self.pid))
+                return True
+        return False
 
     def memfd_regions(self, pid):
         regions = []
@@ -192,7 +251,10 @@ class AcSharedMemory:
             return False
         self.next_scan = now + AC_RESCAN_INTERVAL
 
-        for pid in self.process_ids():
+        for pid, start_ticks in self.matching_processes():
+            if self.defer_existing_process(now, pid, start_ticks):
+                continue
+
             try:
                 mem_fd = os.open("/proc/{}/mem".format(pid), os.O_RDONLY)
             except OSError as exc:
@@ -204,6 +266,7 @@ class AcSharedMemory:
 
             self.close()
             self.pid = pid
+            self.pid_start_ticks = start_ticks
             self.mem_fd = mem_fd
 
             pages = []
@@ -215,31 +278,74 @@ class AcSharedMemory:
 
             statics = self.static_candidates(pages)
             physics = self.physics_candidates(pages)
+            scan_summary = "scan pid={} pages={} static_candidates={} physics_candidates={}".format(
+                pid,
+                len(pages),
+                len(statics),
+                len(physics),
+            )
+            if self.verbose or (
+                (not statics or not physics)
+                and (scan_summary != self.last_scan_summary or now - self.last_scan_log_time >= AC_SCAN_LOG_INTERVAL)
+            ):
+                log(scan_summary)
+                self.last_scan_summary = scan_summary
+                self.last_scan_log_time = now
             if not statics or not physics:
                 self.close()
+                if pages:
+                    return False
                 continue
 
             static = min(statics, key=lambda item: min(abs(item[0] - address) for address in physics))
             self.static_addr, car, track, max_rpm = static
             self.physics_addr = min(physics, key=lambda address: abs(address - self.static_addr))
             self.last_car = car
+            self.last_packet_id = None
+            self.last_packet_time = now
             self.last_error = None
             log("reading Assetto Corsa shared memory pid={} car={} track={} max_rpm={}".format(pid, car, track, max_rpm))
             return True
         return False
 
     def read(self, now):
+        if self.mem_fd is not None and self.newer_process_exists(now):
+            self.close()
+            return None
         if self.mem_fd is None and not self.attach(now):
             return None
         try:
             static = self.read_region(self.static_addr, AC_STATIC_MAX_RPM_OFFSET + 4)
             physics = self.read_region(self.physics_addr, AC_PHYSICS_SPEED_OFFSET + 4)
+            packet_id = int32(physics, AC_PHYSICS_PACKET_ID_OFFSET)
+            gas = float32(physics, AC_PHYSICS_GAS_OFFSET)
+            brake = float32(physics, AC_PHYSICS_BRAKE_OFFSET)
+            fuel = float32(physics, AC_PHYSICS_FUEL_OFFSET)
+            gear = int32(physics, AC_PHYSICS_GEAR_OFFSET)
             rpm = int32(physics, AC_PHYSICS_RPM_OFFSET)
+            steer = float32(physics, AC_PHYSICS_STEER_OFFSET)
+            speed = float32(physics, AC_PHYSICS_SPEED_OFFSET)
             max_rpm = int32(static, AC_STATIC_MAX_RPM_OFFSET)
             car = utf16_string(static, AC_STATIC_CAR_OFFSET, 33)
 
-            if not valid_rpm(rpm) or not valid_max_rpm(max_rpm) or not plausible_name(car):
+            if (
+                not valid_rpm(rpm)
+                or not valid_max_rpm(max_rpm)
+                or not plausible_name(car)
+                or not -1 <= gear <= 10
+                or not 0.0 <= gas <= 1.1
+                or not 0.0 <= brake <= 1.1
+                or not 0.0 <= fuel <= 500.0
+                or not -1080.0 <= steer <= 1080.0
+                or not -20.0 <= speed <= 500.0
+            ):
                 raise OSError(errno.EIO, "invalid AC shared memory telemetry")
+            if self.last_packet_id != packet_id:
+                self.last_packet_id = packet_id
+                self.last_packet_time = now
+            elif now - self.last_packet_time > AC_STALE_PACKET_TIMEOUT:
+                raise OSError(errno.EIO, "stale AC physics telemetry")
+
             if car != self.last_car:
                 track = utf16_string(static, AC_STATIC_TRACK_OFFSET, 33)
                 self.last_car = car
@@ -325,6 +431,7 @@ def setup_wheel(fd):
     send(fd, [28, 0], [1])
     send(fd, [27, 0, 255], [100])
     set_colors(fd, COLORS)
+    send_mask(fd, 0)
 
 
 def rpm_mask(rpm, max_rpm, limiter):
@@ -349,6 +456,7 @@ def idle_mask(step):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--test-sweep", action="store_true")
+    parser.add_argument("--startup-debug-seconds", type=float, default=0.0)
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args()
 
@@ -381,7 +489,7 @@ def main():
         finally:
             close_serial(fd)
 
-    ac_memory = AcSharedMemory()
+    ac_memory = AcSharedMemory(args.verbose)
     fd = None
     last_open_attempt = 0.0
     waiting_logged = False
@@ -392,9 +500,11 @@ def main():
     last_ac_read = 0.0
     mode = None
     rpm = 0.0
+    max_rpm = 0.0
     target = 0
     limiter = 0
     step = 0
+    telemetry_debug_start = None
 
     try:
         while running:
@@ -430,11 +540,19 @@ def main():
                 last_ac_read = now
                 packet = ac_memory.read(now)
                 if packet is not None:
+                    if telemetry_debug_start is None:
+                        telemetry_debug_start = now
                     rpm, max_rpm, limiter = packet
                     target = rpm_mask(rpm, max_rpm, limiter)
                     last_packet = now
                     if args.verbose:
                         print("rpm={} max_rpm={} limiter={} mask={}".format(int(rpm), int(max_rpm), limiter, target), flush=True)
+                elif ac_memory.mem_fd is None:
+                    rpm = 0.0
+                    target = 0
+                    limiter = 0
+                    last_packet = 0.0
+                    telemetry_debug_start = None
 
             try:
                 if now - last_packet > 1.0 or rpm == 0:
@@ -463,6 +581,24 @@ def main():
                     mask = target
 
                 if fd is not None and (mask != last_mask or now - last_send >= 0.5):
+                    if (
+                        args.startup_debug_seconds > 0
+                        and telemetry_debug_start is not None
+                        and now - telemetry_debug_start <= args.startup_debug_seconds
+                    ):
+                        ratio = rpm / max_rpm if max_rpm > 0 else 0.0
+                        log(
+                            "startup-debug age={:.3f}s mode={} rpm={} max_rpm={} ratio={:.3f} limiter={} target_mask={} send_mask={}".format(
+                                now - telemetry_debug_start,
+                                mode,
+                                int(rpm),
+                                int(max_rpm),
+                                ratio,
+                                limiter,
+                                target,
+                                mask,
+                            )
+                        )
                     send_mask(fd, mask)
                     last_mask = mask
                     last_send = now
