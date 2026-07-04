@@ -97,6 +97,12 @@
                 command = [ (lib.getExe pkgsUnstable.context7-mcp) ];
                 enabled = true;
             };
+
+            permission = {
+                external_directory = {
+                    "/nix/**" = "allow";
+                };
+            };
         };
 
         tui.theme = "main";
