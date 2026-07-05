@@ -96,15 +96,30 @@
             };
             ToolBar = {
                 _alreadyVisited = 1;
-                _noMerge = 1;
+                _hidden = true;
                 _name = "mainToolBar";
+                _noMerge = 1;
                 text = "Main Toolbar";
                 index = 0;
-                Action = builtins.map (x: { _name = x; }) [
-                    "split-view"
-                    "new-tab"
-                    "new-window"
-                ];
+            };
+        };
+    };
+
+    xdg.dataFile."kxmlgui5/konsole/sessionui.rc".text = customLib.toXML {
+        gui = {
+            _name = "session";
+            _version = 36;
+            _translationDomain = "kxmlgui5";
+            MenuBar = {
+                _alreadyVisited = 1;
+            };
+            ToolBar = {
+                _alreadyVisited = 1;
+                _hidden = true;
+                _name = "sessionToolbar";
+                _noMerge = 1;
+                text = "Session Toolbar";
+                index = 1;
             };
         };
     };
