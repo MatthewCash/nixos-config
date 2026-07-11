@@ -1,8 +1,8 @@
-{ pkgsUnstable, persistenceHomePath, ... }:
+{ pkgsUnstable, persistenceHomePath, config, ... }:
 
 let
     steam = pkgsUnstable.steam.override {
-        extraPkgs = pkgs: with pkgs; [ kdePackages.breeze ];
+        extraPkgs = _: [ config.gtk.cursorTheme.package ]; # fix cursors
     };
 in
 
