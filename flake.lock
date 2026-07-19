@@ -605,11 +605,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780446483,
-        "narHash": "sha256-tNepLs44D+05zuP7pnt0pOOAI9P2wnZDjcS6YEqa6iY=",
+        "lastModified": 1784480075,
+        "narHash": "sha256-Vch6qUu4/+DQVQPdMEvXecRG6q+/m+BRw3WOxonj4Mw=",
         "owner": "MatthewCash",
         "repo": "plasma-video-wallpaper",
-        "rev": "e96c24649a6459ad4aa091a2aeece9d808528949",
+        "rev": "4d3df3822b3ac660af3497f523d0f205a95fb1ff",
         "type": "github"
       },
       "original": {
