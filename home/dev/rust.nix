@@ -5,6 +5,7 @@
         cargo
         clippy
         rustc
+        rustfmt
     ];
 
     home.sessionVariables = {
