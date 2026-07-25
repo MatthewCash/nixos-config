@@ -3,6 +3,7 @@
 {
     home.packages = with pkgsUnstable; [
         cargo
+        clippy
         rustc
     ];
 
