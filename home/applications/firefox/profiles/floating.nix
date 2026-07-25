@@ -8,6 +8,8 @@
             --system-hue: ${builtins.toString accentColor.h};
             --system-saturation: ${builtins.toString accentColor.s}%;
             --system-lightness: ${builtins.toString accentColor.l}%;
+
+            --toolbar-background-color: black !important;
         }
     '';
     userContent = /* css */ ''
