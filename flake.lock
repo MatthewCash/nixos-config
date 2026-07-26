@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "ac-linux-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgsUnstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1784937437,
+        "narHash": "sha256-nQmS4H6ds7UUT+BdnD2c3ALJsup/YmPX/WuOw/ckjc8=",
+        "owner": "MatthewCash",
+        "repo": "ac-linux-manager",
+        "rev": "9cea91a69ff953bfb29d5848bc90358f45de7604",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MatthewCash",
+        "repo": "ac-linux-manager",
+        "type": "github"
+      }
+    },
     "agenix": {
       "inputs": {
         "darwin": "darwin",
@@ -667,6 +687,7 @@
     },
     "root": {
       "inputs": {
+        "ac-linux-manager": "ac-linux-manager",
         "asus-wmi-screenpad": "asus-wmi-screenpad",
         "aurebesh-fonts": "aurebesh-fonts",
         "codium-theme": "codium-theme",

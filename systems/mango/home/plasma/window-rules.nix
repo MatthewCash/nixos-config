@@ -214,6 +214,16 @@ in
             };
         }
         {
+            description = "Position AC Linux Manager";
+            match.window-class = {
+                value = "ac-linux-manager";
+                match-whole = false;
+            };
+            apply = {
+                inherit (ruleGeometry.centeredLeft) position size;
+            };
+        }
+        {
             description = "Position Firefox Floating";
             match.window-class = {
                 value = "org.mozilla.Firefox.floating";

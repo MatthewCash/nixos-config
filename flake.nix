@@ -2,6 +2,11 @@
     description = "NixOS and Home Manager Configuration";
 
     inputs = {
+        ac-linux-manager = {
+            url = "github:MatthewCash/ac-linux-manager";
+            inputs.nixpkgs.follows = "nixpkgsUnstable";
+        };
+
         asus-wmi-screenpad = {
             url = "github:MatthewCash/asus-wmi-screenpad-module";
             inputs.nixpkgs.follows = "nixpkgsUnstable";
