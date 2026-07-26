@@ -1,14 +1,49 @@
 --- a/ConfigBehavior.qml
 +++ b/ConfigBehavior.qml
-@@ -22,6 +22,7 @@
+@@ -24,6 +24,8 @@
      property alias cfg_groupPopups: groupPopups.checked
      property alias cfg_onlyGroupWhenFull: onlyGroupWhenFull.checked
      property int cfg_sortingStrategy
++    property int cfg_orderedSecondarySortingStrategy
 +    property var cfg_orderedAppIds: []
      property alias cfg_separateLaunchers: separateLaunchers.checked
      property alias cfg_hideLauncherOnStart: hideLauncherOnStart.checked
      property alias cfg_middleClickAction: middleClickAction.currentIndex
-@@ -148,11 +149,31 @@
+@@ -57,6 +59,33 @@
+         watchedService: "org.kde.KWin.Effect.WindowView1"
+     }
+ 
++    ListModel {
++        id: orderedAppIdsModel
++    }
++
++    function writeOrderedAppIdsConfig() {
++        const ids = []
++        for (let i = 0; i < orderedAppIdsModel.count; ++i) {
++            const id = orderedAppIdsModel.get(i).value.trim()
++            if (id.length > 0) {
++                ids.push(id)
++            }
++        }
++        root.cfg_orderedAppIds = ids
++    }
++
++    function syncOrderedAppIdsModelFromConfig() {
++        orderedAppIdsModel.clear()
++        const ids = root.cfg_orderedAppIds || []
++        for (let i = 0; i < ids.length; ++i) {
++            orderedAppIdsModel.append({
++                "value": ids[i],
++            })
++        }
++    }
++
++    Component.onCompleted: syncOrderedAppIdsModelFromConfig()
++
+     Kirigami.FormLayout {
+         anchors.left: parent.left
+         anchors.right: parent.right
+@@ -153,11 +182,114 @@
                  {
                      "text": i18nc("@item:inlistbox sort tasks in grouped task", "By horizontal window position"),
                      "value": TaskManager.TasksModel.SortWindowPositionHorizontal,
@@ -22,19 +57,102 @@
              Component.onCompleted: currentIndex = indexOfValue(root.cfg_sortingStrategy)
          }
  
-+        QQC2.TextArea {
-+            id: orderedAppIds
++        QQC2.ComboBox {
++            id: orderedSecondarySortingStrategy
++            Kirigami.FormData.label: i18nc("@label:listbox secondary sort for ordered tasks", "Then sort:")
++            Layout.fillWidth: true
++            Layout.minimumWidth: Kirigami.Units.gridUnit * 14
++            visible: sortingStrategy.currentValue === 7
++            textRole: "text"
++            valueRole: "value"
++            model: [
++                {
++                    "text": i18nc("@item:inlistbox sort tasks in grouped task", "Do not sort"),
++                    "value": TaskManager.TasksModel.SortDisabled,
++                },
++                {
++                    "text": i18nc("@item:inlistbox sort tasks in grouped task", "Manually"),
++                    "value": TaskManager.TasksModel.SortManual,
++                },
++                {
++                    "text": i18nc("@item:inlistbox sort tasks in grouped task", "Alphabetically"),
++                    "value": TaskManager.TasksModel.SortAlpha,
++                },
++                {
++                    "text": i18nc("@item:inlistbox sort tasks in grouped task", "By desktop"),
++                    "value": TaskManager.TasksModel.SortVirtualDesktop,
++                },
++                {
++                    "text": i18nc("@item:inlistbox sort tasks in grouped task", "By activity"),
++                    "value": TaskManager.TasksModel.SortActivity,
++                },
++                {
++                    "text": i18nc("@item:inlistbox sort tasks in grouped task", "By horizontal window position"),
++                    "value": TaskManager.TasksModel.SortWindowPositionHorizontal,
++                },
++            ]
++            onActivated: root.cfg_orderedSecondarySortingStrategy = currentValue
++            Component.onCompleted: {
++                const idx = indexOfValue(root.cfg_orderedSecondarySortingStrategy)
++                currentIndex = idx === -1 ? 0 : idx
++            }
++        }
++
++        ColumnLayout {
++            id: orderedAppIdsList
 +            Kirigami.FormData.label: i18nc("@label:listbox ordered task app ids", "Ordered apps:")
 +            Layout.fillWidth: true
-+            Layout.preferredHeight: Kirigami.Units.gridUnit * 8
 +            visible: sortingStrategy.currentValue === 7
-+            text: cfg_orderedAppIds.join("\n")
-+            placeholderText: i18nc("@info:placeholder ordered task app ids", "One WM_CLASS, app id, or launcher URL per line")
-+            wrapMode: TextEdit.NoWrap
-+            onTextChanged: {
-+                if (activeFocus) {
-+                    cfg_orderedAppIds = text.split(/[\n,]+/).map(item => item.trim()).filter(item => item.length > 0)
++            spacing: Kirigami.Units.smallSpacing
++
++            Repeater {
++                model: orderedAppIdsModel
++
++                delegate: RowLayout {
++                    required property int index
++                    required property string value
++
++                    Layout.fillWidth: true
++                    spacing: Kirigami.Units.smallSpacing
++
++                    QQC2.TextField {
++                        Layout.fillWidth: true
++                        text: value
++                        placeholderText: i18nc("@info:placeholder ordered task app id", "WM_CLASS, app id, or launcher URL")
++                        onTextEdited: {
++                            orderedAppIdsModel.setProperty(index, "value", text)
++                            root.writeOrderedAppIdsConfig()
++                        }
++                    }
++
++                    QQC2.ToolButton {
++                        icon.name: "list-remove"
++                        text: i18nc("@action:button remove ordered app id", "Remove")
++                        display: QQC2.AbstractButton.IconOnly
++                        onClicked: {
++                            orderedAppIdsModel.remove(index)
++                            root.writeOrderedAppIdsConfig()
++                        }
++                    }
 +                }
++            }
++
++            QQC2.Button {
++                icon.name: "list-add"
++                text: i18nc("@action:button add ordered app id", "Add app")
++                onClicked: {
++                    orderedAppIdsModel.append({
++                        "value": "",
++                    })
++                    root.writeOrderedAppIdsConfig()
++                }
++            }
++
++            QQC2.Label {
++                Layout.fillWidth: true
++                text: i18nc("@info ordered task app ids", "Use one WM_CLASS, app id, or launcher URL per row.")
++                wrapMode: Text.WordWrap
++                color: Kirigami.Theme.disabledTextColor
 +            }
 +        }
 +

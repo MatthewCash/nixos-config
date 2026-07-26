@@ -101,7 +101,7 @@ import OrderedTaskManager 1.0 as OrderedTaskManager' \
                            '        id: tasksModel
         orderedAppIds: Plasmoid.configuration.sortingStrategy === 7 ? (Plasmoid.configuration.orderedAppIds || []) : []' \
             --replace-fail '        sortMode: sortModeEnumValue(Plasmoid.configuration.sortingStrategy)' \
-                           '        sortMode: Plasmoid.configuration.sortingStrategy === 7 ? TaskManager.TasksModel.SortDisabled : sortModeEnumValue(Plasmoid.configuration.sortingStrategy)'
+                           '        sortMode: sortModeEnumValue(Plasmoid.configuration.sortingStrategy === 7 ? (Plasmoid.configuration.orderedSecondarySortingStrategy || 0) : Plasmoid.configuration.sortingStrategy)'
 
         substituteInPlace applet/main.xml \
             --replace-fail '<label>Values from TaskManager::TasksModel::SortMode</label>
@@ -111,9 +111,13 @@ import OrderedTaskManager 1.0 as OrderedTaskManager' \
       <label>Ordered WM_CLASS values, app ids, launcher urls, app names, or display names used by ordered sorting.</label>
       <default></default>
     </entry>
+    <entry name="orderedSecondarySortingStrategy" type="Int">
+      <label>Values from TaskManager::TasksModel::SortMode used after ordered app priorities match.</label>
+      <default>0</default>
+    </entry>
     <entry name="separateLaunchers" type="Bool">'
 
-        # Fix ConfigBehavior.qml: add orderedAppIds UI
+        # Fix ConfigBehavior.qml: add ordered sorting UI
         patch -d applet/qml -p1 < $src/patches/ConfigBehavior.qml.patch
 
         # Copy ordered model sources into applet build tree.

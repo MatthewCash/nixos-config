@@ -23,7 +23,6 @@ find_package(LibTaskManager REQUIRED)
 plasma_add_applet(org.kde.plasma.taskmanagerordered
     QML_SOURCES
         qml/AudioStream.qml
-        qml/Badge.qml
         qml/ConfigAppearance.qml
         qml/ConfigBehavior.qml
         qml/config.qml
