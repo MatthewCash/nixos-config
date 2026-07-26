@@ -11,6 +11,7 @@
         keyboards.default = {
             extraDefCfg = ''
                 linux-device-detect-mode keyboard-only
+                log-layer-changes no
             '';
             config = /* lisp */ ''
                 (defsrc
