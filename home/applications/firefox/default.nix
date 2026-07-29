@@ -21,30 +21,8 @@ let
     profileNames = builtins.map (stableLib.strings.removeSuffix ".nix") profileFileNames;
 
     flatpakId = "org.mozilla.Firefox";
-    getWMClass = profileName: "${flatpakId}.${profileName}";
-    wmClasses = builtins.map getWMClass profileNames;
+    getAppId = profileName: "${flatpakId}.${profileName}";
     binName = firefox.meta.mainProgram;
-
-    desktopFiles = builtins.map ({ fst, snd }: firefox.desktopItem.override (old: {
-        desktopName = "Firefox ${customLib.capitalizeFirstLetter fst}";
-        exec = "${binName} -P ${fst} --name ${snd} %U";
-        actions.new-window = {
-            inherit (old.actions.new-window) name;
-            exec = "${binName} -P ${fst} --name ${snd} --new-window %U";
-        };
-        actions.new-private-window = {
-            inherit (old.actions.new-private-window) name;
-            exec = "${binName} -P ${fst} --name ${snd} --private-window %U";
-        };
-        actions.profile-manager-window = old.actions.profile-manager-window;
-        startupWMClass = snd;
-        extraConfig.X-Flatpak = flatpakId;
-    })) (stableLib.lists.zipLists profileNames wmClasses);
-
-    installCommands = stableLib.strings.concatMapStringsSep
-        "\n"
-        ({ fst, snd }: "install -D -T ${fst}/share/applications/* $out/share/applications/${snd}.desktop")
-        (stableLib.lists.zipLists desktopFiles wmClasses);
 
     dconfSettings = stableLib.optionalAttrs (config.gtk.gtk3.theme.name != null) {
         "org/gnome/desktop/interface".gtk-theme = config.gtk.gtk3.theme.name;
@@ -53,11 +31,38 @@ let
     dconfDb = customLib.generateDconfDb dconfSettings;
 
     mkNixPak = inputs.nixpak.lib.nixpak { lib = stableLib; pkgs = pkgsStable; };
-    wrappedFirefox = mkNixPak {
-        config = { sloth, ... }: rec {
-            app.package = firefox.overrideAttrs (oldAttrs: {
-                buildCommand = oldAttrs.buildCommand + installCommands;
+    wrappedFirefoxes = builtins.map (profileName: mkNixPak {
+        config = { sloth, ... }: let
+            appId = getAppId profileName;
+            launcherName = "${binName}-${profileName}";
+            desktopEntry = firefox.desktopItem.override (old: {
+                desktopName = "Firefox ${customLib.capitalizeFirstLetter profileName}";
+                exec = "${launcherName} -P ${profileName} --name ${appId} %U";
+                actions.new-window = {
+                    inherit (old.actions.new-window) name;
+                    exec = "${launcherName} -P ${profileName} --name ${appId} --new-window %U";
+                };
+                actions.new-private-window = {
+                    inherit (old.actions.new-private-window) name;
+                    exec = "${launcherName} -P ${profileName} --name ${appId} --private-window %U";
+                };
+                actions.profile-manager-window = {
+                    inherit (old.actions.profile-manager-window) name;
+                    exec = "${launcherName} --ProfileManager";
+                };
+                startupWMClass = appId;
             });
+        in rec {
+            app.package = (pkgsStable.symlinkJoin {
+                name = launcherName;
+                paths = [];
+                buildInputs = [ pkgsStable.makeWrapper ];
+                postBuild = ''
+                    install -D -T ${desktopEntry}/share/applications/* "$out/share/applications/${appId}.desktop"
+                    makeWrapper '${stableLib.getExe firefox}' "$out/bin/${launcherName}"
+                '';
+                meta.mainProgram = launcherName;
+            }).overrideAttrs { desktopItems = []; };
             dbus.policies = {
                 "org.freedesktop.portal.*" = "talk";
                 "ca.desrt.dconf" = "talk";
@@ -71,7 +76,7 @@ let
                 "org.mozilla.firefox_beta.*" = "own";
             };
             flatpak = {
-                appId = flatpakId;
+                inherit appId;
                 session-helper.enable = true;
             };
             locale.enable = true;
@@ -95,7 +100,7 @@ let
                     [ ("${config.gtk.cursorTheme.package}/share/icons") (sloth.concat' sloth.xdgDataHome "/icons") ]
                     [ (builtins.toString dconfDb) (sloth.concat' sloth.xdgConfigHome "/dconf/user") ]
                     [ ("${config.gtk.gtk3.theme.package}/share/themes") (sloth.concat' sloth.xdgDataHome "/themes") ]
-                    [ "${app.package}/lib/${app.package.pname}/mozilla.cfg" "/app/etc/firefox/mozilla.cfg" ]
+                    [ "${firefox}/lib/${firefox.pname}/mozilla.cfg" "/app/etc/firefox/mozilla.cfg" ]
                 ];
                 sockets = {
                     wayland = true;
@@ -104,7 +109,7 @@ let
                 };
             };
         };
-    };
+    }) profileNames;
 
     profileList = stableLib.lists.imap0 (i: name: {
         name = builtins.substring 0 (builtins.stringLength name - 4) name;
@@ -125,7 +130,7 @@ in
         inherit profiles;
     };
 
-    home.packages = [ wrappedFirefox.config.env ];
+    home.packages = builtins.map (wrappedFirefox: wrappedFirefox.config.env) wrappedFirefoxes;
 
     # Enable JS mods in 'transparent' profile
     xdg.configFile."mozilla/firefox/transparent/chrome/firefox-mods".source = inputs.firefox-mods;
