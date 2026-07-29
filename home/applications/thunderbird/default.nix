@@ -25,9 +25,14 @@ let
             };
             locale.enable = true;
             etc.sslCertificates.enable = true;
-            flatpak.session-helper.enable = true;
+            flatpak = {
+                appId = "org.mozilla.Thunderbird";
+                desktopFile = "thunderbird.desktop";
+                session-helper.enable = true;
+            };
             gpu.enable = true;
             bubblewrap = {
+                env.FLATPAK_ID = flatpak.appId;
                 bind.rw = [
                     (sloth.concat' sloth.homeDir "/.thunderbird")
                     (sloth.concat' sloth.xdgCacheHome "/thunderbird")

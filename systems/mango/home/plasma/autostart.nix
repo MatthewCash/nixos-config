@@ -2,7 +2,7 @@
 
 let
     autoStartApps = [
-        "thunderbird"
+        "org.mozilla.Thunderbird"
         "org.mozilla.Firefox.layout"
         "org.kde.dolphin"
         "org.kde.konsole"
