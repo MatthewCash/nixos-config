@@ -27,5 +27,7 @@
             }
         }
     '';
-    settings = import ../settings.nix;
+    settings = import ../settings.nix // {
+        "browser.tabs.allow_transparent_browser" = true;
+    };
 }
