@@ -6,7 +6,7 @@
 
         settings = {
             autoupdate = false;
-            model = "openai/gpt-5.5";
+            model = "openai/gpt-5.6-sol";
 
             lsp = {
                 clangd = {
@@ -162,6 +162,10 @@
     };
 
     home.persistence."${persistenceHomePath}" = {
+        directories = [
+            ".cache/opencode"
+        ];
+
         files = [
             ".local/share/opencode/auth.json"
             ".local/share/opencode/opencode-stable.db"
