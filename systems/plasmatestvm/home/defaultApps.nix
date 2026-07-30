@@ -13,7 +13,7 @@
             "inode/directory" = [ "org.kde.dolphin.desktop" ];
 
             # Mail
-            "x-scheme-handler/mailto" = [ "thunderbird.desktop" ];
+            "x-scheme-handler/mailto" = [ "org.mozilla.Thunderbird.desktop" ];
 
             # Images
             "image/jpeg"  = [ "org.kde.gwenview.desktop" ];
@@ -42,4 +42,3 @@
         };
     };
 }
-
