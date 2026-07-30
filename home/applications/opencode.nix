@@ -99,6 +99,7 @@
             };
 
             permission = {
+                playwright_browser_navigate = "ask";
                 external_directory = {
                     "/nix/**" = "allow";
                 };
