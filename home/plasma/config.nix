@@ -5,8 +5,67 @@ let
         ","
         builtins.toString
         (with accentColor; [r g b]);
+    accentName = builtins.substring 1 6 accentColor.hex;
     colorScheme = import ./colors.nix args;
-    colorSchemeText = stableLib.generators.toINI {} colorScheme;
+    colorSchemeText = stableLib.generators.toINI {
+        mkSectionName = name: name;
+    } colorScheme;
+
+    sweetDesktopTheme = pkgsUnstable.runCommand "sweet-kde-${accentName}" {} ''
+        cp -r ${inputs.sweet-kde} $out
+        chmod -R u+w $out
+
+        substituteInPlace $out/colors \
+            --replace-fail "133,0,247" "${plasmaAccentColor}"
+
+        sed -i \
+            -e '/BackgroundNormal/s/=.*/=0,0,0/' \
+            -e '/BackgroundAlternate/s/=.*/=0,0,0/' \
+            -e '/activeBackground/s/=.*/=0,0,0/' \
+            -e '/inactiveBackground/s/=.*/=0,0,0/' \
+            $out/colors
+        sed -i -e '/\[Colors:Selection\]/,/^\[/{s/BackgroundNormal=0,0,0/BackgroundNormal=${plasmaAccentColor}/}' $out/colors
+        substituteInPlace $out/widgets/tabbar.svg \
+            --replace-fail "#5800e2" "${accentColor.hex}" \
+            --replace-fail "#ff00e6" "${accentColor.hex}" \
+            --replace-fail "#a22f66" "${accentColor.hex}"
+
+        for name in button lineedit listitem pager scrollbar tasks viewitem; do
+            file=$out/widgets/$name.svgz
+            gzip -cd "$file" \
+                | sed 's/#bd93f9/${accentColor.hex}/g' \
+                | gzip -c > "$file.tmp"
+            mv "$file.tmp" "$file"
+        done
+
+    '';
+
+    sweetLookAndFeel = pkgsUnstable.runCommand "sweet-look-and-feel-${accentName}" {} ''
+        cp -r ${pkgsUnstable.sweet-nova}/share/plasma/look-and-feel/com.github.eliverlara.sweet $out
+        chmod -R u+w $out
+
+        substituteInPlace $out/contents/components/ActionButton.qml \
+            --replace-fail "#c50ed2" "${accentColor.hex}"
+        substituteInPlace $out/contents/logout/Logout.qml \
+            --replace-fail "#c50ed2" "${accentColor.hex}"
+        substituteInPlace $out/contents/lockscreen/MainBlock.qml \
+            --replace-fail "#D300DC" "${accentColor.hex}" \
+            --replace-fail "#8700FF" "${accentColor.hex}"
+        substituteInPlace $out/contents/splash/images/busy.svg \
+            --replace-fail "rgb(255,0,145)" "rgb(${plasmaAccentColor})"
+
+        ${pkgsUnstable.imagemagick}/bin/magick \
+            $out/contents/splash/images/background.png \
+            -colorspace gray -fill '${accentColor.hex}' -tint 100 \
+            $TMPDIR/background.png
+        mv $TMPDIR/background.png $out/contents/splash/images/background.png
+        ${pkgsUnstable.imagemagick}/bin/magick \
+            $out/contents/splash/images/sweetlogo.png \
+            -colorspace gray -fill '${accentColor.hex}' -tint 100 \
+            $TMPDIR/sweetlogo.png
+        mv $TMPDIR/sweetlogo.png $out/contents/splash/images/sweetlogo.png
+    '';
+
 in
 
 {
@@ -119,8 +178,8 @@ in
 
     # Theme files
     xdg.dataFile = {
-        "plasma/look-and-feel/Sweet".source = "${pkgsUnstable.sweet-nova}/share/plasma/look-and-feel/com.github.eliverlara.sweet/";
-        "plasma/desktoptheme/Sweet".source = inputs.sweet-kde;
+        "plasma/look-and-feel/Sweet".source = sweetLookAndFeel;
+        "plasma/desktoptheme/Sweet".source = sweetDesktopTheme;
         "aurorae/themes/Sweet-Dark-transparent".source = "${pkgsUnstable.sweet-nova}/share/aurorae/themes/Sweet-Dark-transparent";
         "color-schemes/Main.colors".source = pkgsUnstable.writeText "Main.colors" colorSchemeText;
     };

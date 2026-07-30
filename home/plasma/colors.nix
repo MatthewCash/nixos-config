@@ -32,14 +32,59 @@ in
       BackgroundNormal = background;
       DecorationFocus = rgbText;
       DecorationHover = rgbText;
-      ForegroundActive = "61,174,233";
+      ForegroundActive = rgbText;
       ForegroundInactive = "102,106,115";
-      ForegroundLink = "41,128,185";
+      ForegroundLink = rgbText;
       ForegroundNegative = "237,37,78";
       ForegroundNeutral = "255,106,0";
       ForegroundNormal = "195,199,209";
       ForegroundPositive = "113,247,159";
-      ForegroundVisited = "82,148,226";
+      ForegroundVisited = rgbText;
+    };
+
+    "Colors:Complementary" = {
+      BackgroundAlternate = background;
+      BackgroundNormal = background;
+      DecorationFocus = rgbText;
+      DecorationHover = rgbText;
+      ForegroundActive = rgbText;
+      ForegroundInactive = "102,106,115";
+      ForegroundLink = rgbText;
+      ForegroundNegative = "237,37,78";
+      ForegroundNeutral = "255,106,0";
+      ForegroundNormal = "211,218,227";
+      ForegroundPositive = "113,247,159";
+      ForegroundVisited = rgbText;
+    };
+
+    "Colors:Header" = {
+      BackgroundAlternate = background;
+      BackgroundNormal = background;
+      DecorationFocus = rgbText;
+      DecorationHover = rgbText;
+      ForegroundActive = rgbText;
+      ForegroundInactive = "102,106,115";
+      ForegroundLink = rgbText;
+      ForegroundNegative = "237,37,78";
+      ForegroundNeutral = "255,106,0";
+      ForegroundNormal = "211,218,227";
+      ForegroundPositive = "113,247,159";
+      ForegroundVisited = rgbText;
+    };
+
+    "Colors:Header][Inactive" = {
+      BackgroundAlternate = background;
+      BackgroundNormal = background;
+      DecorationFocus = rgbText;
+      DecorationHover = rgbText;
+      ForegroundActive = rgbText;
+      ForegroundInactive = "102,106,115";
+      ForegroundLink = rgbText;
+      ForegroundNegative = "237,37,78";
+      ForegroundNeutral = "255,106,0";
+      ForegroundNormal = "211,218,227";
+      ForegroundPositive = "113,247,159";
+      ForegroundVisited = rgbText;
     };
 
     "Colors:Selection" = {
@@ -62,14 +107,14 @@ in
       BackgroundNormal = background;
       DecorationFocus = rgbText;
       DecorationHover = rgbText;
-      ForegroundActive = "61,174,233";
+      ForegroundActive = rgbText;
       ForegroundInactive = "102,106,115";
-      ForegroundLink = "41,128,185";
+      ForegroundLink = rgbText;
       ForegroundNegative = "237,37,78";
       ForegroundNeutral = "255,106,0";
       ForegroundNormal = "211,218,227";
       ForegroundPositive = "113,247,159";
-      ForegroundVisited = "82,148,226";
+      ForegroundVisited = rgbText;
     };
 
     "Colors:View" = {
@@ -77,14 +122,14 @@ in
       BackgroundNormal = background;
       DecorationFocus = rgbText;
       DecorationHover = rgbText;
-      ForegroundActive = "0,193,228";
+      ForegroundActive = rgbText;
       ForegroundInactive = "102,106,115";
-      ForegroundLink = "82,148,226";
+      ForegroundLink = rgbText;
       ForegroundNegative = "237,37,78";
       ForegroundNeutral = "255,106,0";
       ForegroundNormal = "211,218,227";
       ForegroundPositive = "113,247,159";
-      ForegroundVisited = "124,183,255";
+      ForegroundVisited = rgbText;
     };
 
     "Colors:Window" = {
@@ -92,9 +137,9 @@ in
       BackgroundNormal = background;
       DecorationFocus = rgbText;
       DecorationHover = rgbText;
-      ForegroundActive = "61,174,233";
+      ForegroundActive = rgbText;
       ForegroundInactive = "102,106,115";
-      ForegroundLink = "41,128,185";
+      ForegroundLink = rgbText;
       ForegroundNegative = "237,37,78";
       ForegroundNeutral = "255,106,0";
       ForegroundNormal = "211,218,227";
