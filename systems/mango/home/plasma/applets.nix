@@ -14,7 +14,7 @@ let
         "org.kde.konsole"
         "org.mozilla.Firefox.floating"
         "org.prismlauncher.PrismLauncher"
-        "AxolotlClient 1.21.11"
+        "Minecraft 26.2" # TODO: having to update this all the time sucks
         "steam"
         "steam_app_244210" # content manager
         "assetto-corsa"
