@@ -7,4 +7,10 @@
         AllowSuspendThenHibernate = "no";
         AllowHybridSleep = "no";
     };
+
+    # Keep low-battery warnings without taking an automatic power action.
+    services.upower = {
+        allowRiskyCriticalPowerAction = true;
+        criticalPowerAction = "Ignore";
+    };
 }
