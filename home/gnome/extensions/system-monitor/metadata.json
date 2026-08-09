@@ -1,0 +1,7 @@
+{
+    "uuid": "system-monitor@nixos-config",
+    "name": "System Monitor",
+    "description": "Shows battery drain, CPU usage, and memory usage in the top bar",
+    "shell-version": ["45", "46", "47", "48", "49", "50"],
+    "version": 1
+}
