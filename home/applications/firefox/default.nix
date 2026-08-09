@@ -89,6 +89,7 @@ let
                     (sloth.concat' sloth.runtimeDir "/gvfs")
                     (sloth.concat' sloth.runtimeDir "/gvfsd")
                     (sloth.concat' sloth.runtimeDir "/doc") # For the Document portal
+                    (sloth.concat' sloth.runtimeDir "/speech-dispatcher") # For TTS
                 ];
                 bind.dev = [
                     "/sys/class/hidraw"
