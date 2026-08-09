@@ -45,7 +45,6 @@
         gnome-autoar
         gnome-calendar
         gnome-calculator
-        caribou
         gnome-boxes
         gnome-clocks
         gnome-weather
