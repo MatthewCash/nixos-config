@@ -1,8 +1,20 @@
-{ pkgsUnstable, stableLib, ... }:
+{ pkgsUnstable, stableLib, accentColor, ... }:
+
+let
+    shellCss = pkgsUnstable.runCommand "gnome-shell-system-css" { } /* bash */ ''
+        ${pkgsUnstable.glib.dev}/bin/gresource extract \
+            ${pkgsUnstable.gnome-shell}/share/gnome-shell/gnome-shell-theme.gresource \
+            /org/gnome/shell/theme/gnome-shell-dark.css \
+        | sed 's/-st-accent-color/${accentColor.hex}/g' \
+        > $out
+    '';
+    shellResourceOverlay = "/org/gnome/shell/theme/gnome-shell-dark.css=${shellCss}";
+in
 
 {
     services = {
         displayManager.gdm.enable = true;
+        displayManager.generic.environment.G_RESOURCE_OVERLAYS = shellResourceOverlay;
         desktopManager.gnome.enable = true;
     };
 
@@ -37,6 +49,7 @@
     }];
 
     environment.sessionVariables = {
+        G_RESOURCE_OVERLAYS = shellResourceOverlay;
         QT_STYLE_OVERRIDE = stableLib.mkForce "\${QT_STYLE_OVERRIDE}";
         NIXOS_OZONE_WL = "1";
     };
