@@ -187,6 +187,7 @@ in
             Description = "Mute Minecraft when it is not focused";
             After = [ "graphical-session.target" "pipewire-pulse.service" ];
             PartOf = [ "graphical-session.target" ];
+            ConditionEnvironment = "XDG_CURRENT_DESKTOP=KDE";
         };
 
         Service = {
