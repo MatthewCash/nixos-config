@@ -16,6 +16,7 @@ builtins.map (path: ../../../home/${path}) [
     "gnome/extensions/tray-icons-reloaded.nix"
     "gnome/extensions/desktop-cube.nix"
     "gnome/extensions/blur-my-shell.nix"
+    "gnome/extensions/system-monitor.nix"
     "desktop/userDirs.nix"
     "desktop/wireplumber.nix"
 
