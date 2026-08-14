@@ -63,6 +63,10 @@ in
                 "<Super>q"
                 "<Alt>f4"
             ];
+            switch-applications = [ ];
+            switch-applications-backward = [ ];
+            switch-windows = [ "<Alt>Tab" ];
+            switch-windows-backward = [ "<Shift><Alt>Tab" ];
         };
 
         "org/gnome/mutter" = {
