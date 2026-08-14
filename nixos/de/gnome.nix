@@ -36,7 +36,10 @@ in
         settings = {
             "org/gnome/settings-daemon/plugins/power".sleep-inactive-ac-type = "nothing";
             "org/gnome/desktop/input-sources".xkb-options = [ "caps:escape" ];
-            "org/gnome/desktop/interface".show-battery-percentage = true;
+            "org/gnome/desktop/interface" = {
+                show-battery-percentage = true;
+                scaling-factor = stableLib.gvariant.mkUint32 1;
+            };
                 "org/gnome/desktop/peripherals/touchpad" = {
                 tap-to-click = true;
                 two-finger-scrolling-enabled = true;
