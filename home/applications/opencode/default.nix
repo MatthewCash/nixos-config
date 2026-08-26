@@ -3,6 +3,7 @@
 {
     programs.opencode = {
         enable = true;
+        extraPackages = [ pkgsUnstable.libnotify ];
 
         settings = {
             autoupdate = false;
@@ -106,7 +107,16 @@
             };
         };
 
-        tui.theme = "main";
+        tui = {
+            theme = "main";
+            scroll_speed = 1;
+            plugin = [
+                "./plugins/desktop-notifications.ts"
+                "./plugins/openai-usage.tsx"
+            ];
+            plugin_enabled."internal:notifications" = false;
+            plugin_enabled."internal:sidebar-context" = false;
+        };
 
         themes.main.theme = {
             primary = accentColor.hex;
@@ -160,6 +170,11 @@
             syntaxOperator = "#e6e6e6";
             syntaxPunctuation = "#888888";
         };
+    };
+
+    xdg.configFile = {
+        "opencode/plugins/desktop-notifications.ts".source = ./desktop-notifications.ts;
+        "opencode/plugins/openai-usage.tsx".source = ./openai-usage.tsx;
     };
 
     home.persistence."${persistenceHomePath}" = {
