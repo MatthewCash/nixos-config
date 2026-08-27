@@ -34,6 +34,7 @@ builtins.map (path: ../../../nixos/${path}) [
     "uhid.nix"
     "systemd/config.nix"
     "systemd/logind.nix"
+    "systemd/sleep.nix"
     "bluetooth.nix"
     "fwupd.nix"
     "services/evolution.nix"
