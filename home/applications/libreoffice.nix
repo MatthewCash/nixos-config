@@ -1,5 +1,5 @@
 { pkgsUnstable, ... }:
 
 {
-    home.packages = with pkgsUnstable; [ libreoffice-fresh ];
+    home.packages = with pkgsUnstable; [ libreoffice-stable];
 }
