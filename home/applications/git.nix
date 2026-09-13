@@ -11,7 +11,10 @@
             };
 
             init.defaultBranch = "main";
-            core.whitespace = "trailing-space,space-before-tab";
+            core = {
+                whitespace = "trailing-space,space-before-tab";
+                sshCommand = "ssh -i ~/.ssh/id_git -o IdentitiesOnly=yes";
+            };
             push.autoSetupRemote = true;
         };
 
