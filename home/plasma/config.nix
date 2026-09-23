@@ -78,6 +78,17 @@ in
     programs.plasma = {
         enable = true;
 
+        input.keyboard = {
+            layouts = [
+                {
+                    layout = "us";
+                    variant = "colemak_dh";
+                }
+                { layout = "us"; }
+            ];
+            options = [ "caps:escape" ];
+        };
+
         workspace.iconTheme = "BeautyLine";
         workspace.colorScheme = "Main";
 
@@ -156,10 +167,6 @@ in
                 Theme = "Sweet";
             };
             plasmarc.Theme.name = "Sweet";
-            kxkbrc.Layout = {
-                Options = "caps:escape";
-                ResetOldOptions = true;
-            };
             plasma-localerc.Formats.LC_TIME = "C";
             plasmaparc.General = {
                 AudioFeedback = false;
