@@ -94,7 +94,7 @@ let
                 bind.dev = [
                     "/sys/class/hidraw"
                     "/sys/devices/virtual/misc/uhid"
-                    (sloth.realpath (sloth.concat' sloth.runtimeDir "/tpm-fido-hidrawnode"))
+                    (sloth.realpath "/dev/tpm-fido-hidrawnode")
                 ];
                 bind.ro = [
                     "/etc/fonts"
