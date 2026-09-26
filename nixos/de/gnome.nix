@@ -18,16 +18,7 @@ in
         desktopManager.gnome.enable = true;
     };
 
-    services.libinput.enable = true;
-
-    users.extraUsers.gdm.extraGroups = [ "video" ];
-
-    services.gnome = {
-        core-apps.enable = false;
-        gnome-keyring.enable = true;
-        gnome-browser-connector.enable = true;
-        gnome-settings-daemon.enable = true;
-    };
+    services.gnome.core-apps.enable = false;
 
     environment.gnome.excludePackages = with pkgsUnstable; [ gnome-tour ];
 
@@ -40,10 +31,10 @@ in
                 show-battery-percentage = true;
                 scaling-factor = stableLib.gvariant.mkUint32 1;
             };
-                "org/gnome/desktop/peripherals/touchpad" = {
+            "org/gnome/desktop/peripherals/touchpad" = {
                 tap-to-click = true;
                 two-finger-scrolling-enabled = true;
-                    click-method = "areas";
+                click-method = "areas";
                 natural-scroll = true;
                 send-events = "enabled";
                 speed = 0.6;
@@ -56,10 +47,4 @@ in
         QT_STYLE_OVERRIDE = stableLib.mkForce "\${QT_STYLE_OVERRIDE}";
         NIXOS_OZONE_WL = "1";
     };
-
-    programs.dconf.enable = true;
-
-    services.dbus.packages = with pkgsUnstable; [ dconf gcr ];
-
-    services.udev.packages = with pkgsUnstable; [ gnome-settings-daemon ];
 }
