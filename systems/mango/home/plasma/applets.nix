@@ -8,7 +8,7 @@ let
 
     taskManagerOrderedAppIds = [
         # screen 1
-        "thunderbird"
+        "org.mozilla.Thunderbird"
         "org.mozilla.Firefox.layout"
         "org.kde.dolphin"
         "org.kde.konsole"
