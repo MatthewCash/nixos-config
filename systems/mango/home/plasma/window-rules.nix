@@ -172,7 +172,7 @@ in
         {
             description = "Position Thunderbird";
             match.window-class = {
-                value = "thunderbird";
+                value = "org.mozilla.Thunderbird";
                 match-whole = false;
             };
             apply = {
