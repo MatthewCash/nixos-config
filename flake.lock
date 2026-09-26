@@ -388,11 +388,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790292277,
-        "narHash": "sha256-z+knvdMItRrMonmG4RIsqKYIa/hwYUzKjotDTfC5DDc=",
+        "lastModified": 1790365885,
+        "narHash": "sha256-iQ0ebhiVo64NktTnwft9hNxlFu4j5cvljVxyJaEVIP4=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "4b9add8645d5e2b0f7de18f7a442d08fe2bdcc91",
+        "rev": "7b4c5ec4bedaf1e062bbc1bcaeddbc6bd242aa1b",
         "type": "github"
       },
       "original": {
@@ -583,11 +583,11 @@
     },
     "nixpkgsUnstable": {
       "locked": {
-        "lastModified": 1790185690,
-        "narHash": "sha256-xJ+X4hBtOcAFGBOe5nAMyMUeF9foJBmIOu3NjBqBycU=",
+        "lastModified": 1790323409,
+        "narHash": "sha256-VVTPf+Hyd5ebpjBMHmrLMSBIeW6ls48Bqtosj7CNKLA=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "4975466d324710c576dc11ad614684e6bd8cad8e",
+        "rev": "e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
         "type": "github"
       },
       "original": {
@@ -625,11 +625,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784480075,
-        "narHash": "sha256-Vch6qUu4/+DQVQPdMEvXecRG6q+/m+BRw3WOxonj4Mw=",
+        "lastModified": 1789222132,
+        "narHash": "sha256-sxqDeWjDDq50U9uAwo7G4mG5Q7txKG/6dUbnYi0E5r8=",
         "owner": "MatthewCash",
         "repo": "plasma-video-wallpaper",
-        "rev": "4d3df3822b3ac660af3497f523d0f205a95fb1ff",
+        "rev": "38965dba60c6fb1141152d3efd2aa3cf9927fc59",
         "type": "github"
       },
       "original": {
