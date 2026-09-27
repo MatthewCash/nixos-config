@@ -19,7 +19,6 @@ builtins.map (path: ../../../nixos/${path}) [
     "hardware/tpm.nix"
     "hardware/keyboard.nix"
     "hardware/gpu.nix"
-    # "hardware/usbguard.nix"
     "de/plasma.nix"
     "ld.nix"
     "cpu/scheduler.nix"
@@ -37,7 +36,6 @@ builtins.map (path: ../../../nixos/${path}) [
     "systemd/sleep.nix"
     "bluetooth.nix"
     "fwupd.nix"
-    "dbus.nix"
     "kmscon.nix"
     "podman.nix"
     "xdg.nix"
@@ -51,5 +49,4 @@ builtins.map (path: ../../../nixos/${path}) [
     ./gpu.nix
     ./keyboard.nix
     ./plasma.nix
-    # ./usbguard.nix
 ]

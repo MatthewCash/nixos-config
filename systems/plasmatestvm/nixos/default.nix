@@ -21,7 +21,6 @@ builtins.map (path: ../../../nixos/${path}) [
     "docs.nix"
     "pam-mount.nix"
     "systemd/config.nix"
-    "dbus.nix"
     "kmscon.nix"
     "flatpak.nix"
     "podman.nix"

@@ -21,7 +21,6 @@ builtins.map (path: ../../../nixos/${path}) [
     "systemd/config.nix"
     "systemd/logind.nix"
     "kmscon.nix"
-    "dbus.nix"
     "podman.nix"
 ] ++ [
     ./networking.nix

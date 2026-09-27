@@ -38,7 +38,6 @@ builtins.map (path: ../../../nixos/${path}) [
     "bluetooth.nix"
     "fwupd.nix"
     "services/evolution.nix"
-    "dbus.nix"
     "kmscon.nix"
     "podman.nix"
     "xdg.nix"

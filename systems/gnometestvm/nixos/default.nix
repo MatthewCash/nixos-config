@@ -22,7 +22,6 @@ builtins.map (path: ../../../nixos/${path}) [
     "systemd/config.nix"
     "systemd/logind.nix"
     "services/evolution.nix"
-    "dbus.nix"
     "kmscon.nix"
     "xdg.nix"
 ] ++ [
