@@ -1,12 +1,7 @@
 { pkgsUnstable, ... }:
 
 {
-    services.displayManager = {
-        defaultSession = "plasma";
-        plasma-login-manager.enable = true;
-    };
-
-    services.libinput.enable = true;
+    services.displayManager.plasma-login-manager.enable = true;
 
     services.desktopManager.plasma6.enable = true;
 
@@ -17,10 +12,4 @@
     ];
 
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
-    programs.dconf.enable = true;
-
-    services.dbus.packages = with pkgsUnstable; [ dconf ];
-
-    xdg.portal.extraPortals = with pkgsUnstable; [ xdg-desktop-portal-gtk ];
 }
