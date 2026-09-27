@@ -53,6 +53,7 @@ builtins.map (path: ../../../home/${path}) [
 ] ++ [
     ./defaultApps.nix
     ./channel-mixer
+    ./looper
     ./audio-buses.nix
 
     ./plasma/mouse.nix

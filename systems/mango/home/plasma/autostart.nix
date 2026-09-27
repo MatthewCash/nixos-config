@@ -11,6 +11,7 @@ let
         "assetto-corsa"
         "guitarix"
         "channel-mixer"
+        "looper"
 
         "org.mozilla.Firefox.transparent"
         "com.discord.vesktop.personal"

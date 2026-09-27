@@ -41,17 +41,21 @@ let
         panelSpacerHeight = 1.0 * panel.spacerHeight / screen.height;
         audioRowHeight = 1 - firefoxHeight - panelSpacerHeight;
         vesktopHeight = 0.5;
+        looperVisualHeightPixels = 215;
 
         leftWidthPixels = screen.width * leftWidth;
         audioRowVisualWidth = leftWidthPixels - tilePadding - (tilePadding - tileGap.innerStart);
         audioPrimaryVisualWidth = round ((audioRowVisualWidth - (2 * tilePadding)) / 3.0);
-        guitarixTileWidthPixels = audioPrimaryVisualWidth - (tileGap.innerEnd - tileGap.outerStart);
+        firstColumnTileWidthPixels = audioPrimaryVisualWidth - (tileGap.innerEnd - tileGap.outerStart);
         pipewireBusMixerTileWidthPixels = audioPrimaryVisualWidth - (tileGap.innerEnd - tileGap.innerStart);
-        audioControlsTileWidthPixels = leftWidthPixels - guitarixTileWidthPixels - pipewireBusMixerTileWidthPixels;
+        thirdColumnTileWidthPixels = leftWidthPixels - firstColumnTileWidthPixels - pipewireBusMixerTileWidthPixels;
+        looperTileHeightPixels = looperVisualHeightPixels - (tileGap.innerEnd - tileGap.innerStart);
 
-        guitarixTileWidth = 1.0 * guitarixTileWidthPixels / screen.width;
+        firstColumnTileWidth = 1.0 * firstColumnTileWidthPixels / screen.width;
         pipewireBusMixerTileWidth = 1.0 * pipewireBusMixerTileWidthPixels / screen.width;
-        audioControlsWidth = 1.0 * audioControlsTileWidthPixels / screen.width;
+        thirdColumnTileWidth = 1.0 * thirdColumnTileWidthPixels / screen.width;
+        looperHeight = 1.0 * looperTileHeightPixels / screen.height;
+        pipewireBusMixerHeight = audioRowHeight - looperHeight;
     };
 
     tileGap = rec {
@@ -85,16 +89,28 @@ let
             height = screen.height * layout.firefoxHeight;
         };
         guitarix = {
-            x = screen.x;
+            x = looper.x + looper.width;
             y = screen.y + firefox.height;
-            width = layout.guitarixTileWidthPixels;
+            width = layout.thirdColumnTileWidthPixels;
             height = screen.height * layout.audioRowHeight;
         };
         pipewireBusMixer = {
-            x = guitarix.x + guitarix.width;
-            y = guitarix.y;
+            x = looper.x;
+            y = looper.y + looper.height;
+            width = looper.width;
+            height = guitarix.height - looper.height;
+        };
+        audioControls = {
+            x = screen.x;
+            y = screen.y + firefox.height;
+            width = layout.firstColumnTileWidthPixels;
+            height = screen.height * layout.audioRowHeight;
+        };
+        looper = {
+            x = audioControls.x + audioControls.width;
+            y = audioControls.y;
             width = layout.pipewireBusMixerTileWidthPixels;
-            height = guitarix.height;
+            height = layout.looperTileHeightPixels;
         };
         vesktopPersonal = {
             x = screen.x + screen.width * layout.leftWidth;
@@ -112,8 +128,10 @@ let
 
     ruleGeometry = {
         firefox = tileToGeometry tiles.firefox { left = "outer"; top = "outer"; right = "inner"; bottom = "inner"; };
-        guitarix = tileToGeometry tiles.guitarix { left = "outer"; top = "inner"; right = "inner"; bottom = "inner"; };
+        audioControls = tileToGeometry tiles.audioControls { left = "outer"; top = "inner"; right = "inner"; bottom = "inner"; };
+        guitarix = tileToGeometry tiles.guitarix { left = "inner"; top = "inner"; right = "inner"; bottom = "inner"; };
         pipewireBusMixer = tileToGeometry tiles.pipewireBusMixer { left = "inner"; top = "inner"; right = "inner"; bottom = "inner"; };
+        looper = tileToGeometry tiles.looper { left = "inner"; top = "inner"; right = "inner"; bottom = "inner"; };
         vesktopPersonal = tileToGeometry tiles.vesktopPersonal { left = "inner"; top = "outer"; right = "outer"; bottom = "inner"; };
         vesktopBusiness = tileToGeometry tiles.vesktopBusiness { left = "inner"; top = "inner"; right = "outer"; bottom = "outer"; };
         centeredLeft = centerOnScreen leftScreen { width = 1280; height = 800; };
@@ -144,9 +162,16 @@ in
                                     layoutDirection = "horizontal";
                                     height = layout.audioRowHeight;
                                     tiles = [
-                                        { width = layout.guitarixTileWidth; }
-                                        { width = layout.pipewireBusMixerTileWidth; }
-                                        { width = layout.audioControlsWidth; }
+                                        { width = layout.firstColumnTileWidth; }
+                                        {
+                                            layoutDirection = "vertical";
+                                            width = layout.pipewireBusMixerTileWidth;
+                                            tiles = [
+                                                { height = layout.looperHeight; }
+                                                { height = layout.pipewireBusMixerHeight; }
+                                            ];
+                                        }
+                                        { width = layout.thirdColumnTileWidth; }
                                     ];
                                 }
                                 { height = layout.panelSpacerHeight; }
@@ -263,6 +288,20 @@ in
             apply = {
                 position.value = ruleGeometry.pipewireBusMixer.position;
                 size.value = ruleGeometry.pipewireBusMixer.size;
+            };
+        }
+        {
+            description = "Position Looper";
+            match = {
+                window-class = {
+                    value = "looper";
+                    match-whole = false;
+                };
+                title = "Looper";
+            };
+            apply = {
+                position.value = ruleGeometry.looper.position;
+                size.value = ruleGeometry.looper.size;
             };
         }
         {
