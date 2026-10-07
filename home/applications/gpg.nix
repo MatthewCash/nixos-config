@@ -7,7 +7,10 @@
     };
 
     home.persistence."${persistenceHomePath}".directories = [
-        ".config/gnupg"
+        {
+            directory = ".config/gnupg";
+            mode = "0700";
+        }
     ];
 
     services.gpg-agent = {
