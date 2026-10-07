@@ -13,6 +13,10 @@
 
     fileSystems."/mnt/persist".neededForBoot = true;
 
+    systemd.tmpfiles.rules = [
+        "D! /mnt/persist/tmp 1777 root root -"
+    ];
+
     disko.devices = {
         disk.main.content = {
             type = "gpt";
