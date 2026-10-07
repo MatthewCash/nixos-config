@@ -4,6 +4,7 @@
     environment.persistence.${persistPath} = {
         directories = [
             "/var/log"
+            "/var/lib/systemd/timers"
         ];
         files = [
             "/etc/machine-id"
