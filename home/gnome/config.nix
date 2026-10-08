@@ -94,6 +94,7 @@ in
         };
 
         "org/gnome/shell" = {
+            always-show-log-out = true;
             enabled-extensions = [
                 "places-menu@gnome-shell-extensions.gcampax.github.com"
             ];
