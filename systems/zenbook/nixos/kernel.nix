@@ -1,12 +1,12 @@
-{ stableLib, kernelPackages, inputs, system, ... }:
+{ stableLib, kernelPackages, ... }:
 
 let
-    asus-wmi-screenpad = inputs.asus-wmi-screenpad.defaultPackage.${system}.override kernelPackages.kernel;
+    asus-screenpad-backlight = kernelPackages.callPackage ./screenpad-backlight { };
 in
 
 {
-    boot.extraModulePackages = with kernelPackages; [ turbostat asus-wmi-screenpad ];
-    boot.kernelModules = [ "asus-wmi-screenpad" ];
+    boot.extraModulePackages = with kernelPackages; [ turbostat asus-screenpad-backlight ];
+    boot.kernelModules = [ "asus-screenpad-backlight" ];
 
     boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
 

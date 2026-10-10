@@ -7,11 +7,6 @@
             inputs.nixpkgs.follows = "nixpkgsUnstable";
         };
 
-        asus-wmi-screenpad = {
-            url = "github:MatthewCash/asus-wmi-screenpad-module";
-            inputs.nixpkgs.follows = "nixpkgsUnstable";
-        };
-
         aurebesh-fonts = {
             url = "github:MatthewCash/aurebesh-fonts";
             inputs.nixpkgs.follows = "nixpkgsStable";
