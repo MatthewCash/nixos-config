@@ -42,6 +42,11 @@
             flake = false;
         };
 
+        gaze = {
+            url = "github:GunduLabs/gaze";
+            inputs.nixpkgs.follows = "nixpkgsUnstable";
+        };
+
         home-manager = {
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgsUnstable";
