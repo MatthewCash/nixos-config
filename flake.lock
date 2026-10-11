@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784937437,
-        "narHash": "sha256-nQmS4H6ds7UUT+BdnD2c3ALJsup/YmPX/WuOw/ckjc8=",
+        "lastModified": 1790650906,
+        "narHash": "sha256-IEMaXnuRKPSg6KlyMc/dp7iXXtzFioHaIpEyKse4KS4=",
         "owner": "MatthewCash",
         "repo": "ac-linux-manager",
-        "rev": "9cea91a69ff953bfb29d5848bc90358f45de7604",
+        "rev": "af8c694cf7a9879febb4193ba5b99910ff36ad35",
         "type": "github"
       },
       "original": {
@@ -28,7 +28,7 @@
           "ragenix",
           "nixpkgs"
         ],
-        "systems": "systems_2"
+        "systems": "systems"
       },
       "locked": {
         "lastModified": 1761656077,
@@ -66,17 +66,16 @@
     },
     "codium-theme": {
       "inputs": {
-        "flake-utils": "flake-utils",
         "nixpkgs": [
           "nixpkgsStable"
         ]
       },
       "locked": {
-        "lastModified": 1681753963,
-        "narHash": "sha256-ix2SfZclG+30MPISOdF1mzdNgDaLaa2xwJC92lJRqec=",
+        "lastModified": 1790647773,
+        "narHash": "sha256-eYgf53UesAJOhLeSP1ab0qOCf2Z/jxTV42Ui+4JkU/Q=",
         "owner": "MatthewCash",
         "repo": "codium-theme",
-        "rev": "6b714f489dbc2b858f8869d731e8711c0b0e532e",
+        "rev": "8dbc4850ad5f87686e737db673a8482ffcc70ac2",
         "type": "github"
       },
       "original": {
@@ -177,11 +176,11 @@
     "firefox-gnome-theme": {
       "flake": false,
       "locked": {
-        "lastModified": 1775142784,
-        "narHash": "sha256-I9oqnGpsHMuY2kNggif9cK0O5NFYncHQkCcnKYJz9AY=",
+        "lastModified": 1791153453,
+        "narHash": "sha256-FEr8AziQBAgXGOHkXjbNMZ5zB06AwiOZCrbyoulC1eo=",
         "owner": "rafaelmardojai",
         "repo": "firefox-gnome-theme",
-        "rev": "79c0c35e9d9211a75db71fa6f0c3c9254506d843",
+        "rev": "3d92d85960e8a45b37780ef4721f0459fe4764cf",
         "type": "github"
       },
       "original": {
@@ -194,11 +193,11 @@
     "firefox-mods": {
       "flake": false,
       "locked": {
-        "lastModified": 1785197002,
-        "narHash": "sha256-HD8hF0AocLWLSVMSluP+eKvVwC/6WtrIlaG5WViv6Lw=",
+        "lastModified": 1791643666,
+        "narHash": "sha256-baJWtTVIaUvZxaPHFLGBHgm8C63H0fEVo/iL5UNN1i8=",
         "owner": "MatthewCash",
         "repo": "firefox-mods",
-        "rev": "795adc7e236ac4ece5e257e443167ba6afd51e86",
+        "rev": "ba6b4d566be30049faec6a3b76f9120075e6e930",
         "type": "github"
       },
       "original": {
@@ -246,25 +245,7 @@
     },
     "flake-utils": {
       "inputs": {
-        "systems": "systems"
-      },
-      "locked": {
-        "lastModified": 1681037374,
-        "narHash": "sha256-XL6X3VGbEFJZDUouv2xpKg2Aljzu/etPLv5e1FPt1q0=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "033b9f258ca96a10e543d4442071f614dc3f8412",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_2": {
-      "inputs": {
-        "systems": "systems_3"
+        "systems": "systems_2"
       },
       "locked": {
         "lastModified": 1731533236,
@@ -334,11 +315,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790292277,
-        "narHash": "sha256-z+knvdMItRrMonmG4RIsqKYIa/hwYUzKjotDTfC5DDc=",
+        "lastModified": 1791642191,
+        "narHash": "sha256-0bK0A59rVUn1SRZzo4cNi4VSqAe7vR1gL2/MZl53Frw=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "4b9add8645d5e2b0f7de18f7a442d08fe2bdcc91",
+        "rev": "c58f54c733a7894d84fa2fdff26cc12088c4b78c",
         "type": "github"
       },
       "original": {
@@ -400,11 +381,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783730546,
-        "narHash": "sha256-y/QOyacyPMJLghWb59xnkUapbtbNqfxGGCLakS7YIUk=",
+        "lastModified": 1791431426,
+        "narHash": "sha256-QySACGREVvxXjfixIuvSwjvKfVotyyLg6nYgJoM1C0k=",
         "owner": "MatthewCash",
         "repo": "impermanence",
-        "rev": "03a85f2f61031542a01fcad81915ce741d4ba6a5",
+        "rev": "922e3eeb06f2e5f81d02c773402bf4c58bff0b88",
         "type": "github"
       },
       "original": {
@@ -529,11 +510,11 @@
     },
     "nixpkgsUnstable": {
       "locked": {
-        "lastModified": 1790185690,
-        "narHash": "sha256-xJ+X4hBtOcAFGBOe5nAMyMUeF9foJBmIOu3NjBqBycU=",
+        "lastModified": 1791594108,
+        "narHash": "sha256-XK4KceonkwD8LuMAt/vNrz982mXJM5jeHAxMwsUXXAQ=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "4975466d324710c576dc11ad614684e6bd8cad8e",
+        "rev": "6510408d147d8c5e6d76043e899e9251756f6a75",
         "type": "github"
       },
       "original": {
@@ -571,11 +552,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784480075,
-        "narHash": "sha256-Vch6qUu4/+DQVQPdMEvXecRG6q+/m+BRw3WOxonj4Mw=",
+        "lastModified": 1791643921,
+        "narHash": "sha256-HY9vZvE+BTYk9KthPRfegrwVI/RfjWmpWuZ9tcWvujM=",
         "owner": "MatthewCash",
         "repo": "plasma-video-wallpaper",
-        "rev": "4d3df3822b3ac660af3497f523d0f205a95fb1ff",
+        "rev": "5319ee1dd549bf58086145916da6b24cd234e8d7",
         "type": "github"
       },
       "original": {
@@ -611,7 +592,7 @@
       "inputs": {
         "agenix": "agenix",
         "crane": "crane_2",
-        "flake-utils": "flake-utils_2",
+        "flake-utils": "flake-utils",
         "nixpkgs": [
           "nixpkgsStable"
         ],
@@ -729,21 +710,6 @@
       }
     },
     "systems_2": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
-    "systems_3": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
