@@ -198,7 +198,7 @@
 
         files = [
             ".local/share/opencode/auth.json"
-            ".local/share/opencode/opencode-stable.db"
+            ".local/share/opencode/opencode.db"
         ];
     };
 }
