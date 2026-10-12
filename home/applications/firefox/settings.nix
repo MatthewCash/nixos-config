@@ -63,6 +63,7 @@
                 "panic-button"
                 "print-button"
                 "screenshot-button"
+                "sidebar-button"
             ];
             "nav-bar" = [
                 "back-button"
@@ -120,6 +121,9 @@
 
     # Hide Firefox View
     "browser.tabs.firefox-view" = false;
+
+    "sidebar.revamp" = false;
+    "sidebar.verticalTabs" = false;
 
     # Allow unverified addons
     "xpinstall.signatures.required" = false;
