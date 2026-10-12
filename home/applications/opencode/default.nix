@@ -5,6 +5,18 @@
         enable = true;
         extraPackages = [ pkgsUnstable.libnotify ];
 
+        context = ''
+            Do not use playwright unless DOM access is truly necessary and the user intends it.
+            Use `nix shell` to use packages that are not in PATH.
+            / (and /tmp) may be on a small tmpfs, if so, use /mnt/persist/tmp for large temp.
+            Do not attempt to use sudo.
+            Do not attempt to `nixos-rebuild switch`.
+            Do not ask for broad directory access like /, ~, or ~/.config.
+            If root is ABSOLUTELY necessary, you can use run0, but ONLY with simple commands and SHORT inline scripts, not arbitrary files.
+            Do not search (grep) large directories like /nix/store.
+            If asked to commit, do not add a coauthor or sign the commit, it may break the harness.
+        '';
+
         settings = {
             autoupdate = false;
             model = "openai/gpt-5.6-sol";
@@ -76,27 +88,29 @@
                 };
             };
 
-            mcp.playwright = {
-                type = "local";
-                command = [
-                    (lib.getExe pkgsUnstable.playwright-mcp)
-                    "--browser"
-                    "firefox"
-                    "--isolated"
-                ];
-                enabled = true;
-            };
+            mcp = {
+                playwright = {
+                    type = "local";
+                    command = [
+                        (lib.getExe pkgsUnstable.playwright-mcp)
+                        "--browser"
+                        "firefox"
+                        "--isolated"
+                    ];
+                    enabled = true;
+                };
 
-            mcp.nixos = {
-                type = "local";
-                command = [ (lib.getExe pkgsUnstable.mcp-nixos) ];
-                enabled = true;
-            };
+                nixos = {
+                    type = "local";
+                    command = [ (lib.getExe pkgsUnstable.mcp-nixos) ];
+                    enabled = true;
+                };
 
-            mcp.context7 = {
-                type = "local";
-                command = [ (lib.getExe pkgsUnstable.context7-mcp) ];
-                enabled = true;
+                context7 = {
+                    type = "local";
+                    command = [ (lib.getExe pkgsUnstable.context7-mcp) ];
+                    enabled = true;
+                };
             };
 
             permission = {
