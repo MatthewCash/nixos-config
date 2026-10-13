@@ -20,4 +20,6 @@ in
             source = "/etc/plasma/wallpaper_video";
         };
     };
+
+    hardware.i2c.enable = true;
 }
