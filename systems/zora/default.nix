@@ -1,7 +1,7 @@
 { nixpkgsUnstable, ... }:
 
 rec {
-    hostname = "zenbook";
+    hostname = "zora";
     system = "x86_64-linux";
     systemNixpkgs = nixpkgsUnstable;
     kernelPackages = nixpkgsUnstable.legacyPackages.${system}.linuxPackages_latest;
