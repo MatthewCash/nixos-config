@@ -11,6 +11,7 @@
         plasma-browser-integration
         konsole
         oxygen
+        discover
     ];
 
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
