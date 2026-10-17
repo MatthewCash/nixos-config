@@ -2,7 +2,7 @@
 
 let
     steam = pkgsUnstable.steam.override {
-        extraPkgs = _: [ config.gtk.cursorTheme.package ]; # fix cursors
+        extraPkgs = _: [ config.gtk.cursorTheme.package pkgsUnstable.pulseaudio ];
     };
 in
 
