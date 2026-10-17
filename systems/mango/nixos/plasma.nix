@@ -21,5 +21,8 @@ in
         };
     };
 
+    # plasma-video-wallpaper needs this
+    systemd.services.plasmalogin.environment.LC_NUMERIC = "C";
+
     hardware.i2c.enable = true;
 }
