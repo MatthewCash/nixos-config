@@ -54,7 +54,7 @@
         };
 
         lanzaboote = {
-            url = "github:nix-community/lanzaboote/v1.1.0";
+            url = "github:nix-community/lanzaboote/v1.2.0";
             inputs.nixpkgs.follows = "nixpkgsStable";
         };
 
@@ -63,7 +63,7 @@
             inputs.nixpkgs.follows = "nixpkgsUnstable";
         };
 
-        nixpkgsStable.url = "github:nixos/nixpkgs/nixos-25.11";
+        nixpkgsStable.url = "github:nixos/nixpkgs/nixos-26.05";
         nixpkgsUnstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
         nixpak = {
