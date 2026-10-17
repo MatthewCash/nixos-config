@@ -2,8 +2,8 @@
     description = "NixOS and Home Manager Configuration";
 
     inputs = {
-        ac-linux-manager = {
-            url = "github:MatthewCash/ac-linux-manager";
+        korsa = {
+            url = "github:MatthewCash/korsa";
             inputs.nixpkgs.follows = "nixpkgsUnstable";
         };
 

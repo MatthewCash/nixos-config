@@ -16,8 +16,7 @@ let
         "org.prismlauncher.PrismLauncher"
         "Minecraft 26.2" # TODO: having to update this all the time sucks
         "steam"
-        "steam_app_244210" # content manager
-        "assetto-corsa"
+        "korsa"
         # screen 2
         "org.mozilla.Firefox.transparent"
         "com.discord.vesktop.personal"

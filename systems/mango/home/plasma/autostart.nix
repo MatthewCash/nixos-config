@@ -8,7 +8,7 @@ let
         "org.kde.konsole"
         "org.mozilla.Firefox.floating"
         "prismlauncher-enderscale"
-        "assetto-corsa"
+        "korsa"
         "guitarix"
         "channel-mixer"
         "looper"

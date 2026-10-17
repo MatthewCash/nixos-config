@@ -1,25 +1,5 @@
 {
   "nodes": {
-    "ac-linux-manager": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgsUnstable"
-        ]
-      },
-      "locked": {
-        "lastModified": 1784937437,
-        "narHash": "sha256-nQmS4H6ds7UUT+BdnD2c3ALJsup/YmPX/WuOw/ckjc8=",
-        "owner": "MatthewCash",
-        "repo": "ac-linux-manager",
-        "rev": "9cea91a69ff953bfb29d5848bc90358f45de7604",
-        "type": "github"
-      },
-      "original": {
-        "owner": "MatthewCash",
-        "repo": "ac-linux-manager",
-        "type": "github"
-      }
-    },
     "agenix": {
       "inputs": {
         "darwin": "darwin",
@@ -372,6 +352,26 @@
         "type": "github"
       }
     },
+    "korsa": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgsUnstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790650906,
+        "narHash": "sha256-IEMaXnuRKPSg6KlyMc/dp7iXXtzFioHaIpEyKse4KS4=",
+        "owner": "MatthewCash",
+        "repo": "korsa",
+        "rev": "af8c694cf7a9879febb4193ba5b99910ff36ad35",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MatthewCash",
+        "repo": "korsa",
+        "type": "github"
+      }
+    },
     "kvlibadwaita": {
       "flake": false,
       "locked": {
@@ -591,7 +591,6 @@
     },
     "root": {
       "inputs": {
-        "ac-linux-manager": "ac-linux-manager",
         "aurebesh-fonts": "aurebesh-fonts",
         "codium-theme": "codium-theme",
         "discord-css": "discord-css",
@@ -600,6 +599,7 @@
         "firefox-mods": "firefox-mods",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
+        "korsa": "korsa",
         "kvlibadwaita": "kvlibadwaita",
         "lanzaboote": "lanzaboote",
         "nixos-generators": "nixos-generators",

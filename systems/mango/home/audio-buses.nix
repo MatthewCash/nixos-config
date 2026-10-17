@@ -109,10 +109,10 @@ let
 
             return app_name == "steam"
                 or app_name == "steamwebhelper"
-                or app_name == "ac linux manager"
+                or app_name == "Korsa"
                 or app_id == "com.valvesoftware.steam"
-                or app_id == "ac-linux-manager"
-                or binary == "ac-linux-manager"
+                or app_id == "korsa"
+                or binary == "korsa"
                 or binary == "steam"
                 or binary == "steamwebhelper"
                 or node_name:find("steam", 1, true) ~= nil
@@ -209,7 +209,7 @@ let
                     {
                         "media.type" = "Audio";
                         "media.category" = "Playback";
-                        "application.process.binary" = "ac-linux-manager";
+                        "application.process.binary" = "korsa";
                     }
                     {
                         "media.type" = "Audio";

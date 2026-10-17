@@ -55,6 +55,7 @@ builtins.map (path: ../../../home/${path}) [
     ./channel-mixer
     ./looper
     ./audio-buses.nix
+    ./applications/korsa.nix
 
     ./plasma/mouse.nix
     ./plasma/applets.nix

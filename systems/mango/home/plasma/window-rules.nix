@@ -239,9 +239,9 @@ in
             };
         }
         {
-            description = "Position AC Linux Manager";
+            description = "Position Korsa";
             match.window-class = {
-                value = "ac-linux-manager";
+                value = "korsa";
                 match-whole = false;
             };
             apply = {
