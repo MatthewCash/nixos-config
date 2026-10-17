@@ -1,24 +1,18 @@
 { nixpkgsStable, nixpkgsUnstable, ... }:
 
+let
+    shared = import ./nix-shared.nix;
+in
 {
     nix = {
-
-        gc = {
-            automatic = true;
-            dates = "weekly";
-            options = "--delete-older-than 30d";
-        };
-
-        settings = {
-            auto-optimise-store = true;
-            experimental-features = [ "nix-command" "flakes" ];
-            use-xdg-base-directories = true;
-            trusted-users = [ "@wheel" ];
-        };
+        inherit (shared) gc;
+        settings = shared.settings // { trusted-users = [ "@wheel" ]; };
 
         nixPath = [ "nixpkgs=${nixpkgsUnstable}" ];
 
-        daemonCPUSchedPolicy = "batch";
+        daemonCPUSchedPolicy = "idle";
+        daemonIOSchedClass = "idle";
+        daemonIOSchedPriority = 7;
     };
 
     environment.variables = {
