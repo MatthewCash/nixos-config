@@ -4,16 +4,17 @@ import sys
 import threading
 
 import pulsectl
+import rtmidi
 from PySide6.QtCore import QEvent, QObject, Qt, QTimer, Signal
 from PySide6.QtGui import QColor, QFont, QPalette
-from PySide6.QtWidgets import QApplication, QFrame, QHBoxLayout, QLabel, QProxyStyle, QSlider, QStyle, QVBoxLayout, QWidget
+from PySide6.QtWidgets import QApplication, QFrame, QHBoxLayout, QLabel, QProxyStyle, QSizePolicy, QSlider, QStyle, QVBoxLayout, QWidget
 
 
-SINKS = [
-    ("games", "Games"),
-    ("instruments", "Instruments"),
-    ("media", "Media"),
-    ("voice", "Voice"),
+FADERS = [
+    ("sink", "games", "Games"),
+    ("piano", "piano", "Piano"),
+    ("sink", "media", "Media"),
+    ("sink", "voice", "Voice"),
 ]
 
 APP_ID = "channel-mixer"
@@ -26,9 +27,25 @@ REFRESH_DELAY_MS = 25
 WINDOW_WIDTH = 620
 WINDOW_HEIGHT = 600
 SLIDER_MIN_WIDTH = 92
-SLIDER_MIN_HEIGHT = 380
+SLIDER_MIN_HEIGHT = 120
 SLIDER_HORIZONTAL_MARGIN = 6
 MIXER_SPACING = 9
+LABEL_VERTICAL_PADDING = 16
+PIANO_DEFAULT_VOLUME = 60
+PIANO_MIDI_OUTPUT_MATCH = "smk25"
+PIANO_VOLUME_CC = 7
+# MIDI dial -> piano volume.
+# Fix for min/max sticking: configure the SMK25V2 knob in the 25KEY editor as
+# relative/endless (CC 20, channel 1, Left=0, Right=1) so it sends 0 (CCW) or
+# 1 (CW) per click with no endpoints. Absolute 0-127 mode always gets stuck
+# at the ends because the hardware stops sending events there.
+PIANO_MIDI_INPUT_MATCH = "SMK25V2"
+PIANO_DIAL_CC = 20
+PIANO_DIAL_CHANNEL = 0
+PIANO_DIAL_RELATIVE = True
+PIANO_DIAL_STEP = 1
+MIDI_RECONNECT_MS = 1000
+MELODIC_CHANNELS = [channel for channel in range(16) if channel != 9]
 
 
 class LargeSliderStyle(QProxyStyle):
@@ -43,6 +60,7 @@ class LargeSliderStyle(QProxyStyle):
 
 class PulseEvents(QObject):
     changed = Signal()
+    piano_volume_changed = Signal(int)
 
 
 def single_shot_timer(parent, timeout):
@@ -56,6 +74,12 @@ class PulseBackend:
     def __init__(self, events):
         self.events = events
         self.pulse = pulsectl.Pulse("pw-bus-mixer")
+        self.midi_out = None
+        self.midi_output_port = None
+        self.midi_in = None
+        self.midi_in_port = None
+        self.last_dial_value = None
+        self.piano_volume = PIANO_DEFAULT_VOLUME
         self.event_pulse = None
         self.stop_event = threading.Event()
         self.event_thread = threading.Thread(target=self.listen, daemon=True)
@@ -89,6 +113,202 @@ class PulseBackend:
         except (StopIteration, pulsectl.PulseError):
             pass
 
+    def find_piano_output_port(self):
+        # NOTE: every rtmidi.MidiIn/MidiOut construction opens a kernel
+        # ALSA sequencer client that is only released by delete(). The
+        # enumerator below must always be deleted, otherwise each call
+        # permanently leaks one client until "Cannot allocate memory"
+        # wedges all MIDI on the system.
+        enumerator = None
+        try:
+            enumerator = rtmidi.MidiOut()
+            ports = enumerator.get_ports()
+        except Exception:
+            return None
+        finally:
+            if enumerator is not None:
+                try:
+                    enumerator.delete()
+                except Exception:
+                    pass
+        for index, port in enumerate(ports):
+            if port.startswith(f"{PIANO_MIDI_OUTPUT_MATCH}:{PIANO_MIDI_OUTPUT_MATCH} "):
+                return index, port
+        return None
+
+    def connect_piano(self):
+        if self.midi_out is not None:
+            try:
+                if self.midi_output_port in self.midi_out.get_ports():
+                    return True
+            except rtmidi.RtMidiError:
+                pass
+
+        self.close_piano()
+        candidate = self.find_piano_output_port()
+        if candidate is None:
+            return False
+
+        try:
+            self.midi_out = rtmidi.MidiOut()
+            self.midi_out.open_port(candidate[0])
+            self.midi_output_port = candidate[1]
+            return True
+        except rtmidi.RtMidiError:
+            self.close_piano()
+            return False
+
+    def set_piano_volume(self, volume):
+        self.piano_volume = max(0, min(100, volume))
+        if not self.connect_piano():
+            return
+
+        midi_value = round(self.piano_volume * 127 / 100)
+        midi_out = self.midi_out
+        if midi_out is None:
+            return
+
+        try:
+            for channel in MELODIC_CHANNELS:
+                midi_out.send_message([0xB0 | channel, PIANO_VOLUME_CC, midi_value])
+        except rtmidi.RtMidiError:
+            self.close_piano()
+
+    def close_piano(self):
+        if self.midi_out is not None:
+            try:
+                self.midi_out.close_port()
+            except rtmidi.RtMidiError:
+                pass
+            try:
+                if not self.midi_out.is_deleted:
+                    self.midi_out.delete()
+            except rtmidi.RtMidiError:
+                pass
+        self.midi_out = None
+        self.midi_output_port = None
+
+    def find_piano_input_port(self):
+        # See find_piano_output_port: the enumerator must be delete()d.
+        enumerator = None
+        try:
+            enumerator = rtmidi.MidiIn()
+            ports = enumerator.get_ports()
+        except Exception:
+            return None
+        finally:
+            if enumerator is not None:
+                try:
+                    enumerator.delete()
+                except Exception:
+                    pass
+        for index, port in enumerate(ports):
+            if PIANO_MIDI_INPUT_MATCH.lower() in port.lower():
+                return index, port
+        return None
+
+    def ensure_midi_input(self):
+        if self.midi_in is not None:
+            try:
+                if self.midi_in_port in self.midi_in.get_ports():
+                    return True
+            except rtmidi.RtMidiError:
+                pass
+            self.close_midi_input()
+
+        candidate = self.find_piano_input_port()
+        if candidate is None:
+            return False
+
+        try:
+            self.midi_in = rtmidi.MidiIn()
+            self.midi_in.ignore_types(sysex=False, timing=True, active_sense=True)
+            self.midi_in.open_port(candidate[0])
+            self.midi_in_port = candidate[1]
+            self.midi_in.set_callback(self.handle_midi_message)
+            self.last_dial_value = None
+            return True
+        except rtmidi.RtMidiError:
+            self.close_midi_input()
+            return False
+
+    def handle_midi_message(self, event, data=None):
+        message, _delta = event
+        if len(message) < 3:
+            return
+        status, cc_num, cc_val = message[0], message[1], message[2]
+        if status & 0xF0 != 0xB0:
+            return
+        if (status & 0x0F) != PIANO_DIAL_CHANNEL:
+            return
+        if cc_num != PIANO_DIAL_CC:
+            return
+
+        # Relative/endless mode: each message is one click, 0 = CCW (-step),
+        # >=1 = CW (+step). No endpoints, never snaps, mixes with mouse.
+        if PIANO_DIAL_RELATIVE:
+            step = -PIANO_DIAL_STEP if cc_val == 0 else PIANO_DIAL_STEP
+            volume = max(0, min(100, self.piano_volume + step))
+            if volume == self.piano_volume:
+                return
+            self.set_piano_volume(volume)
+            try:
+                self.events.piano_volume_changed.emit(volume)
+            except RuntimeError:
+                pass
+            return
+
+        # Absolute fallback: apply dial movement as a delta to the current
+        # volume instead of snapping to the dial's absolute position. This
+        # avoids sharp jumps when the volume was changed with the mouse.
+        # NOTE: absolute mode still gets stuck at 0/127 since the hardware
+        # stops sending events at the ends; prefer relative mode above.
+        if self.last_dial_value is None:
+            self.last_dial_value = cc_val
+            return
+
+        delta_raw = cc_val - self.last_dial_value
+        self.last_dial_value = cc_val
+        if delta_raw == 0:
+            return
+        # Endless-encoder wrap: 127 -> 0 is +1, 0 -> 127 is -1.
+        if delta_raw < -64:
+            delta_raw += 128
+        elif delta_raw > 64:
+            delta_raw -= 128
+
+        step = round(delta_raw * 100 / 127)
+        if step == 0:
+            step = 1 if delta_raw > 0 else -1
+
+        volume = max(0, min(100, self.piano_volume + step))
+        if volume == self.piano_volume:
+            return
+        self.set_piano_volume(volume)
+        try:
+            self.events.piano_volume_changed.emit(volume)
+        except RuntimeError:
+            pass
+
+    def close_midi_input(self):
+        if self.midi_in is not None:
+            try:
+                self.midi_in.cancel_callback()
+            except rtmidi.RtMidiError:
+                pass
+            try:
+                self.midi_in.close_port()
+            except rtmidi.RtMidiError:
+                pass
+            try:
+                if not self.midi_in.is_deleted:
+                    self.midi_in.delete()
+            except rtmidi.RtMidiError:
+                pass
+        self.midi_in = None
+        self.midi_in_port = None
+        self.last_dial_value = None
+
     def listen(self):
         while not self.stop_event.is_set():
             try:
@@ -119,6 +339,8 @@ class PulseBackend:
             self.pulse.close()
         except pulsectl.PulseError:
             pass
+        self.close_midi_input()
+        self.close_piano()
 
 
 def bus_slider():
@@ -128,13 +350,15 @@ def bus_slider():
     slider.setPageStep(5)
     slider.setTracking(True)
     slider.setMinimumSize(SLIDER_MIN_WIDTH, SLIDER_MIN_HEIGHT)
+    slider.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
     return slider
 
 
 class SinkSlider(QFrame):
-    def __init__(self, sink, label, backend):
+    def __init__(self, kind, target, label, backend):
         super().__init__()
-        self.sink = sink
+        self.kind = kind
+        self.target = target
         self.backend = backend
         self.sink_info = None
         self.is_muted = False
@@ -146,11 +370,13 @@ class SinkSlider(QFrame):
 
         self.title = QLabel(label[:4])
         self.title.setObjectName("title")
+        self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         title_font = self.title.font()
         title_font.setFamily(FONT_FAMILY)
         title_font.setPointSize(15)
         title_font.setBold(True)
         self.title.setFont(title_font)
+        self.title.setMinimumHeight(self.title.fontMetrics().height() + (LABEL_VERTICAL_PADDING * 2))
 
         self.value_label = QLabel("--")
         self.value_label.setObjectName("value")
@@ -160,15 +386,16 @@ class SinkSlider(QFrame):
         value_font.setPointSize(14)
         value_font.setBold(True)
         self.value_label.setFont(value_font)
+        self.value_label.setMinimumHeight(self.value_label.fontMetrics().height() + (LABEL_VERTICAL_PADDING * 2))
 
         self.slider = bus_slider()
         self.styled_widgets = (self, self.title, self.value_label, self.slider)
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(SLIDER_HORIZONTAL_MARGIN, 9, SLIDER_HORIZONTAL_MARGIN, 9)
-        layout.setSpacing(6)
+        layout.setSpacing(8)
         layout.addWidget(self.title, alignment=Qt.AlignmentFlag.AlignCenter)
-        layout.addWidget(self.slider, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(self.slider, 1, alignment=Qt.AlignmentFlag.AlignHCenter)
         layout.addWidget(self.value_label, alignment=Qt.AlignmentFlag.AlignCenter)
 
         for widget in self.styled_widgets:
@@ -212,12 +439,15 @@ class SinkSlider(QFrame):
             return True
         if event_type == QEvent.Type.Wheel:
             delta = event.angleDelta().y()
-            if delta and self.sink_info is not None:
+            if delta and (self.kind == "piano" or self.sink_info is not None):
                 step = 1 if delta > 0 else -1
                 value = max(self.slider.minimum(), min(self.slider.maximum(), self.slider.value() + step))
                 self.pending_volume = None
                 self.set_display_volume(value)
-                self.backend.adjust_volume(self.sink_info, step)
+                if self.kind == "piano":
+                    self.backend.set_piano_volume(value)
+                else:
+                    self.backend.adjust_volume(self.sink_info, step)
                 return True
         return super().eventFilter(watched, event)
 
@@ -229,11 +459,15 @@ class SinkSlider(QFrame):
         self.commit_timer.start(COMMIT_DELAY_MS)
 
     def commit_volume(self):
-        if self.sink_info is not None and self.pending_volume is not None:
+        if self.pending_volume is None:
+            return
+        if self.kind == "piano":
+            self.backend.set_piano_volume(self.pending_volume)
+        elif self.sink_info is not None:
             self.backend.set_volume(self.sink_info, self.pending_volume)
 
     def toggle_mute(self):
-        if self.sink_info is not None:
+        if self.kind == "sink" and self.sink_info is not None:
             self.backend.toggle_mute(self.sink_info)
 
     def set_muted(self, muted):
@@ -279,7 +513,19 @@ class SinkSlider(QFrame):
         self.set_display_volume(current + (step if delta > 0 else -step))
 
     def refresh(self, sinks):
-        info = sinks.get(self.sink)
+        if self.kind == "piano":
+            self.sink_info = None
+            self.setEnabled(True)
+            self.set_muted(False)
+            if not self.has_volume:
+                self.has_volume = True
+                self.set_display_volume(self.backend.piano_volume)
+                self.backend.set_piano_volume(self.backend.piano_volume)
+            elif not self.dragging and self.slider.value() != self.backend.piano_volume:
+                self.set_display_volume(self.backend.piano_volume)
+            return
+
+        info = sinks.get(self.target)
         if info is None:
             self.sink_info = None
             self.has_volume = False
@@ -304,9 +550,10 @@ class Mixer(QWidget):
         self.setObjectName("mixer")
         self.events = PulseEvents(self)
         self.events.changed.connect(self.pipewire_changed)
+        self.events.piano_volume_changed.connect(self.piano_volume_changed)
         self.backend = PulseBackend(self.events)
 
-        self.sliders = [SinkSlider(sink, label, self.backend) for sink, label in SINKS]
+        self.sliders = [SinkSlider(kind, target, label, self.backend) for kind, target, label in FADERS]
 
         layout = QHBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
@@ -316,7 +563,17 @@ class Mixer(QWidget):
 
         self.refresh_timer = single_shot_timer(self, self.refresh)
 
+        self.midi_timer = QTimer(self)
+        self.midi_timer.timeout.connect(self.backend.ensure_midi_input)
+        self.midi_timer.start(MIDI_RECONNECT_MS)
+        self.backend.ensure_midi_input()
+
         self.refresh()
+
+    def piano_volume_changed(self, volume):
+        for slider in self.sliders:
+            if slider.kind == "piano" and not slider.dragging:
+                slider.set_display_volume(volume)
 
     def pipewire_changed(self):
         if not self.refresh_timer.isActive():

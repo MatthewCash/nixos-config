@@ -4,6 +4,7 @@ let
     python = pkgsUnstable.python3.withPackages (pythonPackages: with pythonPackages; [
         pulsectl
         pyside6
+        python-rtmidi
     ]);
 
     channel-mixer = pkgsUnstable.writeShellApplication {
