@@ -19,6 +19,7 @@
 
         settings = {
             autoupdate = false;
+            snapshot = false;
             model = "openai/gpt-5.6-sol";
 
             lsp = {
