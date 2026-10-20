@@ -14,7 +14,7 @@ let
         "org.kde.konsole"
         "org.mozilla.Firefox.floating"
         "org.prismlauncher.PrismLauncher"
-        "Minecraft 26.2" # TODO: having to update this all the time sucks
+        "com.mojang.minecraft"
         "steam"
         "korsa"
         # screen 2

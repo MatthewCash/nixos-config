@@ -307,22 +307,7 @@ in
         {
             description = "Hide titlebar for Minecraft";
             match.window-class = {
-                value = "Minecraft";
-                type = "substring";
-                match-whole = false;
-            };
-            apply = {
-                position = "${toString leftScreen.x},${toString leftScreen.y}";
-                maximizehoriz = true;
-                maximizevert = true;
-                noborder = true;
-            };
-        }
-        {
-            description = "Hide titlebar for Minecraft (AxolotlClient)";
-            match.window-class = {
-                value = "AxolotlClient";
-                type = "substring";
+                value = "com.mojang.minecraft";
                 match-whole = false;
             };
             apply = {

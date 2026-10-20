@@ -241,6 +241,26 @@
         "type": "github"
       }
     },
+    "guitar-rack": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgsUnstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1789008654,
+        "narHash": "sha256-kgSsFLnfumdFQLTcRLO06GT123IKCEXRBGFm090eMEI=",
+        "owner": "MatthewCash",
+        "repo": "guitar-rack",
+        "rev": "9f424207a9c4e507c0a1be7f8a0bd83733a02a69",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MatthewCash",
+        "repo": "guitar-rack",
+        "type": "github"
+      }
+    },
     "hercules-ci-effects": {
       "inputs": {
         "flake-parts": [
@@ -409,6 +429,23 @@
         "owner": "nix-community",
         "ref": "v1.2.0",
         "repo": "lanzaboote",
+        "type": "github"
+      }
+    },
+    "libfprintCs9711": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1771284585,
+        "narHash": "sha256-QGrBNqbRNqLZIURI66xkenlQamNW+DQU4WS+CLN4zM8=",
+        "owner": "archeYR",
+        "repo": "libfprint-CS9711",
+        "rev": "02b285c9703c38d308fbe47a3c566ef1e7f883ca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "archeYR",
+        "repo": "libfprint-CS9711",
+        "rev": "02b285c9703c38d308fbe47a3c566ef1e7f883ca",
         "type": "github"
       }
     },
@@ -597,11 +634,13 @@
         "disko": "disko",
         "firefox-gnome-theme": "firefox-gnome-theme",
         "firefox-mods": "firefox-mods",
+        "guitar-rack": "guitar-rack",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "korsa": "korsa",
         "kvlibadwaita": "kvlibadwaita",
         "lanzaboote": "lanzaboote",
+        "libfprintCs9711": "libfprintCs9711",
         "nixos-generators": "nixos-generators",
         "nixpak": "nixpak",
         "nixpkgsStable": "nixpkgsStable",
