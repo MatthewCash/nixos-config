@@ -224,6 +224,7 @@ in
         # Hide the physical SIMSONN from the user session; expose only the stable uinput proxy.
         SUBSYSTEM=="input", KERNEL=="event*", ATTRS{id/vendor}=="ddfd", ATTRS{id/product}=="6013", MODE="0600", TAG-="uaccess", ENV{LIBINPUT_IGNORE_DEVICE}="1", ENV{ID_INPUT}="", ENV{ID_INPUT_JOYSTICK}="", SYMLINK+="input/simsonn-hs-pro-shifter"
         SUBSYSTEM=="input", KERNEL=="js*", ATTRS{id/vendor}=="ddfd", ATTRS{id/product}=="6013", MODE="0600", TAG-="uaccess", ENV{ID_INPUT}="", ENV{ID_INPUT_JOYSTICK}=""
+        SUBSYSTEM=="input", KERNEL=="event*", ATTRS{id/vendor}=="346e", ATTRS{id/product}=="0002", ENV{LIBINPUT_IGNORE_DEVICE}="1"
         SUBSYSTEM=="hidraw", ATTRS{idVendor}=="ddfd", ATTRS{idProduct}=="6013", MODE="0600", TAG-="uaccess"
         SUBSYSTEM=="usbmisc", KERNEL=="hiddev*", ATTRS{idVendor}=="ddfd", ATTRS{idProduct}=="6013", MODE="0600", TAG-="uaccess"
         SUBSYSTEM=="usb", ATTR{idVendor}=="ddfd", ATTR{idProduct}=="6013", MODE="0600", TAG-="uaccess"
