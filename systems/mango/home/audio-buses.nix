@@ -281,5 +281,29 @@ in
             command = "${audio-bus-volume}/bin/audio-bus-volume set-sink-mute media toggle";
             logs.enabled = false;
         };
+
+        decrease-game-volume = {
+            name = "Decrease Game Volume";
+            comment = "Decrease Game Volume";
+            keys = [ "F13" "Tools" ];
+            command = "${audio-bus-volume}/bin/audio-bus-volume set-sink-volume games -2%";
+            logs.enabled = false;
+        };
+
+        increase-game-volume = {
+            name = "Increase Game Volume";
+            comment = "Increase Game Volume";
+            keys = [ "F14" "Launch (5)" ];
+            command = "${audio-bus-volume}/bin/audio-bus-volume set-sink-volume games +2%";
+            logs.enabled = false;
+        };
+
+        mute-game-volume = {
+            name = "Mute Game Volume";
+            comment = "Mute Game Volume";
+            keys = [ "F15" "Launch (6)" ];
+            command = "${audio-bus-volume}/bin/audio-bus-volume set-sink-mute games toggle";
+            logs.enabled = false;
+        };
     };
 }
