@@ -67,7 +67,9 @@ in
                         name = "org.kde.plasma.taskmanagerordered";
                         config.General = taskManagerConfig;
                     }
-                    "org.kde.plasma.systemtray"
+                    {
+                        systemTray.items.hidden = [ "org.kde.merkuro.contact.applet" "Sunshine" ];
+                    }
                     {
                         name = "org.kde.plasma.digitalclock";
                         config.Appearance = {
