@@ -7,6 +7,7 @@
     "media.ffvpx.enabled" = false;
     "media.navigator.mediadatadecoder_vpx_enabled" = true;
     "media.rdd-vpx.enabled" = false;
+    "media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled" = false;
     "media.videocontrols.picture-in-picture.video-toggle.has-used" = true;
     "pdfjs.enabledCache.state" = true;
     "pdfjs.migrationVersion" = 2;
