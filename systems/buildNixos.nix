@@ -3,7 +3,7 @@
 let
     kernelPackages = systemConfig.kernelPackages or nixpkgsUnstable.legacyPackages.${systemConfig.system}.linuxPackages;
     persistPath = systemConfig.persistPath or "/mnt/persist";
-    homeMountPath = systemConfig.persistPath or "/mnt/home";
+    homeMountPath = systemConfig.homeMountPath or "/mnt/home";
     batteryChargeLimit = systemConfig.batteryChargeLimit or 100;
 
     extraArgs = {
