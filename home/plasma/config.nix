@@ -176,6 +176,8 @@ in
             };
             plasmarc.Theme.name = "Sweet";
             plasma-localerc.Formats.LC_TIME = "C";
+            # plasma-video-wallpaper needs this
+            plasma-localerc.Formats.LC_NUMERIC = "C";
             plasmaparc.General = {
                 AudioFeedback = false;
                 VolumeStep = 1;
