@@ -1,4 +1,4 @@
-args @ { stableLib, pkgsUnstable, systemConfig, accentColor, inputs, ... }:
+args @ { stableLib, pkgsUnstable, systemConfig, accentColor, inputs, persistenceHomePath, ... }:
 
 let
     plasmaAccentColor = stableLib.strings.concatMapStringsSep
@@ -75,6 +75,13 @@ in
         kdePackages.qtmultimedia
     ];
 
+    home.persistence."${persistenceHomePath}".directories = [
+        ".local/share/kwalletd"
+    ];
+
+    home.sessionVariables.PINENTRY_KDE_USE_WALLET = "1";
+    services.gpg-agent.pinentry.package = pkgsUnstable.pinentry-qt;
+
     programs.plasma = {
         enable = true;
 
@@ -113,6 +120,7 @@ in
                 ksmserver._k_friendly_name = "Session Management";
                 plasmashell._k_friendly_name = "Activity switching";
             };
+            kwalletrc."org.freedesktop.secrets".apiEnabled = true;
             kscreenlockerrc = {
                 Daemon = {
                     Autolock = false;

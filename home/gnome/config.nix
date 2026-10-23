@@ -23,6 +23,8 @@ in
 {
     home.packages = with pkgsUnstable; [ pinentry-gnome3 ];
 
+    services.gpg-agent.pinentry.package = pkgsUnstable.pinentry-gnome3;
+
     systemd.user.services.gnome-monitors-config-sync = stableLib.mkIf useImpermanence {
         Unit = {
             Description = "Sync gnome monitors.xml to persistent config";

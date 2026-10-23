@@ -1,4 +1,4 @@
-{ pkgsUnstable, persistenceHomePath, config, ... }:
+{ persistenceHomePath, config, ... }:
 
 {
     programs.gpg = {
@@ -17,6 +17,7 @@
         enable = true;
         enableExtraSocket = true;
         enableSshSupport = true;
-        pinentry.package = pkgsUnstable.pinentry-gnome3;
+        enableZshIntegration = true;
+        # pinentry.package is set in de config
     };
 }
