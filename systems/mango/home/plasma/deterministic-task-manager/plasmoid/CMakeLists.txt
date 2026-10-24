@@ -11,7 +11,7 @@ include(ECMQtDeclareLoggingCategory)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 find_package(Qt6 REQUIRED COMPONENTS Core DBus Gui Qml Quick Widgets)
 set(QT_MAJOR_VERSION 6)
-find_package(KF6 REQUIRED COMPONENTS Config CoreAddons I18n KIO Notifications Service WindowSystem)
+find_package(KF6 REQUIRED COMPONENTS Config CoreAddons GlobalAccel I18n KIO Notifications Service WindowSystem XmlGui)
 find_package(Plasma REQUIRED)
 find_package(PlasmaActivities REQUIRED)
 find_package(PlasmaActivitiesStats REQUIRED)
@@ -71,6 +71,7 @@ target_link_libraries(org.kde.plasma.taskmanagerordered PRIVATE
     Plasma::Activities
     Plasma::ActivitiesStats
     KF6::ConfigGui
+    KF6::GlobalAccel
     KF6::I18n
     KF6::KIOCore
     KF6::KIOGui
@@ -80,6 +81,7 @@ target_link_libraries(org.kde.plasma.taskmanagerordered PRIVATE
     KSysGuard::ProcessCore
     KF6::Service
     KF6::WindowSystem
+    KF6::XmlGui
     Plasma::KWaylandClient
     PW::LibTaskManager
     PW::LibNotificationManager)

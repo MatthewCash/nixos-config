@@ -56,6 +56,14 @@ in
         panels = [
             {
                 screen = 0;
+                # Plasma 6.8 can report screen 0 while the new panel's view is
+                # on the active output, making the initial assignment a no-op.
+                extraSettings = ''
+                    if (screenCount > 1) {
+                        panel.screen = 1;
+                        panel.screen = 0;
+                    }
+                '';
                 location = "bottom";
                 height = 40;
                 widgets = [

@@ -3,7 +3,12 @@
 {
     programs.opencode = {
         enable = true;
+        themes.main = import ./theme.nix { inherit accentColor; };
         extraPackages = [ pkgsUnstable.libnotify ];
+        validateFiles = {
+            config = true;
+            cli = true;
+        };
 
         context = ''
             Do not use playwright unless DOM access is truly necessary and the user intends it.
@@ -122,74 +127,24 @@
             };
         };
 
-        tui = {
-            theme = "main";
-            scroll_speed = 1;
-            plugin = [
-                "./plugins/desktop-notifications.ts"
-                "./plugins/openai-usage.tsx"
+        cli = {
+            theme.name = "main";
+            scroll.speed = 1;
+            attention = {
+                notifications = true;
+                sound = false;
+            };
+            plugins = [
+                "./cli-plugins/desktop-notifications"
+                "./cli-plugins/openai-usage"
+                "-opencode.sidebar.context"
             ];
-            plugin_enabled."internal:notifications" = false;
-            plugin_enabled."internal:sidebar-context" = false;
-        };
-
-        themes.main.theme = {
-            primary = accentColor.hex;
-            secondary = accentColor.hex;
-            accent = accentColor.hex;
-            error = "#ef4444";
-            warning = "#f59e0b";
-            success = "#22c55e";
-            info = accentColor.hex;
-            text = "#e6e6e6";
-            textMuted = "#888888";
-            background = "none";
-            backgroundPanel = "none";
-            backgroundElement = "#3a3a3a";
-            border = "#333333";
-            borderActive = accentColor.hex;
-            borderSubtle = "#222222";
-            diffAdded = "#22c55e";
-            diffRemoved = "#ef4444";
-            diffContext = "#888888";
-            diffHunkHeader = "#555555";
-            diffHighlightAdded = "#22c55e";
-            diffHighlightRemoved = "#ef4444";
-            diffAddedBg = "#1a2e1a";
-            diffRemovedBg = "#2e1a1a";
-            diffContextBg = "none";
-            diffLineNumber = "#666666";
-            diffAddedLineNumberBg = "#1a2e1a";
-            diffRemovedLineNumberBg = "#2e1a1a";
-            markdownText = "#e6e6e6";
-            markdownHeading = accentColor.hex;
-            markdownLink = accentColor.hex;
-            markdownLinkText = accentColor.hex;
-            markdownCode = "#cccccc";
-            markdownBlockQuote = "#888888";
-            markdownEmph = "#e6e6e6";
-            markdownStrong = "#ffffff";
-            markdownHorizontalRule = "#444444";
-            markdownListItem = accentColor.hex;
-            markdownListEnumeration = accentColor.hex;
-            markdownImage = "#e6e6e6";
-            markdownImageText = "#888888";
-            syntaxComment = "#666666";
-            syntaxKeyword = accentColor.hex;
-            syntaxFunction = accentColor.hex;
-            syntaxVariable = "#e6e6e6";
-            syntaxType = "#cccccc";
-            syntaxNumber = "#cccccc";
-            syntaxString = "#cccccc";
-            syntaxRegexp = "#cccccc";
-            syntaxOperator = "#e6e6e6";
-            syntaxPunctuation = "#888888";
         };
     };
 
     xdg.configFile = {
-        "opencode/plugins/desktop-notifications.ts".source = ./desktop-notifications.ts;
-        "opencode/plugins/openai-usage.tsx".source = ./openai-usage.tsx;
+        "opencode/cli-plugins/desktop-notifications/tui.ts".source = ./desktop-notifications.ts;
+        "opencode/cli-plugins/openai-usage/tui.tsx".source = ./openai-usage.tsx;
     };
 
     home.persistence."${persistenceHomePath}" = {

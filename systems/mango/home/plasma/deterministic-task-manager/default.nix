@@ -10,12 +10,14 @@
     plasma-activities-stats,
     kconfig,
     kcoreaddons,
+    kglobalaccel,
     ki18n,
     kio,
     knotifications,
     kservice,
     kwayland,
     kwindowsystem,
+    kxmlgui,
     libksysguard,
     plasma-workspace,
 }:
@@ -44,12 +46,14 @@ stdenv.mkDerivation {
         plasma-activities-stats
         kconfig
         kcoreaddons
+        kglobalaccel
         ki18n
         kio
         knotifications
         kservice
         kwayland
         kwindowsystem
+        kxmlgui
         libksysguard
         plasma-workspace
     ];

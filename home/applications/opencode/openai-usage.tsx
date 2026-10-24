@@ -1,18 +1,12 @@
 /** @jsxImportSource @opentui/solid */
-import type { TuiPlugin, TuiPluginModule } from "@opencode-ai/plugin/tui"
-import type { AssistantMessage } from "@opencode-ai/sdk/v2"
+import { Plugin } from "@opencode/plugin/tui"
+import type { SessionMessageAssistant } from "@opencode/client"
 import { Buffer } from "node:buffer"
-import { readFile } from "node:fs/promises"
-import path from "node:path"
 import { createMemo, createSignal, For } from "solid-js"
 
-const CLIENT_ID = "app_EMoamEEZ73f0CkXaXp7hrann"
-const TOKEN_ENDPOINT = "https://auth.openai.com/oauth/token"
 const USAGE_ENDPOINT = "https://chatgpt.com/backend-api/wham/usage"
 const REFRESH_INTERVAL_MS = 60_000
 const MIN_REFRESH_GAP_MS = 10_000
-
-const dataHome = process.env.XDG_DATA_HOME ?? (process.env.HOME ? path.join(process.env.HOME, ".local/share") : undefined)
 
 type OAuthAuth = {
   type: "oauth"
@@ -20,13 +14,6 @@ type OAuthAuth = {
   access: string
   expires: number
   accountId?: string
-}
-
-type TokenResponse = {
-  access_token?: string
-  refresh_token?: string
-  expires_in?: number
-  id_token?: string
 }
 
 type RateLimitWindow = {
@@ -94,57 +81,23 @@ function windowText(window: RateLimitWindow | null | undefined) {
   return `${windowName(window.limit_window_seconds)} ${remaining}% left${reset ? `, ${reset}` : ""}`
 }
 
-const tui: TuiPlugin = async (api) => {
+function setup(api: Plugin.Context) {
   const [state, setState] = createSignal<State>({ status: "loading" })
   let lastRefresh = 0
   let pending: Promise<void> | undefined
 
   async function readAuth(): Promise<OAuthAuth> {
-    if (!dataHome) throw new Error("cannot locate OpenCode data directory")
-    const content = JSON.parse(await readFile(path.join(dataHome, "opencode/auth.json"), "utf8")) as {
-      openai?: Partial<OAuthAuth>
+    // OpenCode 2 owns credential persistence and token refresh; read its active
+    // credential rather than rotating refresh tokens from a terminal plugin.
+    const response = await api.client.credential.list()
+    const entry = response.find((item) => item.integrationID === "openai" && item.active)
+    if (entry?.value.type !== "oauth") throw new Error("connect ChatGPT with /connect")
+    const auth = entry.value
+    return {
+      ...auth,
+      accountId:
+        typeof auth.metadata?.accountId === "string" ? auth.metadata.accountId : accountIdFromToken(auth.access),
     }
-    const auth = content.openai
-    if (
-      auth?.type !== "oauth" ||
-      typeof auth.refresh !== "string" ||
-      typeof auth.access !== "string" ||
-      typeof auth.expires !== "number"
-    ) {
-      throw new Error("connect ChatGPT with /connect")
-    }
-    return auth as OAuthAuth
-  }
-
-  async function refreshAuth(auth: OAuthAuth) {
-    const response = await fetch(TOKEN_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        grant_type: "refresh_token",
-        refresh_token: auth.refresh,
-        client_id: CLIENT_ID,
-      }),
-    })
-    if (!response.ok) throw new Error(`OAuth refresh failed (${response.status})`)
-
-    const tokens = (await response.json()) as TokenResponse
-    if (!tokens.access_token) throw new Error("OAuth refresh returned no access token")
-    const next: OAuthAuth = {
-      type: "oauth",
-      refresh: tokens.refresh_token ?? auth.refresh,
-      access: tokens.access_token,
-      expires: Date.now() + (tokens.expires_in ?? 3600) * 1000,
-      accountId: accountIdFromToken(tokens.id_token ?? tokens.access_token) ?? auth.accountId,
-    }
-    await api.client.auth.set({ providerID: "openai", auth: next })
-    return next
-  }
-
-  async function credentials(force = false) {
-    const auth = await readAuth()
-    if (!force && auth.access && auth.expires > Date.now() + 30_000) return auth
-    return refreshAuth(auth)
   }
 
   async function requestUsage(auth: OAuthAuth) {
@@ -161,12 +114,8 @@ const tui: TuiPlugin = async (api) => {
     if (!force && Date.now() - lastRefresh < MIN_REFRESH_GAP_MS) return
     pending = (async () => {
       try {
-        let auth = await credentials()
-        let response = await requestUsage(auth)
-        if (response.status === 401) {
-          auth = await credentials(true)
-          response = await requestUsage(auth)
-        }
+        const auth = await readAuth()
+        const response = await requestUsage(auth)
         if (!response.ok) throw new Error(`usage request failed (${response.status})`)
         setState({ status: "ready", usage: (await response.json()) as Usage })
         lastRefresh = Date.now()
@@ -179,81 +128,84 @@ const tui: TuiPlugin = async (api) => {
     return pending
   }
 
-  api.slots.register({
-    order: 100,
-    slots: {
-      sidebar_content(ctx, props) {
-        const context = createMemo(() => {
-          const last = api.state.session
-            .messages(props.session_id)
-            .findLast((item): item is AssistantMessage => item.role === "assistant" && item.tokens.output > 0)
-          if (!last) return { tokens: 0, percent: 0 }
-          const tokens =
-            last.tokens.input +
-            last.tokens.output +
-            last.tokens.reasoning +
-            last.tokens.cache.read +
-            last.tokens.cache.write
-          const model = api.state.provider.find((item) => item.id === last.providerID)?.models[last.modelID]
-          return {
-            tokens,
-            percent: model?.limit.context ? Math.round((tokens / model.limit.context) * 100) : 0,
-          }
-        })
-        const usage = () => {
-          const value = state()
-          if (value.status === "loading") return ["OpenAI usage: loading..."]
-          if (value.status === "error") return [`OpenAI usage: ${value.message}`]
-          const limits = [
-            windowText(value.usage.rate_limit?.primary_window),
-            windowText(value.usage.rate_limit?.secondary_window),
-          ].filter((limit): limit is string => Boolean(limit))
-          return limits.length ? limits : ["OpenAI usage unavailable"]
+  api.ui.slot({
+    append: "sidebar.content",
+    render(props) {
+      const context = createMemo(() => {
+        const last = api.data.session.message
+          .list(props.sessionID)
+          .findLast(
+            (item): item is SessionMessageAssistant => item.type === "assistant" && (item.tokens?.output ?? 0) > 0,
+          )
+        if (!last?.tokens) return { tokens: 0, percent: 0 }
+        const tokens =
+          last.tokens.input +
+          last.tokens.output +
+          last.tokens.reasoning +
+          last.tokens.cache.read +
+          last.tokens.cache.write
+        const session = api.data.session.get(props.sessionID)
+        const model = api.data.location.model
+          .list(session?.location)
+          ?.find((item) => item.providerID === last.model.providerID && item.id === last.model.id)
+        return {
+          tokens,
+          percent: model?.limit.context ? Math.round((tokens / model.limit.context) * 100) : 0,
         }
+      })
+      const usage = () => {
+        const value = state()
+        if (value.status === "loading") return ["OpenAI usage: loading..."]
+        if (value.status === "error") return [`OpenAI usage: ${value.message}`]
+        const limits = [
+          windowText(value.usage.rate_limit?.primary_window),
+          windowText(value.usage.rate_limit?.secondary_window),
+        ].filter((limit): limit is string => Boolean(limit))
+        return limits.length ? limits : ["OpenAI usage unavailable"]
+      }
 
-        return (
-          <box onMouseUp={() => void update(true)}>
-            <text fg={ctx.theme.current.text}>
-              <b>Context</b>
-            </text>
-            <text fg={ctx.theme.current.textMuted}>{context().tokens.toLocaleString()} tokens</text>
-            <text fg={ctx.theme.current.textMuted}>{context().percent}% used</text>
-            <For each={usage()}>
-              {(limit) => (
-                <text fg={state().status === "error" ? ctx.theme.current.error : ctx.theme.current.textMuted}>
-                  {limit}
-                </text>
-              )}
-            </For>
-          </box>
-        )
-      },
+      return (
+        <box onMouseUp={() => void update(true)}>
+          <text fg={api.theme.text.base}>
+            <b>Context</b>
+          </text>
+          <text fg={api.theme.text.muted}>{context().tokens.toLocaleString()} tokens</text>
+          <text fg={api.theme.text.muted}>{context().percent}% used</text>
+          <For each={usage()}>
+            {(limit) => (
+              <text fg={state().status === "error" ? api.theme.text.feedback.error.base : api.theme.text.muted}>
+                {limit}
+              </text>
+            )}
+          </For>
+        </box>
+      )
     },
   })
 
-  api.keymap.registerLayer({
+  api.keymap.layer(() => ({
     commands: [
       {
-        name: "openai.usage.refresh",
+        id: "openai.usage.refresh",
         title: "Refresh OpenAI subscription usage",
-        category: "Provider",
-        namespace: "palette",
-        slashName: "openai-usage",
+        group: "Provider",
+        palette: true,
+        slash: { name: "openai-usage" },
         run: () => void update(true),
       },
     ],
-  })
+  }))
 
-  api.event.on("session.idle", () => void update())
+  const stop = api.data.on("session.execution.succeeded", () => void update())
   const refreshTimer = setInterval(() => void update(), REFRESH_INTERVAL_MS)
-  api.lifecycle.onDispose(() => {
-    clearInterval(refreshTimer)
-  })
-
   void update(true)
+  return () => {
+    clearInterval(refreshTimer)
+    stop()
+  }
 }
 
-export default {
+export default Plugin.define({
   id: "openai-subscription-usage",
-  tui,
-} satisfies TuiPluginModule & { id: string }
+  setup,
+})

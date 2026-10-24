@@ -10,7 +10,6 @@ builtins.map (path: ../../../home/${path}) [
     "plasma/dolphin.nix"
     "plasma/gtk.nix"
     "plasma/applets.nix"
-    "plasma/kdeconnect.nix"
 
     "desktop/userDirs.nix"
     "desktop/wireplumber.nix"

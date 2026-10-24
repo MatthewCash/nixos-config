@@ -1,9 +1,10 @@
-import type { Event } from "@opencode-ai/sdk/v2"
-import type { TuiPlugin, TuiPluginModule } from "@opencode-ai/plugin/tui"
+import { Plugin } from "@opencode/plugin/tui"
 import { spawn } from "node:child_process"
 
 type FocusState = "unknown" | "focused" | "blurred"
-type SessionError = Extract<Event, { type: "session.error" }>["properties"]["error"]
+type RendererOutput = {
+  writeOut(data: string): boolean
+}
 
 function cleanText(value: string | undefined, fallback: string, limit: number) {
   const text = (value ?? "")
@@ -14,16 +15,21 @@ function cleanText(value: string | undefined, fallback: string, limit: number) {
   return Array.from(text || fallback).slice(0, limit).join("")
 }
 
-function sessionErrorMessage(error: SessionError) {
-  if (error?.name === "MessageAbortedError") return "Session aborted"
-  const data = error?.data
-  if (data && typeof data === "object" && "message" in data && data.message === "SSE read timed out") {
+function sessionErrorMessage(error: { message: string }) {
+  if (error.message === "SSE read timed out") {
     return "Model stopped responding"
   }
   return "Session error"
 }
 
-const tui: TuiPlugin = async (api) => {
+function setup(api: Plugin.Context) {
+  const renderer = api.renderer as unknown as RendererOutput
+  if (process.env.KONSOLE_VERSION) {
+    renderer.writeOut("\u001b[?1004h")
+    return () => { renderer.writeOut("\u001b[?1004l") }
+  }
+  if (process.env.TERM_PROGRAM !== "kgx") return
+
   let focus: FocusState = "unknown"
   const active = new Set<string>()
   const errored = new Set<string>()
@@ -42,17 +48,20 @@ const tui: TuiPlugin = async (api) => {
   api.renderer.on("blur", onBlur)
 
   function notify(sessionID: string | undefined, message: string) {
-    if (focus !== "blurred") return
-    const session = sessionID ? api.state.session.get(sessionID) : undefined
+    const session = sessionID ? api.data.session.get(sessionID) : undefined
     if (session?.parentID !== undefined) return
+
+    const title = cleanText(session?.title, "OpenCode", 80)
+    const text = cleanText(message, "OpenCode needs attention", 240)
+    if (focus !== "blurred") return
 
     const child = spawn(
       "notify-send",
       [
         "--app-name=OpenCode",
         "--urgency=normal",
-        cleanText(session?.title, "OpenCode", 80),
-        cleanText(message, "OpenCode needs attention", 240),
+        title,
+        text,
       ],
       { stdio: "ignore" },
     )
@@ -61,54 +70,56 @@ const tui: TuiPlugin = async (api) => {
   }
 
   dispose.push(
-    api.event.on("question.asked", (event) => {
-      if (questions.has(event.properties.id)) return
-      questions.add(event.properties.id)
-      notify(event.properties.sessionID, "Question needs input")
+    api.data.on("form.created", (event) => {
+      if (questions.has(event.data.form.id)) return
+      questions.add(event.data.form.id)
+      notify(event.data.form.sessionID, "Question needs input")
     }),
-    api.event.on("question.replied", (event) => {
-      questions.delete(event.properties.requestID)
+    api.data.on("form.replied", (event) => {
+      questions.delete(event.data.id)
     }),
-    api.event.on("question.rejected", (event) => {
-      questions.delete(event.properties.requestID)
+    api.data.on("form.cancelled", (event) => {
+      questions.delete(event.data.id)
     }),
-    api.event.on("permission.asked", (event) => {
-      if (permissions.has(event.properties.id)) return
-      permissions.add(event.properties.id)
-      notify(event.properties.sessionID, "Permission needs input")
+    api.data.on("permission.asked", (event) => {
+      if (permissions.has(event.data.id)) return
+      permissions.add(event.data.id)
+      notify(event.data.sessionID, "Permission needs input")
     }),
-    api.event.on("permission.replied", (event) => {
-      permissions.delete(event.properties.requestID)
+    api.data.on("permission.replied", (event) => {
+      permissions.delete(event.data.requestID)
     }),
-    api.event.on("session.status", (event) => {
-      const sessionID = event.properties.sessionID
-      if (event.properties.status.type === "busy" || event.properties.status.type === "retry") {
-        active.add(sessionID)
-        errored.delete(sessionID)
-        return
-      }
-      if (event.properties.status.type !== "idle" || !active.has(sessionID)) return
-
+    api.data.on("session.execution.started", (event) => {
+      active.add(event.data.sessionID)
+      errored.delete(event.data.sessionID)
+    }),
+    api.data.on("session.execution.succeeded", (event) => {
+      const sessionID = event.data.sessionID
+      if (!active.has(sessionID)) return
       active.delete(sessionID)
       if (errored.delete(sessionID)) return
       notify(sessionID, "Session done")
     }),
-    api.event.on("session.error", (event) => {
-      const sessionID = event.properties.sessionID
-      if (!sessionID || !active.has(sessionID)) return
+    api.data.on("session.execution.interrupted", (event) => {
+      active.delete(event.data.sessionID)
+      errored.delete(event.data.sessionID)
+    }),
+    api.data.on("session.execution.failed", (event) => {
+      const sessionID = event.data.sessionID
+      if (!active.has(sessionID) || errored.has(sessionID)) return
       errored.add(sessionID)
-      notify(sessionID, sessionErrorMessage(event.properties.error))
+      notify(sessionID, sessionErrorMessage(event.data.error))
     }),
   )
 
-  api.lifecycle.onDispose(() => {
+  return () => {
     api.renderer.off("focus", onFocus)
     api.renderer.off("blur", onBlur)
     for (const stop of dispose) stop()
-  })
+  }
 }
 
-export default {
+export default Plugin.define({
   id: "desktop-notifications",
-  tui,
-} satisfies TuiPluginModule & { id: string }
+  setup,
+})
