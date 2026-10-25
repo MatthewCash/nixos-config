@@ -7,6 +7,9 @@
         enable = true;
         sudo-shim.enable = true;
         wheelNeedsPassword = true;
-        persistentAuth.enable = true;
+        persistentAuth = {
+            enable = true;
+            enableRemote = true;
+        };
     };
 }
