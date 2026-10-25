@@ -1,4 +1,4 @@
-{ stdenv, kernel }:
+{ stdenv, kernel, kernelModuleMakeFlags }:
 
 stdenv.mkDerivation {
   pname = "asus-screenpad-backlight";
@@ -7,13 +7,16 @@ stdenv.mkDerivation {
 
   nativeBuildInputs = kernel.moduleBuildDependencies;
 
-  buildPhase = ''
-    make -C ${kernel.dev}/lib/modules/${kernel.modDirVersion}/build \
-      M=$PWD modules
-  '';
+  makeFlags = kernelModuleMakeFlags ++ [
+    "-C"
+    "${kernel.dev}/lib/modules/${kernel.modDirVersion}/build"
+    "M=$(PWD)"
+  ];
 
-  installPhase = ''
-    install -Dm444 asus_screenpad_backlight.ko \
-      $out/lib/modules/${kernel.modDirVersion}/kernel/drivers/platform/asus_screenpad_backlight.ko
-  '';
+  buildFlags = [ "modules" ];
+  installFlags = [
+    "INSTALL_MOD_PATH=${placeholder "out"}"
+    "INSTALL_MOD_DIR=kernel/drivers/platform"
+  ];
+  installTargets = [ "modules_install" ];
 }
