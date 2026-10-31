@@ -135,6 +135,7 @@
                 sound = false;
             };
             plugins = [
+                "-opencode.notifications"
                 "./cli-plugins/desktop-notifications"
                 "./cli-plugins/openai-usage"
                 "-opencode.sidebar.context"

@@ -1,10 +1,4 @@
 import { Plugin } from "@opencode/plugin/tui"
-import { spawn } from "node:child_process"
-
-type FocusState = "unknown" | "focused" | "blurred"
-type RendererOutput = {
-  writeOut(data: string): boolean
-}
 
 function cleanText(value: string | undefined, fallback: string, limit: number) {
   const text = (value ?? "")
@@ -23,50 +17,34 @@ function sessionErrorMessage(error: { message: string }) {
 }
 
 function setup(api: Plugin.Context) {
-  const renderer = api.renderer as unknown as RendererOutput
-  if (process.env.KONSOLE_VERSION) {
-    renderer.writeOut("\u001b[?1004h")
-    return () => { renderer.writeOut("\u001b[?1004l") }
-  }
-  if (process.env.TERM_PROGRAM !== "kgx") return
+  if (!process.env.KONSOLE_VERSION && process.env.TERM_PROGRAM !== "kgx") return
 
-  let focus: FocusState = "unknown"
   const active = new Set<string>()
   const errored = new Set<string>()
   const questions = new Set<string>()
   const permissions = new Set<string>()
   const dispose: Array<() => void> = []
 
-  const onFocus = () => {
-    focus = "focused"
+  function ownsSession(sessionID: string | undefined) {
+    if (!sessionID) return false
+    const route = api.ui.router.current()
+    if (route.type === "session" && route.sessionID === sessionID) return true
+    return api.ui.tabs.enabled() && api.ui.tabs.list().some((tab) => tab.sessionID === sessionID)
   }
-  const onBlur = () => {
-    focus = "blurred"
-  }
-
-  api.renderer.on("focus", onFocus)
-  api.renderer.on("blur", onBlur)
 
   function notify(sessionID: string | undefined, message: string) {
+    // The shared service broadcasts events to every TUI, including other terminals.
+    if (!ownsSession(sessionID)) return
     const session = sessionID ? api.data.session.get(sessionID) : undefined
     if (session?.parentID !== undefined) return
 
     const title = cleanText(session?.title, "OpenCode", 80)
     const text = cleanText(message, "OpenCode needs attention", 240)
-    if (focus !== "blurred") return
-
-    const child = spawn(
-      "notify-send",
-      [
-        "--app-name=OpenCode",
-        "--urgency=normal",
-        title,
-        text,
-      ],
-      { stdio: "ignore" },
-    )
-    child.on("error", (error) => console.debug("failed to send desktop notification", { error }))
-    child.unref()
+    void api.attention.notify({
+      title,
+      message: text,
+      notification: { when: "blurred" },
+    }).catch((error) => console.debug("failed to send desktop notification", { error }))
   }
 
   dispose.push(
@@ -90,6 +68,7 @@ function setup(api: Plugin.Context) {
       permissions.delete(event.data.requestID)
     }),
     api.data.on("session.execution.started", (event) => {
+      if (!ownsSession(event.data.sessionID)) return
       active.add(event.data.sessionID)
       errored.delete(event.data.sessionID)
     }),
@@ -113,8 +92,6 @@ function setup(api: Plugin.Context) {
   )
 
   return () => {
-    api.renderer.off("focus", onFocus)
-    api.renderer.off("blur", onBlur)
     for (const stop of dispose) stop()
   }
 }
