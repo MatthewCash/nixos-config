@@ -12,8 +12,6 @@
         };
     };
 
-    boot.initrd.systemd.enable = true;
-
     systemd.services."prepare-kexec".wantedBy = [ "multi-user.target" ];
 
     environment.sessionVariables.SYSTEMCTL_SKIP_AUTO_KEXEC = "1";
