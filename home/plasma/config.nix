@@ -113,6 +113,7 @@ in
                         "${builtins.head systemConfig.fonts.fontconfig.defaultFonts.monospace},10,-1,5,50,0,0,0,0,0";
                 };
                 KDE = colorScheme.KDE // {
+                    AnimationDurationFactor = 0.5;
                     widgetStyle = "kvantum-dark";
                 };
             };
