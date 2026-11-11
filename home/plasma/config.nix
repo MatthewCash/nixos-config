@@ -77,6 +77,7 @@ in
 
     home.persistence."${persistenceHomePath}".directories = [
         ".local/share/kwalletd"
+        "/home/matthew/.local/share/baloo"
     ];
 
     home.sessionVariables.PINENTRY_KDE_USE_WALLET = "1";
