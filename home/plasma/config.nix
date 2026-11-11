@@ -191,7 +191,7 @@ in
             dimDisplay.enable = false;
             turnOffDisplay.idleTimeout = "never";
             autoSuspend.action = "nothing";
-            powerButtonAction = "sleep";
+            powerButtonAction = "shutDown";
         };
     };
 
