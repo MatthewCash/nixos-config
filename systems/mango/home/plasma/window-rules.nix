@@ -265,6 +265,20 @@ in
             apply.position = "500,600";
         }
         {
+            description = "Position Korsa Dash";
+            match = {
+                window-class = {
+                    value = "korsa-dash";
+                    match-whole = false;
+                };
+                title = "Korsa Dash";
+            };
+            apply = {
+                position.value = ruleGeometry.audioControls.position;
+                size.value = ruleGeometry.audioControls.size;
+            };
+        }
+        {
             description = "Position Guitarix";
             match.window-class = {
                 value = "guitarix";

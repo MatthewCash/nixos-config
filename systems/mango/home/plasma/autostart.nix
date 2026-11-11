@@ -10,6 +10,7 @@ let
         "prismlauncher-enderscale"
         "korsa"
         "guitarix"
+        "korsa-dash"
         "channel-mixer"
         "looper"
 

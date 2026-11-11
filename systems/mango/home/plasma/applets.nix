@@ -21,6 +21,7 @@ let
         "org.mozilla.Firefox.transparent"
         "com.discord.vesktop.personal"
         "com.discord.vesktop.business"
+        "korsa-dash"
         "guitarix"
         "channel-mixer"
     ];

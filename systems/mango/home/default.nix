@@ -53,6 +53,7 @@ builtins.map (path: ../../../home/${path}) [
     ./defaultApps.nix
     ./channel-mixer
     ./looper
+    ./korsa-dash
     ./audio-buses.nix
     ./applications/korsa.nix
 
