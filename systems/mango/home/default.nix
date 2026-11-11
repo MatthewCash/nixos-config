@@ -56,6 +56,7 @@ builtins.map (path: ../../../home/${path}) [
     ./korsa-dash
     ./audio-buses.nix
     ./applications/korsa.nix
+    ./piano
 
     ./plasma/mouse.nix
     ./plasma/applets.nix
