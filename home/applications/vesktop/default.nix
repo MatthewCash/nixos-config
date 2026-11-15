@@ -14,7 +14,7 @@ let
     wrappedVesktops = builtins.map (profileName: mkNixPak {
         config = { sloth, ... }: let
             profile = profiles.${profileName};
-            vesktop =  ((pkgsUnstable.vesktop.override { withSystemVencord = true; }).overrideAttrs (old: {
+            vesktop =  ((pkgsUnstable.vesktop.override { withSystemVencord = false; }).overrideAttrs (old: {
                 # patch to override wayland app_id
                 postPatch = old.postPatch or "" + ''
                     ${stableLib.getExe pkgsStable.jq} '.desktopName = "com.discord.vesktop.${profileName}"' package.json > package.json.tmp

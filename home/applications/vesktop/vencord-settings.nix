@@ -1,6 +1,6 @@
 {
-    autoUpdate = false;
-    autoUpdateNotification = true;
+    autoUpdate = true;
+    autoUpdateNotification = false;
     useQuickCss = true;
     themeLinks = [];
     eagerPatches = false;
@@ -208,4 +208,3 @@
         settingsSyncVersion = 1766031605726;
     };
 }
-
