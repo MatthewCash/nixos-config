@@ -359,11 +359,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790650906,
-        "narHash": "sha256-IEMaXnuRKPSg6KlyMc/dp7iXXtzFioHaIpEyKse4KS4=",
+        "lastModified": 1794775194,
+        "narHash": "sha256-Ks52Ab4QASl7lKJIdjGRhls8XV/ZZEitW2cdTcG2fPc=",
         "owner": "MatthewCash",
         "repo": "korsa",
-        "rev": "af8c694cf7a9879febb4193ba5b99910ff36ad35",
+        "rev": "9ed3585191c29c48198e1e9fc645a6ab31855516",
         "type": "github"
       },
       "original": {
