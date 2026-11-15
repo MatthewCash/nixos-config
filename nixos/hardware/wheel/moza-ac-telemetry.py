@@ -38,6 +38,8 @@ AC_PHYSICS_GEAR_OFFSET = 16
 AC_PHYSICS_RPM_OFFSET = 20
 AC_PHYSICS_STEER_OFFSET = 24
 AC_PHYSICS_SPEED_OFFSET = 28
+AC_PHYSICS_TYRE_PRESSURE_OFFSET = 88
+AC_PHYSICS_READ_SIZE = AC_PHYSICS_TYRE_PRESSURE_OFFSET + 4 * 4
 
 THRESHOLDS = (0.013, 0.25, 0.40, 0.52, 0.62, 0.71, 0.78, 0.84, 0.89, 0.93)
 COLORS = (
@@ -80,6 +82,24 @@ def valid_rpm(value):
 
 def valid_max_rpm(value):
     return 1000 < value < 30000
+
+
+def valid_physics(data):
+    pressures = struct.unpack_from("<4f", data, AC_PHYSICS_TYRE_PRESSURE_OFFSET)
+    # Other Wine mappings (including input state) can look like the short
+    # physics header and keep changing while AC is paused. Require car-specific
+    # data too, allowing individual flat tyres but not an empty pressure array.
+    return (
+        valid_rpm(int32(data, AC_PHYSICS_RPM_OFFSET))
+        and -1 <= int32(data, AC_PHYSICS_GEAR_OFFSET) <= 10
+        and 0.0 <= float32(data, AC_PHYSICS_GAS_OFFSET) <= 1.1
+        and 0.0 <= float32(data, AC_PHYSICS_BRAKE_OFFSET) <= 1.1
+        and 0.0 <= float32(data, AC_PHYSICS_FUEL_OFFSET) <= 500.0
+        and -1080.0 <= float32(data, AC_PHYSICS_STEER_OFFSET) <= 1080.0
+        and -20.0 <= float32(data, AC_PHYSICS_SPEED_OFFSET) <= 500.0
+        and all(0.0 <= pressure <= 200.0 for pressure in pressures)
+        and any(pressure >= 1.0 for pressure in pressures)
+    )
 
 
 def process_start_ticks(pid):
@@ -220,28 +240,9 @@ class AcSharedMemory:
 
             packet = int32(data, AC_PHYSICS_PACKET_ID_OFFSET)
             later_packet = int32(later, AC_PHYSICS_PACKET_ID_OFFSET)
-            rpm = int32(data, AC_PHYSICS_RPM_OFFSET)
-            later_rpm = int32(later, AC_PHYSICS_RPM_OFFSET)
-            gear = int32(data, AC_PHYSICS_GEAR_OFFSET)
-            gas = float32(data, AC_PHYSICS_GAS_OFFSET)
-            brake = float32(data, AC_PHYSICS_BRAKE_OFFSET)
-            fuel = float32(data, AC_PHYSICS_FUEL_OFFSET)
-            steer = float32(data, AC_PHYSICS_STEER_OFFSET)
-            speed = float32(data, AC_PHYSICS_SPEED_OFFSET)
-
             if packet == later_packet:
                 continue
-            if not valid_rpm(rpm) or not valid_rpm(later_rpm):
-                continue
-            if not -1 <= gear <= 10:
-                continue
-            if not 0.0 <= gas <= 1.1 or not 0.0 <= brake <= 1.1:
-                continue
-            if not 0.0 <= fuel <= 500.0:
-                continue
-            if not -1080.0 <= steer <= 1080.0:
-                continue
-            if not -20.0 <= speed <= 500.0:
+            if not valid_physics(data) or not valid_physics(later):
                 continue
             candidates.append(address)
         return candidates
@@ -316,28 +317,16 @@ class AcSharedMemory:
             return None
         try:
             static = self.read_region(self.static_addr, AC_STATIC_MAX_RPM_OFFSET + 4)
-            physics = self.read_region(self.physics_addr, AC_PHYSICS_SPEED_OFFSET + 4)
+            physics = self.read_region(self.physics_addr, AC_PHYSICS_READ_SIZE)
             packet_id = int32(physics, AC_PHYSICS_PACKET_ID_OFFSET)
-            gas = float32(physics, AC_PHYSICS_GAS_OFFSET)
-            brake = float32(physics, AC_PHYSICS_BRAKE_OFFSET)
-            fuel = float32(physics, AC_PHYSICS_FUEL_OFFSET)
-            gear = int32(physics, AC_PHYSICS_GEAR_OFFSET)
             rpm = int32(physics, AC_PHYSICS_RPM_OFFSET)
-            steer = float32(physics, AC_PHYSICS_STEER_OFFSET)
-            speed = float32(physics, AC_PHYSICS_SPEED_OFFSET)
             max_rpm = int32(static, AC_STATIC_MAX_RPM_OFFSET)
             car = utf16_string(static, AC_STATIC_CAR_OFFSET, 33)
 
             if (
-                not valid_rpm(rpm)
+                not valid_physics(physics)
                 or not valid_max_rpm(max_rpm)
                 or not plausible_name(car)
-                or not -1 <= gear <= 10
-                or not 0.0 <= gas <= 1.1
-                or not 0.0 <= brake <= 1.1
-                or not 0.0 <= fuel <= 500.0
-                or not -1080.0 <= steer <= 1080.0
-                or not -20.0 <= speed <= 500.0
             ):
                 raise OSError(errno.EIO, "invalid AC shared memory telemetry")
             if self.last_packet_id != packet_id:
