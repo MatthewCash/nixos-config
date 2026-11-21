@@ -3,7 +3,7 @@
 import json
 import sys
 
-from PySide6.QtCore import SLOT, QSize, Slot, Qt, QUrl
+from PySide6.QtCore import SLOT, QSize, Signal, Slot, Qt, QUrl
 from PySide6.QtDBus import (
     QDBusConnection,
     QDBusInterface,
@@ -15,6 +15,7 @@ from PySide6.QtWidgets import (
     QApplication,
     QButtonGroup,
     QFrame,
+    QGridLayout,
     QHBoxLayout,
     QLabel,
     QPushButton,
@@ -30,7 +31,7 @@ FONT_FAMILY = "Aurebesh"
 DBUS_SERVICE = "com.matthewcash.Korsa"
 DBUS_PATH = "/com/matthewcash/Korsa"
 DBUS_INTERFACE = DBUS_SERVICE
-DBUS_PROTOCOL_VERSION = 1
+DBUS_PROTOCOL_VERSION = 2
 
 
 class PreviewButton(QPushButton):
@@ -65,12 +66,15 @@ class PreviewButton(QPushButton):
 
 
 class ChoiceRow(QFrame):
+    selection_changed = Signal(str)
+
     def __init__(
         self,
         slots,
         button_height,
         icon_size=None,
         font_family=None,
+        columns=None,
     ):
         super().__init__()
         self.setObjectName("choiceRow")
@@ -80,8 +84,9 @@ class ChoiceRow(QFrame):
         self.font_family = font_family
         self.slots = slots
         self.button_height = button_height
+        self.columns = columns or slots
 
-        self.buttons_layout = QHBoxLayout()
+        self.buttons_layout = QGridLayout()
         self.buttons_layout.setContentsMargins(0, 0, 0, 0)
         self.buttons_layout.setSpacing(9)
         self.group = QButtonGroup(self)
@@ -91,8 +96,7 @@ class ChoiceRow(QFrame):
         layout.setContentsMargins(0, 0, 0, 0)
         layout.addLayout(self.buttons_layout)
 
-    def set_items(self, items):
-        previous = self.selected
+    def set_items(self, items, selected=None):
         while self.buttons_layout.count():
             item = self.buttons_layout.takeAt(0)
             if item.widget():
@@ -102,8 +106,8 @@ class ChoiceRow(QFrame):
 
         self.items = items
         ids = {item["id"] for item in items}
-        self.selected = previous if previous in ids else (items[0]["id"] if items else None)
-        for item in items:
+        self.selected = selected if selected in ids else None
+        for index, item in enumerate(items):
             image = QUrl(item.get("image", "")).toLocalFile()
             button = (
                 PreviewButton(item["name"], image, self.icon_size)
@@ -119,7 +123,7 @@ class ChoiceRow(QFrame):
                 QSizePolicy.Policy.Expanding,
                 QSizePolicy.Policy.Preferred,
             )
-            button.setToolTip(item["name"])
+            button.setToolTip(item.get("tooltip", item["name"]))
             if self.font_family:
                 choice_font = QFont(self.font_family, 14)
                 choice_font.setBold(True)
@@ -127,9 +131,9 @@ class ChoiceRow(QFrame):
             button.setMinimumHeight(self.button_height)
             button.clicked.connect(lambda _checked, item_id=item["id"]: self.select(item_id))
             self.group.addButton(button)
-            self.buttons_layout.addWidget(button, 1)
+            self.buttons_layout.addWidget(button, index // self.columns, index % self.columns)
 
-        for _ in range(len(items), self.slots):
+        for index in range(len(items), self.slots):
             placeholder = QPushButton("Set in Korsa")
             placeholder.setObjectName("choice")
             placeholder.setEnabled(False)
@@ -140,10 +144,11 @@ class ChoiceRow(QFrame):
                 QSizePolicy.Policy.Preferred,
             )
             placeholder.setMinimumHeight(self.button_height)
-            self.buttons_layout.addWidget(placeholder, 1)
+            self.buttons_layout.addWidget(placeholder, index // self.columns, index % self.columns)
 
     def select(self, item_id):
         self.selected = item_id
+        self.selection_changed.emit(item_id)
 
 
 class Dashboard(QWidget):
@@ -160,10 +165,17 @@ class Dashboard(QWidget):
         self.options_request_active = False
         self.status_request_active = False
         self.dbus_interface = None
+        self.selection = {}
+        self.selection_updates = {}
+        self.selection_request_active = False
+        self.selection_error = None
+        self.connection_generation = 0
 
-        self.car_row = ChoiceRow(3, 128, QSize(158, 88))
-        self.track_row = ChoiceRow(3, 128, QSize(104, 88))
+        self.car_row = ChoiceRow(6, 128, QSize(158, 88), columns=3)
+        self.track_row = ChoiceRow(6, 128, QSize(104, 88), columns=3)
         self.time_row = ChoiceRow(4, 42, font_family=FONT_FAMILY)
+        for kind, row in (("car", self.car_row), ("track", self.track_row), ("time", self.time_row)):
+            row.selection_changed.connect(lambda item_id, kind=kind: self.selection_changed(kind, item_id))
 
         self.launch = QPushButton("LOADING")
         self.launch.setObjectName("launch")
@@ -204,6 +216,10 @@ class Dashboard(QWidget):
             SLOT("dashboard_options_changed()"),
         )
         self.dbus.connect(
+            DBUS_SERVICE, DBUS_PATH, DBUS_INTERFACE, "SessionChanged",
+            self, SLOT("dashboard_options_changed()"),
+        )
+        self.dbus.connect(
             DBUS_SERVICE,
             DBUS_PATH,
             DBUS_INTERFACE,
@@ -214,6 +230,7 @@ class Dashboard(QWidget):
         self.connect_service()
 
     def connect_service(self):
+        self.connection_generation += 1
         interface = QDBusInterface(
             DBUS_SERVICE, DBUS_PATH, DBUS_INTERFACE, self.dbus, self
         )
@@ -236,11 +253,16 @@ class Dashboard(QWidget):
         self.service_unavailable("Korsa stopped")
 
     def service_unavailable(self, detail):
+        self.connection_generation += 1
         self.status_available = False
         self.options_valid = False
         self.options_request_active = False
         self.status_request_active = False
         self.call_in_progress = False
+        self.selection_request_active = False
+        self.selection_updates.clear()
+        self.selection.clear()
+        self.selection_error = None
         self.set_launch_message("UNAVAILABLE", detail)
         self.update_launch_button()
 
@@ -250,11 +272,15 @@ class Dashboard(QWidget):
             return
         pending = self.dbus_interface.asyncCallWithArgumentList(method, arguments)
         watcher = QDBusPendingCallWatcher(pending, self)
+        generation = self.connection_generation
         watcher.finished.connect(
-            lambda finished: self.dbus_call_finished(finished, callback)
+            lambda finished: self.dbus_call_finished(finished, callback, generation)
         )
 
-    def dbus_call_finished(self, watcher, callback):
+    def dbus_call_finished(self, watcher, callback, generation):
+        if generation != self.connection_generation:
+            watcher.deleteLater()
+            return
         if watcher.isError():
             callback(None, watcher.error().message())
         else:
@@ -287,6 +313,10 @@ class Dashboard(QWidget):
         self.launch.setEnabled(
             self.status_available
             and not self.call_in_progress
+            and not self.selection_request_active
+            and not self.selection_updates
+            and not self.options_request_active
+            and not self.options_refresh_pending
             and (self.race_running or self.options_valid)
         )
 
@@ -340,13 +370,21 @@ class Dashboard(QWidget):
             self.options_refresh_pending
             and not self.options_request_active
             and not self.call_in_progress
+            and not self.selection_request_active
+            and not self.selection_updates
         ):
             self.options_refresh_pending = False
             self.options_request_active = True
+            self.update_launch_button()
             self.dbus_call("GetDashboardOptions", [], self.options_finished)
 
     def options_finished(self, arguments, error):
         self.options_request_active = False
+        # A reply requested before a click must not overwrite that newer click.
+        if self.selection_updates or self.selection_request_active:
+            self.options_refresh_pending = True
+            self.flush_selection_updates()
+            return
         if error:
             self.options_valid = False
             self.set_launch_message("ERROR", error)
@@ -355,10 +393,18 @@ class Dashboard(QWidget):
             return
         try:
             options = json.loads(arguments[0])
+            selected = options["selection"]
+            car_id, track_key, minutes = selected["car_id"], selected["track_key"], selected["start_minutes"]
+            if not isinstance(car_id, str) or not isinstance(track_key, str) or not isinstance(minutes, int) or not 0 <= minutes < 1440:
+                raise ValueError("invalid shared session selection")
+            self.selection = selected
             self.car_row.set_items([
-                {"id": item["id"], "name": item["name"], "image": item["preview"]}
+                {
+                    "id": item["id"], "name": item["name"], "image": item["preview"],
+                    "tooltip": item["name"] + ("\nLivery: " + item["skin_name"] if item.get("skin_name") else ""),
+                }
                 for item in options["cars"]
-            ])
+            ], car_id)
             self.track_row.set_items([
                 {
                     "id": item["id"],
@@ -366,11 +412,11 @@ class Dashboard(QWidget):
                     "image": item["outline"] or item["preview"],
                 }
                 for item in options["tracks"]
-            ])
+            ], track_key)
             self.time_row.set_items([
                 {"id": str(item["minutes"]), "name": item["name"]}
                 for item in options["times"]
-            ])
+            ], str(minutes))
         except (KeyError, TypeError, ValueError, json.JSONDecodeError):
             self.options_valid = False
             self.set_launch_message("ERROR", "Korsa returned invalid dashboard data")
@@ -378,15 +424,46 @@ class Dashboard(QWidget):
             self.refresh_options()
             return
 
-        complete = all((self.car_row.selected, self.track_row.selected, self.time_row.selected))
+        complete = bool(car_id and track_key)
         self.options_valid = bool(complete)
         if not self.call_in_progress and self.status_available:
-            self.set_launch_message("STOP" if self.race_running else "START")
+            if self.selection_error:
+                self.set_launch_message("ERROR", self.selection_error)
+            else:
+                self.set_launch_message("STOP" if self.race_running else "START")
         self.update_launch_button()
         self.refresh_options()
 
+    def selection_changed(self, kind, item_id):
+        self.selection_error = None
+        self.selection_updates[kind] = item_id
+        self.update_launch_button()
+        self.flush_selection_updates()
+
+    def flush_selection_updates(self):
+        if self.selection_request_active or self.options_request_active or self.call_in_progress:
+            return
+        if not self.selection_updates:
+            self.refresh_options()
+            return
+        kind = next(iter(self.selection_updates))
+        item_id = self.selection_updates.pop(kind)
+        self.selection_request_active = True
+        self.update_launch_button()
+        self.dbus_call("SetDashboardSelection", [kind, item_id], self.selection_finished)
+
+    def selection_finished(self, _arguments, error):
+        self.selection_request_active = False
+        if error:
+            self.selection_error = error
+            self.set_launch_message("ERROR", error)
+        self.options_refresh_pending = True
+        self.flush_selection_updates()
+        self.update_launch_button()
+
     def start_race(self):
-        if self.call_in_progress:
+        if (self.call_in_progress or self.selection_request_active or self.selection_updates
+                or self.options_request_active or self.options_refresh_pending):
             return
         self.call_in_progress = True
         if self.race_running:
@@ -399,15 +476,12 @@ class Dashboard(QWidget):
             self.call_in_progress = False
             return
         self.stopping = False
+        self.selection_error = None
         self.launch.setEnabled(False)
         self.set_launch_message("STARTING")
         self.dbus_call(
-            "LaunchDashboardSession",
-            [
-                self.car_row.selected,
-                self.track_row.selected,
-                int(self.time_row.selected or "0"),
-            ],
+            "LaunchSelectedSession",
+            [],
             self.launch_finished,
         )
 
@@ -419,6 +493,7 @@ class Dashboard(QWidget):
             self.set_launch_message("ERROR", error)
         self.update_launch_button()
         self.request_options_refresh()
+        self.flush_selection_updates()
         self.refresh_status()
 
 
@@ -479,7 +554,7 @@ def main():
     dashboard = Dashboard()
     dashboard.setWindowFlag(Qt.WindowType.FramelessWindowHint)
     dashboard.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
-    dashboard.resize(620, 670)
+    dashboard.resize(620, 850)
     dashboard.show()
     sys.exit(app.exec())
 
