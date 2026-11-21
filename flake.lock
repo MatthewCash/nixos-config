@@ -359,14 +359,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1793287048,
-        "narHash": "sha256-VMp1PJPO0RaIiidwD9wUADKxcK7ADd56VoZidtKJUrY=",
-        "path": "/home/matthew/code/kaller",
-        "type": "path"
+        "lastModified": 1795282850,
+        "narHash": "sha256-LxrlFOLMdKj3SLvkcgy6TngdOO8hwv2gzq1h8/Gyw/o=",
+        "owner": "MatthewCash",
+        "repo": "kaller",
+        "rev": "632d75c1d9d4b88e2301a24e89692d30a2f7aeaa",
+        "type": "github"
       },
       "original": {
-        "path": "/home/matthew/code/kaller",
-        "type": "path"
+        "owner": "MatthewCash",
+        "repo": "kaller",
+        "type": "github"
       }
     },
     "korsa": {

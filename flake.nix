@@ -38,7 +38,7 @@
         };
 
         kaller = {
-            url = "path:/home/matthew/code/kaller";
+            url = "github:MatthewCash/kaller";
             inputs.nixpkgs.follows = "nixpkgsUnstable";
         };
 
