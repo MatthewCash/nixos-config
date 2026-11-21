@@ -22,6 +22,9 @@
     "signon.rememberSignons" = false;
     "trailhead.firstrun.didSeeAboutWelcome" = true;
 
+    # Launch the bundled Music Remote bridge inside the sandbox.
+    "widget.use-xdg-desktop-portal.native-messaging" = 0;
+
     # Telemetry
     "browser.newtabpage.activity-stream.feeds.telemetry" = false;
     "browser.newtabpage.activity-stream.telemetry" = false;

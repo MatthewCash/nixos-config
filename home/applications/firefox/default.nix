@@ -1,11 +1,13 @@
-args @ { stableLib, customLib, pkgsStable, pkgsUnstable, persistenceHomePath, inputs, config, ... }:
+args @ { stableLib, customLib, pkgsStable, pkgsUnstable, persistenceHomePath, inputs, config, system, ... }:
 
 let
     firefoxPackage = pkgsUnstable.firefox-devedition;
+    musicRemote = inputs.music-remote.packages.${system};
 
     firefox = (firefoxPackage.override (old: {
         icon = "firefox-developer-edition";
         extraPolicies = import ./policy.nix args;
+        nativeMessagingHosts = (old.nativeMessagingHosts or []) ++ [ musicRemote.bridge ];
         extraPrefsFiles = [
             "${inputs.firefox-mods}/install_dir/config.js"
         ];
@@ -52,7 +54,7 @@ let
                 };
                 startupWMClass = appId;
             });
-        in rec {
+        in {
             app.package = (pkgsStable.symlinkJoin {
                 name = launcherName;
                 paths = [];

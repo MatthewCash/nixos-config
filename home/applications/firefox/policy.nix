@@ -1,5 +1,8 @@
-{ ... }:
+{ inputs, system, ... }:
 
+let
+    musicRemoteExtension = inputs.music-remote.packages.${system}.firefox-extension;
+in
 {
     DisableAppUpdate = true;
     DontCheckDefaultBrowser = true;
@@ -38,6 +41,7 @@
             installation_mode = "normal_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/better-lyrics/latest.xpi";
         };
+        ${musicRemoteExtension.addonId} = musicRemoteExtension.policy;
     };
     Handlers = {
         mimeTypes = {

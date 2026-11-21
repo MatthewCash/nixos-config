@@ -429,6 +429,26 @@
         "type": "github"
       }
     },
+    "music-remote": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgsUnstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1795228210,
+        "narHash": "sha256-Zuz8Aohgmgjgiow+ImcuiAsnV3BF6UmyHVkBURQ+dr8=",
+        "owner": "MatthewCash",
+        "repo": "music-remote",
+        "rev": "3ee9a9aab98881377bd560728d12d84b5e8bba14",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MatthewCash",
+        "repo": "music-remote",
+        "type": "github"
+      }
+    },
     "nixlib": {
       "locked": {
         "lastModified": 1736643958,
@@ -620,6 +640,7 @@
         "korsa": "korsa",
         "kvlibadwaita": "kvlibadwaita",
         "lanzaboote": "lanzaboote",
+        "music-remote": "music-remote",
         "nixos-generators": "nixos-generators",
         "nixpak": "nixpak",
         "nixpkgsStable": "nixpkgsStable",

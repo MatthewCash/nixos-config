@@ -42,6 +42,11 @@
             inputs.nixpkgs.follows = "nixpkgsUnstable";
         };
 
+        music-remote = {
+            url = "github:MatthewCash/music-remote";
+            inputs.nixpkgs.follows = "nixpkgsUnstable";
+        };
+
         home-manager = {
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgsUnstable";
