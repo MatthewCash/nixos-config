@@ -15,7 +15,8 @@ let
         substituteInPlace $out/Sweet.svg \
             --replace-fail "#ff00cc" "${accentColor.hex}" \
             --replace-fail "#333399" "${accentColor.hex}" \
-            --replace-fail "#c50ed2" "${accentColor.hex}"
+            --replace-fail "#c50ed2" "${accentColor.hex}" \
+            --replace-fail "#e323f0" "${accentColor.hex}"
     '';
 in
 
