@@ -80,9 +80,18 @@ in
 
     xdg.configFile = stableLib.mergeAttrsList (builtins.map (profileName: {
         "vesktop-${profileName}/themes/theme.css".source = import ./theme.nix args;
-        "vesktop-${profileName}/state.json".text = builtins.toJSON { firstLaunch = false; };
-        "vesktop-${profileName}/settings.json".text = builtins.toJSON (import ./settings.nix);
-        "vesktop-${profileName}/settings/settings.json".text = builtins.toJSON (import ./vencord-settings.nix);
+        "vesktop-${profileName}/state.json" = {
+            text = builtins.toJSON { firstLaunch = false; };
+            force = true;
+        };
+        "vesktop-${profileName}/settings.json" = {
+            text = builtins.toJSON (import ./settings.nix);
+            force = true;
+        };
+        "vesktop-${profileName}/settings/settings.json" = {
+            text = builtins.toJSON (import ./vencord-settings.nix);
+            force = true;
+        };
     }) profileNames);
 
     home.packages = builtins.map (vesktop: vesktop.config.env) wrappedVesktops;
