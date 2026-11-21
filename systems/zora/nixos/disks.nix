@@ -27,8 +27,7 @@
             persist.size = "1T";
             swap = {
                 size = "30G";
-                lvm_type = "thinlv";
-                pool = "thin-main";
+                priority = 100;
                 content = {
                     type = "swap";
                     randomEncryption = true;
