@@ -37,6 +37,11 @@
             flake = false;
         };
 
+        kaller = {
+            url = "path:/home/matthew/code/kaller";
+            inputs.nixpkgs.follows = "nixpkgsUnstable";
+        };
+
         home-manager = {
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgsUnstable";

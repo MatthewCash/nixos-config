@@ -352,6 +352,23 @@
         "type": "github"
       }
     },
+    "kaller": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgsUnstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793287048,
+        "narHash": "sha256-VMp1PJPO0RaIiidwD9wUADKxcK7ADd56VoZidtKJUrY=",
+        "path": "/home/matthew/code/kaller",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/matthew/code/kaller",
+        "type": "path"
+      }
+    },
     "korsa": {
       "inputs": {
         "nixpkgs": [
@@ -599,6 +616,7 @@
         "firefox-mods": "firefox-mods",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
+        "kaller": "kaller",
         "korsa": "korsa",
         "kvlibadwaita": "kvlibadwaita",
         "lanzaboote": "lanzaboote",
