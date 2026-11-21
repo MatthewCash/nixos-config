@@ -2,10 +2,8 @@ args @ { pkgsStable, pkgsUnstable, stableLib, customLib, persistenceHomePath, co
 
 let
     profiles = {
-        personal = {};
-        business = {
-            startupUrl = "discord:///channels/192035476352401409/766775760962060309";
-        };
+        personal.startupUrl = "discord:///channels/@me";
+        business.startupUrl = "discord:///channels/192035476352401409/766775760962060309";
     };
 
     profileNames = builtins.attrNames profiles;
