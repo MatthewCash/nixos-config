@@ -25,7 +25,7 @@
         settings = {
             autoupdate = false;
             snapshot = false;
-            model = "openai/gpt-6.1-sol";
+            model = "openai/gpt-6.2-sol";
 
             lsp = {
                 clangd = {
