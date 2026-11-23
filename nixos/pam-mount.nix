@@ -7,6 +7,7 @@ let
     managedUsers = lib.filterAttrs (_: user: user.usePamMount or false) users;
     userNames = builtins.attrNames managedUsers;
     mountpoint = lib.getExe' pkgs.util-linux "mountpoint";
+    chmod = lib.getExe' pkgs.coreutils "chmod";
     systemctl = lib.getExe' config.systemd.package "systemctl";
     pmvarrun = lib.getExe' pkgs.pam_mount "pmvarrun";
     initializingMessage = pkgs.writeText "pam-mount-initializing" "Initializing Home Directory...";
@@ -21,6 +22,7 @@ let
         in ''
             ${lib.escapeShellArg name})
                 mount_path=${lib.escapeShellArg "${homeMountPath}/${name}"}
+                home_path=${lib.escapeShellArg home}
                 target=${lib.escapeShellArg target}
                 ${homeManager}
                 ;;
@@ -40,6 +42,8 @@ let
                 # pam_mount has already run. Starting active units is harmless,
                 # so every session can execute this without becoming the owner.
                 ${mountpoint} --quiet -- "$mount_path" || exit 0
+                # Protect both paths before Impermanence initializes the tmpfs home.
+                ${chmod} 00700 -- "$mount_path" "$home_path" || exit 1
                 ${systemctl} start "$target" || exit 0
                 if [ -n "$home_manager" ]; then
                     ${systemctl} start "$home_manager" || true
