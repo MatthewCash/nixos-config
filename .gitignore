@@ -1,2 +1,5 @@
 # Build outputs
 result
+
+# Python
+__pycache__/
