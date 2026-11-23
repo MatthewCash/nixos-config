@@ -101,6 +101,7 @@ in
         workspace.colorScheme = "Main";
 
         configFile = {
+            baloofilerc.General.hidden = false;
             kcminputrc = {
                 Keyboard.NumLock = 0;
                 "Libinput/1/1/kanata".PointerAccelerationProfile = 1;
