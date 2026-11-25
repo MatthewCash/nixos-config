@@ -1,5 +1,6 @@
 builtins.map (path: ../../../home/${path}) [
     "env.nix"
+    "dev/adb.nix"
 
     "services/tpm-fido.nix"
 
