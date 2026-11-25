@@ -150,9 +150,9 @@
 
     home.persistence."${persistenceHomePath}" = {
         directories = [
+            ".local/share/opentunnel" # for remote
             ".cache/opencode"
         ];
-
         files = [
             ".local/share/opencode/auth.json"
             ".local/share/opencode/opencode.db"
